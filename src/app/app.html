@@ -1,0 +1,34 @@
+<div style="padding: 5rem">
+
+  <input
+    type="text"
+    [(ngModel)]="searchText"
+    (input)="onSearch()"
+    (focus)="showSearchPanel = true"
+    placeholder="Sbd Kojo"
+    style="padding: 0.5rem; width: 100%; "
+  />
+
+  <div style="margin: 1rem 0 0.5rem 0;">
+    <label>
+      <input type="radio" name="searchMode" [(ngModel)]="searchMode" value="anywhere" (change)="onSearch()" /> Anywhere
+    </label>
+    <label style="margin-left: 1.5rem;">
+      <input type="radio" name="searchMode" [(ngModel)]="searchMode" value="starts" (change)="onSearch()" /> Starts with
+    </label>
+  </div>
+
+  <ul *ngIf="showSearchPanel && filteredItems.length > 0" style="list-style: none; padding-left: 0; margin-top: 0.5rem;">
+    <li *ngFor="let item of filteredItems" style="padding: 0.3rem 0; cursor: pointer;" (click)="onSelectItem(item)">
+      {{ item.GurmukhiUni }}
+    </li>
+  </ul>
+
+  <div *ngIf="!showSearchPanel && selectedShabad && selectedShabad.length > 0" style="margin-top: 1rem; padding: 1rem; border: 1px solid #201e1e; border-radius: 4px; background: #2d2c2c;">
+    <h3>Selected Result</h3>
+    <div *ngFor="let row of selectedShabad">
+      {{ row.GurmukhiUni }}
+    </div>
+    <button style="margin-top: 1rem;" (click)="closePanel()">Close</button>
+  </div>
+</div>

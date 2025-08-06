@@ -1,0 +1,81 @@
+@font-face {
+  font-family: 'PunjabiFont1';
+  src: url('../Fonts/PunjabiFont1.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gurblipi';
+  src: url('../Fonts/Gurblipi.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gurakhar';
+  src: url('../Fonts/GURAKHAR.TTF') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Prabhki';
+  src: url('../Fonts/Prabhki.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+input[type="text"] {
+  font-family: 'Gurakhar', sans-serif;
+  height: 3.5rem;
+  font-size: 2rem;
+}
+:root {
+  --background: #121212;
+  --surface: #1e1e1e;
+  --text: #ffffff;
+  --accent: #03dac6;
+  --input-bg: #2a2a2a;
+  --border: #333;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+input[type="text"] {
+  background-color: var(--input-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 8px;
+  width: 100%;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+ul.suggestions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+ul.suggestions li {
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+
+ul.suggestions li:hover {
+  background-color: var(--accent);
+  color: #000;
+}
