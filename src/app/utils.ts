@@ -33,6 +33,9 @@ export function mapResultsToVerse(results: any[]): Verse[] {
     Bisram: row.Bisram,
     Visraam: row.Visraam,
     FirstLetterEng: row.FirstLetterEng,
-    Transliteration: row.Transliteration
+    Transliteration: row.Transliteration,
+    WriterEnglish: row.WriterEnglish,
+    RaagEnglish: row.RaagEnglish,
+    SourceEnglish: row.SourceEnglish
   }));
 }

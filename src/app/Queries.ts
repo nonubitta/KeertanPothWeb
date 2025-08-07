@@ -2,7 +2,7 @@ export class Queries {
   static searchByFirstLetter(searchText: string, anywhere: boolean): string {
 	if (anywhere) {
 		return `
-		select vr.ID VerseID, sh.ShabadID, trim(vr.Gurmukhi, 15) Gurmukhi, GurmukhiUni, vr.English, vr.WriterID, vr.RaagID, wr.WriterEnglish, wr.WriterGurmukhi, rg.RaagEnglish, vr.PageNo
+		select vr.ID VerseID, sh.ShabadID, vr.Gurmukhi, GurmukhiUni, vr.English, vr.WriterID, vr.RaagID, wr.WriterEnglish, wr.WriterGurmukhi, rg.RaagEnglish, vr.PageNo
 					from shabad sh 
 					inner join verse vr on sh.verseID = vr.ID 
 					left join Raag rg on vr.raagID = rg.RaagID 
@@ -13,7 +13,7 @@ export class Queries {
 	}
 	else {
 		return `
-		select vr.ID VerseID, sh.ShabadID, trim(vr.Gurmukhi, 15) Gurmukhi, GurmukhiUni, vr.English, vr.WriterID, vr.RaagID, wr.WriterEnglish, wr.WriterGurmukhi, rg.RaagEnglish, vr.PageNo
+		select vr.ID VerseID, sh.ShabadID, vr.Gurmukhi, GurmukhiUni, vr.English, vr.WriterID, vr.RaagID, wr.WriterEnglish, wr.WriterGurmukhi, rg.RaagEnglish, vr.PageNo
 					from shabad sh 
 					inner join verse vr on sh.verseID = vr.ID 
 					left join Raag rg on vr.raagID = rg.RaagID 

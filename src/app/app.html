@@ -1,132 +1,243 @@
-
-    
-  
-  <div class="overlay" id="overlay" onclick="closeSidePanel()"></div>
- 
-    <header class="header">
-        <div class="container">
-            <nav class="nav">
-                <div class="nav-left">
-                    <button class="hamburger" onclick="toggleSidePanel()">☰</button>
-                    <a href="#" class="logo">Keertan Pothi</a>
-                </div>
-                <div class="header-search">
-                    <div class="header-search-form" onsubmit="handleSearch(event)">
-                        <input 
-                            type="text" 
-                            class="header-search-input" 
-                            [(ngModel)]="searchText"
-                            (input)="onSearch()"
-                            (focus)="showSearchPanel = true"
-                            placeholder="Sbd Kojo" >
-                        <button type="submit" class="header-search-btn">Search</button>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </header>
-
-  <div class="container">
-    <label>
-      <input type="radio" name="searchMode" [(ngModel)]="searchMode" value="anywhere" (change)="onSearch()" /> Anywhere
-    </label>
-    <label style="margin-left: 1.5rem;">
-      <input type="radio" name="searchMode" [(ngModel)]="searchMode" value="starts" (change)="onSearch()" /> Starts with
-    </label>
+<!-- Side Panel -->
+<div class="side-panel" [class.open]="isSidePanelOpen">
+  <div class="side-panel-header">
+    <h3>Menu</h3>
+    <button class="close-btn" (click)="closeSidePanel()">×</button>
   </div>
-  
-    <main class="main-content">
-        <div class="container">
-            <!-- Search Results Section -->
-            <section class="results-section">
-                <div class="results-header">
-                    <h2 class="results-title">Search Results</h2>
-                    <div class="results-meta">
-                        <span class="results-count">Showing 1-{{filteredItems.length}} of {{filteredItems.length}} results</span>
-                        <div class="results-sort">
-                            <label for="sort">Sort by:</label>
-                            <select id="sort">
-                                <option value="relevance">Relevance</option>
-                                <option value="date">Date</option>
-                                <option value="title">Title</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+  <nav class="side-panel-nav">
+    <a href="#" class="nav-item" (click)="navigateToHome()">
+      <span class="nav-icon">🏠</span>
+      Home
+    </a>
+    <a href="#" class="nav-item" (click)="navigateToSearch()">
+      <span class="nav-icon">🔍</span>
+      Search
+    </a>
+    <a href="details/details.html" class="nav-item" (click)="navigateToSearch()">
+      <span class="nav-icon">🔍</span>
+      Details
+    </a>
+    <a href="#" class="nav-item" (click)="navigateToFavorites()">
+      <span class="nav-icon">⭐</span>
+      Favorites
+    </a>
+    <a href="#" class="nav-item" (click)="navigateToAbout()">
+      <span class="nav-icon">ℹ️</span>
+      About
+    </a>
+    <a href="#" class="nav-item" (click)="navigateToSettings()">
+      <span class="nav-icon">⚙️</span>
+      Settings
+    </a>
+    <a href="#" class="nav-item" (click)="navigateToHelp()">
+      <span class="nav-icon">❓</span>
+      Help
+    </a>
+  </nav>
+</div>
 
-                <div *ngIf="showSearchPanel && filteredItems.length > 0" class="results-grid">
-                    <div class="result-card" *ngFor="let item of filteredItems">
-                        <!-- <div class="result-type">📚 Reference</div> -->
-                        <div class="result-content">
-                            <h3 class="result-title" style="font-family: 'Gurakhar', sans-serif;">{{ item.Gurmukhi }}</h3>
-                            <!-- <p class="result-excerpt">An in-depth analysis of historical 
-                              spiritual texts with modern commentary and interpretation. 
-                              Includes cross-references and scholarly annotations...</p> -->
-                        </div>
-                        <div class="result-meta">
-                            <span class="result-date">January 10, 2024</span>
-                            <span class="result-category">Academic</span>
-                        </div>
-                        <div class="result-actions">
-                            <button class="btn-primary">Read</button>
-                        </div>
-                    </div>
-  <!-- <ul *ngIf="showSearchPanel && filteredItems.length > 0" style="list-style: none; padding-left: 0; margin-top: 0.5rem;">
-    <li *ngFor="let item of filteredItems" style="padding: 0.3rem 0; cursor: pointer;" (click)="onSelectItem(item)">
-      {{ item.GurmukhiUni }}
-    </li>
-  </ul> -->
-    
-                </div>
+<!-- Overlay -->
+<div class="overlay" [class.active]="isSidePanelOpen" (click)="closeSidePanel()"></div>
 
-                <div class="pagination">
-                    <button class="page-btn" disabled>← Previous</button>
-                    <button class="page-btn active">1</button>
-                    <button class="page-btn">2</button>
-                    <button class="page-btn">3</button>
-                    <button class="page-btn">...</button>
-                    <button class="page-btn">104</button>
-                    <button class="page-btn">Next →</button>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <div *ngIf="!showSearchPanel && selectedShabad && selectedShabad.length > 0" style="margin-top: 1rem; padding: 1rem; border: 1px solid #201e1e; border-radius: 4px; background: #2d2c2c;">
-    <h3>Selected Result</h3>
-    <div *ngFor="let row of selectedShabad">
-      {{ row.GurmukhiUni }}
+<header class="header">
+    <div class="container">
+        <nav class="nav">
+            <div class="nav-left">
+                <button class="hamburger" (click)="toggleSidePanel()">☰</button>
+                <a href="#" class="logo">Keertan Pothi</a>
+            </div>
+            <div class="header-search">
+                <form class="header-search-form" (submit)="handleSearch($event)">
+                    <input 
+                        type="text" 
+                        class="header-search-input" 
+                        [(ngModel)]="searchText"
+                        (input)="onSearch()"
+                        (focus)="showSearchPanel = true"
+                        placeholder="Sbd Kojo" 
+                        name="searchText">
+                    <button type="submit" class="header-search-btn">Search</button>
+                </form>
+            </div>
+        </nav>
     </div>
-    <button style="margin-top: 1rem;" (click)="closePanel()">Close</button>
-  </div>
-  
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <a href="#about">About Us</a>
-                    <a href="#contact">Contact</a>
-                    <a href="#faq">FAQ</a>
-                    <a href="#support">Support</a>
-                </div>
-                <div class="footer-section">
-                    <h4>Resources</h4>
-                    <a href="#guide">Search Guide</a>
-                    <a href="#api">API Documentation</a>
-                    <a href="#tools">Search Tools</a>
-                    <a href="#tips">Tips & Tricks</a>
-                </div>
-                <div class="footer-section">
-                    <h4>Legal</h4>
-                    <a href="#privacy">Privacy Policy</a>
-                    <a href="#terms">Terms of Service</a>
-                    <a href="#cookies">Cookie Policy</a>
-                    <a href="#dmca">DMCA</a>
+</header>
+
+<main *ngIf="showSearchPanel && filteredItems.length > 0" class="main-content">
+            <!-- Filters-->
+    <div class="container">
+        <label>
+            <input type="radio" name="searchMode" [(ngModel)]="searchMode" value="anywhere" (change)="onSearch()" /> Anywhere
+        </label>
+        <label style="margin-left: 1.5rem;">
+            <input type="radio" name="searchMode" [(ngModel)]="searchMode" value="starts" (change)="onSearch()" /> Starts with
+        </label>
+    </div>
+    <div class="container">
+        <!-- Search Results Section -->
+        <section class="results-section">
+            
+            <!-- Results headers-->
+            <div class="results-header">
+                <h2 class="results-title">Search Results</h2>
+                <div class="results-meta">
+                    <span class="results-count">Showing 1-{{filteredItems.length}} of {{filteredItems.length}} results</span>
+                    <div class="results-sort">
+                        <label for="sort">Sort by:</label>
+                        <select id="sort">
+                            <option value="relevance">Relevance</option>
+                            <option value="date">Date</option>
+                            <option value="title">Title</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Keertan Pothi. All rights reserved.</p>
+            
+            <!-- Results -->
+            <div class="results-grid">
+                <div class="result-card" *ngFor="let item of filteredItems" (click)="onSelectItem(item)">
+                    <div class="result-content">
+                        <h3 class="result-title" style="font-family: 'Gurakhar', sans-serif;">{{ item.Gurmukhi }}</h3>
+                    </div>
+                    <div class="result-meta">
+                        <span class="result-date">January 10, 2024</span>
+                        <span class="result-category">Academic</span>
+                    </div>
+                    <div class="result-actions">
+                        <button class="btn-primary">Read</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</main>
+<main id="details" class="main-content" *ngIf="!showSearchPanel && selectedShabad && selectedShabad.length > 0">
+    <div class="container">
+        <!-- Details Header Section -->
+        <section class="details-header">
+            <!-- <div class="details-card"> -->
+                <div class="details-main">
+                    <!-- <h1 class="details-title" style="font-family: 'Gurakhar', sans-serif;">
+                        {{ detailsInfo?.Gurmukhi }}
+                    </h1> -->
+                    <div class="details-subtitle">
+                        <span class="author">{{ detailsInfo?.WriterEnglish }}</span>
+                        <span class="separator">•</span>
+                        <span class="raag">{{ detailsInfo?.RaagEnglish }}</span>
+                        <span class="separator">•</span>
+                        <span class="meta-label">Ang {{ detailsInfo?.PageNo }}</span>
+                        <span class="separator">•</span>
+                        <span class="meta-label">Lines {{ selectedShabad.length }}</span>
+                    </div>
+                </div>
+                
+                <div class="details-meta">
+                    
+                </div>
+            <!-- </div> -->
+        </section>
+
+        <!-- Content Section -->
+        <section class="content-section">
+            <div class="verses-container">
+                <div class="verse-row" *ngFor="let verse of selectedShabad; let i = index">
+                    <div class="verse-content">
+                        <div class="verse-text" style="font-family: 'Gurakhar', sans-serif;">
+                            {{ verse.Gurmukhi }}
+                        </div>
+                        <div class="verse-translation" *ngIf="verse.English">
+                            {{ verse.English }}
+                        </div>
+                    </div>
+                    <!-- <div class="verse-actions">
+                        <button class="verse-action-btn" title="Copy verse">📋</button>
+                        <button class="verse-action-btn" title="Share verse">📤</button>
+                    </div> -->
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="#about">About Us</a>
+                <a href="#contact">Contact</a>
+                <a href="#faq">FAQ</a>
+                <a href="#support">Support</a>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="#guide">Search Guide</a>
+                <a href="#api">API Documentation</a>
+                <a href="#tools">Search Tools</a>
+                <a href="#tips">Tips & Tricks</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#cookies">Cookie Policy</a>
+                <a href="#dmca">DMCA</a>
             </div>
         </div>
-    </footer>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Keertan Pothi. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="#about">About Us</a>
+                <a href="#contact">Contact</a>
+                <a href="#faq">FAQ</a>
+                <a href="#support">Support</a>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="#guide">Search Guide</a>
+                <a href="#api">API Documentation</a>
+                <a href="#tools">Search Tools</a>
+                <a href="#tips">Tips & Tricks</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#cookies">Cookie Policy</a>
+                <a href="#dmca">DMCA</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Keertan Pothi. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- paging code -->
+<!-- <div class="pagination">
+    <button class="page-btn" disabled>← Previous</button>
+    <button class="page-btn active">1</button>
+    <button class="page-btn">2</button>
+    <button class="page-btn">3</button>
+    <button class="page-btn">...</button>
+    <button class="page-btn">104</button>
+    <button class="page-btn">Next →</button>
+</div> -->

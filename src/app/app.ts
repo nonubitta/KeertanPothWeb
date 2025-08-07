@@ -20,6 +20,9 @@ export class App implements OnInit {
   filteredItems: VerseSearchResult[] = [];
   selectedShabad: Verse[] | null = null;
   private isDbReady = false;
+  detailsInfo:Verse | null = null;
+  // Side panel state
+  isSidePanelOpen: boolean = false;
 
   constructor(private dbService: DbService) {}
 
@@ -28,14 +31,65 @@ export class App implements OnInit {
     this.isDbReady = true;
   }
 
+  // Side panel methods
+  toggleSidePanel() {
+    this.isSidePanelOpen = !this.isSidePanelOpen;
+  }
+
+  closeSidePanel() {
+    this.isSidePanelOpen = false;
+  }
+
+  // Navigation methods
+  navigateToHome() {
+    this.closeSidePanel();
+    // Add your home navigation logic here
+    console.log('Navigate to Home');
+  }
+
+  navigateToAbout() {
+    this.closeSidePanel();
+    // Add your about navigation logic here
+    console.log('Navigate to About');
+  }
+
+  navigateToSearch() {
+    this.closeSidePanel();
+    // Add your search navigation logic here
+    console.log('Navigate to Search');
+  }
+
+  navigateToFavorites() {
+    this.closeSidePanel();
+    // Add your favorites navigation logic here
+    console.log('Navigate to Favorites');
+  }
+
+  navigateToSettings() {
+    this.closeSidePanel();
+    // Add your settings navigation logic here
+    console.log('Navigate to Settings');
+  }
+
+  navigateToHelp() {
+    this.closeSidePanel();
+    // Add your help navigation logic here
+    console.log('Navigate to Help');
+  }
+
+  handleSearch(event: Event) {
+    event.preventDefault();
+    this.onSearch();
+  }
+
   async onSearch() {
-    
-    if (!this.isDbReady || !this.searchText.trim()){// || this.searchText.length < 3) {
+    if (!this.isDbReady || !this.searchText.trim()) {
       this.filteredItems = [];
       return;
     }
     this.selectedShabad = null;
     this.showSearchPanel = true;
+    
     // Sanitize input if needed to prevent SQL injection — here simple usage
     let asciiSearch = '';
     for (const c of this.searchText) {
@@ -49,12 +103,20 @@ export class App implements OnInit {
     } catch (error) {
       console.error('Error querying the DB:', error);
     }
-}
+  }
 
   async onSelectItem(item: VerseSearchResult) {
     const query = Queries.getShabadById(item.ShabadID);
     const results = await this.dbService.query(query);
     this.selectedShabad = mapResultsToVerse(results);
+    this.detailsInfo = this.selectedShabad[0];
+    if (!this.detailsInfo.WriterID) {
+      const verse = this.selectedShabad.find(v => v.WriterID != null);
+      if (verse) {
+        this.detailsInfo.WriterID = verse.WriterID;
+        this.detailsInfo.WriterEnglish = verse.WriterEnglish;
+      }
+    }
     this.showSearchPanel = false;
   }
 
@@ -62,5 +124,4 @@ export class App implements OnInit {
     this.selectedShabad = null;
     this.showSearchPanel = true;
   }
-
 }

@@ -18,6 +18,9 @@ export interface Verse {
   Visraam: string;
   FirstLetterEng: string;
   Transliteration: string;
+  WriterEnglish: string;
+  RaagEnglish: string;
+  SourceEnglish: string;
 }
 
 
