@@ -1,49 +1,8 @@
-<!-- Side Panel -->
-<div class="side-panel" [class.open]="isSidePanelOpen">
-  <div class="side-panel-header">
-    <h3>Menu</h3>
-    <button class="close-btn" (click)="closeSidePanel()">×</button>
-  </div>
-  <nav class="side-panel-nav">
-    <a href="#" class="nav-item" (click)="navigateToHome()">
-      <span class="nav-icon">🏠</span>
-      Home
-    </a>
-    <a href="#" class="nav-item" (click)="navigateToSearch()">
-      <span class="nav-icon">🔍</span>
-      Search
-    </a>
-    <a href="details/details.html" class="nav-item" (click)="navigateToSearch()">
-      <span class="nav-icon">🔍</span>
-      Details
-    </a>
-    <a href="#" class="nav-item" (click)="navigateToFavorites()">
-      <span class="nav-icon">⭐</span>
-      Favorites
-    </a>
-    <a href="#" class="nav-item" (click)="navigateToAbout()">
-      <span class="nav-icon">ℹ️</span>
-      About
-    </a>
-    <a href="#" class="nav-item" (click)="navigateToSettings()">
-      <span class="nav-icon">⚙️</span>
-      Settings
-    </a>
-    <a href="#" class="nav-item" (click)="navigateToHelp()">
-      <span class="nav-icon">❓</span>
-      Help
-    </a>
-  </nav>
-</div>
-
-<!-- Overlay -->
-<div class="overlay" [class.active]="isSidePanelOpen" (click)="closeSidePanel()"></div>
 
 <header class="header">
     <div class="container">
         <nav class="nav">
             <div class="nav-left">
-                <button class="hamburger" (click)="toggleSidePanel()">☰</button>
                 <a href="#" class="logo">Keertan Pothi</a>
             </div>
             <div class="header-search">
@@ -181,7 +140,7 @@
     </div>
 </main>
 
-<footer class="footer">
+<!-- <footer class="footer">
     <div class="container">
         <div class="footer-content">
             <div class="footer-section">
@@ -210,4 +169,4 @@
             <p>&copy; 2024 Keertan Pothi. All rights reserved.</p>
         </div>
     </div>
-</footer>
+</footer> -->
