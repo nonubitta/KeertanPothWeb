@@ -21,8 +21,28 @@ export class App implements OnInit {
   selectedShabad: Verse[] | null = null;
   private isDbReady = false;
   detailsInfo:Verse | null = null;
+  showMainKeyboard: boolean = true
+  
   // Side panel state
   isSidePanelOpen: boolean = false;
+
+  // Punjabi Keyboard state
+  showKeyboard: boolean = false;
+  
+  // Punjabi keyboard layout
+  keyboardLayout1 = [
+    ['a', 'A', 'e', 's', 'h', 'q', 'Q', 'd', 'D', 'n'],
+    ['k', 'K', 'g', 'G', '|', 'p', 'P', 'b', 'B', 'm'],
+    ['c', 'C', 'j', 'J', '\\', 'X', 'r', 'l', 'v', 'V'],
+    ['t', 'T', 'f', 'F', 'x', 'E', '⎵', '←', '123']
+    
+  ];
+   keyboardLayout2 = [
+    ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
+    ['y', 'Y', 'i', 'I', 'w', 'W', 'u', 'U', 'o', 'O'],
+    ['R', 'N', 'M', 'S', '^', 'Z', 'z', '&', '⎵', '←','123']
+  ];
+  keyboardLayout = this.keyboardLayout1;
 
   constructor(private dbService: DbService) {}
 
@@ -38,6 +58,40 @@ export class App implements OnInit {
 
   closeSidePanel() {
     this.isSidePanelOpen = false;
+  }
+
+  // Keyboard methods
+  toggleKeyboard() {
+    this.showKeyboard = !this.showKeyboard;
+  }
+
+  hideKeyboard() {
+    this.showKeyboard = false;
+  }
+
+  onKeyPress(key: string) {
+    if (key === '←') {
+      // Backspace
+      this.searchText = this.searchText.slice(0, -1);
+    } else if (key === '') {
+      return;
+    } else if (key === '⎵') {
+      this.searchText += ' '; // Add space
+    }else if (key === '⌕') {
+      return; // Add space
+    }else if (key === '123') {
+      if(this.showMainKeyboard) 
+        this.keyboardLayout = this.keyboardLayout2;
+      else 
+        this.keyboardLayout = this.keyboardLayout1; // Switch back to Punjabi layout
+      this.showMainKeyboard = !this.showMainKeyboard; 
+
+    }else {
+      // Add character
+      this.searchText += key;
+    }
+    // Trigger search after key press
+    this.onSearch();
   }
 
   // Navigation methods

@@ -1145,3 +1145,280 @@ body {
     font-size: 0.8rem;
   }
 }
+
+/* Add this to your existing CSS file */
+
+/* Keyboard Toggle Button */
+.keyboard-toggle-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  padding: 0.7rem 1rem;
+  border-radius: 6px;
+  color: #e0e0e0;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 4px;
+}
+
+.keyboard-toggle-btn:hover {
+  background: rgba(64, 224, 208, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Punjabi Keyboard */
+.punjabi-keyboard {
+  position: fixed;
+  bottom: -400px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 450px;
+  background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+  border: 2px solid #404040;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+  transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.punjabi-keyboard.show {
+  bottom: 0;
+}
+
+.keyboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #404040;
+  background: #252525;
+  border-radius: 10px 10px 0 0;
+}
+
+.keyboard-header h4 {
+  margin: 0;
+  color: var(--defaultContrastColor);
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: 'Gurakhar', sans-serif;
+}
+
+.keyboard-close {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.keyboard-close:hover {
+  background-color: #404040;
+}
+
+.keyboard-body {
+  padding: 1.5rem;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.keyboard-row:last-child {
+  margin-bottom: 0;
+}
+
+.keyboard-key {
+  background: #333333;
+  border: 2px solid #444444;
+  color: #ffffff;
+  padding: 0.5rem 0.5rem;
+  border-radius: 8px;
+  font-family: 'Gurakhar', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 30px;
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.keyboard-key:hover:not(:disabled) {
+  background: #404040;
+  border-color: var(--defaultContrastColor);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.keyboard-key:active:not(:disabled) {
+  transform: translateY(0);
+  background: #4a90e2;
+  border-color: #4a90e2;
+}
+
+.keyboard-key.backspace {
+  background: #e74c3c;
+  border-color: #c0392b;
+  font-size: 1rem;
+  min-width: 30px;
+}
+
+.keyboard-key.backspace:hover {
+  background: #c0392b;
+  border-color: #a93226;
+}
+
+.keyboard-key.empty {
+  background: transparent;
+  border: none;
+  cursor: default;
+  min-width: 50px;
+}
+
+.keyboard-key:disabled {
+  opacity: 0;
+  cursor: default;
+}
+
+/* Responsive Design for Keyboard */
+@media (max-width: 768px) {
+  .punjabi-keyboard {
+    width: 95%;
+    bottom: -350px;
+  }
+  
+  .keyboard-header {
+    padding: 0.75rem 1rem;
+  }
+  
+  .keyboard-header h4 {
+    font-size: 1rem;
+  }
+  
+  .keyboard-body {
+    padding: 1rem;
+  }
+  
+  .keyboard-key {
+    padding: 0.6rem 0.8rem;
+    font-size: 1.1rem;
+    min-width: 45px;
+    min-height: 45px;
+  }
+  
+  .keyboard-key.backspace {
+    min-width: 70px;
+  }
+  
+  .keyboard-row {
+    gap: 0.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .punjabi-keyboard {
+    width: 100%;
+    border-radius: 0;
+    bottom: -320px;
+  }
+  
+  .keyboard-header {
+    border-radius: 0;
+  }
+  
+  .keyboard-body {
+    padding: 0.75rem;
+  }
+  
+  .keyboard-key {
+    padding: 0.5rem 0.6rem;
+    font-size: 1rem;
+    min-width: 40px;
+    min-height: 40px;
+  }
+  
+  .keyboard-key.backspace {
+    min-width: 60px;
+    font-size: 0.9rem;
+  }
+  
+  .keyboard-row {
+    gap: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+}
+
+/* Animation for keyboard appearance */
+@keyframes slideUp {
+  from {
+    bottom: -400px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    bottom: 0;
+    opacity: 1;
+  }
+  to {
+    bottom: -400px;
+    opacity: 0;
+  }
+}
+
+/* Keyboard overlay to prevent interaction with background */
+.punjabi-keyboard.show::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: -1;
+}
+
+/* Ensure keyboard appears above other elements */
+.punjabi-keyboard {
+  z-index: 1001;
+}
+
+/* Update overlay z-index to be below keyboard */
+.overlay {
+  z-index: 999;
+}
+
+.overlay.active {
+  z-index: 999;
+}
+
+/* Adjust header search form to accommodate keyboard toggle */
+.header-search-form {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(64, 224, 208, 0.3);
+  border-radius: 8px;
+  padding: 4px;
+  transition: all 0.3s ease;
+}
+
+/* Special styling for Punjabi text in keyboard */
+.keyboard-key {
+  line-height: 1;
+  letter-spacing: 0;
+}

@@ -56,12 +56,32 @@
                         (focus)="showSearchPanel = true"
                         placeholder="Sbd Kojo" 
                         name="searchText">
+                    <button type="button" class="keyboard-toggle-btn" (click)="toggleKeyboard()" title="Toggle Punjabi Keyboard">
+                        🔤
+                    </button>
                     <button type="submit" class="header-search-btn">Search</button>
                 </form>
             </div>
         </nav>
     </div>
 </header>
+
+<!-- Punjabi Keyboard -->
+<div class="punjabi-keyboard" [class.show]="showKeyboard">
+    <div class="keyboard-body">
+        <div class="keyboard-row" *ngFor="let row of keyboardLayout">
+            <button 
+                *ngFor="let key of row" 
+                class="keyboard-key" 
+                [class.backspace]="key === '⌫'"
+                [class.empty]="key === ''"
+                (click)="onKeyPress(key)"
+                [disabled]="key === ''">
+                {{ key }}
+            </button>
+        </div>
+    </div>
+</div>
 
 <main *ngIf="showSearchPanel && filteredItems.length > 0" class="main-content">
             <!-- Filters-->
@@ -191,53 +211,3 @@
         </div>
     </div>
 </footer>
-
-
-
-
-
-
-
-
-
-<footer class="footer">
-    <div class="container">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <a href="#about">About Us</a>
-                <a href="#contact">Contact</a>
-                <a href="#faq">FAQ</a>
-                <a href="#support">Support</a>
-            </div>
-            <div class="footer-section">
-                <h4>Resources</h4>
-                <a href="#guide">Search Guide</a>
-                <a href="#api">API Documentation</a>
-                <a href="#tools">Search Tools</a>
-                <a href="#tips">Tips & Tricks</a>
-            </div>
-            <div class="footer-section">
-                <h4>Legal</h4>
-                <a href="#privacy">Privacy Policy</a>
-                <a href="#terms">Terms of Service</a>
-                <a href="#cookies">Cookie Policy</a>
-                <a href="#dmca">DMCA</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Keertan Pothi. All rights reserved.</p>
-        </div>
-    </div>
-</footer>
-
-<!-- paging code -->
-<!-- <div class="pagination">
-    <button class="page-btn" disabled>← Previous</button>
-    <button class="page-btn active">1</button>
-    <button class="page-btn">2</button>
-    <button class="page-btn">3</button>
-    <button class="page-btn">...</button>
-    <button class="page-btn">104</button>
-    <button class="page-btn">Next →</button>
-</div> -->
