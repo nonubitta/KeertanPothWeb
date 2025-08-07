@@ -52,10 +52,7 @@ export class App implements OnInit {
 }
 
   async onSelectItem(item: VerseSearchResult) {
-    const query = `
-      SELECT * FROM sggsvw 
-      WHERE ShabadId = '${item.ShabadID}' 
-    `;
+    const query = Queries.getShabadById(item.ShabadID);
     const results = await this.dbService.query(query);
     this.selectedShabad = mapResultsToVerse(results);
     this.showSearchPanel = false;

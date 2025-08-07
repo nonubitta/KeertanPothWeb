@@ -23,4 +23,11 @@ export class Queries {
 		`;
 	}
   }
+
+  static getShabadById(shabadId: number): string {
+	return `
+	  SELECT * FROM sggsvw 
+	  WHERE ShabadId = ${shabadId}
+	`;
+  }
 }
