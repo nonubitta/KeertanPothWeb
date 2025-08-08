@@ -87,10 +87,16 @@ export class App implements OnInit {
   }
 
   openSidePanel(tab: 'links' | 'settings' | 'history' | 'pothi') {
+    const prevTab = this.activeTab;
     this.activeTab = tab;
-    this.isSidePanelOpen = !this.isSidePanelOpen;
-    if(!this.isSidePanelOpen) {
-      this.activeTab = null;
+    if(!prevTab)
+      this.isSidePanelOpen = !this.isSidePanelOpen;
+
+    if (prevTab && this.activeTab === prevTab && this.isSidePanelOpen) {
+      this.isSidePanelOpen = !this.isSidePanelOpen;
+      if (!this.isSidePanelOpen) {
+        this.activeTab = null; // Close the panel
+      }
     }
   }
 
