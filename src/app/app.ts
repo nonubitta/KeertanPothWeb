@@ -33,11 +33,12 @@ export class App implements OnInit {
   showKeyboard: boolean = false;
     // Gurmukhi font size
   gurmukhiFontSize: number = 2;
-
-  // English translation font size
   englishFontSize: number = 1.0;
   transliterationFontSize: number = 1.0;
 
+  showGurmukhi: boolean = true;
+  showEnglish: boolean = true;
+  showTransliteration: boolean = true;
   //#endregion
 
   //#region Punjabi keyboard layout

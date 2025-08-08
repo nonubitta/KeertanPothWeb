@@ -68,7 +68,12 @@
       </div>
       <div *ngSwitchCase="'settings'">
         <!-- Example settings -->
-        <label for="gurmukhiFontSize">Gurmukhi Font Size:</label>
+        <label>
+          <input type="checkbox" [(ngModel)]="showGurmukhi" />
+          Show Gurmukhi
+        </label>
+        <br />
+        <label for="gurmukhiFontSize">Gurmukhi Font Size:</label><br />
         <input
           id="gurmukhiFontSize"
           type="range"
@@ -80,7 +85,13 @@
         />
         <span>{{ gurmukhiFontSize * 10 }}</span>
         <br>
-        <label for="englishFontSize">English Font Size:</label>
+        <hr class="toolbar-divider-hr"/>
+        <label>
+          <input type="checkbox" [(ngModel)]="showEnglish" />
+          Show English
+        </label>
+        <br />
+        <label for="englishFontSize">English Font Size:</label><br />
         <input
           id="englishFontSize"
           type="range"
@@ -92,7 +103,14 @@
         />
         <span>{{ englishFontSize * 10 }}</span>
         <br>
+        <hr class="toolbar-divider-hr" />
+        <label>
+          <input type="checkbox" [(ngModel)]="showTransliteration" />
+          Show Transliteration
+        </label>
+        <br />
         <label for="transliterationFontSize">Transliteration Font Size:</label>
+        <br />
         <input
           id="transliterationFontSize"
           type="range"
@@ -103,6 +121,8 @@
           style="vertical-align: middle; width: 120px;"
         />
         <span>{{ transliterationFontSize * 10 }}</span>
+        <br />
+        <hr class="toolbar-divider-hr" />
       </div>
       <div *ngSwitchCase="'history'">
         <!-- Example history -->
@@ -197,13 +217,13 @@
             <div class="verses-container">
                 <div class="verse-row" *ngFor="let verse of selectedShabad; let i = index">
                     <div class="verse-content">
-                        <div class="verse-text" style="font-family: 'Gurakhar', sans-serif;"  [style.font-size.rem]="gurmukhiFontSize">
+                        <div *ngIf="showGurmukhi" class="verse-text" style="font-family: 'Gurakhar', sans-serif;"  [style.font-size.rem]="gurmukhiFontSize">
                             {{ verse.Gurmukhi }}
                         </div>
-                        <div class="verse-translation" *ngIf="verse.English" [style.font-size.rem]="englishFontSize">
+                        <div *ngIf="showEnglish && verse.English" class="verse-translation" [style.font-size.rem]="englishFontSize">
                             {{ verse.English }}
                         </div>
-                        <div class="verse-translation transliteration" *ngIf="verse.English" [style.font-size.rem]="transliterationFontSize">
+                        <div *ngIf="showTransliteration && verse.English" class="verse-translation transliteration" [style.font-size.rem]="transliterationFontSize">
                             {{ verse.Transliteration }}
                         </div>
                     </div>
