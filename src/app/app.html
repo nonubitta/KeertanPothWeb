@@ -1,4 +1,3 @@
-
 <header class="header">
     <div class="container">
         <nav class="nav">
@@ -41,6 +40,64 @@
         </div>
     </div>
 </div>
+
+<!-- Left Tabs Bar -->
+<div class="left-tabs">
+  <button class="tab-btn" [class.active]="activeTab === 'links'" (click)="openSidePanel('links')">Links</button>
+  <button class="tab-btn" [class.active]="activeTab === 'settings'" (click)="openSidePanel('settings')">Settings</button>
+  <button class="tab-btn" [class.active]="activeTab === 'history'" (click)="openSidePanel('history')">History</button>
+</div>
+
+<!-- Side Panel -->
+<div class="side-panel" [class.open]="isSidePanelOpen">
+  <div class="side-panel-header">
+    <h3 *ngIf="activeTab === 'links'">Links</h3>
+    <h3 *ngIf="activeTab === 'settings'">Settings</h3>
+    <h3 *ngIf="activeTab === 'history'">History</h3>
+    <button class="close-btn" (click)="closeSidePanel()">×</button>
+  </div>
+  <div class="side-panel-content">
+    <ng-container [ngSwitch]="activeTab">
+      <div *ngSwitchCase="'links'">
+        <!-- Example links -->
+        <a href="#" class="panel-link">Home</a>
+        <a href="#" class="panel-link">About</a>
+        <a href="#" class="panel-link">Contact</a>
+      </div>
+      <div *ngSwitchCase="'settings'">
+        <!-- Example settings -->
+        <label for="gurmukhiFontSize">Gurmukhi Font Size:</label>
+        <input
+          id="gurmukhiFontSize"
+          type="range"
+          min="1"
+          max="3"
+          step="0.05"
+          [(ngModel)]="gurmukhiFontSize"
+          style="vertical-align: middle; width: 120px;"
+        />
+        <span>{{ gurmukhiFontSize }}rem</span>
+        <br>
+        <label for="englishFontSize">English Font Size:</label>
+        <input
+          id="englishFontSize"
+          type="range"
+          min="0.7"
+          max="2"
+          step="0.05"
+          [(ngModel)]="englishFontSize"
+          style="vertical-align: middle; width: 120px;"
+        />
+        <span>{{ englishFontSize }}rem</span>
+      </div>
+      <div *ngSwitchCase="'history'">
+        <!-- Example history -->
+        <p>History content goes here.</p>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<div class="overlay" [class.active]="isSidePanelOpen" (click)="closeSidePanel()"></div>
 
 <main *ngIf="showSearchPanel && filteredItems.length > 0" class="main-content">
             <!-- Filters-->
@@ -122,10 +179,10 @@
             <div class="verses-container">
                 <div class="verse-row" *ngFor="let verse of selectedShabad; let i = index">
                     <div class="verse-content">
-                        <div class="verse-text" style="font-family: 'Gurakhar', sans-serif;">
+                        <div class="verse-text" style="font-family: 'Gurakhar', sans-serif; font-size: {{gurmukhiFontSize}}rem;">
                             {{ verse.Gurmukhi }}
                         </div>
-                        <div class="verse-translation" *ngIf="verse.English">
+                        <div class="verse-translation" *ngIf="verse.English" [style.font-size.rem]="englishFontSize">
                             {{ verse.English }}
                         </div>
                     </div>

@@ -25,6 +25,7 @@ export class App implements OnInit {
   
   // Side panel state
   isSidePanelOpen: boolean = false;
+  activeTab: 'links' | 'settings' | 'history' | null = null;
 
   // Punjabi Keyboard state
   showKeyboard: boolean = false;
@@ -44,6 +45,12 @@ export class App implements OnInit {
   ];
   keyboardLayout = this.keyboardLayout1;
 
+  // Gurmukhi font size
+  gurmukhiFontSize: number = 1.3;
+
+  // English translation font size
+  englishFontSize: number = 1.0;
+
   constructor(private dbService: DbService) {}
 
   async ngOnInit() {
@@ -56,8 +63,14 @@ export class App implements OnInit {
     this.isSidePanelOpen = !this.isSidePanelOpen;
   }
 
+  openSidePanel(tab: 'links' | 'settings' | 'history') {
+    this.activeTab = tab;
+    this.isSidePanelOpen = !this.isSidePanelOpen;
+  }
+
   closeSidePanel() {
     this.isSidePanelOpen = false;
+    this.activeTab = null;
   }
 
   // Keyboard methods

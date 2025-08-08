@@ -223,7 +223,7 @@ body {
         }
 
         .side-panel.open {
-            left: 0;
+            left: 60px; /* leave space for tabs */
         }
 
         .panel-header {
@@ -591,6 +591,14 @@ body {
                 width: 100%;
                 left: -100%;
             }
+
+            .left-tabs {
+                top: 60px;
+            }
+
+            .side-panel.open {
+                left: 50px;
+            }
         }
 
         /* Animations */
@@ -630,7 +638,7 @@ body {
 }
 
 .side-panel.open {
-  left: 0; /* Show panel */
+  left: 60px; /* leave space for tabs */
 }
 
 .side-panel-header {
@@ -1421,4 +1429,42 @@ body {
 .keyboard-key {
   line-height: 1;
   letter-spacing: 0;
+}
+
+.left-tabs {
+  position: fixed;
+  top: 110px;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 1100;
+}
+
+.tab-btn {
+  background: #222;
+  color: #b0b0b0;
+  border: none;
+  border-radius: 0 8px 8px 0;
+  padding: 0.5rem 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s, color 0.2s;
+  outline: none;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  height: 80px; /* adjust as needed */
+  min-width: 40px;
+  max-width: 40px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.tab-btn.active,
+.tab-btn:hover {
+  background: var(--defaultContrastColor);
+  color: #fff;
 }
