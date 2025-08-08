@@ -1476,3 +1476,21 @@ body {
 .toolbar-divider-hr{
     border-color: gray;
 }
+
+.history-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.history-link {
+  display: block;
+  padding: 0.5rem 0;
+  color: inherit;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.history-link:visited,
+.history-link:active {
+  color: inherit;
+}

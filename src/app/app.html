@@ -60,14 +60,26 @@
   </div>
   <div class="side-panel-content">
     <ng-container [ngSwitch]="activeTab">
+        <!-- Links Section -->
       <div *ngSwitchCase="'links'">
-        <!-- Example links -->
         <a href="#" class="panel-link">Home</a><br />
         <a href="#" class="panel-link">About</a><br />
         <a href="#" class="panel-link">Contact</a><br />
       </div>
-      <div *ngSwitchCase="'settings'">
-        <!-- Example settings -->
+
+        <!-- Settings Section -->
+      <div *ngSwitchCase="'settings'" style="padding-top: 0.3rem;">
+           <!-- Single/Presentation View Setting -->
+        <label>
+          <input type="checkbox" [checked]="viewMode === 'single'" (change)="viewMode = 'single'">
+          Single View
+        </label>
+        <label style="margin-left: 1.5rem;">
+          <input type="checkbox" [checked]="viewMode === 'presentation'" (change)="viewMode = 'presentation'">
+          Presentation View
+        </label>
+        <br />
+        <hr class="toolbar-divider-hr" />
         <label>
           <input type="checkbox" [(ngModel)]="showGurmukhi" />
           Show Gurmukhi
@@ -123,16 +135,20 @@
         <span>{{ transliterationFontSize * 10 }}</span>
         <br />
         <hr class="toolbar-divider-hr" />
+      
       </div>
+
+      <!-- History Section -->
       <div *ngSwitchCase="'history'">
         <div *ngIf="history.length === 0">
           <p>No history yet.</p>
         </div>
-        <ul *ngIf="history.length > 0" style="padding-left: 0; list-style: none;">
+        <ul *ngIf="history.length > 0" class="history-list">
           <li *ngFor="let item of history">
-            <a href="#" (click)="onSelectItem(item)" style="display: block; padding: 0.5rem 0; color: inherit; text-decoration: none;">
+            <a href="#" (click)="onSelectItem(item)" class="history-link">
               <span style="font-family: 'Gurakhar', sans-serif;">{{ item.Gurmukhi }}</span>
             </a>
+            <hr class="toolbar-divider-hr" />
           </li>
         </ul>
       </div>

@@ -201,4 +201,7 @@ export class App implements OnInit {
   }
 
   //#endregion
+
+  // View mode: 'single' or 'presentation'
+  viewMode: 'single' | 'presentation' = 'single';
 }
