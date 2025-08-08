@@ -199,8 +199,9 @@ export class App implements OnInit {
     this.selectedShabad = null;
     this.showSearchPanel = true;
   }
+  //#endregion
 
-  // View mode: 'single' or 'presentation'
+  //#region Presentation mode
   viewMode: 'single' | 'presentation' = 'single';
   popupWindow: Window | null = null;
 
@@ -272,4 +273,6 @@ export class App implements OnInit {
       </html>
     `;
   }
+
+  //#endregion
 }
