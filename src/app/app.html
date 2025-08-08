@@ -46,6 +46,7 @@
   <button class="tab-btn" [class.active]="activeTab === 'links'" (click)="openSidePanel('links')">Links</button>
   <button class="tab-btn" [class.active]="activeTab === 'settings'" (click)="openSidePanel('settings')">Settings</button>
   <button class="tab-btn" [class.active]="activeTab === 'history'" (click)="openSidePanel('history')">History</button>
+  <button class="tab-btn" [class.active]="activeTab === 'pothi'" (click)="openSidePanel('pothi')">Pothi</button>
 </div>
 
 <!-- Side Panel -->
@@ -54,15 +55,16 @@
     <h3 *ngIf="activeTab === 'links'">Links</h3>
     <h3 *ngIf="activeTab === 'settings'">Settings</h3>
     <h3 *ngIf="activeTab === 'history'">History</h3>
+    <h3 *ngIf="activeTab === 'pothi'">Pothi</h3>
     <button class="close-btn" (click)="closeSidePanel()">×</button>
   </div>
   <div class="side-panel-content">
     <ng-container [ngSwitch]="activeTab">
       <div *ngSwitchCase="'links'">
         <!-- Example links -->
-        <a href="#" class="panel-link">Home</a>
-        <a href="#" class="panel-link">About</a>
-        <a href="#" class="panel-link">Contact</a>
+        <a href="#" class="panel-link">Home</a><br />
+        <a href="#" class="panel-link">About</a><br />
+        <a href="#" class="panel-link">Contact</a><br />
       </div>
       <div *ngSwitchCase="'settings'">
         <!-- Example settings -->
@@ -93,6 +95,10 @@
       <div *ngSwitchCase="'history'">
         <!-- Example history -->
         <p>History content goes here.</p>
+      </div>
+        <div *ngSwitchCase="'pothi'">
+        <!-- Example history -->
+        <p>Pothi content goes here.</p>
       </div>
     </ng-container>
   </div>
@@ -179,7 +185,7 @@
             <div class="verses-container">
                 <div class="verse-row" *ngFor="let verse of selectedShabad; let i = index">
                     <div class="verse-content">
-                        <div class="verse-text" style="font-family: 'Gurakhar', sans-serif; font-size: {{gurmukhiFontSize}}rem;">
+                        <div class="verse-text" style="font-family: 'Gurakhar', sans-serif;"  [style.font-size.rem]="gurmukhiFontSize">
                             {{ verse.Gurmukhi }}
                         </div>
                         <div class="verse-translation" *ngIf="verse.English" [style.font-size.rem]="englishFontSize">

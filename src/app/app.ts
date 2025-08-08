@@ -27,15 +27,15 @@ export class App implements OnInit {
   
   // Side panel state
   isSidePanelOpen: boolean = false;
-  activeTab: 'links' | 'settings' | 'history' | null = null;
+  activeTab: 'links' | 'settings' | 'history' | 'pothi' | null = null;
 
   // Punjabi Keyboard state
   showKeyboard: boolean = false;
     // Gurmukhi font size
-  gurmukhiFontSize: number = 1.3;
+  gurmukhiFontSize: number = 2;
 
   // English translation font size
-  englishFontSize: number = 1.0;
+  englishFontSize: number = 1.4;
 
   //#endregion
 
@@ -71,7 +71,7 @@ export class App implements OnInit {
     this.isSidePanelOpen = !this.isSidePanelOpen;
   }
 
-  openSidePanel(tab: 'links' | 'settings' | 'history') {
+  openSidePanel(tab: 'links' | 'settings' | 'history' | 'pothi') {
     this.activeTab = tab;
     this.isSidePanelOpen = !this.isSidePanelOpen;
     if(!this.isSidePanelOpen) {
