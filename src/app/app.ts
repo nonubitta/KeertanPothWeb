@@ -188,6 +188,8 @@ export class App implements OnInit {
     const query = Queries.getShabadById(item.ShabadID);
     const results = await this.dbService.query(query);
     this.selectedShabad = mapResultsToVerse(results);
+    console.log('Selected Shabad:', this.selectedShabad);
+
     this.detailsInfo = this.selectedShabad[0];
     if (!this.detailsInfo.WriterID) {
       const verse = this.selectedShabad.find(v => v.WriterID != null);
@@ -286,6 +288,12 @@ export class App implements OnInit {
       </body>
       </html>
     `;
+  }
+
+  getVishraamClass(vishraamArray: any[], wi: number): string | null {
+    const v = vishraamArray?.find(x => x.p === wi);
+    if (!v) return null;
+    return (v.t && v.t.toLowerCase() === 'v') ? 'main-vishram' : 'secondary-vishram';
   }
 
   //#endregion

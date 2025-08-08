@@ -284,8 +284,21 @@
                   style="cursor: pointer;"
                 >
                     <div class="verse-content">
-                        <div *ngIf="showGurmukhi" class="verse-text" style="font-family: 'Gurakhar', sans-serif;"  [style.font-size.rem]="gurmukhiFontSize">
+                        <div *ngIf="showGurmukhi" class="verse-text" style="font-family: 'Gurakhar', sans-serif;" [style.font-size.rem]="gurmukhiFontSize">
+                          <ng-container *ngIf="verse.VishramArray && verse.VishramArray.length > 0; else plainGurmukhi">
+                            <ng-container *ngFor="let word of verse.Gurmukhi.split(' '); let wi = index; let last = last">
+                              <ng-container *ngIf="getVishraamClass(verse.VishramArray, wi) as vishraamClass">
+                                <span [ngClass]="vishraamClass">{{ word }}</span>
+                              </ng-container>
+                              <ng-container *ngIf="!getVishraamClass(verse.VishramArray, wi)">
+                                {{ word }}
+                              </ng-container>
+                              <span> </span>
+                            </ng-container>
+                          </ng-container>
+                          <ng-template #plainGurmukhi>
                             {{ verse.Gurmukhi }}
+                          </ng-template>
                         </div>
                         <div *ngIf="showEnglish && verse.English" class="verse-translation" [style.font-size.rem]="englishFontSize">
                             {{ verse.English }}
