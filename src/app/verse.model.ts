@@ -41,6 +41,9 @@ export interface VerseSearchResult {
   RaagID: number;
   PageNo: number;
   SourceID: string;
+  WriterEnglish: string;
+  RaagEnglish: string;
+  SourceEnglish: string;
 }
 
 

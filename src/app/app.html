@@ -230,16 +230,24 @@
             <!-- Results -->
             <div class="results-grid">
                 <div class="result-card" *ngFor="let item of filteredItems" (click)="onSelectItem(item)">
-                    <div class="result-content">
-                        <h3 class="result-title" style="font-family: 'Gurakhar', sans-serif;">{{ item.Gurmukhi }}</h3>
+                  <div class="result-content">
+                    <h3 class="result-title" style="font-family: 'Gurakhar', sans-serif;">{{ item.Gurmukhi }}</h3>
+                    <div class="result-details-line"
+                         style="font-size: 0.95rem; margin-top: 0.2rem;">
+                      <span style="color: #7ecbff;">By </span>
+                      <span style="color: #d2691e; font-weight: 500;">{{ item.WriterEnglish }}</span>
+                      <span style="color: #7ecbff;"> in </span>
+                      <span style="color: #bfa600; font-weight: 500;">{{ item.RaagEnglish }}</span>
+                      <span style="color: #7ecbff;"> on Ang {{ item.PageNo }}</span>
                     </div>
-                    <div class="result-meta">
-                        <span class="result-date">January 10, 2024</span>
-                        <span class="result-category">Academic</span>
-                    </div>
-                    <div class="result-actions">
-                        <button class="btn-primary">Read</button>
-                    </div>
+                  </div>
+                  <div class="result-meta">
+                      <span class="result-date">January 10, 2024</span>
+                      <span class="result-category">Academic</span>
+                  </div>
+                  <div class="result-actions">
+                      <button class="btn-primary">Read</button>
+                  </div>
                 </div>
             </div>
 

@@ -10,7 +10,10 @@ export function mapResultsToVerseSearchResults(results: any[]): VerseSearchResul
     Punjabi: row.Punjabi,
     RaagID: row.RaagID,
     PageNo: row.PageNo,
-    SourceID: row.SourceID
+    SourceID: row.SourceID,
+    WriterEnglish: row.WriterEnglish,
+    RaagEnglish: row.RaagEnglish,
+    SourceEnglish: row.SourceEnglish
   }));
 }
 
