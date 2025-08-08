@@ -21,7 +21,7 @@ export interface Verse {
   WriterEnglish: string;
   RaagEnglish: string;
   SourceEnglish: string;
-  VishramArray: Vishram[];
+  VishramArray: Vishram[] | null; // Array of Vishram objects or null if not applicable
 }
 
 export interface Vishram{

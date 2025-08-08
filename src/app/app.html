@@ -154,7 +154,7 @@
       
         <!-- New settings -->
         <label>
-          <input type="checkbox" [(ngModel)]="showVishraam" />
+          <input type="checkbox" [(ngModel)]="showVishraam" (click)="onToggleVishraam()" />
           Show Vishraam
         </label>
         <!-- <label style="margin-left: 1.5rem;">

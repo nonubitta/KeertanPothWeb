@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DbService } from './db.service';  // Your existing service handling sql.js
 import { Verse, VerseSearchResult } from './verse.model';
-import { mapResultsToVerse, mapResultsToVerseSearchResults } from './utils';
+import { visraamToVishraamArray, mapResultsToVerse, mapResultsToVerseSearchResults } from './utils';
 import { Queries } from './Queries';
 
 @Component({
@@ -14,7 +14,8 @@ import { Queries } from './Queries';
 })
 
 export class App implements OnInit {
-  
+
+
   //#region Public Properties
   searchMode: string = 'anywhere';
   showSearchPanel: boolean = true;
@@ -187,7 +188,7 @@ export class App implements OnInit {
   async onSelectItem(item: VerseSearchResult) {
     const query = Queries.getShabadById(item.ShabadID);
     const results = await this.dbService.query(query);
-    this.selectedShabad = mapResultsToVerse(results);
+    this.selectedShabad = mapResultsToVerse(results, this.showVishraam);
     console.log('Selected Shabad:', this.selectedShabad);
 
     this.detailsInfo = this.selectedShabad[0];
@@ -206,6 +207,18 @@ export class App implements OnInit {
       localStorage.setItem(this.HISTORY_KEY, JSON.stringify(this.history));
     }
     this.showSearchPanel = false;
+  }
+
+  onToggleVishraam() {
+    debugger;
+    if(!this.showVishraam) {
+      this.selectedShabad = visraamToVishraamArray(this.selectedShabad);
+    }
+    else {
+      this.selectedShabad?.forEach(verse => {
+        verse.VishramArray = null;
+      });
+    }
   }
 
   closePanel() {

@@ -14,11 +14,11 @@ export function mapResultsToVerseSearchResults(results: any[]): VerseSearchResul
   }));
 }
 
-export function mapResultsToVerse(results: any[]): Verse[] {
+export function mapResultsToVerse(results: any[], showVishraam: boolean = false): Verse[] {
   return results.map(row => {
     // Parse Visraam column for sttm data into VishramArray
     let VishramArray: any = undefined;
-    if (row.Visraam) {
+    if (row.Visraam && showVishraam) {
       try {
         const visraamObj = typeof row.Visraam === 'string' ? JSON.parse(row.Visraam) : row.Visraam;
         VishramArray = visraamObj?.sttm ?? [];
@@ -51,4 +51,28 @@ export function mapResultsToVerse(results: any[]): Verse[] {
       VishramArray: VishramArray
     };
   });
+}
+
+/**
+ * For a selectedShabad array, parses each row's Visraam and updates its VishramArray property.
+ * Modifies the array in-place and also returns it.
+ */
+export function visraamToVishraamArray(selectedShabad: Verse[] | null): any[] {
+  if (selectedShabad === null || !Array.isArray(selectedShabad)) {
+    return selectedShabad || [];
+  }
+  for (const row of selectedShabad) {
+    try {
+      const visraam = row.Visraam;
+      if (visraam) {
+        const obj = typeof visraam === 'string' ? JSON.parse(visraam) : visraam;
+        row.VishramArray = Array.isArray(obj?.sttm) ? obj.sttm : [];
+      } else {
+        row.VishramArray = [];
+      }
+    } catch {
+      row.VishramArray = [];
+    }
+  }
+  return selectedShabad;
 }
