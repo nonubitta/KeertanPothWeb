@@ -109,9 +109,11 @@
           [(ngModel)]="presentationGurmukhiFontSize"
           style="vertical-align: middle; width: 120px;"
         />
-        <span>{{ presentationGurmukhiFontSize * 10 }}</span>
+        <span>{{ presentationGurmukhiFontSize }}rem</span>
         <br />
         <hr class="toolbar-divider-hr" />
+
+        <!-- English settings -->
         <label>
           <input type="checkbox" [(ngModel)]="showEnglish" />
           Show English
@@ -150,6 +152,17 @@
         <br />
         <hr class="toolbar-divider-hr" />
       
+        <!-- New settings -->
+        <label>
+          <input type="checkbox" [(ngModel)]="showVishraam" />
+          Show Vishraam
+        </label>
+        <label style="margin-left: 1.5rem;">
+          <input type="checkbox" [(ngModel)]="showLadivaar" />
+          Ladivaar
+        </label>
+        <br />
+        <hr class="toolbar-divider-hr" />
       </div>
 
       <!-- History Section -->
@@ -246,6 +259,8 @@
                         <span class="author">{{ detailsInfo?.WriterEnglish }}</span>
                         <span class="separator">•</span>
                         <span class="raag">{{ detailsInfo?.RaagEnglish }}</span>
+                        <span class="separator">•</span>
+                        <span class="source-label">{{ detailsInfo?.SourceEnglish }}</span>
                         <span class="separator">•</span>
                         <span class="meta-label">Ang {{ detailsInfo?.PageNo }}</span>
                         <span class="separator">•</span>

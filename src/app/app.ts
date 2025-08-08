@@ -40,6 +40,10 @@ export class App implements OnInit {
   showEnglish: boolean = true;
   showTransliteration: boolean = true;
 
+  // New settings
+  showVishraam: boolean = true;
+  showLadivaar: boolean = false;
+
   // History of selected items
   history: VerseSearchResult[] = [];
   private readonly HISTORY_KEY = 'kpoth-history';
@@ -228,7 +232,7 @@ export class App implements OnInit {
   }
 
   // Presentation view Gurmukhi font size
-  presentationGurmukhiFontSize: number = 3;
+  presentationGurmukhiFontSize: number = 5;
 
   getPresentationHtml(verse: Verse): string {
   console.log(window.location.origin);
@@ -263,14 +267,14 @@ export class App implements OnInit {
             text-align: center;
           }
           .verse-translation {
-            font-size: ${this.englishFontSize}rem;
+            font-size: ${this.englishFontSize + 2}rem;
             color: #b0b0b0;
             margin-bottom: 1rem;
             text-align: center;
           }
           .verse-translation.transliteration {
             color: #8ecae6;
-            font-size: ${this.transliterationFontSize}rem;
+            font-size: ${this.transliterationFontSize + 2}rem;
             text-align: center;
           }
         </style>
