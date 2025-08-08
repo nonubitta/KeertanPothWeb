@@ -945,6 +945,10 @@ body {
   font-style: italic;
 }
 
+.verse-translation.transliteration {
+  color: #8ecae6;
+}
+
 .verse-actions {
   display: flex;
   gap: 0.5rem;
@@ -1453,7 +1457,7 @@ body {
   text-align: left;
   transition: background 0.2s, color 0.2s;
   outline: none;
-  writing-mode: vertical-rl;
+  writing-mode: vertical-lr;
   text-orientation: mixed;
   height: 80px; /* adjust as needed */
   min-width: 40px;

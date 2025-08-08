@@ -35,7 +35,8 @@ export class App implements OnInit {
   gurmukhiFontSize: number = 2;
 
   // English translation font size
-  englishFontSize: number = 1.4;
+  englishFontSize: number = 1.0;
+  transliterationFontSize: number = 1.0;
 
   //#endregion
 

@@ -91,6 +91,18 @@
           style="vertical-align: middle; width: 120px;"
         />
         <span>{{ englishFontSize * 10 }}</span>
+        <br>
+        <label for="transliterationFontSize">Transliteration Font Size:</label>
+        <input
+          id="transliterationFontSize"
+          type="range"
+          min="0.7"
+          max="2"
+          step="0.05"
+          [(ngModel)]="transliterationFontSize"
+          style="vertical-align: middle; width: 120px;"
+        />
+        <span>{{ transliterationFontSize * 10 }}</span>
       </div>
       <div *ngSwitchCase="'history'">
         <!-- Example history -->
@@ -190,6 +202,9 @@
                         </div>
                         <div class="verse-translation" *ngIf="verse.English" [style.font-size.rem]="englishFontSize">
                             {{ verse.English }}
+                        </div>
+                        <div class="verse-translation transliteration" *ngIf="verse.English" [style.font-size.rem]="transliterationFontSize">
+                            {{ verse.Transliteration }}
                         </div>
                     </div>
                     <!-- <div class="verse-actions">
