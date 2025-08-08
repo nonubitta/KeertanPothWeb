@@ -220,11 +220,18 @@ export class App implements OnInit {
   }
 
   getPresentationHtml(verse: Verse): string {
+  console.log(window.location.origin);
     return `
       <html>
       <head>
         <title>Keertan Pothi - Presentation</title>
         <style>
+          @font-face {
+            font-family: 'Gurakhar';
+            src: url('${window.location.origin}/assets/Fonts/GURAKHAR.TTF') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+          }
           body {
             background: #121212;
             color: #fff;
