@@ -154,6 +154,15 @@
 
       <!-- History Section -->
       <div *ngSwitchCase="'history'">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+        <span style="font-weight: 600;">History</span>
+        <button 
+        class="btn-clear-history" 
+        (click)="confirmClearHistory()"
+        style="background: none; border: none; color: #e57373; font-size: 1rem; cursor: pointer; margin-left: 1rem;">
+        Clear History
+        </button>
+    </div>
         <div *ngIf="history.length === 0">
           <p>No history yet.</p>
         </div>

@@ -86,6 +86,13 @@ export class App implements OnInit {
     this.isSidePanelOpen = !this.isSidePanelOpen;
   }
 
+  confirmClearHistory() {
+    if (confirm('Are you sure you want to clear your history? This action cannot be undone.')) {
+      this.history = [];
+      localStorage.removeItem(this.HISTORY_KEY);
+    }
+  }
+
   openSidePanel(tab: 'links' | 'settings' | 'history' | 'pothi') {
     const prevTab = this.activeTab;
     this.activeTab = tab;
