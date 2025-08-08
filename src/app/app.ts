@@ -200,8 +200,69 @@ export class App implements OnInit {
     this.showSearchPanel = true;
   }
 
-  //#endregion
-
   // View mode: 'single' or 'presentation'
   viewMode: 'single' | 'presentation' = 'single';
+  popupWindow: Window | null = null;
+
+  // Call this from the template when a verse row is clicked in selectedShabad
+  onPresentationVerseClick(verse: Verse) {
+    if (this.viewMode === 'presentation') {
+      const popupHtml = this.getPresentationHtml(verse);
+      if (!this.popupWindow || this.popupWindow.closed) {
+        this.popupWindow = window.open('', 'kpoth-presentation', 'width=800,height=600');
+      }
+      if (this.popupWindow) {
+        this.popupWindow.document.open();
+        this.popupWindow.document.write(popupHtml);
+        this.popupWindow.document.close();
+      }
+    }
+  }
+
+  getPresentationHtml(verse: Verse): string {
+    return `
+      <html>
+      <head>
+        <title>Keertan Pothi - Presentation</title>
+        <style>
+          body {
+            background: #121212;
+            color: #fff;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+          }
+          .verse-text {
+            font-family: 'Gurakhar', sans-serif;
+            font-size: ${this.gurmukhiFontSize}rem;
+            margin-bottom: 2rem;
+            color: #fff;
+            text-align: center;
+          }
+          .verse-translation {
+            font-size: ${this.englishFontSize}rem;
+            color: #b0b0b0;
+            margin-bottom: 1rem;
+            text-align: center;
+          }
+          .verse-translation.transliteration {
+            color: #8ecae6;
+            font-size: ${this.transliterationFontSize}rem;
+            text-align: center;
+          }
+        </style>
+      </head>
+      <body>
+        ${this.showGurmukhi ? `<div class="verse-text">${verse.Gurmukhi}</div>` : ''}
+        ${this.showEnglish && verse.English ? `<div class="verse-translation">${verse.English}</div>` : ''}
+        ${this.showTransliteration && verse.Transliteration ? `<div class="verse-translation transliteration">${verse.Transliteration}</div>` : ''}
+      </body>
+      </html>
+    `;
+  }
 }

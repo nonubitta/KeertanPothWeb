@@ -239,7 +239,12 @@
         <!-- Content Section -->
         <section class="content-section">
             <div class="verses-container">
-                <div class="verse-row" *ngFor="let verse of selectedShabad; let i = index">
+                <div
+                  class="verse-row"
+                  *ngFor="let verse of selectedShabad; let i = index"
+                  (click)="viewMode === 'presentation' ? onPresentationVerseClick(verse) : null"
+                  style="cursor: pointer;"
+                >
                     <div class="verse-content">
                         <div *ngIf="showGurmukhi" class="verse-text" style="font-family: 'Gurakhar', sans-serif;"  [style.font-size.rem]="gurmukhiFontSize">
                             {{ verse.Gurmukhi }}
