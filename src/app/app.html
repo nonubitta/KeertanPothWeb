@@ -76,7 +76,7 @@
           [(ngModel)]="gurmukhiFontSize"
           style="vertical-align: middle; width: 120px;"
         />
-        <span>{{ gurmukhiFontSize }}rem</span>
+        <span>{{ gurmukhiFontSize * 10 }}</span>
         <br>
         <label for="englishFontSize">English Font Size:</label>
         <input
@@ -88,7 +88,7 @@
           [(ngModel)]="englishFontSize"
           style="vertical-align: middle; width: 120px;"
         />
-        <span>{{ englishFontSize }}rem</span>
+        <span>{{ englishFontSize * 10 }}</span>
       </div>
       <div *ngSwitchCase="'history'">
         <!-- Example history -->

@@ -14,6 +14,8 @@ import { Queries } from './Queries';
 })
 
 export class App implements OnInit {
+  
+  //#region Public Properties
   searchMode: string = 'anywhere';
   showSearchPanel: boolean = true;
   searchText: string = '';
@@ -29,8 +31,15 @@ export class App implements OnInit {
 
   // Punjabi Keyboard state
   showKeyboard: boolean = false;
-  
-  // Punjabi keyboard layout
+    // Gurmukhi font size
+  gurmukhiFontSize: number = 1.3;
+
+  // English translation font size
+  englishFontSize: number = 1.0;
+
+  //#endregion
+
+  //#region Punjabi keyboard layout
   keyboardLayout1 = [
     ['a', 'A', 'e', 's', 'h', 'q', 'Q', 'd', 'D', 'n'],
     ['k', 'K', 'g', 'G', '|', 'p', 'P', 'b', 'B', 'm'],
@@ -44,13 +53,9 @@ export class App implements OnInit {
     ['R', 'N', 'M', 'S', '^', 'Z', 'z', '&', '⎵', '←','123']
   ];
   keyboardLayout = this.keyboardLayout1;
+  //#endregion
 
-  // Gurmukhi font size
-  gurmukhiFontSize: number = 1.3;
-
-  // English translation font size
-  englishFontSize: number = 1.0;
-
+  //#region constructor, onInit
   constructor(private dbService: DbService) {}
 
   async ngOnInit() {
@@ -58,7 +63,10 @@ export class App implements OnInit {
     this.isDbReady = true;
   }
 
-  // Side panel methods
+  //#endregion
+
+  //#region Side Panels
+  
   toggleSidePanel() {
     this.isSidePanelOpen = !this.isSidePanelOpen;
   }
@@ -66,6 +74,9 @@ export class App implements OnInit {
   openSidePanel(tab: 'links' | 'settings' | 'history') {
     this.activeTab = tab;
     this.isSidePanelOpen = !this.isSidePanelOpen;
+    if(!this.isSidePanelOpen) {
+      this.activeTab = null;
+    }
   }
 
   closeSidePanel() {
@@ -73,7 +84,10 @@ export class App implements OnInit {
     this.activeTab = null;
   }
 
-  // Keyboard methods
+  //#endregion
+
+  //#region Keyboard methods
+
   toggleKeyboard() {
     this.showKeyboard = !this.showKeyboard;
   }
@@ -107,43 +121,9 @@ export class App implements OnInit {
     this.onSearch();
   }
 
-  // Navigation methods
-  navigateToHome() {
-    this.closeSidePanel();
-    // Add your home navigation logic here
-    console.log('Navigate to Home');
-  }
+  //#endregion
 
-  navigateToAbout() {
-    this.closeSidePanel();
-    // Add your about navigation logic here
-    console.log('Navigate to About');
-  }
-
-  navigateToSearch() {
-    this.closeSidePanel();
-    // Add your search navigation logic here
-    console.log('Navigate to Search');
-  }
-
-  navigateToFavorites() {
-    this.closeSidePanel();
-    // Add your favorites navigation logic here
-    console.log('Navigate to Favorites');
-  }
-
-  navigateToSettings() {
-    this.closeSidePanel();
-    // Add your settings navigation logic here
-    console.log('Navigate to Settings');
-  }
-
-  navigateToHelp() {
-    this.closeSidePanel();
-    // Add your help navigation logic here
-    console.log('Navigate to Help');
-  }
-
+  //#region Search methods & toggle search and details
   handleSearch(event: Event) {
     event.preventDefault();
     this.onSearch();
@@ -191,4 +171,6 @@ export class App implements OnInit {
     this.selectedShabad = null;
     this.showSearchPanel = true;
   }
+
+  //#endregion
 }
