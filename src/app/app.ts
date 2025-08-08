@@ -220,6 +220,9 @@ export class App implements OnInit {
     }
   }
 
+  // Presentation view Gurmukhi font size
+  presentationGurmukhiFontSize: number = 3;
+
   getPresentationHtml(verse: Verse): string {
   console.log(window.location.origin);
     return `
@@ -247,7 +250,7 @@ export class App implements OnInit {
           }
           .verse-text {
             font-family: 'Gurakhar', sans-serif;
-            font-size: ${this.gurmukhiFontSize}rem;
+            font-size: ${this.presentationGurmukhiFontSize}rem;
             margin-bottom: 2rem;
             color: #fff;
             text-align: center;
