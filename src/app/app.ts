@@ -210,7 +210,6 @@ export class App implements OnInit {
   }
 
   onToggleVishraam() {
-    debugger;
     if(!this.showVishraam) {
       this.selectedShabad = visraamToVishraamArray(this.selectedShabad);
     }
