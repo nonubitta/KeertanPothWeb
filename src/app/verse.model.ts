@@ -21,6 +21,12 @@ export interface Verse {
   WriterEnglish: string;
   RaagEnglish: string;
   SourceEnglish: string;
+  VishramArray: Vishram[];
+}
+
+export interface Vishram{
+  p: number | null;
+  t: string;
 }
 
 

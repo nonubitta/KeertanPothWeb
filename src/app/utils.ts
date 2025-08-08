@@ -15,27 +15,40 @@ export function mapResultsToVerseSearchResults(results: any[]): VerseSearchResul
 }
 
 export function mapResultsToVerse(results: any[]): Verse[] {
-  return results.map(row => ({
-    ID: row.ID,
-    ShabadID: row.ShabadID,
-    English: row.English,
-    Gurmukhi: row.Gurmukhi,
-    GurmukhiBisram: row.GurmukhiBisram,
-    GurmukhiUni: row.GurmukhiUni,
-    WriterID: row.WriterID,
-    Punjabi: row.Punjabi,
-    RaagID: row.RaagID,
-    PageNo: row.PageNo,
-    LineNo: row.LineNo,
-    SourceID: row.SourceID,
-    FirstLetterStr: row.FirstLetterStr,
-    MainLetters: row.MainLetters,
-    Bisram: row.Bisram,
-    Visraam: row.Visraam,
-    FirstLetterEng: row.FirstLetterEng,
-    Transliteration: row.Transliteration,
-    WriterEnglish: row.WriterEnglish,
-    RaagEnglish: row.RaagEnglish,
-    SourceEnglish: row.SourceEnglish
-  }));
+  return results.map(row => {
+    // Parse Visraam column for sttm data into VishramArray
+    let VishramArray: any = undefined;
+    if (row.Visraam) {
+      try {
+        const visraamObj = typeof row.Visraam === 'string' ? JSON.parse(row.Visraam) : row.Visraam;
+        VishramArray = visraamObj?.sttm ?? [];
+      } catch {
+        VishramArray = [];
+      }
+    }
+    return {
+      ID: row.ID,
+      ShabadID: row.ShabadID,
+      English: row.English,
+      Gurmukhi: row.Gurmukhi,
+      GurmukhiBisram: row.GurmukhiBisram,
+      GurmukhiUni: row.GurmukhiUni,
+      WriterID: row.WriterID,
+      Punjabi: row.Punjabi,
+      RaagID: row.RaagID,
+      PageNo: row.PageNo,
+      LineNo: row.LineNo,
+      SourceID: row.SourceID,
+      FirstLetterStr: row.FirstLetterStr,
+      MainLetters: row.MainLetters,
+      Bisram: row.Bisram,
+      Visraam: row.Visraam,
+      FirstLetterEng: row.FirstLetterEng,
+      Transliteration: row.Transliteration,
+      WriterEnglish: row.WriterEnglish,
+      RaagEnglish: row.RaagEnglish,
+      SourceEnglish: row.SourceEnglish,
+      VishramArray: VishramArray
+    };
+  });
 }
