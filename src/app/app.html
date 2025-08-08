@@ -125,8 +125,17 @@
         <hr class="toolbar-divider-hr" />
       </div>
       <div *ngSwitchCase="'history'">
-        <!-- Example history -->
-        <p>History content goes here.</p>
+        <div *ngIf="history.length === 0">
+          <p>No history yet.</p>
+        </div>
+        <ul *ngIf="history.length > 0" style="padding-left: 0; list-style: none;">
+          <li *ngFor="let item of history">
+            <a href="#" (click)="onSelectItem(item)" style="display: block; padding: 0.5rem 0; color: inherit; text-decoration: none;">
+              <span style="font-family: 'Gurakhar', sans-serif;">{{ item.Gurmukhi }}</span>
+              <span style="color: #888; font-size: 0.9em;">({{ item.ShabadID }})</span>
+            </a>
+          </li>
+        </ul>
       </div>
         <div *ngSwitchCase="'pothi'">
         <!-- Example history -->

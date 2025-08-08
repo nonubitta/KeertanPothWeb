@@ -39,6 +39,10 @@ export class App implements OnInit {
   showGurmukhi: boolean = true;
   showEnglish: boolean = true;
   showTransliteration: boolean = true;
+
+  // History of selected items
+  history: VerseSearchResult[] = [];
+  private readonly HISTORY_KEY = 'kpoth-history';
   //#endregion
 
   //#region Punjabi keyboard layout
@@ -63,6 +67,15 @@ export class App implements OnInit {
   async ngOnInit() {
     await this.dbService.initDb();
     this.isDbReady = true;
+    // Load history from localStorage
+    const stored = localStorage.getItem(this.HISTORY_KEY);
+    if (stored) {
+      try {
+        this.history = JSON.parse(stored);
+      } catch {
+        this.history = [];
+      }
+    }
   }
 
   //#endregion
@@ -165,6 +178,13 @@ export class App implements OnInit {
         this.detailsInfo.WriterID = verse.WriterID;
         this.detailsInfo.WriterEnglish = verse.WriterEnglish;
       }
+    }
+    // Store in history (avoid duplicates by ShabadID)
+    if (!this.history.some(h => h.ShabadID === item.ShabadID)) {
+      this.history.unshift(item);
+      // Limit history length if desired, e.g. 50
+      if (this.history.length > 50) this.history.length = 50;
+      localStorage.setItem(this.HISTORY_KEY, JSON.stringify(this.history));
     }
     this.showSearchPanel = false;
   }
