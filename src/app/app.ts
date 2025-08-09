@@ -251,55 +251,65 @@ export class App implements OnInit {
   getPresentationHtml(verse: Verse): string {
   console.log(window.location.origin);
     return `
-      <html>
-      <head>
-        <title>Keertan Pothi - Presentation</title>
-        <style>
-          @font-face {
-            font-family: 'Gurakhar';
-            src: url('${window.location.origin}/assets/Fonts/GURAKHAR.TTF') format('truetype');
-            font-weight: 300;
-            font-style: normal;
-          }
-          body {
-            background: #121212;
-            color: #fff;
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-          }
-          .verse-text {
-            font-family: 'Gurakhar', sans-serif;
-            font-size: ${this.presentationGurmukhiFontSize}rem;
-            margin-bottom: 2rem;
-            color: #fff;
-            text-align: center;
-          }
-          .verse-translation {
-            font-size: ${this.englishFontSize + 2}rem;
-            color: #b0b0b0;
-            margin-bottom: 1rem;
-            text-align: center;
-          }
-          .verse-translation.transliteration {
-            color: #8ecae6;
-            font-size: ${this.transliterationFontSize + 2}rem;
-            text-align: center;
-          }
-        </style>
-      </head>
-      <body>
-        ${this.showGurmukhi ? `<div class="verse-text">${verse.Gurmukhi}</div>` : ''}
-        ${this.showEnglish && verse.English ? `<div class="verse-translation">${verse.English}</div>` : ''}
-        ${this.showTransliteration && verse.Transliteration ? `<div class="verse-translation transliteration">${verse.Transliteration}</div>` : ''}
-      </body>
-      </html>
-    `;
+    <html>
+    <head>
+      <title>Keertan Pothi - Presentation</title>
+      <style>
+        @font-face {
+          font-family: 'Gurakhar';
+          src: url('${window.location.origin}/assets/Fonts/GURAKHAR.TTF') format('truetype');
+          font-weight: 300;
+          font-style: normal;
+        }
+        body {
+          background: #121212;
+          color: #fff;
+          font-family: 'Segoe UI', sans-serif;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+        }
+        .verse-text {
+          font-family: 'Gurakhar', sans-serif;
+          font-size: ${this.presentationGurmukhiFontSize}rem;
+          margin-bottom: 2rem;
+          color: #fff;
+          text-align: center;
+        }
+        .verse-translation {
+          font-size: ${this.englishFontSize + 2}rem;
+          color: #b0b0b0;
+          margin-bottom: 1rem;
+          text-align: center;
+        }
+        .verse-translation.transliteration {
+          color: #8ecae6;
+          font-size: ${this.transliterationFontSize + 2}rem;
+          text-align: center;
+        }
+        .v{
+          color: #f97b4d;
+        }
+
+        .y {
+          color: #1f991f;
+        }
+      </style>
+    </head>
+    <body>
+      ${this.showGurmukhi ? `<div class="verse-text">${verse.GurmukhiHtml || ''}</div>` : ''}
+      ${this.showEnglish && verse.English ? `<div class="verse-translation">${verse.English}</div>` : ''}
+      ${this.showTransliteration && verse.Transliteration ? `<div class="verse-translation transliteration">${verse.Transliteration}</div>` : ''}
+      <script>
+        // No escaping needed, innerHTML is used directly in document.write
+      </script>
+    </body>
+    </html>
+  `;
   }
 
   getVishraamClass(vishraamArray: any[], wi: number): string | null {
