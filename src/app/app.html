@@ -3,7 +3,7 @@
         <nav class="nav">
             <div class="nav-left">
                 <a href="#" class="logo">
-                    <img src="assets/images/Logo.png" alt="Keertan Pothi Logo" style="height: 3.5rem; width: auto; display: inline-block; vertical-align: middle; margin-right: 0.5rem;" />
+                    <img src="assets/images/Logo.png" alt="Keertan Pothi Logo" class="logo-img" />
                     <span style="vertical-align: middle;">Keertan Pothi</span>
                 </a>
             </div>
@@ -18,7 +18,7 @@
                         placeholder="Sbd Kojo" 
                         name="searchText">
                     <button type="button" class="keyboard-toggle-btn" (click)="toggleKeyboard()" title="Toggle Punjabi Keyboard">
-                        🔤
+                        <span style="font-size: 1.3rem; vertical-align: middle;">⌨️</span>
                     </button>
                     <button type="submit" class="header-search-btn">Search</button>
                 </form>
@@ -203,25 +203,24 @@
 <main *ngIf="showSearchPanel && filteredItems.length > 0" class="main-content">
             <!-- Filters-->
     <div class="container">
-        <label>
-            <input type="radio" name="searchMode" [(ngModel)]="searchMode" value="anywhere" (change)="onSearch()" /> Anywhere
-        </label>
-        <label style="margin-left: 1.5rem;">
-            <input type="radio" name="searchMode" [(ngModel)]="searchMode" value="starts" (change)="onSearch()" /> Starts with
-        </label>
-    </div>
-    <div class="container">
         <!-- Search Results Section -->
         <section class="results-section">
             
             <!-- Results headers-->
             <div class="results-header">
-                <h2 class="results-title">Search Results</h2>
+                <span class="results-sort">
+                   <select name="searchMode" [(ngModel)]="searchMode" (change)="onSearch()">
+                        <option value="anywhere">First letter Anywhere</option>
+                        <option value="starts">First letter Start</option>
+                        <option value="mainletters">Main letters Anywhere</option>
+                        <option value="exact">Exact Match</option>
+                    </select>
+                </span>
                 <div class="results-meta">
                     <span class="results-count">Showing 1-{{filteredItems.length}} of {{filteredItems.length}} results</span>
                     <div class="results-sort">
                         <label for="sort">Sort by:</label>
-                        <select id="sort">
+                        <select id="sort2">
                             <option value="relevance">Relevance</option>
                             <option value="date">Date</option>
                             <option value="title">Title</option>

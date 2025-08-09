@@ -152,6 +152,14 @@ body {
             gap: 10px;
         }
 
+        .logo-img {
+          height: 3.5rem;
+          width: auto;
+          display: inline-block;
+          vertical-align: middle;
+          margin-right: 0.5rem;
+        }
+
         // .logo::before {
         //     //content: "🔍";
         //     font-size: 1.5rem;
@@ -178,34 +186,31 @@ body {
         }
 
         .header-search-input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            padding: 0.7rem 1rem;
-            font-size: 1rem;
-            color: #e0e0e0;
-            outline: none;
-        }
-
-        .header-search-input::placeholder {
-            color: #888;
+          flex: 1;
+          background: transparent;
+          border: none;
+          padding: 0.5rem 1rem;
+          font-size: 1rem;
+          color: #e0e0e0;
+          outline: none;
+          height: 2.4rem;
         }
 
         .header-search-btn {
-            background: linear-gradient(45deg, var(--defaultContrastColor), #2285ee);
-            border: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 6px;
-            color: white;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
+          background: linear-gradient(45deg, #d98300, #b86b00);
+          border: none;
+          padding: 0.5rem 1.2rem;
+          border-radius: 6px;
+          color: white;
+          font-size: 0.9rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
         }
 
         .header-search-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 15px rgba(64, 224, 208, 0.3);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 15px rgba(217, 131, 0, 0.25);
         }
 
         /* Side Panel */
@@ -304,7 +309,7 @@ body {
 
         /* Main Content */
         .main-content {
-            padding: 0.5rem 0;
+            padding: 1rem 0rem;
         }
 
         .results-header {
@@ -398,13 +403,13 @@ body {
         }
 
         .result-title {
-            color: var(--defaultContrastColor);
-            font-size: 2rem;
-            font-weight: 400;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            min-width: 200px;
+          color: #fff;
+          font-size: 2rem;
+          font-weight: 400;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          min-width: 200px;
         }
 
         .result-excerpt {
