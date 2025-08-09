@@ -49,6 +49,8 @@ body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+  width: 100vw; // Prevent page shift by forcing body to always be 100vw
 }
 
 input[type="text"] {
@@ -101,6 +103,8 @@ body {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            box-sizing: border-box;
+            width: 100%;
         }
 
         /* Header */
@@ -166,23 +170,26 @@ body {
         // }
 
         .header-search {
-            flex: 1;
+            flex: 1 1 auto;
             max-width: 600px;
-            margin: 0 2rem;
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: flex-end;
         }
 
         .header-search-form {
-            display: flex;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(64, 224, 208, 0.3);
-            border-radius: 8px;
-            padding: 4px;
-            transition: all 0.3s ease;
-        }
-
-        .header-search-form:focus-within {
-            border-color: var(--defaultContrastColor);
-            box-shadow: 0 0 15px rgba(64, 224, 208, 0.2);
+          width: 100%;
+          display: flex;
+          background: rgba(255, 255, 255, 0.05);
+          border: 2px solid rgba(64, 224, 208, 0.3);
+          border-radius: 8px;
+          padding: 0; // Remove extra padding from form
+          transition: all 0.3s ease;
+          align-items: center; // Center children vertically
+          box-sizing: border-box;
+          justify-content: flex-end;
         }
 
         .header-search-input {
@@ -194,18 +201,26 @@ body {
           color: #e0e0e0;
           outline: none;
           height: 2.4rem;
+          min-width: 0;
+          text-align: left;
+          box-sizing: border-box;
         }
 
         .header-search-btn {
           background: linear-gradient(45deg, #d98300, #b86b00);
           border: none;
-          padding: 0.5rem 1.2rem;
+          padding: 0 1.2rem;
           border-radius: 6px;
           color: white;
           font-size: 0.9rem;
           font-weight: 600;
           cursor: pointer;
           transition: all 0.3s ease;
+          height: 2.4rem; // Match input height exactly
+          display: flex;
+          align-items: center;
+          box-sizing: border-box;
+          margin-left: 0.5rem;
         }
 
         .header-search-btn:hover {
@@ -309,7 +324,11 @@ body {
 
         /* Main Content */
         .main-content {
-            padding: 1rem 0rem;
+          padding: 1rem 0rem;
+          width: 100%;
+          max-width: 100%;
+          box-sizing: border-box;
+          overflow-x: hidden;
         }
 
         .results-header {
@@ -1170,13 +1189,17 @@ body {
 .keyboard-toggle-btn {
   background: rgba(255, 255, 255, 0.1);
   border: none;
-  padding: 0.7rem 1rem;
+  padding: 0 1rem;
   border-radius: 6px;
   color: #e0e0e0;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-right: 4px;
+  margin-right: 0.5rem;
+  height: 2.4rem; // Match search button/input height
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
 }
 
 .keyboard-toggle-btn:hover {
