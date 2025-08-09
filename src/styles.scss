@@ -91,7 +91,7 @@ punjabi-font {
 
 body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            background: linear-gradient(135deg, #181818 0%, #232323 50%, #101010 100%);
             color: #e0e0e0;
             min-height: 100vh;
             line-height: 1.6;
@@ -105,12 +105,13 @@ body {
 
         /* Header */
         header {
-            background: rgba(15, 15, 35, 0.9);
+            background: linear-gradient(135deg, #232323 0%, #181818 100%);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(64, 224, 208, 0.2);
+            border-bottom: 1px solid rgba(64, 224, 208, 0.18);
             position: sticky;
             top: 0;
             z-index: 100;
+            transition: background 0.3s cubic-bezier(0.4,0,0.2,1);
         }
 
         .nav {
