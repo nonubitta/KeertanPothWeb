@@ -21,6 +21,7 @@ export interface Verse {
   WriterEnglish: string;
   RaagEnglish: string;
   SourceEnglish: string;
+  GurmukhiHtml?: string; // Optional HTML representation of Gurmukhi
   VishramArray: Vishram[] | null; // Array of Vishram objects or null if not applicable
 }
 

@@ -21,6 +21,7 @@ export function mapResultsToVerse(results: any[], showVishraam: boolean = false)
   return results.map(row => {
     // Parse Visraam column for sttm data into VishramArray
     let VishramArray: any = undefined;
+    let gurmukhiHtml: string | undefined = undefined;
     if (row.Visraam && showVishraam) {
       try {
         const visraamObj = typeof row.Visraam === 'string' ? JSON.parse(row.Visraam) : row.Visraam;
@@ -28,6 +29,10 @@ export function mapResultsToVerse(results: any[], showVishraam: boolean = false)
       } catch {
         VishramArray = [];
       }
+      gurmukhiHtml = GetHtmlWithVishraam(row.Gurmukhi, VishramArray);
+    }
+    else{
+      gurmukhiHtml = row.Gurmukhi;
     }
     return {
       ID: row.ID,
@@ -51,11 +56,27 @@ export function mapResultsToVerse(results: any[], showVishraam: boolean = false)
       WriterEnglish: row.WriterEnglish,
       RaagEnglish: row.RaagEnglish,
       SourceEnglish: row.SourceEnglish,
-      VishramArray: VishramArray
+      VishramArray: VishramArray,
+      GurmukhiHtml: gurmukhiHtml
     };
   });
 }
 
+export function GetHtmlWithVishraam (gurmukhi: string, vishramArray: any[]): string {
+  // Split Gurmukhi into words
+  debugger;
+  if (!gurmukhi) return '';
+  const words = gurmukhi.split(' ');
+  let html = '';
+  for (let i = 0; i < vishramArray.length; i++) {
+    const vishraam = vishramArray[i];
+    if (vishraam && vishraam.p !== null && vishraam.t !== null) {
+      words[vishraam.p] = `<span class="${vishraam.t}">${words[vishraam.p]}</span>`;
+    } 
+  }
+  html = words.join(' ');
+  return html;
+}
 /**
  * For a selectedShabad array, parses each row's Visraam and updates its VishramArray property.
  * Modifies the array in-place and also returns it.
