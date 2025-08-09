@@ -83,6 +83,19 @@
         </label>
         <br />
         <hr class="toolbar-divider-hr" />
+
+        <!-- New settings -->
+        <label>
+          <input type="checkbox" [(ngModel)]="showVishraam" (click)="onToggleVishraam()" />
+          Show Vishraam
+        </label>
+        <!-- <label style="margin-left: 1.5rem;">
+          <input type="checkbox" [(ngModel)]="showLadivaar" />
+          Ladivaar
+        </label> -->
+        <br />
+        <hr class="toolbar-divider-hr"/>
+
         <label>
           <input type="checkbox" [(ngModel)]="showGurmukhi" />
           Show Gurmukhi
@@ -100,20 +113,7 @@
         />
         <span>{{ gurmukhiFontSize * 10 }}</span>
         <br>
-        <hr class="toolbar-divider-hr"/>
-        <!-- Presentation View Gurmukhi Font Size -->
-        <label for="presentationGurmukhiFontSize">Presentation View Gurmukhi Font Size:</label><br />
-        <input
-          id="presentationGurmukhiFontSize"
-          type="range"
-          min="1"
-          max="8"
-          step="0.1"
-          [(ngModel)]="presentationGurmukhiFontSize"
-          style="vertical-align: middle; width: 120px;"
-        />
-        <span>{{ presentationGurmukhiFontSize }}rem</span>
-        <br />
+        
         <hr class="toolbar-divider-hr" />
 
         <!-- English settings -->
@@ -155,16 +155,20 @@
         <br />
         <hr class="toolbar-divider-hr" />
       
-        <!-- New settings -->
-        <label>
-          <input type="checkbox" [(ngModel)]="showVishraam" (click)="onToggleVishraam()" />
-          Show Vishraam
-        </label>
-        <!-- <label style="margin-left: 1.5rem;">
-          <input type="checkbox" [(ngModel)]="showLadivaar" />
-          Ladivaar
-        </label> -->
+        <!-- Presentation View Gurmukhi Font Size -->
+        <label for="presentationGurmukhiFontSize">Presentation View Gurmukhi Font Size:</label><br />
+        <input
+          id="presentationGurmukhiFontSize"
+          type="range"
+          min="1"
+          max="8"
+          step="0.1"
+          [(ngModel)]="presentationGurmukhiFontSize"
+          style="vertical-align: middle; width: 120px;"
+        />
+        <span>{{ presentationGurmukhiFontSize * 10 }}</span>
         <br />
+
         <hr class="toolbar-divider-hr" />
       </div>
 
