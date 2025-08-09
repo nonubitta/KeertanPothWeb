@@ -1537,3 +1537,19 @@ body {
 .y {
   color: #1f991f;
 }
+
+/* Custom select dropdown theme for searchMode and others */
+select,
+select:focus,
+select:active {
+  background: rgba(30, 30, 30, 1);
+  color: #e0e0e0;
+  border: 1px solid rgba(64, 224, 208, 0.3);
+  border-radius: 6px;
+  outline: none;
+}
+
+select option {
+  background: #232323;
+  color: #e0e0e0;
+}
