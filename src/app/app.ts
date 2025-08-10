@@ -176,8 +176,23 @@ export class App implements OnInit {
       const str = c.charCodeAt(0).toString().padStart(3, '0');
       asciiSearch += str + ',';
     }
-    const query = Queries.searchByFirstLetter(asciiSearch, this.searchMode === 'anywhere');
+    let query: string;
+    switch(this.searchMode) {
+      case 'mainletters':
+      case 'exact':
+         query = Queries.searchByFirstLetter(this.searchText, this.searchMode);
+        break;
+      case 'anywhere':
+      case 'start':
+         query = Queries.searchByFirstLetter(asciiSearch, this.searchMode);
+        break;
+      default:
+         query = Queries.searchByFirstLetter(asciiSearch, this.searchMode);
+        break;
+    }
+    
     try {
+      debugger;
       const results = await this.dbService.query(query);
       this.filteredItems = mapResultsToVerseSearchResults(results);
     } catch (error) {
