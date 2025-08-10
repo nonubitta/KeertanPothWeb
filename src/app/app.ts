@@ -192,7 +192,6 @@ export class App implements OnInit {
     }
     
     try {
-      debugger;
       const results = await this.dbService.query(query);
       this.filteredItems = mapResultsToVerseSearchResults(results);
     } catch (error) {

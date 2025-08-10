@@ -5,7 +5,7 @@ export class Queries {
 	switch(searchMode){
 		case 'anywhere':
 			return this.searchByFirstLetterAnywhere(searchText);
-		case 'start':
+		case 'starts':
 			return this.searchByFirstLetterStart(searchText);
 		case 'mainletters':
 			return this.searchByMainletters(searchText);
@@ -43,25 +43,25 @@ export class Queries {
 
   static searchByMainletters(searchText: string): string {
 	return `
-				select vr.ID VerseID, trim(vr.Gurmukhi, 15) Gurmukhi, vr.English, vr.WriterID, vr.RaagID, wr.WriterEnglish, wr.WriterGurmukhi, rg.RaagEnglish, vr.PageNo
+				select vr.ID VerseID, sh.ShabadID, vr.Gurmukhi, GurmukhiUni, vr.English, vr.WriterID, vr.RaagID, wr.WriterEnglish, wr.WriterGurmukhi, rg.RaagEnglish, vr.PageNo
 				from shabad sh 
 				inner join verse vr on sh.verseID = vr.ID 
 				left join Raag rg on vr.raagID = rg.RaagID 
 				left join Writer wr on vr.WriterID = wr.writerID 
 				where vr.MainLetters like '%${searchText}%'
-				 order by vr.id
+				 order by vr.id limit 100
 		`;
   }
 
   static searchByExactletters(searchText: string): string {
 	return `
-				select vr.ID VerseID, trim(vr.Gurmukhi, 15) Gurmukhi, vr.English, vr.WriterID, vr.RaagID, wr.WriterEnglish, wr.WriterGurmukhi, rg.RaagEnglish, vr.PageNo
+				select vr.ID VerseID, sh.ShabadID, vr.Gurmukhi, GurmukhiUni, vr.English, vr.WriterID, vr.RaagID, wr.WriterEnglish, wr.WriterGurmukhi, rg.RaagEnglish, vr.PageNo
 				from shabad sh 
 				inner join verse vr on sh.verseID = vr.ID 
 				left join Raag rg on vr.raagID = rg.RaagID 
 				left join Writer wr on vr.WriterID = wr.writerID 
 				where vr.Gurmukhi like '%${searchText}%'
-				 order by vr.id
+				 order by vr.id  limit 100
 		`;
   }
 
