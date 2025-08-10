@@ -204,58 +204,56 @@
 </div>
 <div class="overlay" [class.active]="isSidePanelOpen" (click)="closeSidePanel()"></div>
 
-<main *ngIf="showSearchPanel && filteredItems.length > 0" class="main-content">
-            <!-- Filters-->
+<main *ngIf="showSearchPanel" class="main-content">
     <div class="container">
-        <!-- Search Results Section -->
-        <section class="results-section">
-            
-            <!-- Results headers-->
-            <div class="results-header">
-                <span class="results-sort">
-                   <select name="searchMode" [(ngModel)]="searchMode" (change)="onSearch()">
-                        <option value="anywhere">First letter Anywhere</option>
-                        <option value="starts">First letter Start</option>
-                        <option value="mainletters">Main letters Anywhere</option>
-                        <option value="exact">Exact Match</option>
+        <!-- Search Filters (always visible when search panel is open) -->
+        <div class="results-header">
+            <span class="results-sort">
+                <select name="searchMode" [(ngModel)]="searchMode" (change)="onSearch()">
+                    <option value="anywhere">First letter Anywhere</option>
+                    <option value="starts">First letter Start</option>
+                    <option value="mainletters">Main letters Anywhere</option>
+                    <option value="exact">Exact Match</option>
+                </select>
+            </span>
+            <div class="results-meta" *ngIf="filteredItems.length > 0">
+                <span class="results-count">Showing 1-{{filteredItems.length}} of {{filteredItems.length}} results</span>
+                <div class="results-sort">
+                    <label for="sort2">Sort by:</label>
+                    <select id="sort2">
+                        <option value="relevance">Relevance</option>
+                        <option value="date">Date</option>
+                        <option value="title">Title</option>
                     </select>
-                </span>
-                <div class="results-meta">
-                    <span class="results-count">Showing 1-{{filteredItems.length}} of {{filteredItems.length}} results</span>
-                    <div class="results-sort">
-                        <label for="sort2">Sort by:</label>
-                        <select id="sort2">
-                            <option value="relevance">Relevance</option>
-                            <option value="date">Date</option>
-                            <option value="title">Title</option>
-                        </select>
-                    </div>
                 </div>
             </div>
+        </div>
+        <!-- Search Results Section -->
+        <section class="results-section" *ngIf="filteredItems.length > 0">
             
-            <!-- Results -->
-            <div class="results-grid">
-                <div class="result-card" *ngFor="let item of filteredItems" (click)="onSelectItem(item)">
-                  <div class="result-content" style="display: flex; flex-direction: column; align-items: flex-start;">
-                    <span class="result-title" style="font-family: 'Gurakhar', sans-serif; margin-bottom: 0rem; 
-                    text-align: left;">{{ item.Gurmukhi }}</span>
-                    <div style="font-size: 0.95rem; margin-top: 0; margin-bottom: 0.2rem; text-align: left;">
-                      <span style="color: #7ecbff;">By </span>
-                      <span style="color: #d2691e; font-weight: 500;">{{ item.WriterEnglish }}</span>
-                      <span style="color: #7ecbff;"> in </span>
-                      <span style="color: #bfa600; font-weight: 500;">{{ item.RaagEnglish }}</span>
-                      <span style="color: #7ecbff;"> on Ang {{ item.PageNo }}</span>
-                    </div>
-                  </div>
-                  <!-- <div class="result-meta">
-                      <span class="result-date">January 10, 2024</span>
-                      <span class="result-category">Academic</span>
-                  </div>
-                  <div class="result-actions">
-                      <button class="btn-primary">Read</button>
-                  </div> -->
+        <!-- Results -->
+        <div class="results-grid">
+            <div class="result-card" *ngFor="let item of filteredItems" (click)="onSelectItem(item)">
+              <div class="result-content" style="display: flex; flex-direction: column; align-items: flex-start;">
+                <span class="result-title" style="font-family: 'Gurakhar', sans-serif; margin-bottom: 0rem; 
+                text-align: left;">{{ item.Gurmukhi }}</span>
+                <div style="font-size: 0.95rem; margin-top: 0; margin-bottom: 0.2rem; text-align: left;">
+                  <span style="color: #7ecbff;">By </span>
+                  <span style="color: #d2691e; font-weight: 500;">{{ item.WriterEnglish }}</span>
+                  <span style="color: #7ecbff;"> in </span>
+                  <span style="color: #bfa600; font-weight: 500;">{{ item.RaagEnglish }}</span>
+                  <span style="color: #7ecbff;"> on Ang {{ item.PageNo }}</span>
                 </div>
+              </div>
+              <!-- <div class="result-meta">
+                  <span class="result-date">January 10, 2024</span>
+                  <span class="result-category">Academic</span>
+              </div>
+              <div class="result-actions">
+                  <button class="btn-primary">Read</button>
+              </div> -->
             </div>
+        </div>
 
         </section>
     </div>
