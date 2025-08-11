@@ -65,7 +65,6 @@ export function mapResultsToVerse(results: any[], showVishraam: boolean = false)
 
 export function GetHtmlWithVishraam (gurmukhi: string, vishramArray: any[]): string {
   // Split Gurmukhi into words
-  debugger;
   if (!gurmukhi) return '';
   const words = gurmukhi.split(' ');
   let html = '';

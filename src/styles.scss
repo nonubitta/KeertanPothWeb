@@ -28,11 +28,6 @@
 
 
 
-input[type="text"] {
-  font-family: 'Gurakhar', sans-serif;
-  height: 3rem;
-  font-size: 2rem;
-}
 :root {
   --background: #121212;
   --surface: #1e1e1e;
@@ -105,7 +100,6 @@ body {
             width: 100%;
         }
 
-        /* Header */
         header {
             background: linear-gradient(135deg, #232323 0%, #181818 100%);
             backdrop-filter: blur(10px);
@@ -121,6 +115,61 @@ body {
             justify-content: space-between;
             align-items: center;
             padding: 1rem 0;
+        }
+
+        input[type="text"] {
+          font-family: 'Gurakhar', sans-serif;
+          height: 3rem;
+          font-size: 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #d98300;//var(--defaultContrastColor);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+          height: 3.5rem;
+          width: auto;
+          display: inline-block;
+          vertical-align: middle;
+          margin-right: 0.5rem;
+        }
+
+        input.compact[type="text"] {
+          font-family: 'Gurakhar', sans-serif;
+          height: 2rem;
+          font-size: 1.4rem;
+        }
+
+        .logo.compact {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #d98300;//var(--defaultContrastColor);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img.compact {
+          height: 2rem;
+          width: auto;
+          display: inline-block;
+          vertical-align: middle;
+          margin-right: 0.5rem;
+        }
+
+        .nav.compact {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.4rem 0;
         }
 
         .nav-left {
@@ -143,29 +192,6 @@ body {
         .hamburger:hover {
             background: rgba(64, 224, 208, 0.1);
         }
-
-        .logo {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #d98300;//var(--defaultContrastColor);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo-img {
-          height: 3.5rem;
-          width: auto;
-          display: inline-block;
-          vertical-align: middle;
-          margin-right: 0.5rem;
-        }
-
-        // .logo::before {
-        //     //content: "🔍";
-        //     font-size: 1.5rem;
-        // }
 
         .header-search {
             flex: 1 1 auto;
@@ -1467,7 +1493,7 @@ body {
   background: rgba(255, 255, 255, 0.05);
   border: 2px solid rgba(64, 224, 208, 0.3);
   border-radius: 8px;
-  padding: 4px;
+  padding: 0px 4px 0px 0px;
   transition: all 0.3s ease;
 }
 
