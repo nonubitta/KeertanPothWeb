@@ -14,8 +14,6 @@ import { Queries } from './Queries';
 })
 
 export class App implements OnInit {
-
-
   //#region Public Properties
   searchMode: string = 'anywhere';
   showSearchPanel: boolean = true;
@@ -48,6 +46,11 @@ export class App implements OnInit {
   // History of selected items
   history: VerseSearchResult[] = [];
   private readonly HISTORY_KEY = 'kpoth-history';
+
+  writers: any[] = [];
+  selectedWriterId: string = '';
+  sources: any[] = [];
+  selectedSourceId: string = '';
   //#endregion
 
   //#region Punjabi keyboard layout
@@ -72,6 +75,20 @@ export class App implements OnInit {
   async ngOnInit() {
     await this.dbService.initDb();
     this.isDbReady = true;
+    // Load writers for dropdown
+    try {
+      const writersResult = await this.dbService.query('SELECT WriterID, WriterEnglish FROM Writer Where WriterId > 0');
+      this.writers = writersResult;
+    } catch (e) {
+      this.writers = [];
+    }
+    // Load sources for dropdown
+    try {
+      const sourcesResult = await this.dbService.query('SELECT SourceID, SourceEnglish FROM Source WHERE UniqueID > 0');
+      this.sources = sourcesResult;
+    } catch (e) {
+      this.sources = [];
+    }
     // Load history from localStorage
     const stored = localStorage.getItem(this.HISTORY_KEY);
     if (stored) {
@@ -169,28 +186,38 @@ export class App implements OnInit {
     }
     this.selectedShabad = null;
     this.showSearchPanel = true;
-    
+
     // Sanitize input if needed to prevent SQL injection — here simple usage
     let asciiSearch = '';
     for (const c of this.searchText) {
       const str = c.charCodeAt(0).toString().padStart(3, '0');
       asciiSearch += str + ',';
     }
+
+    // Add writer/source filter if selected
+    let extraFilters = '';
+    if (this.selectedWriterId) {
+      extraFilters += ` AND vr.WriterID = '${this.selectedWriterId}' `;
+    }
+    if (this.selectedSourceId) {
+      extraFilters += ` AND vr.SourceID = '${this.selectedSourceId}' `;
+    }
+
     let query: string;
     switch(this.searchMode) {
       case 'mainletters':
       case 'exact':
-         query = Queries.searchByFirstLetter(this.searchText, this.searchMode);
+         query = Queries.searchByFirstLetter(this.searchText, this.searchMode, extraFilters);
         break;
       case 'anywhere':
       case 'start':
-         query = Queries.searchByFirstLetter(asciiSearch, this.searchMode);
+         query = Queries.searchByFirstLetter(asciiSearch, this.searchMode, extraFilters);
         break;
       default:
-         query = Queries.searchByFirstLetter(asciiSearch, this.searchMode);
+         query = Queries.searchByFirstLetter(asciiSearch, this.searchMode, extraFilters);
         break;
     }
-    
+
     try {
       const results = await this.dbService.query(query);
       this.filteredItems = mapResultsToVerseSearchResults(results);

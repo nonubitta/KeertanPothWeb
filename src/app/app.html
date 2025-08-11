@@ -209,11 +209,21 @@
         <!-- Search Filters (always visible when search panel is open) -->
         <div class="results-header">
             <span class="results-sort">
-                <select name="searchMode" [(ngModel)]="searchMode" (change)="onSearch()">
+                <select name="searchMode" [(ngModel)]="searchMode" (change)="onSearch()" style="min-width: 170px; max-width: 170px;">
                     <option value="anywhere">First letter Anywhere</option>
                     <option value="starts">First letter Start</option>
                     <option value="mainletters">Main letters Anywhere</option>
                     <option value="exact">Exact Match</option>
+                </select>
+                <!-- Writer dropdown -->
+                <select name="writerId" [(ngModel)]="selectedWriterId" (change)="onSearch()" style="margin-left: 1rem; min-width: 180px; max-width: 180px;">
+                    <option value="">All Writers</option>
+                    <option *ngFor="let writer of writers" [value]="writer.WriterID">{{ writer.WriterEnglish }}</option>
+                </select>
+                <!-- Source dropdown -->
+                <select name="sourceId" [(ngModel)]="selectedSourceId" (change)="onSearch()" style="margin-left: 1rem; min-width: 180px; max-width: 180px;">
+                    <option value="">All Sources</option>
+                    <option *ngFor="let source of sources" [value]="source.SourceID">{{ source.SourceEnglish }}</option>
                 </select>
             </span>
             <div class="results-meta" *ngIf="filteredItems.length > 0">
