@@ -85,10 +85,8 @@ ul.suggestions li:hover {
   color: #000;
 }
 
-punjabi-font {
-  font-family: 'PunjabiFont1', 'Gurblipi', 'Gurakhar', 'Prabhki', sans-serif;
-  font-size: 1.5rem;
-  line-height: 1.6;
+.punjabi-font {
+  font-family: 'Gurakhar', 'PunjabiFont1', 'Gurblipi', 'Prabhki', sans-serif;
 }
 
 body {
@@ -963,15 +961,25 @@ body {
   margin-bottom: 0.5rem;
 }
 
-.verse-translation {
+.translation-english {
   font-size: 1rem;
-  color: #b0b0b0;
+  color: #fadd7b;
   line-height: 1.5;
   font-style: italic;
 }
 
-.verse-translation.transliteration {
+.verse-transliteration {
+  color: #b0b0b0;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.translation-punjabi {
   color: #8ecae6;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-style: italic;
 }
 
 .verse-actions {

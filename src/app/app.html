@@ -318,13 +318,16 @@
                   style="cursor: pointer;"
                 >
                     <div class="verse-content">
-                        <div *ngIf="showGurmukhi" class="verse-text" style="font-family: 'Gurakhar', sans-serif;" [style.font-size.rem]="gurmukhiFontSize"
+                        <div *ngIf="showGurmukhi" class="verse-text punjabi-font" [style.font-size.rem]="gurmukhiFontSize"
                             [innerHTML]="verse.GurmukhiHtml">
                         </div>
-                        <div *ngIf="showEnglish && verse.English" class="verse-translation" [style.font-size.rem]="englishFontSize">
+                        <div *ngIf="showPunjabi && verse.Punjabi" class="translation-punjabi punjabi-font" [style.font-size.rem]="englishFontSize">
+                            {{ verse.Punjabi }}
+                        </div>
+                        <div *ngIf="showEnglish && verse.English" class="translation-english" [style.font-size.rem]="englishFontSize">
                             {{ verse.English }}
                         </div>
-                        <div *ngIf="showTransliteration && verse.English" class="verse-translation transliteration" [style.font-size.rem]="transliterationFontSize">
+                        <div *ngIf="showTransliteration && verse.Transliteration" class="verse-transliteration" [style.font-size.rem]="transliterationFontSize">
                             {{ verse.Transliteration }}
                         </div>
                     </div>

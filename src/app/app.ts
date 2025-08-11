@@ -37,6 +37,7 @@ export class App implements OnInit {
 
   showGurmukhi: boolean = true;
   showEnglish: boolean = true;
+  showPunjabi: boolean = true;
   showTransliteration: boolean = true;
 
   // New settings
@@ -322,13 +323,13 @@ export class App implements OnInit {
           color: #fff;
           text-align: center;
         }
-        .verse-translation {
+        .translation-english {
           font-size: ${this.englishFontSize + 2}rem;
           color: #b0b0b0;
           margin-bottom: 1rem;
           text-align: center;
         }
-        .verse-translation.transliteration {
+        .translation-english.transliteration {
           color: #8ecae6;
           font-size: ${this.transliterationFontSize + 2}rem;
           text-align: center;
@@ -344,8 +345,9 @@ export class App implements OnInit {
     </head>
     <body>
       ${this.showGurmukhi ? `<div class="verse-text">${verse.GurmukhiHtml || ''}</div>` : ''}
-      ${this.showEnglish && verse.English ? `<div class="verse-translation">${verse.English}</div>` : ''}
-      ${this.showTransliteration && verse.Transliteration ? `<div class="verse-translation transliteration">${verse.Transliteration}</div>` : ''}
+      ${this.showEnglish && verse.English ? `<div class="translation-english">${verse.English}</div>` : ''}
+      ${this.showPunjabi && verse.Punjabi ? `<div class="translation-english">${verse.Punjabi}</div>` : ''}
+      ${this.showTransliteration && verse.Transliteration ? `<div class="translation-english transliteration">${verse.Transliteration}</div>` : ''}
       <script>
         // No escaping needed, innerHTML is used directly in document.write
       </script>
