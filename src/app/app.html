@@ -99,25 +99,31 @@
         </label> -->
         <br />
         <hr class="toolbar-divider-hr"/>
-
+        
+        <!-- Gurmukhi settings -->
         <label>
           <input type="checkbox" [(ngModel)]="showGurmukhi" />
           Show Gurmukhi
         </label>
         <br />
         <label for="gurmukhiFontSize">Gurmukhi Font Size:</label><br />
-        <input
-          id="gurmukhiFontSize"
-          type="range"
-          min="1"
-          max="3"
-          step="0.05"
-          [(ngModel)]="gurmukhiFontSize"
-          style="vertical-align: middle; width: 120px;"
-        />
+        <input id="gurmukhiFontSize" type="range" min="1" max="3" step="0.05"
+          [(ngModel)]="gurmukhiFontSize" style="vertical-align: middle; width: 120px;" />
         <span>{{ gurmukhiFontSize * 10 }}</span>
-        <br>
-        
+        <br />
+        <hr class="toolbar-divider-hr" />
+
+        <!-- Punjabi settings -->
+        <label>
+          <input type="checkbox" [(ngModel)]="showPunjabi" />
+          Show Punjabi
+        </label>
+        <br />
+        <label for="punjabiFontSize">Punjabi Font Size:</label><br />
+        <input id="punjabiFontSize" type="range" min="0.7" max="2" step="0.05"
+          [(ngModel)]="punjabiFontSize" style="vertical-align: middle; width: 120px;" />
+        <span>{{ punjabiFontSize * 10 }}</span>
+        <br />
         <hr class="toolbar-divider-hr" />
 
         <!-- English settings -->
@@ -127,18 +133,13 @@
         </label>
         <br />
         <label for="englishFontSize">English Font Size:</label><br />
-        <input
-          id="englishFontSize"
-          type="range"
-          min="0.7"
-          max="2"
-          step="0.05"
-          [(ngModel)]="englishFontSize"
-          style="vertical-align: middle; width: 120px;"
-        />
+        <input id="englishFontSize" type="range" min="0.7" max="2" step="0.05"
+          [(ngModel)]="englishFontSize" style="vertical-align: middle; width: 120px;" />
         <span>{{ englishFontSize * 10 }}</span>
-        <br>
+        <br />
         <hr class="toolbar-divider-hr" />
+        
+        <!-- Transliteration settings -->
         <label>
           <input type="checkbox" [(ngModel)]="showTransliteration" />
           Show Transliteration
@@ -146,33 +147,18 @@
         <br />
         <label for="transliterationFontSize">Transliteration Font Size:</label>
         <br />
-        <input
-          id="transliterationFontSize"
-          type="range"
-          min="0.7"
-          max="2"
-          step="0.05"
-          [(ngModel)]="transliterationFontSize"
-          style="vertical-align: middle; width: 120px;"
-        />
+        <input id="transliterationFontSize" type="range" min="0.7" max="2" step="0.05"
+          [(ngModel)]="transliterationFontSize" style="vertical-align: middle; width: 120px;" />
         <span>{{ transliterationFontSize * 10 }}</span>
         <br />
         <hr class="toolbar-divider-hr" />
       
         <!-- Presentation View Gurmukhi Font Size -->
         <label for="presentationGurmukhiFontSize">Presentation View Gurmukhi Font Size:</label><br />
-        <input
-          id="presentationGurmukhiFontSize"
-          type="range"
-          min="1"
-          max="8"
-          step="0.1"
-          [(ngModel)]="presentationGurmukhiFontSize"
-          style="vertical-align: middle; width: 120px;"
-        />
+        <input id="presentationGurmukhiFontSize" type="range" min="1" max="8" step="0.1"
+          [(ngModel)]="presentationGurmukhiFontSize" style="vertical-align: middle; width: 120px;" />
         <span>{{ presentationGurmukhiFontSize * 10 }}</span>
         <br />
-
         <hr class="toolbar-divider-hr" />
       </div>
 
@@ -321,7 +307,7 @@
                         <div *ngIf="showGurmukhi" class="verse-text punjabi-font" [style.font-size.rem]="gurmukhiFontSize"
                             [innerHTML]="verse.GurmukhiHtml">
                         </div>
-                        <div *ngIf="showPunjabi && verse.Punjabi" class="translation-punjabi punjabi-font" [style.font-size.rem]="englishFontSize">
+                        <div *ngIf="showPunjabi && verse.Punjabi" class="translation-punjabi punjabi-font" [style.font-size.rem]="punjabiFontSize">
                             {{ verse.Punjabi }}
                         </div>
                         <div *ngIf="showEnglish && verse.English" class="translation-english" [style.font-size.rem]="englishFontSize">

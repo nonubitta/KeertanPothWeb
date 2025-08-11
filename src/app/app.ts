@@ -32,6 +32,7 @@ export class App implements OnInit {
   showKeyboard: boolean = false;
     // Gurmukhi font size
   gurmukhiFontSize: number = 2;
+  punjabiFontSize: number = 1.0;
   englishFontSize: number = 1.0;
   transliterationFontSize: number = 1.0;
 
@@ -39,7 +40,6 @@ export class App implements OnInit {
   showEnglish: boolean = true;
   showPunjabi: boolean = true;
   showTransliteration: boolean = true;
-
   // New settings
   showVishraam: boolean = true;
   showLadivaar: boolean = false;
