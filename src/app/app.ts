@@ -250,6 +250,15 @@ export class App implements OnInit {
       localStorage.setItem(this.HISTORY_KEY, JSON.stringify(this.history));
     }
     this.showSearchPanel = false;
+    
+    setTimeout(() => {
+    const el = document.getElementById('selected-verse');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      console.warn('selected-verse not found in DOM');
+    }
+  }, 50); // small delay to ensure details section is rendered
   }
 
   onToggleVishraam() {

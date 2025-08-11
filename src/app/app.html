@@ -301,6 +301,7 @@
                   class="verse-row"
                   *ngFor="let verse of selectedShabad; let i = index"
                   [class.verse-selected]="verse.ID === selectedVerseId"
+                  [attr.id]="verse.ID === selectedVerseId ? 'selected-verse' : null"
                   (click)="viewMode === 'presentation' ? onPresentationVerseClick(verse) : null"
                   style="cursor: pointer;"
                 >
