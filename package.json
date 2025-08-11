@@ -8,6 +8,12 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
+  "browser": {
+  "fs": false,
+  "path": false,
+  "crypto": false,
+  "os": false
+},
   "prettier": {
     "overrides": [
       {
