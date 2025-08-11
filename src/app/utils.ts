@@ -2,7 +2,8 @@ import { Verse, VerseSearchResult } from './verse.model';
 
 export function mapResultsToVerseSearchResults(results: any[]): VerseSearchResult[] {
   return results.map(row => ({
-    ID: row.ID,
+    ID: row.VerseID,
+    VerseID: row.VerseID,
     ShabadID: row.ShabadID,
     Gurmukhi: row.Gurmukhi,
     GurmukhiUni: row.GurmukhiUni,
