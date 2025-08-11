@@ -254,7 +254,9 @@ export class App implements OnInit {
     setTimeout(() => {
     const el = document.getElementById('selected-verse');
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const offset = 90; // pixels from the top
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
     } else {
       console.warn('selected-verse not found in DOM');
     }
