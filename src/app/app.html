@@ -1,3 +1,4 @@
+<!--#region Header-->
 <header class="header">
     <div class="container">
         <nav class="nav">
@@ -26,8 +27,9 @@
         </nav>
     </div>
 </header>
+<!--#endregion Header-->
 
-<!-- Punjabi Keyboard -->
+<!--#region Punjabi Keyboard -->
 <div class="punjabi-keyboard" [class.show]="showKeyboard">
     <div class="keyboard-body">
         <div class="keyboard-row" *ngFor="let row of keyboardLayout">
@@ -43,7 +45,9 @@
         </div>
     </div>
 </div>
+<!--#endregion Punjabi Keyboard-->
 
+<!--#region Side Panel -->
 <!-- Left Tabs Bar -->
 <div class="left-tabs">
   <button class="tab-btn" [class.active]="activeTab === 'links'" (click)="openSidePanel('links')">Links</button>
@@ -52,7 +56,6 @@
   <button class="tab-btn" [class.active]="activeTab === 'pothi'" (click)="openSidePanel('pothi')">Pothi</button>
 </div>
 
-<!-- Side Panel -->
 <div class="side-panel" [class.open]="isSidePanelOpen">
   <div class="side-panel-header">
     <h3 *ngIf="activeTab === 'links'">Links</h3>
@@ -63,7 +66,8 @@
   </div>
   <div class="side-panel-content">
     <ng-container [ngSwitch]="activeTab">
-        <!-- Links Section -->
+      
+      <!-- Links Section -->
       <div *ngSwitchCase="'links'">
         <a href="#" class="panel-link">Home</a><br />
         <!-- <a href="#" class="panel-link">About</a><br />
@@ -195,17 +199,22 @@
           </li>
         </ul>
       </div>
-        <div *ngSwitchCase="'pothi'">
-        <!-- Example history -->
-        <p>Pothi functionality coming soon.</p>
+      
+      <div *ngSwitchCase="'pothi'">
+      <!-- Example history -->
+      <p>Pothi functionality coming soon.</p>
       </div>
     </ng-container>
   </div>
 </div>
 <div class="overlay" [class.active]="isSidePanelOpen" (click)="closeSidePanel()"></div>
+<!--#endregion Side Panel-->
 
+<!--#region Filter & Results -->
 <main *ngIf="showSearchPanel" class="main-content">
     <div class="container">
+
+        <!-- #region Filters -->
         <!-- Search Filters (always visible when search panel is open) -->
         <div class="results-header">
             <span class="results-sort">
@@ -228,21 +237,22 @@
             </span>
             <div class="results-meta" *ngIf="filteredItems.length > 0">
                 <span class="results-count">Showing 1-{{filteredItems.length}} of {{filteredItems.length}} results</span>
-                <div class="results-sort">
+                <!-- <div class="results-sort">
                     <label for="sort2">Sort by:</label>
                     <select id="sort2">
                         <option value="relevance">Relevance</option>
                         <option value="date">Date</option>
                         <option value="title">Title</option>
                     </select>
-                </div>
+                </div> -->
             </div>
         </div>
-        <!-- Search Results Section -->
+        <!-- #endregion Filters -->
+
+        <!-- #region Search Results Section -->
         <section class="results-section" *ngIf="filteredItems.length > 0">
-            
-        <!-- Results -->
-        <div class="results-grid">
+          <!-- Results -->
+          <div class="results-grid">
             <div class="result-card" *ngFor="let item of filteredItems" (click)="onSelectItem(item)">
               <div class="result-content" style="display: flex; flex-direction: column; align-items: flex-start;">
                 <span class="result-title" style="font-family: 'Gurakhar', sans-serif; margin-bottom: 0rem; 
@@ -263,20 +273,20 @@
                   <button class="btn-primary">Read</button>
               </div> -->
             </div>
-        </div>
-
+          </div>
         </section>
+        <!-- #endregion Search Results Section -->
+
     </div>
 </main>
+<!--#endregion Filter & Results-->
+
+<!--#region Selected Shabad-->
 <main id="details" class="main-content" *ngIf="!showSearchPanel && selectedShabad && selectedShabad.length > 0">
     <div class="container">
-        <!-- Details Header Section -->
+      <!-- #region Details Header Bar -->
         <section class="details-header">
-            <!-- <div class="details-card"> -->
                 <div class="details-main">
-                    <!-- <h1 class="details-title" style="font-family: 'Gurakhar', sans-serif;">
-                        {{ detailsInfo?.Gurmukhi }}
-                    </h1> -->
                     <div class="details-subtitle">
                         <span class="author">{{ detailsInfo?.WriterEnglish }}</span>
                         <span class="separator">•</span>
@@ -287,18 +297,18 @@
                         <span class="meta-label">Ang {{ detailsInfo?.PageNo }}</span>
                         <span class="separator">•</span>
                         <span class="meta-label">Lines {{ selectedShabad.length }}</span>
-                        <span class="author" style="margin-left:auto; display:inline-block; float:right; text-align:right;">
+                        <!-- <span class="author" style="margin-left:auto; display:inline-block; float:right; text-align:right;">
                           {{ viewMode | titlecase }} View
-                        </span>
+                        </span> -->
                     </div>
                 </div>
                 <div class="details-meta">
                     
                 </div>
-            <!-- </div> -->
         </section>
+        <!-- #endregion Details Header Section -->
 
-        <!-- Content Section -->
+      <!-- #region Selected Shabad Display -->
         <section class="content-section">
             <div class="verses-container">
                 <div
@@ -325,9 +335,10 @@
                 </div>
             </div>
         </section>
-
+        <!-- #endregion Selected Shabad Display -->
     </div>
 </main>
+<!--#endregion Selected Shabad-->
 
 <!-- <footer class="footer">
     <div class="container">

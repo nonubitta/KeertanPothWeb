@@ -23,7 +23,7 @@ export class App implements OnInit {
   private isDbReady = false;
   detailsInfo:Verse | null = null;
   showMainKeyboard: boolean = true
-  
+  selectedVerseId: number | null = null;
   // Side panel state
   isSidePanelOpen: boolean = false;
   activeTab: 'links' | 'settings' | 'history' | 'pothi' | null = null;
@@ -173,7 +173,7 @@ export class App implements OnInit {
 
   //#endregion
 
-  //#region Search methods & toggle search and details
+  //#region Search methods & toggle search and SelectItem
   handleSearch(event: Event) {
     event.preventDefault();
     this.onSearch();
@@ -227,6 +227,7 @@ export class App implements OnInit {
   }
 
   async onSelectItem(item: VerseSearchResult) {
+    this.selectedVerseId = item.ID;
     const query = Queries.getShabadById(item.ShabadID);
     const results = await this.dbService.query(query);
     this.selectedShabad = mapResultsToVerse(results, this.showVishraam);
