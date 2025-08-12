@@ -10,7 +10,7 @@
             </div>
             <div class="header-search">
                 <form class="header-search-form" (submit)="handleSearch($event)">
-                    <input 
+                    <input id="searchText"
                         type="text" 
                         class="header-search-input" 
                         [(ngModel)]="searchText"
@@ -57,13 +57,13 @@
 </div>
 <!-- Star Button Right Bar -->
 <div class="right-tabs" *ngIf="!showSearchPanel">
-  <button class="tab-btn-right star-btn" title="Add to Favorite">
+  <button (click)="addToFavorites()" class="tab-btn-right star-btn" title="Add to Favorite">
     <img height="24rem" src="assets/images/favorite.png" alt="Favorite" class="favorite-icon" />
   </button>
-  <button class="tab-btn-right share-btn" title="Share">
+  <button (click)="shareShabad()" class="tab-btn-right share-btn" title="Share">
     <img height="24rem" src="assets/images/share.png" alt="Share" class="share-icon" />
   </button>
-  <button class="tab-btn-right share-btn" title="Share">
+  <button (click)="openQuickSettings()" class="tab-btn-right share-btn" title="Quick Settings">
     <img height="24rem" src="assets/images/quicksetting.png" alt="Share" class="share-icon" />
   </button>
 </div>
@@ -201,9 +201,17 @@
       </div>
       
       <div *ngSwitchCase="'pothi'">
-      <!-- Example history -->
-      <p>Pothi functionality coming soon.</p>
-      </div>
+  <button class="btn-primary" (click)="openAddPothiModal()" style="margin-bottom: 1rem;">Add new Pothi</button>
+  <div *ngIf="pothis.length === 0" style="color: #aaa; margin-bottom: 1rem;">No Pothis yet.</div>
+  <div *ngIf="pothis.length > 0" class="pothi-list" style="margin-bottom: 1rem;">
+    <div *ngFor="let pothi of pothis; let i = index" class="pothi-list-item" style="display: flex; align-items: center; gap: 0.5rem;">
+      <span class="pothi-name">{{ pothi.name }}</span>
+      <span class="pothi-count" style="color: #8ecae6; font-size: 0.95em;">({{ pothi.ids.length }} items)</span>
+      <span style="flex:1 1 auto;"></span>
+      <button class="btn-secondary" (click)="deletePothi(i)">Delete</button>
+    </div>
+  </div>
+</div>
     </ng-container>
   </div>
 </div>
@@ -376,7 +384,7 @@
     </div>
 </footer> -->
 
-<!-- Contact Modal -->
+<!--#region Contact Modal -->
 <div class="modal-overlay" *ngIf="showContactModal" (click)="closeContactModal()">
   <div class="modal-dialog" (click)="$event.stopPropagation()">
     <div class="modal-header">
@@ -388,6 +396,43 @@
         You can contact us at <a style="color: white;" href="mailto:keertanpothi@gmail.com">keertanpothi@gmail.com</a>
       </p>
       <!-- Add more contact info here if needed -->
+    </div>
+  </div>
+</div>
+<!--#endregion Contact Modal -->
+
+<!-- Add New Pothi Modal -->
+<div class="modal-overlay" *ngIf="showAddPothiModal" (click)="closeAddPothiModal()">
+  <div class="modal-dialog" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <span>Add New Pothi</span>
+      <button class="modal-close-btn" (click)="closeAddPothiModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <label for="newPothiName">Pothi Name:</label>
+      <input id="newPothiName" type="text" [(ngModel)]="newPothiName" style="width: 100%; margin: 0.5rem 0;" />
+      <button class="btn-primary" (click)="addPothi()">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add to Pothi Modal -->
+<div class="modal-overlay" *ngIf="showAddToPothiModal" (click)="closeAddToPothiModal()">
+  <div class="modal-dialog" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <span>Add Shabad to Pothi</span>
+      <button class="modal-close-btn" (click)="closeAddToPothiModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <label for="pothiSelect">Select Existing Pothi:</label>
+      <select id="pothiSelect" [(ngModel)]="selectedPothiIndex" style="width: 100%; margin-bottom: 1rem;">
+        <option [ngValue]="null">-- Select --</option>
+        <option *ngFor="let pothi of pothis; let i = index" [ngValue]="i">{{ pothi.name }}</option>
+      </select>
+      <div style="margin: 1rem 0; text-align: center;">OR</div>
+      <label for="newPothiNameForFav">Create New Pothi:</label>
+      <input id="newPothiNameForFav" type="text" [(ngModel)]="newPothiNameForFav" style="width: 100%; margin-bottom: 1rem;" />
+      <button class="btn-primary" (click)="saveShabadToPothi()">Save</button>
     </div>
   </div>
 </div>

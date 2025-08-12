@@ -14,6 +14,7 @@ import { Queries } from './Queries';
 })
 
 export class App implements OnInit {
+
   //#region Public Properties
   searchMode: string = 'anywhere';
   showSearchPanel: boolean = true;
@@ -55,6 +56,13 @@ export class App implements OnInit {
 
   // Contact modal
   showContactModal: boolean = false;
+
+  // Add Pothi modal
+  showAddPothiModal: boolean = false;
+  newPothiName: string = '';
+
+  pothis: { name: string, ids: number[] }[] = [];
+  private readonly POTHIS_KEY = 'kpoth-pothis';
   //#endregion
 
   //#region Punjabi keyboard layout
@@ -100,6 +108,16 @@ export class App implements OnInit {
         this.history = JSON.parse(stored);
       } catch {
         this.history = [];
+      }
+    }
+
+    // Load pothis from localStorage
+    const pothisStored = localStorage.getItem(this.POTHIS_KEY);
+    if (pothisStored) {
+      try {
+        this.pothis = JSON.parse(pothisStored);
+      } catch {
+        this.pothis = [];
       }
     }
   }
@@ -154,6 +172,112 @@ export class App implements OnInit {
   closeContactModal() {
     this.showContactModal = false;
   }
+
+  openAddPothiModal() {
+    this.newPothiName = '';
+    this.showAddPothiModal = true;
+  }
+
+  closeAddPothiModal() {
+    this.showAddPothiModal = false;
+  }
+
+  addPothi() {
+    if (this.newPothiName.trim()) {
+      this.pothis.push({ name: this.newPothiName.trim(), ids: [] });
+      localStorage.setItem(this.POTHIS_KEY, JSON.stringify(this.pothis));
+      this.closeAddPothiModal();
+    }
+  }
+
+  // Add selectedVerseId to a pothi (no duplicates)
+  addVerseToPothi(pothiIndex: number) {
+    if (
+      this.pothis[pothiIndex] &&
+      this.selectedVerseId != null &&
+      !this.pothis[pothiIndex].ids.includes(this.selectedVerseId)
+    ) {
+      this.pothis[pothiIndex].ids.push(this.selectedVerseId);
+      localStorage.setItem(this.POTHIS_KEY, JSON.stringify(this.pothis));
+    }
+  }
+
+  removeVerseFromPothi(pothiIndex: number, verseId: number) {
+    if (this.pothis[pothiIndex]) {
+      this.pothis[pothiIndex].ids = this.pothis[pothiIndex].ids.filter(id => id !== verseId);
+      localStorage.setItem(this.POTHIS_KEY, JSON.stringify(this.pothis));
+    }
+  }
+
+  deletePothi(index: number) {
+    if (index >= 0 && index < this.pothis.length) {
+      if (confirm(`Delete pothi "${this.pothis[index].name}"? This cannot be undone.`)) {
+        this.pothis.splice(index, 1);
+        localStorage.setItem(this.POTHIS_KEY, JSON.stringify(this.pothis));
+      }
+    }
+  }
+
+  openQuickSettings() {
+    if(this.showEnglish || this.showPunjabi || this.showTransliteration) {
+    this.showEnglish = false;
+    this.showPunjabi = false;
+    this.showTransliteration = false;
+    }
+    else{
+      this.showEnglish = true;
+      this.showPunjabi = true;
+    }
+  }
+
+  shareShabad() {
+    // Share the current page using the Web Share API if available
+    if (navigator.share) {
+      const url = window.location.href;
+      navigator.share({
+        title: 'Keertan Pothi',
+        text: 'Check out this Shabad on Keertan Pothi',
+        url: url
+      }).catch(() => {});
+    } else {
+      // Fallback: copy URL to clipboard
+      try {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Link copied to clipboard!');
+      } catch {
+        alert('Unable to copy link. Please copy the URL manually.');
+      }
+    }
+  }
+
+  // Modal for adding to pothi
+  showAddToPothiModal: boolean = false;
+  selectedPothiIndex: number | null = null;
+  newPothiNameForFav: string = '';
+
+  addToFavorites() {
+    this.selectedPothiIndex = null;
+    this.newPothiNameForFav = '';
+    this.showAddToPothiModal = true;
+  }
+
+  closeAddToPothiModal() {
+    this.showAddToPothiModal = false;
+  }
+
+  saveShabadToPothi() {
+    if (this.selectedVerseId == null) return;
+
+    if (this.selectedPothiIndex !== null && this.selectedPothiIndex >= 0) {
+      this.addVerseToPothi(this.selectedPothiIndex);
+      this.closeAddToPothiModal();
+    } else if (this.newPothiNameForFav.trim()) {
+      this.pothis.push({ name: this.newPothiNameForFav.trim(), ids: [this.selectedVerseId] });
+      localStorage.setItem(this.POTHIS_KEY, JSON.stringify(this.pothis));
+      this.closeAddToPothiModal();
+    }
+  }
+
   //#endregion
 
   //#region Keyboard methods
