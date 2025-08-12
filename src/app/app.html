@@ -53,11 +53,12 @@
   <button class="tab-btn" [class.active]="activeTab === 'links'" (click)="openSidePanel('links')">Links</button>
   <button class="tab-btn" [class.active]="activeTab === 'settings'" (click)="openSidePanel('settings')">Settings</button>
   <button class="tab-btn" [class.active]="activeTab === 'history'" (click)="openSidePanel('history')">History</button>
-  <button class="tab-btn" [class.active]="activeTab === 'pothi'" (click)="openSidePanel('pothi')">Pothi</button>
+  <!-- <button class="tab-btn" [class.active]="activeTab === 'pothi'" (click)="openSidePanel('pothi')">Pothi</button> -->
+  <button class="tab-btn" [class.active]="activeTab === 'favorites'" (click)="openSidePanel('favorites')">Favorites</button>
 </div>
 <!-- Star Button Right Bar -->
 <div class="right-tabs" *ngIf="!showSearchPanel">
-  <button (click)="addToFavorites()" class="tab-btn-right star-btn" title="Add to Favorite">
+   <button (click)="addToFavorites()" class="tab-btn-right star-btn" title="Add to Favorite"><!-- for pothi call addToPothi()-->
     <img height="24rem" src="assets/images/favorite.png" alt="Favorite" class="favorite-icon" />
   </button>
   <button (click)="shareShabad()" class="tab-btn-right share-btn" title="Share">
@@ -74,6 +75,7 @@
     <h3 *ngIf="activeTab === 'settings'">Settings</h3>
     <h3 *ngIf="activeTab === 'history'">History</h3>
     <h3 *ngIf="activeTab === 'pothi'">Pothi</h3>
+    <h3 *ngIf="activeTab === 'favorites'">Favorites</h3>
     <button class="close-btn" (click)="closeSidePanel()">×</button>
   </div>
   <div class="side-panel-content">
@@ -179,14 +181,14 @@
       <!-- History Section -->
       <div *ngSwitchCase="'history'">
         <div style="display: flex; align-items: center; justify-content: space-between;">
-        <span style="font-weight: 600;">History</span>
-        <button 
-        class="btn-clear-history" 
-        (click)="confirmClearHistory()"
-        style="background: none; border: none; color: #e57373; font-size: 1rem; cursor: pointer; margin-left: 1rem;">
-        Clear History
-        </button>
-    </div>
+          <span style="font-weight: 600;"> </span>
+          <button 
+          class="btn-clear-history" 
+          (click)="confirmClearHistory()"
+          style="background: none; border: none; color: #e57373; font-size: 1rem; cursor: pointer; margin-left: 1rem;">
+          Clear History
+          </button>
+        </div>
         <div *ngIf="history.length === 0">
           <p>No history yet.</p>
         </div>
@@ -228,7 +230,29 @@
       </li>
     </ul>
   </div>
-</div>
+      </div>
+
+      <!-- favorites Section -->
+      <div *ngSwitchCase="'favorites'">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <span style="font-weight: 600;"> </span>
+          <button class="btn-clear-history" (click)="confirmClearFavorites()"
+          style="background: none; border: none; color: #e57373; font-size: 1rem; cursor: pointer; margin-left: 1rem;">
+          Clear Favorites
+          </button>
+        </div>
+        <div *ngIf="history.length === 0">
+          <p>No favorites yet.</p>
+        </div>
+        <ul *ngIf="favorites.length > 0" class="history-list">
+          <li *ngFor="let item of favorites">
+            <a href="#" (click)="onSelectItem(item)" class="history-link">
+              <span style="font-family: 'Gurakhar', sans-serif;">{{ item.Gurmukhi }}</span>
+            </a>
+            <hr class="toolbar-divider-hr" />
+          </li>
+        </ul>
+      </div>
     </ng-container>
   </div>
 </div>

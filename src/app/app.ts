@@ -25,9 +25,10 @@ export class App implements OnInit {
   detailsInfo:Verse | null = null;
   showMainKeyboard: boolean = true
   selectedVerseId: number | null = null;
+  selectedItem: VerseSearchResult | null = null;
   // Side panel state
   isSidePanelOpen: boolean = false;
-  activeTab: 'links' | 'settings' | 'history' | 'pothi' | null = null;
+  activeTab: 'links' | 'settings' | 'history' | 'pothi' | 'favorites' | null = null;
 
   // Punjabi Keyboard state
   showKeyboard: boolean = false;
@@ -63,6 +64,10 @@ export class App implements OnInit {
 
   pothis: { name: string, ids: number[] }[] = [];
   private readonly POTHIS_KEY = 'kpoth-pothis';
+
+  // Favorites
+  favorites: VerseSearchResult[] = [];
+  private readonly FAVORITES_KEY = 'kpoth-favorites';
   //#endregion
 
   //#region Punjabi keyboard layout
@@ -120,6 +125,16 @@ export class App implements OnInit {
         this.pothis = [];
       }
     }
+
+    // Load favorites from localStorage
+    const favStored = localStorage.getItem(this.FAVORITES_KEY);
+    if (favStored) {
+      try {
+        this.favorites = JSON.parse(favStored);
+      } catch {
+        this.favorites = [];
+      }
+    }
   }
 
   //#endregion
@@ -137,7 +152,14 @@ export class App implements OnInit {
     }
   }
 
-  openSidePanel(tab: 'links' | 'settings' | 'history' | 'pothi') {
+  confirmClearFavorites() {
+   if (confirm('Are you sure you want to clear your favorites? This action cannot be undone.')) {
+      this.favorites = [];
+      localStorage.removeItem(this.FAVORITES_KEY);
+    }
+  }
+
+  openSidePanel(tab: 'links' | 'settings' | 'history' | 'pothi' | 'favorites') {
     const prevTab = this.activeTab;
     this.activeTab = tab;
     if(!prevTab)
@@ -256,6 +278,15 @@ export class App implements OnInit {
   newPothiNameForFav: string = '';
 
   addToFavorites() {
+    if (this.selectedItem && this.selectedItem.Gurmukhi) {
+      if (!this.favorites.some(f => f.ShabadID === this.selectedItem!.ShabadID)) {
+        this.favorites.unshift(this.selectedItem);
+        localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(this.favorites));
+      }
+    }
+  }
+
+  addToPothi() {
     this.selectedPothiIndex = null;
     this.newPothiNameForFav = '';
     this.showAddToPothiModal = true;
@@ -394,6 +425,7 @@ export class App implements OnInit {
         }
       }
     }
+    this.selectedItem = item;
     if(item.Gurmukhi){
       // Store in history (avoid duplicates by ShabadID)
       if (!this.history.some(h => h.ShabadID === item.ShabadID)) {
