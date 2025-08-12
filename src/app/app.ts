@@ -147,7 +147,7 @@ export class App implements OnInit {
     this.onSelectItem(result);
   }
 
-  openContant() {
+  openContact() {
     this.showContactModal = true;
   }
 
