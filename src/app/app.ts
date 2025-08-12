@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DbService } from './db.service';  // Your existing service handling sql.js
 import { Verse, VerseSearchResult } from './verse.model';
-import { visraamToVishraamArray, mapResultsToVerse, mapResultsToVerseSearchResults } from './utils';
+import { visraamToVishraamArray, mapResultsToVerse, mapResultsToVerseSearchResults, mapVerseToVerseSearchResults } from './utils';
 import { Queries } from './Queries';
 
 @Component({
@@ -143,8 +143,9 @@ export class App implements OnInit {
       ShabadID: randomIndex
     };
     this.onSelectItem(result);
-  
   }
+
+  openContant() {}
 
   //#endregion
 
@@ -244,23 +245,31 @@ export class App implements OnInit {
     this.selectedShabad = mapResultsToVerse(results, this.showVishraam);
     if(item.ID)
       this.selectedVerseId = item.ID;
-    else
+    else{
       this.selectedVerseId = this.selectedShabad[0].ID; 
-
+    }
     this.detailsInfo = this.selectedShabad[0];
     if (!this.detailsInfo.WriterID) {
       const verse = this.selectedShabad.find(v => v.WriterID != null);
       if (verse) {
         this.detailsInfo.WriterID = verse.WriterID;
         this.detailsInfo.WriterEnglish = verse.WriterEnglish;
+        if(!item.ID){
+          item = mapVerseToVerseSearchResults(verse);
+        }
       }
     }
-    // Store in history (avoid duplicates by ShabadID)
-    if (!this.history.some(h => h.ShabadID === item.ShabadID)) {
-      this.history.unshift(item);
-      // Limit history length if desired, e.g. 50
-      if (this.history.length > 50) this.history.length = 50;
-      localStorage.setItem(this.HISTORY_KEY, JSON.stringify(this.history));
+    if(item.Gurmukhi){
+      // Store in history (avoid duplicates by ShabadID)
+      if (!this.history.some(h => h.ShabadID === item.ShabadID)) {
+        this.history.unshift(item);
+        // Limit history length if desired, e.g. 50
+        if (this.history.length > 50) this.history.length = 50;
+        localStorage.setItem(this.HISTORY_KEY, JSON.stringify(this.history));
+      }
+    }
+    else{
+      console.warn('Selected item does not have Gurmukhi text:', item);
     }
     this.showSearchPanel = false;
     

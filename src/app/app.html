@@ -63,6 +63,9 @@
   <button class="tab-btn-right share-btn" title="Share">
     <img height="24rem" src="assets/images/share.png" alt="Share" class="share-icon" />
   </button>
+  <button class="tab-btn-right share-btn" title="Share">
+    <img height="24rem" src="assets/images/quicksetting.png" alt="Share" class="share-icon" />
+  </button>
 </div>
 
 <div class="side-panel" [class.open]="isSidePanelOpen">
@@ -78,10 +81,11 @@
       
       <!-- Links Section -->
       <div *ngSwitchCase="'links'">
-        <a href="#" (click)="openRandomShabad()" class="panel-link">Random Shabad</a><br />
-        <a href="#" class="panel-link">Sundar Gutka</a><br />
-        <!-- <a href="#" class="panel-link">About</a><br />
-        <a href="#" class="panel-link">Contact</a><br /> -->
+        <a href="#" (click)="openRandomShabad()" class="panel-links">Random Shabad</a>
+        <a href="#" class="panel-links">Sundar Gutka</a>
+        <a href="#" (click)="openContant()" class="panel-links">Contact</a>
+        <!-- <a href="#" class="panel-links">About</a><br />
+         -->
       </div>
 
         <!-- Settings Section -->

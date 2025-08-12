@@ -63,6 +63,24 @@ export function mapResultsToVerse(results: any[], showVishraam: boolean = false)
   });
 }
 
+export function mapVerseToVerseSearchResults(results: Verse): VerseSearchResult {
+  return {
+    ID: results.VerseID,
+    VerseID: results.VerseID,
+    ShabadID: results.ShabadID,
+    Gurmukhi: results.Gurmukhi,
+    GurmukhiUni: results.GurmukhiUni,
+    WriterID: results.WriterID,
+    Punjabi: results.Punjabi,
+    RaagID: results.RaagID,
+    PageNo: results.PageNo,
+    SourceID: results.SourceID,
+    WriterEnglish: results.WriterEnglish,
+    RaagEnglish: results.RaagEnglish,
+    SourceEnglish: results.SourceEnglish
+  };
+}
+
 export function GetHtmlWithVishraam (gurmukhi: string, vishramArray: any[]): string {
   // Split Gurmukhi into words
   if (!gurmukhi) return '';
