@@ -49,7 +49,8 @@ export class App implements OnInit {
   // History of selected items
   history: VerseSearchResult[] = [];
   private readonly HISTORY_KEY = 'kpoth-history';
-
+  RoastMessage: string = '';
+  showRoastMessage: boolean = false;
   writers: any[] = [];
   selectedWriterId: string = '';
   sources: any[] = [];
@@ -137,6 +138,13 @@ export class App implements OnInit {
     }
   }
 
+  showRoastMessageFn(message: string) {
+    this.RoastMessage = message;
+    this.showRoastMessage = true;
+    setTimeout(() => {
+      this.showRoastMessage = false;
+    }, 3000);
+  }
   //#endregion
 
   //#region Side Panels
@@ -149,6 +157,7 @@ export class App implements OnInit {
     if (confirm('Are you sure you want to clear your history? This action cannot be undone.')) {
       this.history = [];
       localStorage.removeItem(this.HISTORY_KEY);
+      this.showRoastMessageFn('History has been cleared');
     }
   }
 
@@ -156,6 +165,7 @@ export class App implements OnInit {
    if (confirm('Are you sure you want to clear your favorites? This action cannot be undone.')) {
       this.favorites = [];
       localStorage.removeItem(this.FAVORITES_KEY);
+      this.showRoastMessageFn('Favorites have been cleared');
     }
   }
 
@@ -195,6 +205,7 @@ export class App implements OnInit {
     this.showContactModal = false;
   }
 
+  //#region Pothi management
   openAddPothiModal() {
     this.newPothiName = '';
     this.showAddPothiModal = true;
@@ -240,6 +251,34 @@ export class App implements OnInit {
     }
   }
 
+    addToPothi() {
+    this.selectedPothiIndex = null;
+    this.newPothiNameForFav = '';
+    this.showAddToPothiModal = true;
+  }
+
+  closeAddToPothiModal() {
+    this.showAddToPothiModal = false;
+  }
+
+  saveShabadToPothi() {
+    if (this.selectedVerseId == null) return;
+
+    if (this.selectedPothiIndex !== null && this.selectedPothiIndex >= 0) {
+      this.addVerseToPothi(this.selectedPothiIndex);
+      this.closeAddToPothiModal();
+    } else if (this.newPothiNameForFav.trim()) {
+      this.pothis.push({ name: this.newPothiNameForFav.trim(), ids: [this.selectedVerseId] });
+      localStorage.setItem(this.POTHIS_KEY, JSON.stringify(this.pothis));
+      this.closeAddToPothiModal();
+    }
+  }
+
+  selectPothi(index: number) {
+    this.selectedPothiIndex = index;
+  }
+  //#endregion
+
   openQuickSettings() {
     if(this.showEnglish || this.showPunjabi || this.showTransliteration) {
     this.showEnglish = false;
@@ -277,45 +316,15 @@ export class App implements OnInit {
   selectedPothiIndex: number | null = null;
   newPothiNameForFav: string = '';
 
-  showFavoriteSavedMsg: boolean = false;
-
   addToFavorites() {
     if (this.selectedItem) {
       // Avoid duplicates by ShabadID
       if (!this.favorites.some(f => f.ShabadID === this.selectedItem!.ShabadID)) {
         this.favorites.unshift(this.selectedItem);
         localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(this.favorites));
-        this.showFavoriteSavedMsg = true;
-        setTimeout(() => this.showFavoriteSavedMsg = false, 1500);
+        this.showRoastMessageFn('Shabad added to favorites');
       }
     }
-  }
-
-  addToPothi() {
-    this.selectedPothiIndex = null;
-    this.newPothiNameForFav = '';
-    this.showAddToPothiModal = true;
-  }
-
-  closeAddToPothiModal() {
-    this.showAddToPothiModal = false;
-  }
-
-  saveShabadToPothi() {
-    if (this.selectedVerseId == null) return;
-
-    if (this.selectedPothiIndex !== null && this.selectedPothiIndex >= 0) {
-      this.addVerseToPothi(this.selectedPothiIndex);
-      this.closeAddToPothiModal();
-    } else if (this.newPothiNameForFav.trim()) {
-      this.pothis.push({ name: this.newPothiNameForFav.trim(), ids: [this.selectedVerseId] });
-      localStorage.setItem(this.POTHIS_KEY, JSON.stringify(this.pothis));
-      this.closeAddToPothiModal();
-    }
-  }
-
-  selectPothi(index: number) {
-    this.selectedPothiIndex = index;
   }
 
   //#endregion

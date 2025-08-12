@@ -11,6 +11,7 @@
             <div class="header-search">
                 <form class="header-search-form" (submit)="handleSearch($event)">
                     <input id="searchText"
+                        autocomplete="off"
                         type="text" 
                         class="header-search-input" 
                         [(ngModel)]="searchText"
@@ -442,7 +443,7 @@
 </div>
 <!--#endregion Contact Modal -->
 
-<!-- Add New Pothi Modal -->
+<!--#region Add New Pothi Modal -->
 <div class="modal-overlay" *ngIf="showAddPothiModal" (click)="closeAddPothiModal()">
   <div class="modal-dialog" (click)="$event.stopPropagation()">
     <div class="modal-header">
@@ -456,8 +457,9 @@
     </div>
   </div>
 </div>
+<!--#endregion Add New Pothi Modal -->
 
-<!-- Add to Pothi Modal -->
+<!--#region Add to Pothi Modal -->
 <div class="modal-overlay" *ngIf="showAddToPothiModal" (click)="closeAddToPothiModal()">
   <div class="modal-dialog" (click)="$event.stopPropagation()">
     <div class="modal-header">
@@ -477,9 +479,11 @@
     </div>
   </div>
 </div>
+<!--#endregion Add to Pothi Modal -->
 
-<!-- Show success message on main window -->
-<div *ngIf="showFavoriteSavedMsg" class="success-msg"
+<!--#region Roast Message -->
+<div *ngIf="showRoastMessage" class="success-msg"
      style="position:fixed;top:2rem;left:50%;transform:translateX(-50%);z-index:3000;background:#1f991f;color:#fff;padding:0.7rem 2rem;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.18);font-size:1.1rem;">
-  Shabad added to favorites!
+  {{ RoastMessage}}
 </div>
+<!--#endregion Roast Message -->
