@@ -14,6 +14,7 @@ import { Queries } from './Queries';
 })
 
 export class App implements OnInit {
+
   //#region Public Properties
   searchMode: string = 'anywhere';
   showSearchPanel: boolean = true;
@@ -135,6 +136,16 @@ export class App implements OnInit {
     this.activeTab = null;
   }
 
+  openRandomShabad() {
+    const randomIndex =  Math.floor(Math.random() * (5540 - 40 + 1)) + 40;
+    // Create a new VerseSearchResult and assign ShabadID
+    const result: VerseSearchResult = {
+      ShabadID: randomIndex
+    };
+    this.onSelectItem(result);
+  
+  }
+
   //#endregion
 
   //#region Keyboard methods
@@ -228,11 +239,13 @@ export class App implements OnInit {
   }
 
   async onSelectItem(item: VerseSearchResult) {
-    this.selectedVerseId = item.ID;
     const query = Queries.getShabadById(item.ShabadID);
     const results = await this.dbService.query(query);
     this.selectedShabad = mapResultsToVerse(results, this.showVishraam);
-    console.log('Selected Shabad:', this.selectedShabad);
+    if(item.ID)
+      this.selectedVerseId = item.ID;
+    else
+      this.selectedVerseId = this.selectedShabad[0].ID; 
 
     this.detailsInfo = this.selectedShabad[0];
     if (!this.detailsInfo.WriterID) {

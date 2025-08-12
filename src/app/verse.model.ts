@@ -32,19 +32,19 @@ export interface Vishram{
 
 
 export interface VerseSearchResult {
-  ID: number;
+  ID?: number;
   VerseID?: number; 
-  ShabadID: number;
-  Gurmukhi: string;
-  GurmukhiUni: string;
-  WriterID: number;
-  Punjabi: string;
-  RaagID: number;
-  PageNo: number;
-  SourceID: string;
-  WriterEnglish: string;
-  RaagEnglish: string;
-  SourceEnglish: string;
+  ShabadID?: number;
+  Gurmukhi?: string;
+  GurmukhiUni?: string;
+  WriterID?: number;
+  Punjabi?: string;
+  RaagID?: number;
+  PageNo?: number;
+  SourceID?: string;
+  WriterEnglish?: string;
+  RaagEnglish?: string;
+  SourceEnglish?: string;
 }
 
 

@@ -71,7 +71,7 @@ export class Queries {
 
   //#endregion
 
-  static getShabadById(shabadId: number): string {
+  static getShabadById(shabadId?: number): string {
 	return `
 	  SELECT * FROM sggsvw 
 	  WHERE ShabadId = ${shabadId}

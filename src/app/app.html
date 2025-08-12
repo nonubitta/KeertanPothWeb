@@ -78,7 +78,8 @@
       
       <!-- Links Section -->
       <div *ngSwitchCase="'links'">
-        <a href="#" class="panel-link">Home</a><br />
+        <a href="#" (click)="openRandomShabad()" class="panel-link">Random Shabad</a><br />
+        <a href="#" class="panel-link">Sundar Gutka</a><br />
         <!-- <a href="#" class="panel-link">About</a><br />
         <a href="#" class="panel-link">Contact</a><br /> -->
       </div>
