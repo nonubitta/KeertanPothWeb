@@ -254,7 +254,7 @@ export class App implements OnInit {
     setTimeout(() => {
     const el = document.getElementById('selected-verse');
     if (el) {
-      const offset = 90; // pixels from the top
+      const offset = 60; // pixels from the top
       const top = el.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top, behavior: 'smooth' });
     } else {

@@ -55,6 +55,15 @@
   <button class="tab-btn" [class.active]="activeTab === 'history'" (click)="openSidePanel('history')">History</button>
   <button class="tab-btn" [class.active]="activeTab === 'pothi'" (click)="openSidePanel('pothi')">Pothi</button>
 </div>
+<!-- Star Button Right Bar -->
+<div class="right-tabs" *ngIf="!showSearchPanel">
+  <button class="tab-btn-right star-btn" title="Add to Favorite">
+    <img height="24rem" src="assets/images/favorite.png" alt="Favorite" class="favorite-icon" />
+  </button>
+  <button class="tab-btn-right share-btn" title="Share">
+    <img height="24rem" src="assets/images/share.png" alt="Share" class="share-icon" />
+  </button>
+</div>
 
 <div class="side-panel" [class.open]="isSidePanelOpen">
   <div class="side-panel-header">
