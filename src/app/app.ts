@@ -277,11 +277,16 @@ export class App implements OnInit {
   selectedPothiIndex: number | null = null;
   newPothiNameForFav: string = '';
 
+  showFavoriteSavedMsg: boolean = false;
+
   addToFavorites() {
-    if (this.selectedItem && this.selectedItem.Gurmukhi) {
+    if (this.selectedItem) {
+      // Avoid duplicates by ShabadID
       if (!this.favorites.some(f => f.ShabadID === this.selectedItem!.ShabadID)) {
         this.favorites.unshift(this.selectedItem);
         localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(this.favorites));
+        this.showFavoriteSavedMsg = true;
+        setTimeout(() => this.showFavoriteSavedMsg = false, 1500);
       }
     }
   }

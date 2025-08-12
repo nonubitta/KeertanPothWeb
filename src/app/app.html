@@ -477,3 +477,9 @@
     </div>
   </div>
 </div>
+
+<!-- Show success message on main window -->
+<div *ngIf="showFavoriteSavedMsg" class="success-msg"
+     style="position:fixed;top:2rem;left:50%;transform:translateX(-50%);z-index:3000;background:#1f991f;color:#fff;padding:0.7rem 2rem;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.18);font-size:1.1rem;">
+  Shabad added to favorites!
+</div>
