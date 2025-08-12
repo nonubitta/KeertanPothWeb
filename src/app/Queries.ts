@@ -85,4 +85,8 @@ export class Queries {
   static getSources(): string {
 	return 'SELECT SourceID, SourceEnglish FROM Source WHERE UniqueID > 0';
   }
+
+  static getAllBanis(): string {
+	return ` select * from BaniName `;
+  }
 }

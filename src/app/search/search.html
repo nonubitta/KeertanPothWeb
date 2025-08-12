@@ -51,11 +51,17 @@
 <!--#region Side Panel -->
 <!-- Left Tabs Bar -->
 <div class="left-tabs">
-  <button class="tab-btn" [class.active]="activeTab === 'links'" (click)="openSidePanel('links')">Links</button>
-  <button class="tab-btn" [class.active]="activeTab === 'settings'" (click)="openSidePanel('settings')">Settings</button>
-  <button class="tab-btn" [class.active]="activeTab === 'history'" (click)="openSidePanel('history')">History</button>
+  <button class="tab-btn" tooltip="Random Shabad" [class.active]="activeTab === 'random'" (click)="openRandomShabad()">
+    <img height="24rem" src="assets/images/random.png" alt="Random" class="tab-icon" /></button>
+  <button class="tab-btn" tooltip="Sundar Gutka" [class.active]="activeTab === 'links'" (click)="openSidePanel('links')">
+    <img height="24rem" src="assets/images/nitnem.png" alt="Sundar Gutka" class="tab-icon" /></button>
+  <button class="tab-btn" tooltip="History" [class.active]="activeTab === 'history'" (click)="openSidePanel('history')">
+    <img height="24rem" src="assets/images/history.png" alt="History" class="tab-icon" /></button>
   <!-- <button class="tab-btn" [class.active]="activeTab === 'pothi'" (click)="openSidePanel('pothi')">Pothi</button> -->
-  <button class="tab-btn" [class.active]="activeTab === 'favorites'" (click)="openSidePanel('favorites')">Favorites</button>
+  <button class="tab-btn" tooltip="Favorites" [class.active]="activeTab === 'favorites'" (click)="openSidePanel('favorites')">
+    <img height="24rem" src="assets/images/bookmark.png" alt="Favorites" class="tab-icon" /></button>
+  <button class="tab-btn" tooltip="Settings" [class.active]="activeTab === 'settings'" (click)="openSidePanel('settings')">
+    <img height="24rem" src="assets/images/settingsmall.png" alt="Settings" class="tab-icon" /></button>
 </div>
 <!-- Star Button Right Bar -->
 <div class="right-tabs" *ngIf="!showSearchPanel">
@@ -85,10 +91,10 @@
       <!-- Links Section -->
       <div *ngSwitchCase="'links'">
         <a href="#" (click)="openRandomShabad()" class="panel-links">Random Shabad</a>
-        <a href="#" class="panel-links">Sundar Gutka</a>
+        <a href="#" (click)="openSundarGutka()" class="panel-links">Sundar Gutka</a>
         <a href="#" (click)="openContact()" class="panel-links">Contact</a>
         <!-- Example link to route to AboutComponent -->
-        <a routerLink="/about" class="panel-links">About</a>
+        <!-- <a routerLink="/about" class="panel-links">About</a> -->
         <!-- <a href="#" class="panel-links">About</a><br />
          -->
       </div>
@@ -396,37 +402,6 @@
     </div>
 </main>
 <!--#endregion Selected Shabad-->
-
-<!-- <footer class="footer">
-    <div class="container">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <a href="#about">About Us</a>
-                <a href="#contact">Contact</a>
-                <a href="#faq">FAQ</a>
-                <a href="#support">Support</a>
-            </div>
-            <div class="footer-section">
-                <h4>Resources</h4>
-                <a href="#guide">Search Guide</a>
-                <a href="#api">API Documentation</a>
-                <a href="#tools">Search Tools</a>
-                <a href="#tips">Tips & Tricks</a>
-            </div>
-            <div class="footer-section">
-                <h4>Legal</h4>
-                <a href="#privacy">Privacy Policy</a>
-                <a href="#terms">Terms of Service</a>
-                <a href="#cookies">Cookie Policy</a>
-                <a href="#dmca">DMCA</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Keertan Pothi. All rights reserved.</p>
-        </div>
-    </div>
-</footer> -->
 
 <!--#region Contact Modal -->
 <div class="modal-overlay" *ngIf="showContactModal" (click)="closeContactModal()">

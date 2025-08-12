@@ -30,7 +30,6 @@ export interface Vishram{
   t: string;
 }
 
-
 export interface VerseSearchResult {
   ID?: number;
   VerseID?: number; 
@@ -47,4 +46,12 @@ export interface VerseSearchResult {
   SourceEnglish?: string;
 }
 
-
+export interface NitnemBani {
+  Id: number; // Id
+  BaniId: number; // BaniId
+  PunjabiName: string;
+  EnglishName: string;
+  Bookmark: boolean;
+  ShabadList?: string; // Optional, used for single bani
+  IsSingleBani?: boolean; // Optional, used for single bani
+}

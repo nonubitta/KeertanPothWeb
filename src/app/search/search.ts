@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DbService } from '../db.service';  // Your existing service handling sql.js
-import { Verse, VerseSearchResult } from '../verse.model';
+import { NitnemBani, Verse, VerseSearchResult } from '../verse.model';
 import { visraamToVishraamArray, mapResultsToVerse, mapResultsToVerseSearchResults, mapVerseToVerseSearchResults } from '../utils';
 import { Queries } from '../Queries';
 import { Router, RouterModule } from '@angular/router';
@@ -27,9 +27,10 @@ export class Search {
   showMainKeyboard: boolean = true
   selectedVerseId: number | null = null;
   selectedItem: VerseSearchResult | null = null;
+  sundarGutka: NitnemBani[] = [];
   // Side panel state
   isSidePanelOpen: boolean = false;
-  activeTab: 'links' | 'settings' | 'history' | 'pothi' | 'favorites' | null = null;
+  activeTab: 'random' | 'links' | 'settings' | 'history' | 'pothi' | 'favorites' | null = null;
 
   // Punjabi Keyboard state
   showKeyboard: boolean = false;
@@ -50,6 +51,8 @@ export class Search {
   // History of selected items
   history: VerseSearchResult[] = [];
   private readonly HISTORY_KEY = 'kpoth-history';
+  private readonly POTHIS_KEY = 'kpoth-pothis';
+  private readonly FAVORITES_KEY = 'kpoth-favorites';
   RoastMessage: string = '';
   showRoastMessage: boolean = false;
   writers: any[] = [];
@@ -65,11 +68,9 @@ export class Search {
   newPothiName: string = '';
 
   pothis: { name: string, ids: number[] }[] = [];
-  private readonly POTHIS_KEY = 'kpoth-pothis';
 
   // Favorites
   favorites: VerseSearchResult[] = [];
-  private readonly FAVORITES_KEY = 'kpoth-favorites';
   //#endregion
 
   //#region Punjabi keyboard layout
@@ -167,7 +168,7 @@ export class Search {
     }
   }
 
-  openSidePanel(tab: 'links' | 'settings' | 'history' | 'pothi' | 'favorites') {
+  openSidePanel(tab: 'random' | 'links' | 'settings' | 'history' | 'pothi' | 'favorites') {
     const prevTab = this.activeTab;
     this.activeTab = tab;
     if(!prevTab)
@@ -203,6 +204,58 @@ export class Search {
 
   closeContactModal() {
     this.showContactModal = false;
+  }
+
+  openSundarGutka() {
+  
+  }
+
+  openQuickSettings() {
+    if(this.showEnglish || this.showPunjabi || this.showTransliteration) {
+    this.showEnglish = false;
+    this.showPunjabi = false;
+    this.showTransliteration = false;
+    }
+    else{
+      this.showEnglish = true;
+      this.showPunjabi = true;
+    }
+  }
+
+  shareShabad() {
+    // Share the current page using the Web Share API if available
+    if (navigator.share) {
+      const url = window.location.href;
+      navigator.share({
+        title: 'Keertan Pothi',
+        text: 'Check out this Shabad on Keertan Pothi',
+        url: url
+      }).catch(() => {});
+    } else {
+      // Fallback: copy URL to clipboard
+      try {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Link copied to clipboard!');
+      } catch {
+        alert('Unable to copy link. Please copy the URL manually.');
+      }
+    }
+  }
+
+  // Modal for adding to pothi
+  showAddToPothiModal: boolean = false;
+  selectedPothiIndex: number | null = null;
+  newPothiNameForFav: string = '';
+
+  addToFavorites() {
+    if (this.selectedItem) {
+      // Avoid duplicates by ShabadID
+      if (!this.favorites.some(f => f.ShabadID === this.selectedItem!.ShabadID)) {
+        this.favorites.unshift(this.selectedItem);
+        localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(this.favorites));
+        this.showRoastMessageFn('Shabad added to favorites');
+      }
+    }
   }
 
   //#region Pothi management
@@ -278,54 +331,6 @@ export class Search {
     this.selectedPothiIndex = index;
   }
   //#endregion
-
-  openQuickSettings() {
-    if(this.showEnglish || this.showPunjabi || this.showTransliteration) {
-    this.showEnglish = false;
-    this.showPunjabi = false;
-    this.showTransliteration = false;
-    }
-    else{
-      this.showEnglish = true;
-      this.showPunjabi = true;
-    }
-  }
-
-  shareShabad() {
-    // Share the current page using the Web Share API if available
-    if (navigator.share) {
-      const url = window.location.href;
-      navigator.share({
-        title: 'Keertan Pothi',
-        text: 'Check out this Shabad on Keertan Pothi',
-        url: url
-      }).catch(() => {});
-    } else {
-      // Fallback: copy URL to clipboard
-      try {
-        navigator.clipboard.writeText(window.location.href);
-        alert('Link copied to clipboard!');
-      } catch {
-        alert('Unable to copy link. Please copy the URL manually.');
-      }
-    }
-  }
-
-  // Modal for adding to pothi
-  showAddToPothiModal: boolean = false;
-  selectedPothiIndex: number | null = null;
-  newPothiNameForFav: string = '';
-
-  addToFavorites() {
-    if (this.selectedItem) {
-      // Avoid duplicates by ShabadID
-      if (!this.favorites.some(f => f.ShabadID === this.selectedItem!.ShabadID)) {
-        this.favorites.unshift(this.selectedItem);
-        localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(this.favorites));
-        this.showRoastMessageFn('Shabad added to favorites');
-      }
-    }
-  }
 
   //#endregion
 
