@@ -77,4 +77,12 @@ export class Queries {
 	  WHERE ShabadId = ${shabadId}
 	`;
   }
+
+  static getWriters(): string{
+	return 'SELECT WriterID, WriterEnglish FROM Writer Where WriterId > 0';
+  }
+
+  static getSources(): string {
+	return 'SELECT SourceID, SourceEnglish FROM Source WHERE UniqueID > 0';
+  }
 }
