@@ -114,17 +114,17 @@ body {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
+            padding: 0.8rem 0;
         }
 
         input[type="text"] {
           font-family: 'Gurakhar', sans-serif;
-          height: 3rem;
-          font-size: 2rem;
+          height: 2.5rem;
+          font-size: 1.6rem;
         }
 
         .logo {
-            font-size: 2rem;
+            font-size: 1.7rem;
             font-weight: bold;
             color: #d98300;//var(--defaultContrastColor);
             text-decoration: none;
@@ -134,7 +134,7 @@ body {
         }
 
         .logo-img {
-          height: 3.5rem;
+          height: 2.9rem;
           width: auto;
           display: inline-block;
           vertical-align: middle;
