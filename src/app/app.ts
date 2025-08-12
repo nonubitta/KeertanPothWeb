@@ -14,7 +14,6 @@ import { Queries } from './Queries';
 })
 
 export class App implements OnInit {
-
   //#region Public Properties
   searchMode: string = 'anywhere';
   showSearchPanel: boolean = true;
@@ -53,6 +52,9 @@ export class App implements OnInit {
   selectedWriterId: string = '';
   sources: any[] = [];
   selectedSourceId: string = '';
+
+  // Contact modal
+  showContactModal: boolean = false;
   //#endregion
 
   //#region Punjabi keyboard layout
@@ -145,8 +147,13 @@ export class App implements OnInit {
     this.onSelectItem(result);
   }
 
-  openContant() {}
+  openContant() {
+    this.showContactModal = true;
+  }
 
+  closeContactModal() {
+    this.showContactModal = false;
+  }
   //#endregion
 
   //#region Keyboard methods

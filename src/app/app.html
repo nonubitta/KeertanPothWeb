@@ -375,3 +375,19 @@
         </div>
     </div>
 </footer> -->
+
+<!-- Contact Modal -->
+<div class="modal-overlay" *ngIf="showContactModal" (click)="closeContactModal()">
+  <div class="modal-dialog" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <span>Contact</span>
+      <button class="modal-close-btn" (click)="closeContactModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <p>
+        You can contact us at <a style="color: white;" href="mailto:keertanpothi@gmail.com">keertanpothi@gmail.com</a>
+      </p>
+      <!-- Add more contact info here if needed -->
+    </div>
+  </div>
+</div>
