@@ -117,8 +117,20 @@ body {
             padding: 0.8rem 0;
         }
 
-        input[type="text"] {
-          font-family: 'Gurakhar', sans-serif;
+       
+        
+        .header-search-input {
+          flex: 1;
+          background: transparent;
+          border: none;
+          padding: 0.5rem 1rem;
+          color: #e0e0e0;
+          outline: none;
+          height: 2.4rem;
+          min-width: 0;
+          text-align: left;
+          box-sizing: border-box;
+             font-family: 'Gurakhar', sans-serif;
           height: 2.5rem;
           font-size: 1.6rem;
         }
@@ -216,19 +228,6 @@ body {
           justify-content: flex-end;
         }
 
-        .header-search-input {
-          flex: 1;
-          background: transparent;
-          border: none;
-          padding: 0.5rem 1rem;
-          font-size: 1rem;
-          color: #e0e0e0;
-          outline: none;
-          height: 2.4rem;
-          min-width: 0;
-          text-align: left;
-          box-sizing: border-box;
-        }
 
         .header-search-btn {
           background: linear-gradient(45deg, #d98300, #b86b00);
@@ -971,7 +970,7 @@ body {
 
 .verse-row {
   display: flex;
-  padding: 1.5rem;
+  padding: 1rem 1.5rem;
   border-bottom: 1px solid #404040;
   transition: background-color 0.2s ease;
   flex-direction: column;
