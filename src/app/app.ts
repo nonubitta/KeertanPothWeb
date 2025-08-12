@@ -195,10 +195,12 @@ export class App implements OnInit {
       ShabadID: randomIndex
     };
     this.onSelectItem(result);
+    this.closeSidePanel();
   }
 
   openContact() {
     this.showContactModal = true;
+    this.closeSidePanel();
   }
 
   closeContactModal() {
