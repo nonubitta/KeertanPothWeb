@@ -204,12 +204,29 @@
   <button class="btn-primary" (click)="openAddPothiModal()" style="margin-bottom: 1rem;">Add new Pothi</button>
   <div *ngIf="pothis.length === 0" style="color: #aaa; margin-bottom: 1rem;">No Pothis yet.</div>
   <div *ngIf="pothis.length > 0" class="pothi-list" style="margin-bottom: 1rem;">
-    <div *ngFor="let pothi of pothis; let i = index" class="pothi-list-item" style="display: flex; align-items: center; gap: 0.5rem;">
+    <div *ngFor="let pothi of pothis; let i = index"
+         class="pothi-list-item"
+         style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;"
+         [class.selected]="selectedPothiIndex === i"
+         (click)="selectPothi(i)">
       <span class="pothi-name">{{ pothi.name }}</span>
       <span class="pothi-count" style="color: #8ecae6; font-size: 0.95em;">({{ pothi.ids.length }} items)</span>
       <span style="flex:1 1 auto;"></span>
-      <button class="btn-secondary" (click)="deletePothi(i)">Delete</button>
+      <button class="btn-secondary" (click)="deletePothi(i); $event.stopPropagation()">Delete</button>
     </div>
+  </div>
+  <div *ngIf="selectedPothiIndex !== null && pothis[selectedPothiIndex]">
+    <div style="margin: 1rem 0 0.5rem 0; font-weight: 600;">
+      {{ pothis[selectedPothiIndex].name }} Details
+    </div>
+    <div *ngIf="pothis[selectedPothiIndex].ids.length === 0" style="color: #aaa;">No verses saved in this pothi.</div>
+    <ul *ngIf="pothis[selectedPothiIndex].ids.length > 0" style="padding-left: 1rem;">
+      <li *ngFor="let vid of pothis[selectedPothiIndex].ids">
+        Verse ID: {{ vid }}
+        <!-- Optionally, add a remove button for each verse -->
+        <button class="btn-secondary" style="margin-left: 1rem;" (click)="removeVerseFromPothi(selectedPothiIndex, vid)">Remove</button>
+      </li>
+    </ul>
   </div>
 </div>
     </ng-container>

@@ -278,6 +278,10 @@ export class App implements OnInit {
     }
   }
 
+  selectPothi(index: number) {
+    this.selectedPothiIndex = index;
+  }
+
   //#endregion
 
   //#region Keyboard methods
