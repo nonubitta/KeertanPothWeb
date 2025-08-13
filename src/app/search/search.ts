@@ -441,13 +441,22 @@ export class Search {
   }
 
   async setSelectedShabad(item: VerseSearchResult, results: any[]) {
+    debugger;
     this.selectedShabad = mapResultsToVerse(results, this.showVishraam);
     if(item.ID)
       this.selectedVerseId = item.ID;
     else{
       this.selectedVerseId = this.selectedShabad[0].ID; 
     }
-    this.detailsInfo = this.selectedShabad[0];
+    this.detailsInfo = { ...this.selectedShabad[0] };
+    // Update the URL to show the ShabadID (without reloading)
+    // if (item.ShabadID) {
+    //   this.router.navigate([], {
+    //     queryParams: { shabad: item.ShabadID },
+    //     queryParamsHandling: 'merge',
+    //     replaceUrl: true
+    //   });
+    // }
     if (!this.detailsInfo.WriterID) {
       const verse = this.selectedShabad.find(v => v.WriterID != null);
       if (verse) {

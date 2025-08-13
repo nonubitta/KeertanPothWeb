@@ -388,6 +388,7 @@
                   [class.verse-selected]="verse.ID === selectedVerseId"
                   [attr.id]="verse.ID === selectedVerseId ? 'selected-verse' : null"
                   (click)="viewMode === 'presentation' ? onPresentationVerseClick(verse) : null"
+                  [class.verse-heading-center]="verse.WriterID == null"
                   style="cursor: pointer;"
                 >
                     <div class="verse-content">

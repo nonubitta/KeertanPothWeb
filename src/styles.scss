@@ -1004,6 +1004,12 @@ body {
   flex: 1;
 }
 
+.verse-heading-center {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
 .verse-text {
   font-size: 1.3rem;
   color: #ffffff;
