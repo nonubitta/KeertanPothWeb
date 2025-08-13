@@ -6,6 +6,7 @@ import { NitnemBani, Verse, VerseSearchResult } from '../verse.model';
 import { visraamToVishraamArray, mapResultsToVerse, mapResultsToVerseSearchResults, mapVerseToVerseSearchResults } from '../utils';
 import { Queries } from '../Queries';
 import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -90,9 +91,13 @@ export class Search {
   //#endregion
 
   //#region constructor, onInit
-  constructor(private dbService: DbService, private router: Router) {}
+  constructor(private dbService: DbService, private router: Router, 
+    private route: ActivatedRoute
+  ) {}
 
   async ngOnInit() {
+    
+    const shabadId = this.route.snapshot.queryParamMap.get('shabad');
     await this.dbService.initDb();
     this.isDbReady = true;
     
@@ -136,6 +141,13 @@ export class Search {
       } catch {
         this.favorites = [];
       }
+    }
+
+    if (shabadId) {
+      const result: VerseSearchResult = {
+        ShabadID: Number(shabadId)
+      };
+      this.onSelectItem(result);
     }
   }
 
