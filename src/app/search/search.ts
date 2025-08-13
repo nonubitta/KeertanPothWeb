@@ -203,7 +203,8 @@ export class Search {
     const query = Queries.getNitnemBani(baniId);
     const results = await this.dbService.query(query);
     const item: VerseSearchResult = mapVerseToVerseSearchResults(results[0]);
-    this.setSelectedShabad(item, results);
+    // Remove the URL update for Nitnem Bani, or use a different param
+    this.setSelectedShabad(item, results, { updateUrl: false });
     this.closeSidePanel();
   }
 
@@ -440,7 +441,7 @@ export class Search {
     this.setSelectedShabad(item, results);
   }
 
-  async setSelectedShabad(item: VerseSearchResult, results: any[]) {
+  async setSelectedShabad(item: VerseSearchResult, results: any[], opts?: { updateUrl?: boolean }) {
     debugger;
     this.selectedShabad = mapResultsToVerse(results, this.showVishraam);
     if(item.ID)
@@ -449,14 +450,15 @@ export class Search {
       this.selectedVerseId = this.selectedShabad[0].ID; 
     }
     this.detailsInfo = { ...this.selectedShabad[0] };
-    // Update the URL to show the ShabadID (without reloading)
-    // if (item.ShabadID) {
-    //   this.router.navigate([], {
-    //     queryParams: { shabad: item.ShabadID },
-    //     queryParamsHandling: 'merge',
-    //     replaceUrl: true
-    //   });
-    // }
+    
+    // Only update URL if not explicitly disabled
+    if (item.ShabadID && (!opts || opts.updateUrl !== false)) {
+      this.router.navigate([], {
+        queryParams: { shabad: item.ShabadID },
+        queryParamsHandling: 'merge',
+        replaceUrl: true
+      });
+    }
     if (!this.detailsInfo.WriterID) {
       const verse = this.selectedShabad.find(v => v.WriterID != null);
       if (verse) {
