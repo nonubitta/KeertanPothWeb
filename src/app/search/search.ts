@@ -27,7 +27,7 @@ export class Search {
   showMainKeyboard: boolean = true
   selectedVerseId: number | null = null;
   selectedItem: VerseSearchResult | null = null;
-  sundarGutka: NitnemBani[] = [];
+  nitnemBani: NitnemBani[] = [];
   // Side panel state
   isSidePanelOpen: boolean = false;
   activeTab: 'random' | 'links' | 'settings' | 'history' | 'pothi' | 'favorites' | null = null;
@@ -101,6 +101,8 @@ export class Search {
       this.writers = writersResult;
       const sourcesResult = await this.dbService.query(Queries.getSources());
       this.sources = sourcesResult;
+      this.nitnemBani = await this.dbService.query(Queries.getAllBanis());
+      console.log(this.nitnemBani);
     } catch (e) {
       this.writers = [];
       this.sources = [];
@@ -194,6 +196,14 @@ export class Search {
       ShabadID: randomIndex
     };
     this.onSelectItem(result);
+    this.closeSidePanel();
+  }
+
+  async openNitnemBani(baniId: number) {
+    const query = Queries.getNitnemBani(baniId);
+    const results = await this.dbService.query(query);
+    const item: VerseSearchResult = mapVerseToVerseSearchResults(results[0]);
+    this.setSelectedShabad(item, results);
     this.closeSidePanel();
   }
 
@@ -427,6 +437,10 @@ export class Search {
   async onSelectItem(item: VerseSearchResult) {
     const query = Queries.getShabadById(item.ShabadID);
     const results = await this.dbService.query(query);
+    this.setSelectedShabad(item, results);
+  }
+
+  async setSelectedShabad(item: VerseSearchResult, results: any[]) {
     this.selectedShabad = mapResultsToVerse(results, this.showVishraam);
     if(item.ID)
       this.selectedVerseId = item.ID;
@@ -465,10 +479,10 @@ export class Search {
       const offset = 60; // pixels from the top
       const top = el.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top, behavior: 'smooth' });
-    } else {
-      console.warn('selected-verse not found in DOM');
-    }
-  }, 50); // small delay to ensure details section is rendered
+      } else {
+        console.warn('selected-verse not found in DOM');
+      }
+    }, 50); // small delay to ensure details section is rendered
   }
 
   onToggleVishraam() {

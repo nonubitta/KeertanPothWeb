@@ -90,9 +90,17 @@
       
       <!-- Links Section -->
       <div *ngSwitchCase="'links'">
-        <a href="#" (click)="openRandomShabad()" class="panel-links">Random Shabad</a>
-        <a href="#" (click)="openSundarGutka()" class="panel-links">Sundar Gutka</a>
-        <a href="#" (click)="openContact()" class="panel-links">Contact</a>
+        <ul *ngIf="nitnemBani.length > 0" class="history-list">
+          <li *ngFor="let item of nitnemBani">
+            <a href="#" (click)="openNitnemBani(item.Id)" class="history-link">
+              <span style="font-family: 'Gurakhar', sans-serif;">{{ item.PunjabiName }}</span><br />
+              <span style="font-size: 1rem;">{{ item.EnglishName }}</span>
+            </a>
+            <hr class="toolbar-divider-hr" />
+          </li>
+        </ul>
+        <!-- <a href="#" (click)="openSundarGutka()" class="panel-links">Sundar Gutka</a> -->
+        <!-- <a href="#" (click)="openContact()" class="panel-links">Contact</a> -->
         <!-- Example link to route to AboutComponent -->
         <!-- <a routerLink="/about" class="panel-links">About</a> -->
         <!-- <a href="#" class="panel-links">About</a><br />

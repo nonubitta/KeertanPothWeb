@@ -89,4 +89,14 @@ export class Queries {
   static getAllBanis(): string {
 	return ` select * from BaniName `;
   }
+
+  static getNitnemBani(id: number): string {
+	return ` select *
+                    from shabad sh join verse vr on sh.verseID = vr.ID 
+                    left join Writer wr on vr.writerId = wr.writerId
+                    left join Raag rg on vr.RaagId = rg.RaagId
+                    left join Source sc on vr.SourceId = sc.SourceId
+                    inner join Nitnem n on n.verseid = vr.id
+                    Where n.id = ${id} order by n.sort, n.verseid `;
+  }
 }

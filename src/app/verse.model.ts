@@ -48,7 +48,6 @@ export interface VerseSearchResult {
 
 export interface NitnemBani {
   Id: number; // Id
-  BaniId: number; // BaniId
   PunjabiName: string;
   EnglishName: string;
   Bookmark: boolean;
