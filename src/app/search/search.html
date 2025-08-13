@@ -52,16 +52,21 @@
 <!-- Left Tabs Bar -->
 <div class="left-tabs">
   <button class="tab-btn" tooltip="Random Shabad" [class.active]="activeTab === 'random'" (click)="openRandomShabad()">
-    <img height="24rem" src="assets/images/random.png" alt="Random" class="tab-icon" /></button>
+    <img height="24rem" src="assets/images/random.png" alt="Random" class="tab-icon" />
+    <span class="tab-text">Random</span></button>
   <button class="tab-btn" tooltip="Sundar Gutka" [class.active]="activeTab === 'links'" (click)="openSidePanel('links')">
-    <img height="24rem" src="assets/images/nitnem.png" alt="Sundar Gutka" class="tab-icon" /></button>
+    <img height="24rem" src="assets/images/nitnem.png" alt="Sundar Gutka" class="tab-icon" />
+    <span class="tab-text">Gutka</span></button>
   <button class="tab-btn" tooltip="History" [class.active]="activeTab === 'history'" (click)="openSidePanel('history')">
-    <img height="24rem" src="assets/images/history.png" alt="History" class="tab-icon" /></button>
+    <img height="24rem" src="assets/images/history.png" alt="History" class="tab-icon" />
+    <span class="tab-text">History</span></button>
   <!-- <button class="tab-btn" [class.active]="activeTab === 'pothi'" (click)="openSidePanel('pothi')">Pothi</button> -->
   <button class="tab-btn" tooltip="Favorites" [class.active]="activeTab === 'favorites'" (click)="openSidePanel('favorites')">
-    <img height="24rem" src="assets/images/bookmark.png" alt="Favorites" class="tab-icon" /></button>
+    <img height="24rem" src="assets/images/bookmark.png" alt="Favorites" class="tab-icon" />
+    <span class="tab-text">Favorite</span></button>
   <button class="tab-btn" tooltip="Settings" [class.active]="activeTab === 'settings'" (click)="openSidePanel('settings')">
-    <img height="24rem" src="assets/images/settingsmall.png" alt="Settings" class="tab-icon" /></button>
+    <img height="24rem" src="assets/images/settingsmall.png" alt="Settings" class="tab-icon" />
+    <span class="tab-text">Settings</span></button>
 </div>
 <!-- Star Button Right Bar -->
 <div class="right-tabs" *ngIf="!showSearchPanel">
