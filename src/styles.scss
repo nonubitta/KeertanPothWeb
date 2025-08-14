@@ -1616,7 +1616,11 @@ body {
   color: #fff;
 }
 
-.tab-btn.active,
+.tab-btn.active{
+  background: var(--defaultContrastColor);
+  color: #fff;
+}
+
 .tab-btn:hover {
   background: var(--defaultContrastColor);
   color: #fff;
