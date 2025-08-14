@@ -1,3 +1,5 @@
+//Selected Shabad background - verses-container
+//Main page background - body { background }
 @font-face {
   font-family: 'PunjabiFont1';
   src: url('../Fonts/PunjabiFont1.otf') format('opentype');
@@ -35,6 +37,17 @@
   --accent: #03dac6;
   --input-bg: #2a2a2a;
   --border: #333;
+  --defaultContrastColor: #067bfa;
+}
+
+/* Blue Theme */
+:root.theme-blue {
+  --background: #0a192f;
+  --surface: #112240;
+  --text: #e6f1ff;
+  --accent: #64ffda;
+  --input-bg: #233554;
+  --border: #233554;
   --defaultContrastColor: #067bfa;
 }
 
@@ -1641,7 +1654,7 @@ body {
 .source-label {
   font-weight: 500;
   letter-spacing: 0.5px;
-  color: #50f095; 
+  color: #2c911e; 
 }
 
 .v{
@@ -1717,4 +1730,18 @@ select option {
 .modal-body {
   font-size: 1.1rem;
   color: #e0e0e0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #181818 0%, #232323 50%, #101010 100%);
+  color: #e0e0e0;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+// Blue theme body background
+:root.theme-blue body {
+  background: linear-gradient(135deg, #0a192f 0%, #112240 50%, #233554 100%);
+  color: #e6f1ff;
 }

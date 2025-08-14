@@ -191,6 +191,15 @@
         <br />
         <hr class="toolbar-divider-hr" />
       
+           <!-- Theme Switcher -->
+        <label for="themeSelect">Theme:</label>
+        <select id="themeSelect" [ngModel]="theme" (ngModelChange)="onThemeChange($event)" style="margin-left: 0.5rem;">
+          <option value="default">Default</option>
+          <option value="blue">Blue</option>
+        </select>
+        <br />
+        <hr class="toolbar-divider-hr" />
+
         <!-- Presentation View Gurmukhi Font Size -->
         <label for="presentationGurmukhiFontSize">Presentation View Gurmukhi Font Size:</label><br />
         <input id="presentationGurmukhiFontSize" type="range" min="1" max="8" step="0.1"
@@ -198,6 +207,8 @@
         <span>{{ presentationGurmukhiFontSize * 10 }}</span>
         <br />
         <hr class="toolbar-divider-hr" />
+
+     
       </div>
 
       <!-- History Section -->

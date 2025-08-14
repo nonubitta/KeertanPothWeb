@@ -72,6 +72,9 @@ export class Search {
 
   // Favorites
   favorites: VerseSearchResult[] = [];
+
+  // Theme
+  theme: string = 'default'; // 'default' or 'blue'
   //#endregion
 
   //#region Punjabi keyboard layout
@@ -148,6 +151,12 @@ export class Search {
         ShabadID: Number(shabadId)
       };
       this.onSelectItem(result);
+    }
+
+    // Load theme from localStorage
+    const savedTheme = localStorage.getItem('kpoth-theme');
+    if (savedTheme) {
+      this.setTheme(savedTheme);
     }
   }
 
@@ -617,5 +626,23 @@ export class Search {
     return (v.t && v.t.toLowerCase() === 'v') ? 'main-vishram' : 'secondary-vishram';
   }
 
+  //#endregion
+
+  //#region Theme management
+  setTheme(theme: string) {
+    this.theme = theme;
+    const root = document.documentElement;
+    root.classList.remove('theme-blue');
+    if (theme === 'blue') {
+      root.classList.add('theme-blue');
+    }
+    // Add more themes here as needed
+  }
+
+  // Save theme selection
+  onThemeChange(theme: string) {
+    this.setTheme(theme);
+    localStorage.setItem('kpoth-theme', theme);
+  }
   //#endregion
 }
