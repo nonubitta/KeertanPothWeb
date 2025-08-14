@@ -56,7 +56,7 @@
     <span class="tab-text">Random</span></button>
   <button class="tab-btn" tooltip="Sundar Gutka" [class.active]="activeTab === 'links'" (click)="openSidePanel('links')">
     <img height="24rem" src="assets/images/nitnem.png" alt="Sundar Gutka" class="tab-icon" />
-    <span class="tab-text">Gutka</span></button>
+    <span class="tab-text">Sundar<br />Gutka</span></button>
   <button class="tab-btn" tooltip="History" [class.active]="activeTab === 'history'" (click)="openSidePanel('history')">
     <img height="24rem" src="assets/images/history.png" alt="History" class="tab-icon" />
     <span class="tab-text">History</span></button>
@@ -83,7 +83,7 @@
 
 <div class="side-panel" [class.open]="isSidePanelOpen">
   <div class="side-panel-header">
-    <h3 *ngIf="activeTab === 'links'">Links</h3>
+    <h3 *ngIf="activeTab === 'links'">Sundar Gutka</h3>
     <h3 *ngIf="activeTab === 'settings'">Settings</h3>
     <h3 *ngIf="activeTab === 'history'">History</h3>
     <h3 *ngIf="activeTab === 'pothi'">Pothi</h3>
