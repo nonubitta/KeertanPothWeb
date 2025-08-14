@@ -1559,8 +1559,7 @@ body {
   writing-mode: vertical-lr;
   text-orientation: mixed;
   height: 50px; /* adjust as needed */
-  min-width: 40px;
-  max-width: 40px;
+  width: 40px;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -1596,6 +1595,12 @@ body {
   white-space: nowrap;
   transition: width 0.2s, opacity 0.2s;
   opacity: 0;
+}
+
+.tab-btn-right.active,
+.tab-btn-right:hover   {
+  background: var(--defaultContrastColor);
+  color: #fff;
 }
 
 .tab-btn.active,
