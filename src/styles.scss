@@ -1776,4 +1776,13 @@ $theme-blue-body-mid-color:#2d3748;
     //gap: 1rem;
 }
 
+.theme-blue .verse-selected {
+  background-color: #272c3d;
+  color: #ffffff;
+}
+
+.verse-row:hover {
+  background-color: transparent;
+}
+
 //#endregion
