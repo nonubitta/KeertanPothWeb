@@ -634,12 +634,8 @@ export class Search {
     this.theme = theme;
     const root = document.documentElement;
     root.classList.remove(`theme-${oldTheme}`);
-    switch(theme){
-      case 'gray':
-      root.classList.add('theme-gray');
-      break;
-      default:break;
-    }
+    root.classList.add(`theme-${theme}`);
+
     // Add more themes here as needed
   }
 
