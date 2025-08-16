@@ -1,0 +1,319 @@
+/* =======================
+   Global Reset & Base
+======================= */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0a192f;
+    color: #e6f1ff;
+    line-height: 1.5;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button, input, select {
+    font-family: inherit;
+    outline: none;
+    border: none;
+}
+
+/* =======================
+   Header & Navigation
+======================= */
+.header {
+    background: #112240;
+    padding: 0.8rem 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.container {
+    width: 95%;
+    margin: auto;
+    max-width: 1200px;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-left .logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #64ffda;
+}
+
+.logo-img {
+    height: 40px;
+    margin-right: 0.6rem;
+}
+
+/* =======================
+   Search Bar
+======================= */
+.header-search-form {
+    display: flex;
+    align-items: center;
+    background: #1c2e4a;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.header-search-input {
+    padding: 0.6rem 0.8rem;
+    background: transparent;
+    color: #e6f1ff;
+    width: 220px;
+    font-size: 0.95rem;
+}
+
+.header-search-input::placeholder {
+    color: #8892b0;
+}
+
+.keyboard-toggle-btn,
+.header-search-btn {
+    background: #233554;
+    color: #e6f1ff;
+    padding: 0.5rem 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.keyboard-toggle-btn:hover,
+.header-search-btn:hover {
+    background: #2d4a73;
+}
+
+/* =======================
+   Side Tabs
+======================= */
+.left-tabs, .right-tabs {
+    position: fixed;
+    top: 70px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    z-index: 1000;
+}
+
+.left-tabs { left: 0.5rem; }
+.right-tabs { right: 0.5rem; }
+
+.tab-btn, .tab-btn-right {
+    background: #112240;
+    border-radius: 8px;
+    padding: 0.6rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ccd6f6;
+    border: 1px solid transparent;
+}
+
+.tab-btn:hover, .tab-btn-right:hover {
+    background: #233554;
+}
+
+.tab-btn.active {
+    border: 1px solid #64ffda;
+}
+
+/* =======================
+   Side Panel
+======================= */
+.side-panel {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 320px;
+    height: 100%;
+    background: #112240;
+    box-shadow: -2px 0 12px rgba(0,0,0,0.4);
+    transition: right 0.3s ease;
+    overflow-y: auto;
+    z-index: 1500;
+}
+
+.side-panel.open {
+    right: 0;
+}
+
+.side-panel-header {
+    padding: 1rem;
+    background: #1c2e4a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.side-panel-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #64ffda;
+}
+
+.close-btn {
+    background: transparent;
+    color: #e57373;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.side-panel-content {
+    padding: 1rem;
+}
+
+/* =======================
+   Overlay
+======================= */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1400;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* =======================
+   Results Section
+======================= */
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1c2e4a;
+    padding: 0.7rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.results-sort select {
+    background: #233554;
+    color: #e6f1ff;
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+}
+
+.results-grid {
+    display: grid;
+    gap: 0.8rem;
+}
+
+.result-card {
+    background: #112240;
+    padding: 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.3s;
+}
+
+.result-card:hover {
+    transform: translateY(-2px);
+    background: #1a3555;
+}
+
+/* =======================
+   Verse Display
+======================= */
+.verse-row {
+    padding: 0.6rem 0.4rem;
+    border-bottom: 1px solid #233554;
+    transition: background 0.3s;
+}
+
+.verse-row:hover {
+    background: rgba(100,255,218,0.05);
+}
+
+.verse-selected {
+    background: rgba(100,255,218,0.15);
+}
+
+/* =======================
+   Buttons
+======================= */
+.btn-primary {
+    background: #64ffda;
+    color: #0a192f;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-primary:hover {
+    background: #52e0c4;
+}
+
+.btn-secondary {
+    background: #233554;
+    color: #e6f1ff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background: #2d4a73;
+}
+
+/* =======================
+   Modals
+======================= */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-dialog {
+    background: #112240;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+.modal-header {
+    background: #1c2e4a;
+    padding: 0.8rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header span {
+    font-weight: 600;
+}
+
+.modal-close-btn {
+    background: transparent;
+    color: #e57373;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 1rem;
+}
