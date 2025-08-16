@@ -1,0 +1,91 @@
+.admin-login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #181818 0%, #232323 50%, #101010 100%);
+}
+
+.admin-login-form {
+  background: rgba(30, 34, 40, 0.98);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
+  min-width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1.5px solid #222;
+}
+
+.admin-login-title {
+  color: #8ecae6;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 12px #0008;
+}
+
+.admin-input-group {
+  display: flex;
+  align-items: center;
+  background: #232323;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border: 1.5px solid #333;
+  transition: border 0.2s;
+}
+
+.admin-input-group:focus-within {
+  border-color: #8ecae6;
+}
+
+.admin-input-icon {
+  padding: 0 0.8rem;
+  display: flex;
+  align-items: center;
+  opacity: 0.85;
+}
+
+.admin-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #e0e0e0;
+  font-size: 1.1rem;
+  padding: 0.9rem 0.8rem;
+  flex: 1;
+  border-radius: 8px;
+  font-family: 'Segoe UI', 'Gurakhar', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.admin-login-btn {
+  background: linear-gradient(45deg, #8ecae6, #067bfa);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.85rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 2px 12px #0004;
+  transition: background 0.2s, transform 0.15s;
+  letter-spacing: 1px;
+}
+
+.admin-login-btn:hover {
+  background: linear-gradient(45deg, #067bfa, #8ecae6);
+  transform: translateY(-2px) scale(1.03);
+}
+
+@media (max-width: 500px) {
+  .admin-login-form {
+    min-width: 90vw;
+    padding: 1.5rem 0.5rem 1.5rem 0.5rem;
+  }
+}

@@ -1,9 +1,10 @@
 import { Routes } from '@angular/router';
-import { App } from './app';
-import { AboutComponent } from './about.component'; // You need to create this component
 import { Search } from './search/search';
+import { About } from './about/about';
+import { Admin } from './admin/admin';
 
 export const routes: Routes = [
   { path: '', component: Search },
-  { path: 'about', component: AboutComponent }
+  { path: 'about', component: About },
+  { path: 'admin', component: Admin }
 ];

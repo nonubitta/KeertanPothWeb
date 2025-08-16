@@ -1,0 +1,33 @@
+<!-- #region Admin Login -->
+<div class="admin-login-container" *ngIf="!loggedIn">
+  <form class="admin-login-form" (submit)="onLogin($event)">
+    <h2 class="admin-login-title">Admin Login</h2>
+    <div class="admin-input-group">
+      <span class="admin-input-icon">
+        <svg width="22" height="22" fill="#8ecae6" viewBox="0 0 24 24"><path d="M12 12c2.7 0 8 1.34 8 4v2H4v-2c0-2.66 5.3-4 8-4zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+      </span>
+      <input type="text" placeholder="Username" class="admin-input" autocomplete="username" [(ngModel)]="username" name="username" />
+    </div>
+    <div class="admin-input-group">
+      <span class="admin-input-icon">
+        <svg width="22" height="22" fill="#8ecae6" viewBox="0 0 24 24"><path d="M12 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm6-7V7a6 6 0 1 0-12 0v3a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2zm-8-3a4 4 0 1 1 8 0v3H6V7zm10 12H6v-7h12v7z"/></svg>
+      </span>
+      <input type="password" placeholder="Password" class="admin-input" autocomplete="current-password" [(ngModel)]="password" name="password" />
+    </div>
+    <div *ngIf="loginError" style="color:#ff6b6b; margin-bottom:1rem; text-align:center;">
+      {{ loginError }}
+    </div>
+    <button type="submit" class="admin-login-btn">Login</button>
+  </form>
+</div>
+<!-- #endregion Admin Login -->
+
+<!-- #region Admin Dashboard -->
+<div *ngIf="loggedIn" class="admin-login-container" style="justify-content: flex-start;">
+  <div class="admin-login-form" style="text-align:center;">
+    <h2 class="admin-login-title" style="color:#1f991f;">Login Successful</h2>
+    <div style="font-size:1.2rem; color:#8ecae6; margin-top:1.5rem;">Welcome, {{ username }}!</div>
+    <div style="margin-top:2rem; color:#b0b0b0;">You are now signed in as admin.</div>
+  </div>
+</div>
+<!-- #endregion Admin Dashboard -->
