@@ -630,11 +630,18 @@ export class Search {
 
   //#region Theme management
   setTheme(theme: string) {
+    const oldTheme = this.theme;
     this.theme = theme;
     const root = document.documentElement;
-    root.classList.remove('theme-blue');
-    if (theme === 'blue') {
+    root.classList.remove(`theme-${oldTheme}`);
+    switch(theme){
+      case 'blue':
       root.classList.add('theme-blue');
+      break;
+      case 'green':
+      root.classList.add('theme-green');
+      break;
+      default:break;
     }
     // Add more themes here as needed
   }
