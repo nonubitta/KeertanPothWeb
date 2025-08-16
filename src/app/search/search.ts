@@ -643,6 +643,7 @@ export class Search {
   onThemeChange(theme: string) {
     this.setTheme(theme);
     localStorage.setItem('kpoth-theme', theme);
+    this.closeSidePanel();
   }
   //#endregion
 }
