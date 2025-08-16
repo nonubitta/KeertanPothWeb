@@ -635,11 +635,8 @@ export class Search {
     const root = document.documentElement;
     root.classList.remove(`theme-${oldTheme}`);
     switch(theme){
-      case 'blue':
-      root.classList.add('theme-blue');
-      break;
-      case 'green':
-      root.classList.add('theme-green');
+      case 'gray':
+      root.classList.add('theme-gray');
       break;
       default:break;
     }

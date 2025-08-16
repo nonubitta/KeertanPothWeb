@@ -1724,27 +1724,27 @@ select option {
 
 //#region Blue Theme
 
-$theme-blue-header-color:#1A1D29F2;
-$theme-blue-body-color:#2d3748;//linear-gradient(135deg, #1a1d29 0%, #2d3748 50%, #4a5568 100%);
-$theme-blue-body-mid-color:#2d3748;
+$theme-gray-header-color:#1A1D29F2;
+$theme-gray-body-color:#2d3748;//linear-gradient(135deg, #1a1d29 0%, #2d3748 50%, #4a5568 100%);
+$theme-gray-body-mid-color:#2d3748;
 // Blue theme body background
-:root.theme-blue body {
-  background: $theme-blue-body-color;
+:root.theme-gray body {
+  background: $theme-gray-body-color;
   color: #e6f1ff;
 }
 
-:root.theme-blue {
+:root.theme-gray {
   --background: #0a192f;
   --surface: #112240;
   --text: #e6f1ff;
   --accent: #64ffda;
-  --input-bg: #{$theme-blue-body-mid-color};
+  --input-bg: #{$theme-gray-body-mid-color};
   --border: #233554;
   --defaultContrastColor: #067bfa;
 }
 
-.theme-blue header {
-  background: $theme-blue-header-color;
+.theme-gray header {
+  background: $theme-gray-header-color;
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(64, 224, 208, 0.18);
   position: sticky;
@@ -1753,30 +1753,30 @@ $theme-blue-body-mid-color:#2d3748;
   transition: background 0.3s cubic-bezier(0.4,0,0.2,1);
 }
 
-.theme-blue .header-search-input:focus {
+.theme-gray .header-search-input:focus {
   border-color: #3b82f6;
   background: rgba(255, 255, 255, 0.15);
   box-shadow: 0 8px 30px rgba(59, 130, 246, 0.15);
 }
 
-.theme-blue .header-search-btn {
+.theme-gray .header-search-btn {
   background: $primary-blue;
 }
 
-.theme-blue .verses-container {
-  background: $theme-blue-header-color;
+.theme-gray .verses-container {
+  background: $theme-gray-header-color;
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid #404040;
 }
 
-.theme-blue .result-card {
-    background: $theme-blue-header-color;
+.theme-gray .result-card {
+    background: $theme-gray-header-color;
     border: 1px solid rgba(64, 224, 208, 0.2);
     //gap: 1rem;
 }
 
-.theme-blue .verse-selected {
+.theme-gray .verse-selected {
   background-color: #272c3d;
   color: #ffffff;
 }
