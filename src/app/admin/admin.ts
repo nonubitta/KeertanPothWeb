@@ -25,4 +25,11 @@ export class Admin {
       this.loggedIn = false;
     }
   }
+
+  logout() {
+    this.loggedIn = false;
+    this.username = '';
+    this.password = '';
+    this.loginError = '';
+  }
 }

@@ -23,8 +23,18 @@
 <!-- #endregion Admin Login -->
 
 <!-- #region Admin Dashboard -->
-<div *ngIf="loggedIn" class="admin-login-container" style="justify-content: flex-start;">
-  <div class="admin-login-form" style="text-align:center;">
+<nav *ngIf="loggedIn" class="admin-top-menu">
+  <ul class="admin-menu-list">
+    <li class="admin-menu-item"><a href="#">Get Shabad</a></li>
+    <li class="admin-menu-item"><a href="#">Research</a></li>
+  </ul>
+  <div class="admin-menu-right">
+    <span class="admin-menu-welcome">Welcome, {{ username }}</span>
+    <button class="admin-menu-logout" (click)="logout()">Logout</button>
+  </div>
+</nav>
+<div *ngIf="loggedIn" class="admin-details-content">
+  <div class="admin-details-success">
     <h2 class="admin-login-title" style="color:#1f991f;">Login Successful</h2>
     <div style="font-size:1.2rem; color:#8ecae6; margin-top:1.5rem;">Welcome, {{ username }}!</div>
     <div style="margin-top:2rem; color:#b0b0b0;">You are now signed in as admin.</div>
