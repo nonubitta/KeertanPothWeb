@@ -37,44 +37,57 @@
 </nav>
 
 <div *ngIf="loggedIn" class="admin-details-content" style="padding-top:0.5rem;">
-  <!-- Query Section -->
-  <div class="research-query-section" style="width:100%; max-width:1100px; margin:0 auto;">
-    <div style="display:flex; gap:1rem; margin-bottom:0.7rem; flex-wrap:wrap;">
-     <!-- <button class="research-query-shortcut-btn" (click)="setQuery('SELECT * FROM Shabad LIMIT 100')">Shabad</button>
-       <button class="research-query-shortcut-btn" (click)="setQuery('SELECT ID,English,Gurmukhi,GurmukhiUni,Punjabi,PageNo, w.WriterEnglish FROM Verse v inner join Writer w on v.writerId = w.WriterID LIMIT 100')">Verse</button> -->
+  <div style="display: flex; width: 100%; max-width: 1100px; margin: 0 auto;">
+    <!-- Sidebar Buttons -->
+    <div style="display: flex; flex-direction: column; gap: 1rem; min-width: 140px; margin-right: 2rem;">
       <button class="research-query-shortcut-btn" (click)="setQuery('SELECT * FROM Writer LIMIT 100')">Writer</button>
       <button class="research-query-shortcut-btn" (click)="setQuery('SELECT * FROM Raag LIMIT 100')">Raag</button>
       <button class="research-query-shortcut-btn" (click)="setQuery('SELECT GurmukhiUni FROM SGGSVW LIMIT 100')">SGGS</button>
+      <button class="research-query-shortcut-btn" (click)="setQuery('SELECT * FROM SundarGutka LIMIT 100')">Sundar Gutka</button>
     </div>
-    <textarea [(ngModel)]="queryText"
-              class="research-query-input"
-              rows="4"
-              style="width:100%; font-size:1.08rem; border-radius:10px; background:#181c24; color:#e0e0e0; border:1.5px solid #333; padding:0.8rem; margin-bottom:1.2rem; font-family:monospace; resize:vertical;"
-              placeholder="Write your SQL query here..."></textarea>
-    <button class="research-query-btn"
-            style="background:linear-gradient(45deg,#8ecae6,#067bfa);color:#fff;border:none;border-radius:8px;padding:0.7rem 2rem;font-size:1.05rem;font-weight:600;cursor:pointer;box-shadow:0 2px 12px #0004;transition:background 0.2s,transform 0.15s;letter-spacing:1px;"
-            (click)="runQuery()">Run Query</button>
-    <div *ngIf="errorMsg" style="color:#ff6b6b; margin-top:1rem; font-size:1.1rem;">{{ errorMsg }}</div>
-  </div>
-
-  <!-- Results Section -->
-  <div class="research-results-section" style="width:100%; max-width:1100px; margin:1.5rem auto 0 auto; overflow-x:auto;">
-    <h3 style="color:#8ecae6; font-size:1.2rem; margin-bottom:1rem;">Results</h3>
-    <div style="overflow-x:auto;">
-      <table *ngIf="results && results.length > 0" class="research-results-table" style="width:100%; min-width:600px; border-collapse:collapse; background:#232323; border-radius:10px; overflow:hidden;">
-        <thead>
-          <tr style="background:#181c24;">
-            <th *ngFor="let col of columns" style="padding:0.8rem 0.5rem; color:#8ecae6; font-weight:600; border-bottom:2px solid #333;">{{ col }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let row of results">
-            <td *ngFor="let col of columns" style="padding:0.7rem 0.5rem; color:#e0e0e0; border-bottom:1px solid #232323;">{{ row[col] }}</td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Main Query/Results Area -->
+    <div style="flex: 1 1 0; min-width: 0;">
+      <!-- Column Chips -->
+      <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.7rem;">
+        <button
+          *ngFor="let col of columnChips"
+          class="column-chip-btn"
+          [class.selected]="selectedColumns.includes(col.value)"
+          (click)="toggleColumn(col.value)">
+          {{ col.label }}
+        </button>
+      </div>
+      <!-- Query Section -->
+      <div class="research-query-section" style="width:100%; margin:0;">
+        <textarea [(ngModel)]="queryText"
+                  class="research-query-input"
+                  rows="4"
+                  style="width:100%; font-size:1.08rem; border-radius:10px; background:#181c24; color:#e0e0e0; border:1.5px solid #333; padding:0.8rem; margin-bottom:1.2rem; font-family:monospace; resize:vertical;"
+                  placeholder="Write your SQL query here..."></textarea>
+        <button class="research-query-btn"
+                style="background:linear-gradient(45deg,#8ecae6,#067bfa);color:#fff;border:none;border-radius:8px;padding:0.7rem 2rem;font-size:1.05rem;font-weight:600;cursor:pointer;box-shadow:0 2px 12px #0004;transition:background 0.2s,transform 0.15s;letter-spacing:1px;"
+                (click)="runQuery()">Run Query</button>
+        <div *ngIf="errorMsg" style="color:#ff6b6b; margin-top:1rem; font-size:1.1rem;">{{ errorMsg }}</div>
+      </div>
+      <!-- Results Section -->
+      <div class="research-results-section" style="width:100%; margin:1.5rem 0 0 0; overflow-x:auto;">
+        <div style="overflow-x:auto;">
+          <table *ngIf="results && results.length > 0" class="research-results-table" style="width:100%; min-width:600px; border-collapse:collapse; background:#232323; border-radius:10px; overflow:hidden;">
+            <thead>
+              <tr style="background:#181c24;">
+                <th *ngFor="let col of columns" style="padding:0.8rem 0.5rem; color:#8ecae6; font-weight:600; border-bottom:2px solid #333;">{{ col }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of results">
+                <td *ngFor="let col of columns" style="padding:0.7rem 0.5rem; color:#e0e0e0; border-bottom:1px solid #232323;">{{ row[col] }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="results && results.length === 0 && !errorMsg" style="color:#b0b0b0; font-size:1.1rem;">No results.</div>
+      </div>
     </div>
-    <div *ngIf="results && results.length === 0 && !errorMsg" style="color:#b0b0b0; font-size:1.1rem;">No results.</div>
   </div>
 </div>
 <!-- #endregion Admin Dashboard -->

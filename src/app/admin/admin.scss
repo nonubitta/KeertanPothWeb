@@ -219,6 +219,32 @@
   border-color: #067bfa;
 }
 
+.column-chip-btn {
+  background: #232323;
+  color: #8ecae6;
+  border: 1.5px solid #333;
+  border-radius: 16px;
+  padding: 0.35rem 1.1rem;
+  font-size: 0.98rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, border 0.18s;
+  box-shadow: 0 2px 8px #0001;
+  outline: none;
+  margin-bottom: 0.2rem;
+  user-select: none;
+}
+.column-chip-btn.selected {
+  background: linear-gradient(45deg, #067bfa, #8ecae6);
+  color: #fff;
+  border-color: #067bfa;
+}
+.column-chip-btn:hover {
+  background: #067bfa;
+  color: #fff;
+  border-color: #067bfa;
+}
+
 @media (max-width: 700px) {
   .admin-top-menu {
     flex-direction: column;
