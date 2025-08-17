@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DbService } from '../db.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -14,13 +15,17 @@ export class Admin implements OnInit {
   results: any[] = [];
   columns: string[] = [];
   errorMsg: string = '';
-
-  constructor(private dbService: DbService) {}
+  defaultQuery = "SELECT GurmukhiUni FROM SGGSVW WHERE ShabadID = ";
+  constructor(private dbService: DbService, private route: ActivatedRoute) {}
   async ngOnInit(): Promise<void> {
     await this.dbService.initDb();
+    this.shabadId = this.route.snapshot.queryParamMap.get('shabad') || '';
+    if(this.shabadId){
+      this.setQuery(this.defaultQuery + this.shabadId);
+    }
   }
-
-    username: string = '';
+  shabadId: string = '';
+  username: string = '';
   password: string = '';
   loginError: string = '';
   loggedIn: boolean = false;
@@ -58,7 +63,7 @@ export class Admin implements OnInit {
       this.errorMsg = e.message || 'Query failed.';
     }
   }
-
+ 
   setQuery(sql: string) {
     this.queryText = sql;
   }
