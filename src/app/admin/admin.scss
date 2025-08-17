@@ -121,6 +121,7 @@
   padding: 0.2rem 0.7rem;
   border-radius: 6px;
   transition: background 0.18s, color 0.18s;
+  cursor: pointer;
 }
 
 .admin-menu-item a:hover {
@@ -195,6 +196,27 @@
   align-items: center;
   border: 1.5px solid #222;
   margin-top: 2rem;
+}
+
+.research-query-shortcut-btn {
+  background: linear-gradient(45deg, #232323, #181818);
+  color: #8ecae6;
+  border: 1.5px solid #333;
+  border-radius: 7px;
+  padding: 0.5rem 1.3rem;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, border 0.18s;
+  box-shadow: 0 2px 8px #0002;
+  outline: none;
+}
+
+.research-query-shortcut-btn:hover {
+  background: linear-gradient(45deg, #067bfa, #8ecae6);
+  color: #fff;
+  border-color: #067bfa;
 }
 
 @media (max-width: 700px) {

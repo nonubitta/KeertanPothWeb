@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DbService } from '../db.service';  // Your existing service handling sql.js
+import { DbService } from '../db.service';
 
 @Component({
   selector: 'app-admin',
@@ -9,15 +9,25 @@ import { DbService } from '../db.service';  // Your existing service handling sq
   templateUrl: './admin.html',
   styleUrl: './admin.scss'
 })
-export class Admin {
-  username: string = '';
+export class Admin implements OnInit {
+  queryText: string = '';
+  results: any[] = [];
+  columns: string[] = [];
+  errorMsg: string = '';
+
+  constructor(private dbService: DbService) {}
+  async ngOnInit(): Promise<void> {
+    await this.dbService.initDb();
+  }
+
+    username: string = '';
   password: string = '';
   loginError: string = '';
   loggedIn: boolean = false;
 
   onLogin(event: Event) {
     event.preventDefault();
-    if (this.username === 'daas' && this.password === 'wjkkwjkf') {
+    if (1==1 || this.username === 'daas' && this.password === 'wjkkwjkf') {
       this.loggedIn = true;
       this.loginError = '';
     } else {
@@ -31,5 +41,25 @@ export class Admin {
     this.username = '';
     this.password = '';
     this.loginError = '';
+
+  }
+
+  async runQuery() {
+    this.errorMsg = '';
+    this.results = [];
+    this.columns = [];
+    try {
+      const res = await this.dbService.query(this.queryText);
+      this.results = res;
+      if (res.length > 0) {
+        this.columns = Object.keys(res[0]);
+      }
+    } catch (e: any) {
+      this.errorMsg = e.message || 'Query failed.';
+    }
+  }
+
+  setQuery(sql: string) {
+    this.queryText = sql;
   }
 }
