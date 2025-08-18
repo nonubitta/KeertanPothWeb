@@ -32,7 +32,7 @@ export class Admin implements OnInit {
 
   onLogin(event: Event) {
     event.preventDefault();
-    if (1==1 || this.username === 'daas' && this.password === 'wjkkwjkf') {
+    if (this.username === 'daas' && this.password === 'wjkkwjkf') {
       this.loggedIn = true;
       this.loginError = '';
     } else {

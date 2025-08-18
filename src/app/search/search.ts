@@ -646,4 +646,50 @@ export class Search {
     this.closeSidePanel();
   }
   //#endregion
+
+  //#region Ang Search Modal
+  showAngModal: boolean = false;
+  angInputValue: number | null = null;
+
+  angSources = [
+    { value: 'G', label: 'ਸ੍ਰੀ ਗੁਰੂ ਗ੍ਰੰਥ ਸਾਹਿਬ ਜੀ' },
+    { value: 'D', label: 'ਦਸਮ ਬਾਣੀ' },
+    { value: 'B', label: 'ਭਾਈ ਗੁਰਦਾਸ ਜੀ ਵਾਰਾਂ' },
+    { value: 'N', label: 'ਭਾਈ ਨੰਦ ਲਾਲ ਜੀ ਵਾਰਾਂ' },
+    { value: 'A', label: 'ਅੰਮ੍ਰਿਤ ਕੀਰਤਨ' },
+    { value: 'S', label: 'ਭਾਈ ਗੁਰਦਾਸ ਸਿੰਘ ਜੀ ਵਾਰਾਂ' },
+    { value: 'R', label: 'ਰਹਿਤਨਾਮੇ ਅਤੇ ਪੰਥਕ ਲਿਖ਼ਤਾਂ' }
+  ];
+  angSourceValue: string = 'G';
+
+  onSearchModeChange(mode: string) {
+    if (mode === 'ang') {
+      this.showAngModal = true;
+      this.angInputValue = null;
+      this.angSourceValue = this.angSources[0].value;
+    } else {
+      this.showAngModal = false;
+    }
+  }
+
+  closeAngModal() {
+    this.showAngModal = false;
+    this.angInputValue = null;
+    if (this.searchMode === 'ang') {
+      this.searchMode = 'anywhere';
+    }
+  }
+
+  async openAng() {
+    if (this.angInputValue && Number.isInteger(this.angInputValue) && this.angInputValue > 0) {
+      this.showAngModal = false;
+      // Query for all verses on this Ang/PageNo and Source
+      const query = Queries.getAngByAngNo(this.angInputValue, this.angSourceValue);
+      const results = await this.dbService.query(query);
+      this.filteredItems = mapResultsToVerse(results);
+      this.setSelectedShabad(this.filteredItems[0], this.filteredItems);
+    }
+    this.searchMode = 'anywhere';
+  }
+  //#endregion
 }

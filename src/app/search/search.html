@@ -300,11 +300,12 @@
         <!-- Search Filters (always visible when search panel is open) -->
         <div class="results-header">
             <span class="results-sort">
-                <select name="searchMode" [(ngModel)]="searchMode" (change)="onSearch()" style="min-width: 170px; max-width: 170px;">
+                <select name="searchMode" [(ngModel)]="searchMode" (change)="onSearch()" style="min-width: 170px; max-width: 170px;" (ngModelChange)="onSearchModeChange($event)">
                     <option value="anywhere">First letter Anywhere</option>
                     <option value="starts">First letter Start</option>
                     <option value="mainletters">Main letters Anywhere</option>
                     <option value="exact">Exact Match</option>
+                    <option value="ang">Ang</option>
                 </select>
                 <!-- Writer dropdown -->
                 <select name="writerId" [(ngModel)]="selectedWriterId" (change)="onSearch()" style="margin-left: 1rem; min-width: 180px; max-width: 180px;">
@@ -316,6 +317,7 @@
                     <option value="">All Sources</option>
                     <option *ngFor="let source of sources" [value]="source.SourceID">{{ source.SourceEnglish }}</option>
                 </select>
+                <!-- <button class="btn-secondary" (click)="onSearch()" style="margin-left: 1rem;">Search</button> -->
             </span>
             <div class="results-meta" *ngIf="filteredItems.length > 0">
                 <span class="results-count">Showing 1-{{filteredItems.length}} of {{filteredItems.length}} results</span>
@@ -486,3 +488,29 @@
   {{ RoastMessage}}
 </div>
 <!--#endregion Roast Message -->
+<div class="modal-overlay" *ngIf="showAngModal" (click)="closeAngModal()">
+  <div class="modal-dialog" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <span>Go to Ang</span>
+      <button class="modal-close-btn" (click)="closeAngModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <label for="angInput">Enter Ang Number:</label>
+      <input id="angInput"
+             type="number"
+             [(ngModel)]="angInputValue"
+             min="1"
+             style="width: 100%; margin: 0.5rem 0 1rem 0; background: var(--input-bg); color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: 0.7rem 1rem; font-size: 1.1rem; box-sizing: border-box;" />
+      <label for="angSourceSelect" style="margin-top:0.5rem; display:block;">Source:</label>
+      <select id="angSourceSelect"
+              [(ngModel)]="angSourceValue"
+              style="width:100%; margin-bottom:1.2rem; background: var(--input-bg); color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: 0.7rem 1rem; font-size: 1.1rem; box-sizing: border-box;">
+        <option *ngFor="let src of angSources" [value]="src.value">{{ src.label }}</option>
+      </select>
+      <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+        <button class="btn-secondary" (click)="closeAngModal()">Cancel</button>
+        <button class="btn-primary" (click)="openAng()">Open</button>
+      </div>
+    </div>
+  </div>
+</div>

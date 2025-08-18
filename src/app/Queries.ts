@@ -99,4 +99,15 @@ export class Queries {
                     inner join Nitnem n on n.verseid = vr.id
                     Where n.id = ${id} order by n.sort, n.verseid `;
   }
+
+  static getAngByAngNo(angNo: number, source: string = "G"): string {
+	return ` select wr.writerenglish, rg.raagenglish, sc.sourceenglish, sh.shabadid, 
+                    REPLACE(vr.gurmukhi,'<>','&lt;&gt;') gurmukhiHtml,  vr.* 
+                    from shabad sh join verse vr on sh.verseID = vr.ID 
+                    left join Writer wr on vr.writerId = wr.writerId
+                    left join Raag rg on vr.RaagId = rg.RaagId
+                    left join Source sc on vr.SourceId = sc.SourceId  
+                    Where vr.PageNo = ${angNo} and vr.SourceId = '${source}'
+                    order by vr.id `;
+  }
 }
