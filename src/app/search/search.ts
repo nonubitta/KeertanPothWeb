@@ -287,6 +287,9 @@ export class Search {
         localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(this.favorites));
         this.showRoastMessageFn('Shabad added to favorites');
       }
+      else {
+        this.showRoastMessageFn('Shabad is already in favorites');
+      }
     }
   }
 
