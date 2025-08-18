@@ -592,12 +592,19 @@ export class Search {
         }
         .translation-english {
           font-size: ${this.englishFontSize + 2}rem;
-          color: #b0b0b0;
+          color: #fadd7b;
           margin-bottom: 1rem;
           text-align: center;
         }
+        .translation-punjabi {
+          font-family: 'Gurakhar', sans-serif;
+          font-size: ${this.punjabiFontSize + 2}rem;
+          margin-bottom: 1rem;
+          text-align: center;
+           color: #8ecae6;
+        }
         .translation-english.transliteration {
-          color: #8ecae6;
+          color: #b0b0b0;
           font-size: ${this.transliterationFontSize + 2}rem;
           text-align: center;
         }
@@ -613,7 +620,7 @@ export class Search {
     <body>
       ${this.showGurmukhi ? `<div class="verse-text">${verse.GurmukhiHtml || ''}</div>` : ''}
       ${this.showEnglish && verse.English ? `<div class="translation-english">${verse.English}</div>` : ''}
-      ${this.showPunjabi && verse.Punjabi ? `<div class="translation-english">${verse.Punjabi}</div>` : ''}
+      ${this.showPunjabi && verse.Punjabi ? `<div class="translation-punjabi">${verse.Punjabi}</div>` : ''}
       ${this.showTransliteration && verse.Transliteration ? `<div class="translation-english transliteration">${verse.Transliteration}</div>` : ''}
       <script>
         // No escaping needed, innerHTML is used directly in document.write

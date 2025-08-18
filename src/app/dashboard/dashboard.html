@@ -1,1 +1,45 @@
-<p>dashboard works!</p>
+<div class="dashboard-grid">
+  <div class="dashboard-search-results">
+    <h3>Search & Results</h3>
+    <input type="text"
+           [(ngModel)]="searchText"
+           (input)="onSearch()"
+           placeholder="Sbd Kojo"
+           style="width:100%;padding:0.7rem 1rem;border-radius:6px;border:1px solid #333;background:#181c24;color:#fff;font-size:1.1rem;margin-bottom:1rem;" />
+    <div *ngIf="filteredItems.length > 0">
+      <div *ngFor="let item of filteredItems"
+           (click)="onSelectItem(item)"
+           style="padding:0.7rem 0.5rem;cursor:pointer;border-bottom:1px solid #333;">
+        <span style="font-family:'Gurakhar',sans-serif;font-size:1.2rem;">{{ item.Gurmukhi }}</span>
+        <div style="font-size:0.95rem;color:#8ecae6;">
+          {{ item.WriterEnglish }} | {{ item.RaagEnglish }} | Ang {{ item.PageNo }}
+        </div>
+      </div>
+    </div>
+    <div *ngIf="filteredItems.length === 0 && searchText.trim()">
+      <span style="color:#b0b0b0;">No results found.</span>
+    </div>
+  </div>
+  <div class="dashboard-history">
+    <h3>History</h3>
+    <div *ngIf="history.length === 0" style="color:#b0b0b0;">No history yet.</div>
+    <ul *ngIf="history.length > 0" style="list-style:none;padding:0;margin:0;">
+      <li *ngFor="let item of history" (click)="onSelectHistory(item)" style="cursor:pointer;padding:0.5rem 0;border-bottom:1px solid #444;">
+        <span style="font-family:'Gurakhar',sans-serif;">{{ item.Gurmukhi }}</span>
+        <span style="color:#8ecae6;font-size:0.95em;"> ({{ item.WriterEnglish }})</span>
+      </li>
+    </ul>
+  </div>
+  <div class="dashboard-selected-shabad">
+    <h3>Selected Shabad</h3>
+    <div *ngIf="selectedShabad && selectedShabad.length > 0">
+      <div *ngFor="let verse of selectedShabad">
+        <div style="font-family:'Gurakhar',sans-serif;font-size:1.3rem;color:#fff;margin-bottom:0.2rem;" [innerHTML]="verse.GurmukhiHtml"></div>
+        <div style="color:#8ecae6;font-size:1rem;">{{ verse.English }}</div>
+        <div style="color:#b0b0b0;font-size:0.95rem;">{{ verse.Punjabi }}</div>
+        <hr style="border:0;border-top:1px solid #2e2e2e;margin:0.7rem 0;">
+      </div>
+    </div>
+    <div *ngIf="!selectedShabad || selectedShabad.length === 0" style="color:#fff;">No shabad selected.</div>
+  </div>
+</div>
