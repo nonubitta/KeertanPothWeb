@@ -32,6 +32,11 @@
 
 <!--#region Punjabi Keyboard -->
 <div class="punjabi-keyboard" [class.show]="showKeyboard">
+    <div style="display: flex; justify-content: flex-end;">
+      <button (click)="hideKeyboard()" style="background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; margin: 0.3rem 0.7rem 0 0.7rem; padding: 0;">
+        ×
+      </button>
+    </div>
     <div class="keyboard-body">
         <div class="keyboard-row" *ngFor="let row of keyboardLayout">
             <button 
