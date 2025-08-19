@@ -25,6 +25,17 @@
                     <button type="submit" class="header-search-btn">Search</button>
                 </form>
             </div>
+            <button class="header-pin-btn"
+                (click)="pinHeader = !pinHeader; onPinHeaderChange()"
+                [title]="pinHeader ? 'Unpin header' : 'Pin header'"
+                style="margin-left:1.5rem; background:none; border:none; cursor:pointer; outline:none; display:flex; align-items:center; font-size:1.7rem;">
+                <img src="assets/images/pin.png"
+                  [style.transform]="pinHeader ? 'rotate(0deg)' : 'rotate(-45deg)'"
+                  [style.opacity]="pinHeader ? '1' : '0.7'"
+                  alt="Pin Search Bar"
+                  style="height: 2rem; width: 2rem; transition: transform 0.18s, opacity 0.18s;"
+                />
+            </button>
         </nav>
     </div>
 </header>
@@ -213,7 +224,13 @@
         <br />
         <hr class="toolbar-divider-hr" />
 
-     
+        <!-- Pin Header Setting -->
+        <label>
+          <input type="checkbox" [(ngModel)]="pinHeader" (change)="onPinHeaderChange()" />
+          Pin header
+        </label>
+        <br />
+        <hr class="toolbar-divider-hr" />
       </div>
 
       <!-- History Section -->
@@ -515,7 +532,7 @@
       <div style="display: flex; justify-content: flex-end; gap: 1rem;">
         <button class="btn-secondary" (click)="closeAngModal()">Cancel</button>
         <button class="btn-primary" (click)="openAng()">Open</button>
-      </div>
     </div>
   </div>
+</div>
 </div>

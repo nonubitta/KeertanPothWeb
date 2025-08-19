@@ -739,7 +739,7 @@ a:active {
 }
 
 .close-btn:hover {
-  background-color: #404040;
+  background: #404040;
 }
 
 .side-panel-nav {
@@ -1087,7 +1087,6 @@ a:active {
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-size: 0.9rem;
 }
 
 .page-btn:hover:not(:disabled) {
@@ -1786,3 +1785,25 @@ $theme-gray-body-mid-color:#2d3748;
 }
 
 //#endregion
+
+.header-pin-btn {
+  margin-left: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  font-size: 1.7rem;
+  color: #d98300;
+  transition: color 0.18s;
+  padding: 0 0.2rem;
+  height: 2.5rem;
+}
+
+.header-pin-btn:hover,
+.header-pin-btn:focus {
+  color: #ffb300;
+  background: rgba(255,255,255,0.06);
+  border-radius: 6px;
+}

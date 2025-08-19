@@ -75,6 +75,9 @@ export class Search {
 
   // Theme
   theme: string = 'default'; // 'default' or 'blue'
+
+  // Pin header
+  pinHeader: boolean = true;
   //#endregion
 
   //#region Punjabi keyboard layout
@@ -157,6 +160,13 @@ export class Search {
     const savedTheme = localStorage.getItem('kpoth-theme');
     if (savedTheme) {
       this.setTheme(savedTheme);
+    }
+
+    // Load pinHeader from localStorage
+    const pin = localStorage.getItem('kpoth-pin-header');
+    if (pin !== null) {
+      this.pinHeader = pin === 'true';
+      this.applyPinHeader();
     }
   }
 
@@ -702,4 +712,24 @@ export class Search {
     this.searchMode = 'anywhere';
   }
   //#endregion
+
+  onPinHeaderChange() {
+    localStorage.setItem('kpoth-pin-header', this.pinHeader ? 'true' : 'false');
+    this.applyPinHeader();
+  }
+
+  applyPinHeader() {
+    const header = document.querySelector('header.header') as HTMLElement;
+    if (header) {
+      if (this.pinHeader) {
+        header.style.position = 'sticky';
+        header.style.top = '0';
+        header.style.zIndex = '100';
+      } else {
+        header.style.position = 'relative';
+        header.style.top = '';
+        header.style.zIndex = '';
+      }
+    }
+  }
 }
