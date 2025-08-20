@@ -2022,7 +2022,7 @@ $theme-gray-body-mid-color:#2d3748;
   border-radius: 6px;
 }
 
-/* Navy Theme (refined, modern, less saturated, more contrast) */
+//#region Navy Theme 
 $theme-navy-header-color: #14213d;
 $theme-navy-body-color: #1a2238;
 $theme-navy-surface: #222b45;
@@ -2157,3 +2157,5 @@ $theme-navy-border: #233554;
 .theme-navy .verse-transliteration {
   color: #b0c4d6;
 }
+
+//#endregion
