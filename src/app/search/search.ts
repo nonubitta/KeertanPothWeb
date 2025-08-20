@@ -113,7 +113,6 @@ export class Search {
       const sourcesResult = await this.dbService.query(Queries.getSources());
       this.sources = sourcesResult;
       this.nitnemBani = await this.dbService.query(Queries.getAllBanis());
-      console.log(this.nitnemBani);
     } catch (e) {
       this.writers = [];
       this.sources = [];
@@ -569,7 +568,6 @@ export class Search {
   presentationGurmukhiFontSize: number = 5;
 
   getPresentationHtml(verse: Verse): string {
-  console.log(window.location.origin);
     return `
     <html>
     <head>

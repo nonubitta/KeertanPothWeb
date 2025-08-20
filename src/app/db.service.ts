@@ -18,13 +18,12 @@ export class DbService {
     let dbFile = await this.loadFromIndexedDB();
 
     if (!dbFile) {
-      console.log('DB not found in IndexedDB, fetching from server...');
+      console.log('DB not found in IDB, fetching from server...');
       const response = await fetch(`assets/${this.FILE_KEY}`);
       const buffer = await response.arrayBuffer();
       dbFile = new Uint8Array(buffer);
       await this.saveToIndexedDB(dbFile);
     } else {
-      console.log('Loaded DB from IndexedDB');
     }
 
     this.db = new SQL.Database(dbFile);
