@@ -1,6 +1,6 @@
 <!--#region Header-->
 <header class="header">
-    <div class="container">
+    <div class="container" style="position:relative;">
         <nav class="nav">
             <div class="nav-left">
                 <a href="#" class="logo">
@@ -25,17 +25,17 @@
                     <button type="submit" class="header-search-btn">Search</button>
                 </form>
             </div>
-            <button class="header-pin-btn"
-                (click)="pinHeader = !pinHeader; onPinHeaderChange()"
-                [title]="pinHeader ? 'Unpin header' : 'Pin header'"
-                style="margin-left:1.5rem; background:none; border:none; cursor:pointer; outline:none; display:flex; align-items:center; font-size:1.7rem;">
-                <img src="assets/images/pin.png"
-                  [style.transform]="pinHeader ? 'rotate(-45deg)' : 'rotate(0deg)'"
-                  alt="Pin Search Bar"
-                  style="height: 1.4rem; width: 1.4rem; transition: transform 0.18s, opacity 0.18s;"
-                />
-            </button>
         </nav>
+        <button class="header-pin-btn"
+            (click)="pinHeader = !pinHeader; onPinHeaderChange()"
+            [title]="pinHeader ? 'Unpin header' : 'Pin header'"
+            style="position: fixed; right: 2.2rem; top: 1.1rem; margin-left:0; background:none; border:none; cursor:pointer; outline:none; display:flex; align-items:center; font-size:1.7rem; z-index:1101;">
+            <img src="assets/images/pin.png"
+              [style.transform]="pinHeader ? 'rotate(-45deg)' : 'rotate(0deg)'"
+              alt="Pin Search Bar"
+              style="height: 1.2rem; width: 1.2rem; transition: transform 0.18s, opacity 0.18s;"
+            />
+        </button>
     </div>
 </header>
 <!--#endregion Header-->
@@ -205,16 +205,7 @@
         <span>{{ transliterationFontSize * 10 }}</span>
         <br />
         <hr class="toolbar-divider-hr" />
-      
-           <!-- Theme Switcher -->
-        <span class="results-sort">
-          <select id="themeSelect" [ngModel]="theme" (ngModelChange)="onThemeChange($event)" style="margin-left: 0.5rem;">
-            <option value="default">Dark Theme</option>
-            <option value="gray">Gray Theme</option>
-          </select>
-        </span>
-        <hr class="toolbar-divider-hr" />
-                
+
         <!-- Presentation View Gurmukhi Font Size -->
         <label for="presentationGurmukhiFontSize">Presentation View Gurmukhi Font Size:</label><br />
         <input id="presentationGurmukhiFontSize" type="range" min="1" max="8" step="0.1"
@@ -223,13 +214,21 @@
         <br />
         <hr class="toolbar-divider-hr" />
 
+           <!-- Theme Switcher -->
+        <span class="results-sort">Theme:
+          <select id="themeSelect" [ngModel]="theme" (ngModelChange)="onThemeChange($event)" style="margin-left: 0.5rem;">
+            <option value="default">Dark</option>
+            <option value="gray">Gray</option>
+          </select>
+        </span>
+        <hr class="toolbar-divider-hr" />
         <!-- Pin Header Setting -->
-        <label>
+        <!-- <label>
           <input type="checkbox" [(ngModel)]="pinHeader" (change)="onPinHeaderChange()" />
           Pin header
         </label>
         <br />
-        <hr class="toolbar-divider-hr" />
+        <hr class="toolbar-divider-hr" /> -->
       </div>
 
       <!-- History Section -->
