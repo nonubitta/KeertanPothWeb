@@ -1304,6 +1304,13 @@ $theme-gray-body-mid-color:#2d3748;
   border-radius: 50%; width: 2.5rem; height: 2.5rem; 
   box-shadow: 0 2px 12px rgba(0,0,0,0.18); cursor: pointer; 
   display: flex; align-items: center; justify-content: center; font-size: 1.2rem; opacity: 0.85;
+  transition: background 0.18s, color 0.18s;
+}
+
+.scroll-to-top-btn:hover{
+  background: #00a8e8;
+  color: #fff;
+  outline: none;
 }
 
 /* Navy Theme (refined, modern, less saturated, more contrast) */
@@ -2013,14 +2020,6 @@ $theme-gray-body-mid-color:#2d3748;
   color: #ffb300;
   background: rgba(255,255,255,0.06);
   border-radius: 6px;
-}
-
-.scroll-to-top-btn{
-  position: fixed; right: 2.2rem; bottom: 2.2rem; z-index: 3000; 
-  background: #232f3e; color: #fff; border: none; 
-  border-radius: 50%; width: 2.5rem; height: 2.5rem; 
-  box-shadow: 0 2px 12px rgba(0,0,0,0.18); cursor: pointer; 
-  display: flex; align-items: center; justify-content: center; font-size: 1.2rem; opacity: 0.85;
 }
 
 /* Navy Theme (refined, modern, less saturated, more contrast) */
