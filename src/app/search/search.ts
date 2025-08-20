@@ -422,7 +422,7 @@ export class Search {
   }
 
   async onSearch() {
-    if (!this.isDbReady || !this.searchText.trim()) {
+    if (!this.isDbReady || !this.searchText.trim() || this.searchText.trim().length < 2) {
       this.filteredItems = [];
       return;
     }
