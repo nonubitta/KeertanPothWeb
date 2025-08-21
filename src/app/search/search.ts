@@ -484,13 +484,13 @@ export class Search {
     this.detailsInfo = { ...this.selectedShabad[0] };
     
     // Only update URL if not explicitly disabled
-    if (item.ShabadID && (!opts || opts.updateUrl !== false)) {
-      this.router.navigate([], {
-        queryParams: { shabad: item.ShabadID },
-        queryParamsHandling: 'merge',
-        replaceUrl: true
-      });
-    }
+    // if (item.ShabadID && (!opts || opts.updateUrl !== false)) {
+    //   this.router.navigate([], {
+    //     queryParams: { shabad: item.ShabadID },
+    //     queryParamsHandling: 'merge',
+    //     replaceUrl: true
+    //   });
+    // }
     if (!this.detailsInfo.WriterID) {
       const verse = this.selectedShabad.find(v => v.WriterID != null);
       if (verse) {
