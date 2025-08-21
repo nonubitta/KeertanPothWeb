@@ -249,7 +249,7 @@
         </div>
         <ul *ngIf="history.length > 0" class="history-list">
           <li *ngFor="let item of history">
-            <a href="#" (click)="onSelectItem(item)" class="history-link">
+            <a href="#" (click)="onSelectItem(item, 'HISTORY')" class="history-link">
               <span style="font-family: 'Gurakhar', sans-serif;">{{ item.Gurmukhi }}</span>
             </a>
             <hr class="toolbar-divider-hr" />
@@ -301,7 +301,7 @@
         </div>
         <ul *ngIf="favorites.length > 0" class="history-list">
           <li *ngFor="let item of favorites">
-            <a href="#" (click)="onSelectItem(item)" class="history-link">
+            <a href="#" (click)="onSelectItem(item, 'FAVORITES')" class="history-link">
               <span style="font-family: 'Gurakhar', sans-serif;">{{ item.Gurmukhi }}</span>
             </a>
             <hr class="toolbar-divider-hr" />
@@ -358,7 +358,7 @@
         <section class="results-section" *ngIf="filteredItems.length > 0">
           <!-- Results -->
           <div class="results-grid">
-            <div class="result-card" *ngFor="let item of filteredItems" (click)="onSelectItem(item)">
+            <div class="result-card" *ngFor="let item of filteredItems" (click)="onSelectItem(item, 'SEARCH')">
               <div class="result-content" style="display: flex; flex-direction: column; align-items: flex-start;">
                 <span class="result-title" style="font-family: 'Gurakhar', sans-serif; margin-bottom: 0rem; 
                 text-align: left;">{{ item.Gurmukhi }}</span>

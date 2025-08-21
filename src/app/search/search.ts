@@ -8,7 +8,14 @@ import { Queries } from '../Queries';
 import { Router, RouterModule } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 
-
+export enum ShabadSource {
+  None = 'None',
+  Random = 'Random',
+  History = 'History',
+  Favorites = 'Favorites',
+  Search = 'Search',
+  SundarGutka = 'SundarGutka'
+}
 @Component({
   selector: 'app-search',
   imports: [CommonModule, FormsModule, RouterModule],
@@ -29,6 +36,7 @@ export class Search {
   selectedVerseId: number | null = null;
   selectedItem: VerseSearchResult | null = null;
   nitnemBani: NitnemBani[] = [];
+  shabadSource: ShabadSource = ShabadSource.None;
   // Side panel state
   isSidePanelOpen: boolean = false;
   activeTab: 'random' | 'links' | 'settings' | 'history' | 'pothi' | 'favorites' | null = null;
@@ -152,7 +160,7 @@ export class Search {
       const result: VerseSearchResult = {
         ShabadID: Number(shabadId)
       };
-      this.onSelectItem(result);
+      this.onSelectItem(result, "NONE");
     }
 
     // Load theme from localStorage
@@ -225,7 +233,7 @@ export class Search {
     const result: VerseSearchResult = {
       ShabadID: randomIndex
     };
-    this.onSelectItem(result);
+    this.onSelectItem(result, "RANDOM");
     this.closeSidePanel();
   }
 
@@ -234,6 +242,7 @@ export class Search {
     const results = await this.dbService.query(query);
     const item: VerseSearchResult = mapVerseToVerseSearchResults(results[0]);
     // Remove the URL update for Nitnem Bani, or use a different param
+    this.shabadSource = ShabadSource.SundarGutka;
     this.setSelectedShabad(item, results, { updateUrl: false });
     this.closeSidePanel();
   }
@@ -468,7 +477,8 @@ export class Search {
     }
   }
 
-  async onSelectItem(item: VerseSearchResult) {
+  async onSelectItem(item: VerseSearchResult, source: string = "NONE") {
+    this.SetShabadSource(source);
     const query = Queries.getShabadById(item.ShabadID);
     const results = await this.dbService.query(query);
     this.setSelectedShabad(item, results);
@@ -502,7 +512,8 @@ export class Search {
       }
     }
     this.selectedItem = item;
-    if(item.Gurmukhi){
+    debugger;
+    if(item.Gurmukhi && this.shabadSource !== ShabadSource.SundarGutka){
       // Store in history (avoid duplicates by ShabadID)
       if (!this.history.some(h => h.ShabadID === item.ShabadID)) {
         this.history.unshift(item);
@@ -511,9 +522,7 @@ export class Search {
         localStorage.setItem(this.HISTORY_KEY, JSON.stringify(this.history));
       }
     }
-    else{
-      console.warn('Selected item does not have Gurmukhi text:', item);
-    }
+    
     this.showSearchPanel = false;
     
     setTimeout(() => {
@@ -526,6 +535,28 @@ export class Search {
         console.warn('selected-verse not found in DOM');
       }
     }, 50); // small delay to ensure details section is rendered
+  }
+
+  SetShabadSource(source: string) {
+    switch(source){
+      case 'SEARCH':
+        this.shabadSource = ShabadSource.Search;
+        break;
+      case 'RANDOM':
+        this.shabadSource = ShabadSource.Random;
+        break;
+      case 'SUNDARGUTKA':
+        this.shabadSource = ShabadSource.SundarGutka;
+        break;
+      case 'HISTORY':
+        this.shabadSource = ShabadSource.History;
+        break;
+      case 'FAVORITES':
+        this.shabadSource = ShabadSource.Favorites;
+        break;
+      default:
+        this.shabadSource = ShabadSource.None;
+    }
   }
 
   onToggleVishraam() {
@@ -711,6 +742,7 @@ export class Search {
   }
   //#endregion
 
+  //#region Header pinning
   onPinHeaderChange() {
     localStorage.setItem('kpoth-pin-header', this.pinHeader ? 'true' : 'false');
     this.applyPinHeader();
@@ -734,4 +766,6 @@ export class Search {
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
+  //#endregion
 }
