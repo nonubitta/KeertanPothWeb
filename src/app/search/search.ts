@@ -512,7 +512,6 @@ export class Search {
       }
     }
     this.selectedItem = item;
-    debugger;
     if(item.Gurmukhi && this.shabadSource !== ShabadSource.SundarGutka){
       // Store in history (avoid duplicates by ShabadID)
       if (!this.history.some(h => h.ShabadID === item.ShabadID)) {

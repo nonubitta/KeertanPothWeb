@@ -1552,10 +1552,8 @@ $theme-blueorange-border: #003F66;
   color: #fff;
 }
 
-.theme-blueorange .result-title,
-.theme-blueorange .panel-title,
-.theme-blueorange .details-title {
-  color: $theme-blueorange-accent;
+.theme-blueorange .result-title{
+  color: $primary-text-white
 }
 
 .theme-blueorange .btn-primary {
