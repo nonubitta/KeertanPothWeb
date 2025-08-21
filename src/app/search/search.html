@@ -220,6 +220,7 @@
             <option value="default">Dark</option>
             <!-- <option value="gray">Gray</option> -->
             <option value="navy">Navy Blue</option>
+            <option value="blueorange">Blue Orange</option>
           </select>
         </span>
         <hr class="toolbar-divider-hr" />
@@ -338,7 +339,6 @@
                     <option value="">All Sources</option>
                     <option *ngFor="let source of sources" [value]="source.SourceID">{{ source.SourceEnglish }}</option>
                 </select>
-                <!-- <button class="btn-secondary" (click)="onSearch()" style="margin-left: 1rem;">Search</button> -->
             </span>
             <div class="results-meta" *ngIf="filteredItems.length > 0">
                 <span class="results-count">Showing 1-{{filteredItems.length}} of {{filteredItems.length}} results</span>

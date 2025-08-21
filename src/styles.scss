@@ -36,6 +36,14 @@ $primary-blue:#067bfa;//side bar hove
 $primary-dark-green: #1f991f;
 $primary-orange:#f97b4d;
 
+//stand text colors
+$primary-text-white: #eaf6fb;
+$english-translation-orange: #fca311;
+
+
+//dark theme
+$theme-dark-sidepanel: #2a2a2a;
+
 :root {
   --background: #121212;
   --surface: #1e1e1e;
@@ -215,7 +223,7 @@ header {
   left: -100%; /* Completely hidden */
   width: 300px;
   height: 100vh;
-  background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+  background: $theme-dark-sidepanel;
   border-right: 1px solid rgba(64, 224, 208, 0.2);
   backdrop-filter: blur(10px);
   z-index: 1000;
@@ -226,7 +234,7 @@ header {
 }
 
 .side-panel-header {
-  padding: 1.5rem;
+  padding: 1rem;
   border-bottom: 1px solid #404040;
   display: flex;
   justify-content: space-between;
@@ -355,7 +363,7 @@ a:active {
 }
 
 .tab-btn-right {
-  background: #2a2a2a;
+  background: $theme-dark-sidepanel;
   color: #b0b0b0;
   border: none;
   border-radius: 8px 0px 0px 8px;
@@ -376,7 +384,7 @@ a:active {
 }
 
 .tab-btn {
-  background: #2a2a2a;
+  background: $theme-dark-sidepanel;
   color: #b0b0b0;
   border: none;
   border-radius: 0 8px 8px 0;
@@ -886,7 +894,7 @@ select option {
 }
 
 .verses-container {
-  background: #2a2a2a;
+  background: $theme-dark-sidepanel;
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid #404040;
@@ -943,7 +951,7 @@ select option {
 
 .translation-english {
   font-size: 1rem;
-  color: #fadd7b;
+  color: $english-translation-orange;
   line-height: 1.5;
   //font-style: italic;
 }
@@ -1350,7 +1358,7 @@ $theme-gray-body-mid-color:#2d3748;
 
 .scroll-to-top-btn{
   position: fixed; right: 2.2rem; bottom: 2.2rem; z-index: 3000; 
-  background: #232f3e; color: #fff; border: none; 
+  background: $theme-dark-sidepanel; color: #fff; border: none; 
   border-radius: 50%; width: 2.5rem; height: 2.5rem; 
   box-shadow: 0 2px 12px rgba(0,0,0,0.18); cursor: pointer; 
   display: flex; align-items: center; justify-content: center; font-size: 1.2rem; opacity: 0.85;
@@ -1358,7 +1366,7 @@ $theme-gray-body-mid-color:#2d3748;
 }
 
 .scroll-to-top-btn:hover{
-  background: #00a8e8;
+  background: var(--defaultContrastColor);
   color: #fff;
   outline: none;
 }
@@ -1366,36 +1374,21 @@ $theme-gray-body-mid-color:#2d3748;
 //#endregion
 
 //#region Navy Theme 
+
 $theme-navy-header-color: #14213d;
 $theme-navy-body-color: #1a2238;
 $theme-navy-surface: #222b45;
 $theme-navy-accent: #00a8e8;
-$theme-navy-highlight: #fca311;
 $theme-navy-border: #233554;
-
-:root.theme-navy {
-  --background: #1a2238;
-  --surface: #222b45;
-  --text: #eaf6fb;
-  --accent: #00a8e8;
-  --input-bg: #222b45;
-  --border: #233554;
-  --defaultContrastColor: #00a8e8;
-}
 
 .theme-navy body {
   background: $theme-navy-body-color;
-  color: #eaf6fb;
+  color: $primary-text-white;
 }
 
 .theme-navy header {
   background: $theme-navy-header-color;
-  backdrop-filter: blur(10px);
   border-bottom: 1px solid #233554;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  transition: background 0.3s cubic-bezier(0.4,0,0.2,1);
 }
 
 .theme-navy .header-search-input:focus {
@@ -1405,7 +1398,7 @@ $theme-navy-border: #233554;
 }
 
 .theme-navy .header-search-btn {
-  background: #00a8e8; // solid accent color
+  background: $theme-navy-accent; // solid accent color
   color: #fff;
   border: none;
 }
@@ -1440,7 +1433,7 @@ $theme-navy-border: #233554;
 }
 
 .theme-navy .btn-primary {
-  background: linear-gradient(45deg, $theme-navy-accent, $theme-navy-highlight);
+  background: linear-gradient(45deg, $theme-navy-accent, $english-translation-orange);
   color: #fff;
 }
 
@@ -1478,7 +1471,7 @@ $theme-navy-border: #233554;
 }
 
 .theme-navy .history-link {
-  color: $theme-navy-highlight;
+  color: $primary-text-white;
 }
 
 .theme-navy .history-link:hover {
@@ -1486,11 +1479,11 @@ $theme-navy-border: #233554;
 }
 
 .theme-navy .verse-text {
-  color: #eaf6fb;
+  color: $primary-text-white;
 }
 
 .theme-navy .translation-english {
-  color: #fca311;
+  color: $english-translation-orange;
 }
 
 .theme-navy .translation-punjabi {
@@ -1499,6 +1492,151 @@ $theme-navy-border: #233554;
 
 .theme-navy .verse-transliteration {
   color: #b0c4d6;
+}
+
+//#endregion
+
+//#region BlueOrange Theme 
+$theme-blueorange-header-color: #011B2F;
+$theme-blueorange-body-color: #003F66;
+$theme-blueorange-shabad-bg: #002A45;
+$theme-blueorange-sidepanel: #c38900;
+$theme-blueorange-accent: #c38900;
+$theme-blueorange-highlight: $english-translation-orange;
+$theme-blueorange-border: #003F66;
+
+//body Required
+.theme-blueorange body {
+  background: $theme-blueorange-body-color;
+  color: $primary-text-white;
+}
+
+//header Required
+.theme-blueorange header {
+  background: $theme-blueorange-header-color;
+  border-bottom: 1px solid #233554;
+}
+
+.theme-blueorange .header-search-input:focus {
+  border-color: $theme-blueorange-accent;
+  background: rgba(0, 168, 232, 0.10);
+  box-shadow: 0 8px 30px rgba(0, 168, 232, 0.10);
+}
+
+.theme-blueorange .header-search-btn {
+  background: $theme-blueorange-sidepanel; // solid accent color
+  color: #fff;
+  border: none;
+}
+
+.theme-blueorange .header-search-btn:hover,
+.theme-blueorange .header-search-btn:focus {
+  background: #007bb8;
+  color: #fff;
+}
+
+.theme-blueorange .verses-container {
+  background: $theme-blueorange-shabad-bg;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid $theme-blueorange-border;
+}
+
+.theme-blueorange .result-card {
+  background: $theme-blueorange-shabad-bg;
+  border: 1px solid $theme-blueorange-border;
+}
+
+.theme-blueorange .verse-selected {
+  background-color: rgb(7, 57, 88);
+  color: #fff;
+}
+
+.theme-blueorange .result-title,
+.theme-blueorange .panel-title,
+.theme-blueorange .details-title {
+  color: $theme-blueorange-accent;
+}
+
+.theme-blueorange .btn-primary {
+  background: linear-gradient(45deg, $theme-blueorange-accent, $theme-blueorange-highlight);
+  color: #fff;
+}
+
+//button color Required
+.theme-blueorange .btn-secondary {
+  color: $theme-blueorange-accent;
+  border-color: $theme-blueorange-accent;
+}
+
+//side buttons Required
+.theme-blueorange .tab-btn,
+.theme-blueorange .tab-btn-right {
+  background: $theme-blueorange-sidepanel;
+  color: #b0b0b0;
+}
+
+//side button hover Required
+.theme-blueorange .tab-btn.active,
+.theme-blueorange .tab-btn:hover,
+.theme-blueorange .tab-btn-right.active,
+.theme-blueorange .tab-btn-right:hover {
+  background: $theme-blueorange-accent;
+  color: #fff;
+}
+
+//side panel header Required
+.theme-blueorange .side-panel-header {
+  background: $theme-blueorange-header-color;
+  border-bottom: 1px solid $theme-blueorange-border;
+}
+
+//side panel body Required
+.theme-blueorange .side-panel {
+  background: $theme-blueorange-body-color;
+  border-bottom: 1px solid $theme-blueorange-border;
+}
+
+.theme-blueorange .close-btn {
+  color: $theme-blueorange-accent;
+}
+
+.theme-blueorange .close-btn:hover {
+  background: $theme-blueorange-accent;
+  color: #fff;
+}
+
+//side links text Required - all history, favorites, etc.
+.theme-blueorange .history-link {
+  color: $primary-text-white;
+}
+
+.theme-blueorange .history-link:hover {
+  color: rgb(123, 222, 255);
+}
+
+.theme-blueorange .verse-text {
+  color: $primary-text-white;
+}
+
+.theme-blueorange .translation-english {
+  color: $english-translation-orange;
+}
+
+.theme-blueorange .translation-punjabi {
+  color: #00a8e8;
+}
+
+.theme-blueorange .verse-transliteration {
+  color: #b0c4d6;
+}
+
+.theme-blueorange .scroll-to-top-btn{
+  background: $theme-blueorange-sidepanel; 
+}
+
+.theme-blueorange .scroll-to-top-btn:hover{
+  background: $theme-blueorange-sidepanel;
 }
 
 //#endregion
