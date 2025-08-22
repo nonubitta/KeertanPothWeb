@@ -111,6 +111,12 @@ export class Search {
 
   async ngOnInit() {
     
+      // Load theme from localStorage
+    const savedTheme = localStorage.getItem('kpoth-theme');
+    if (savedTheme) {
+      this.setTheme(savedTheme);
+    }
+    
     const shabadId = this.route.snapshot.queryParamMap.get('shabad');
     await this.dbService.initDb();
     this.isDbReady = true;
@@ -161,12 +167,6 @@ export class Search {
         ShabadID: Number(shabadId)
       };
       this.onSelectItem(result, "NONE");
-    }
-
-    // Load theme from localStorage
-    const savedTheme = localStorage.getItem('kpoth-theme');
-    if (savedTheme) {
-      this.setTheme(savedTheme);
     }
 
     // Load pinHeader from localStorage

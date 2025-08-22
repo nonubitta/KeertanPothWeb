@@ -1495,6 +1495,11 @@ $theme-navy-border: #233554;
   color: #b0c4d6;
 }
 
+//side panel body Required
+.theme-navy .side-panel {
+  background: $theme-navy-body-color;
+  border-bottom: 1px solid $theme-navy-border;
+}
 //#endregion
 
 //#region BlueOrange Theme 
