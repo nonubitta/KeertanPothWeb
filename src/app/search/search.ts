@@ -492,15 +492,7 @@ export class Search {
       this.selectedVerseId = this.selectedShabad[0].ID; 
     }
     this.detailsInfo = { ...this.selectedShabad[0] };
-    
-    // Only update URL if not explicitly disabled
-    // if (item.ShabadID && (!opts || opts.updateUrl !== false)) {
-    //   this.router.navigate([], {
-    //     queryParams: { shabad: item.ShabadID },
-    //     queryParamsHandling: 'merge',
-    //     replaceUrl: true
-    //   });
-    // }
+  
     if (!this.detailsInfo.WriterID) {
       const verse = this.selectedShabad.find(v => v.WriterID != null);
       if (verse) {
@@ -524,6 +516,24 @@ export class Search {
     
     this.showSearchPanel = false;
     
+    if (item.ShabadID) {
+      if(!opts || opts.updateUrl === true){
+        this.router.navigate([], {
+          queryParams: { shabad: item.ShabadID },
+          queryParamsHandling: 'merge',
+          replaceUrl: true
+        });
+      }
+      else{
+        // Remove shabad param from URL
+        this.router.navigate([], {
+          queryParams: { shabad: null },
+          queryParamsHandling: 'merge',
+          replaceUrl: true
+        });
+      }
+    }
+
     setTimeout(() => {
     const el = document.getElementById('selected-verse');
     if (el) {

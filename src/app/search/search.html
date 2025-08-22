@@ -3,7 +3,7 @@
     <div class="container" style="position:relative;">
         <nav class="nav">
             <div class="nav-left">
-                <a href="#" class="logo">
+                <a class="logo">
                     <img src="assets/images/Logo.png" alt="Keertan Pothi Logo" class="logo-img" />
                     <span style="vertical-align: middle;">Keertan Pothi</span>
                 </a>
@@ -112,19 +112,13 @@
       <div *ngSwitchCase="'links'">
         <ul *ngIf="nitnemBani.length > 0" class="history-list">
           <li *ngFor="let item of nitnemBani">
-            <a href="#" (click)="openNitnemBani(item.Id)" class="history-link">
+            <a (click)="openNitnemBani(item.Id)" class="history-link">
               <span style="font-family: 'Gurakhar', sans-serif;">{{ item.PunjabiName }}</span><br />
               <span style="font-size: 1rem;">{{ item.EnglishName }}</span>
             </a>
             <hr class="toolbar-divider-hr" />
           </li>
         </ul>
-        <!-- <a href="#" (click)="openSundarGutka()" class="panel-links">Sundar Gutka</a> -->
-        <!-- <a href="#" (click)="openContact()" class="panel-links">Contact</a> -->
-        <!-- Example link to route to AboutComponent -->
-        <!-- <a routerLink="/about" class="panel-links">About</a> -->
-        <!-- <a href="#" class="panel-links">About</a><br />
-         -->
       </div>
 
         <!-- Settings Section -->
@@ -249,7 +243,7 @@
         </div>
         <ul *ngIf="history.length > 0" class="history-list">
           <li *ngFor="let item of history">
-            <a href="#" (click)="onSelectItem(item, 'HISTORY')" class="history-link">
+            <a (click)="onSelectItem(item, 'HISTORY')" class="history-link">
               <span style="font-family: 'Gurakhar', sans-serif;">{{ item.Gurmukhi }}</span>
             </a>
             <hr class="toolbar-divider-hr" />
@@ -301,7 +295,7 @@
         </div>
         <ul *ngIf="favorites.length > 0" class="history-list">
           <li *ngFor="let item of favorites">
-            <a href="#" (click)="onSelectItem(item, 'FAVORITES')" class="history-link">
+            <a (click)="onSelectItem(item, 'FAVORITES')" class="history-link">
               <span style="font-family: 'Gurakhar', sans-serif;">{{ item.Gurmukhi }}</span>
             </a>
             <hr class="toolbar-divider-hr" />
