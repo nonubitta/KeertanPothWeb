@@ -298,7 +298,7 @@ export class Search {
   newPothiNameForFav: string = '';
 
   addToFavorites() {
-    if (this.selectedItem) {
+    if (this.selectedItem && this.selectedItem.Gurmukhi) {
       // Avoid duplicates by ShabadID
       if (!this.favorites.some(f => f.ShabadID === this.selectedItem!.ShabadID)) {
         this.favorites.unshift(this.selectedItem);
@@ -481,6 +481,9 @@ export class Search {
     this.SetShabadSource(source);
     const query = Queries.getShabadById(item.ShabadID);
     const results = await this.dbService.query(query);
+    if(!item.Gurmukhi){
+      item = mapVerseToVerseSearchResults(results[0]);
+    }
     this.setSelectedShabad(item, results);
   }
 
@@ -488,9 +491,9 @@ export class Search {
     this.selectedShabad = mapResultsToVerse(results, this.showVishraam);
     if(item.ID)
       this.selectedVerseId = item.ID;
-    else{
-      this.selectedVerseId = this.selectedShabad[0].ID; 
-    }
+    //else{
+    //  this.selectedVerseId = this.selectedShabad[0].ID; 
+    //}
     this.detailsInfo = { ...this.selectedShabad[0] };
   
     if (!this.detailsInfo.WriterID) {
