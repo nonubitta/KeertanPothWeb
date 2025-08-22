@@ -1381,6 +1381,7 @@ $theme-navy-body-color: #1a2238;
 $theme-navy-surface: #222b45;
 $theme-navy-accent: #00a8e8;
 $theme-navy-border: #233554;
+$theme-navy-sidepanel: #222b45;
 
 .theme-navy body {
   background: $theme-navy-body-color;
@@ -1445,7 +1446,7 @@ $theme-navy-border: #233554;
 
 .theme-navy .tab-btn,
 .theme-navy .tab-btn-right {
-  background: $theme-navy-surface;
+  background: $theme-navy-sidepanel;
   color: #b0b0b0;
 }
 
@@ -1455,6 +1456,20 @@ $theme-navy-border: #233554;
 .theme-navy .tab-btn-right:hover {
   background: $theme-navy-accent;
   color: #fff;
+}
+
+//side panel body Required
+.theme-navy .side-panel {
+  background: $theme-navy-body-color;
+  border-bottom: 1px solid $theme-navy-border;
+}
+
+.theme-navy .scroll-to-top-btn{
+  background: $theme-navy-sidepanel; 
+}
+
+.theme-navy .scroll-to-top-btn:hover{
+  background: $theme-navy-sidepanel;
 }
 
 .theme-navy .side-panel-header {
@@ -1495,11 +1510,6 @@ $theme-navy-border: #233554;
   color: #b0c4d6;
 }
 
-//side panel body Required
-.theme-navy .side-panel {
-  background: $theme-navy-body-color;
-  border-bottom: 1px solid $theme-navy-border;
-}
 //#endregion
 
 //#region BlueOrange Theme 
