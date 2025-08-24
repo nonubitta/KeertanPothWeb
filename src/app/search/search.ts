@@ -82,7 +82,7 @@ export class Search {
   favorites: VerseSearchResult[] = [];
 
   // Theme
-  theme: string = 'default'; // 'default' or 'blue'
+  theme: string = 'navy'; // set blue/navy as default
 
   // Pin header
   pinHeader: boolean = true;
@@ -115,6 +115,8 @@ export class Search {
     const savedTheme = localStorage.getItem('kpoth-theme');
     if (savedTheme) {
       this.setTheme(savedTheme);
+    } else {
+      this.setTheme('navy'); // set blue/navy as default if not set
     }
     
     const shabadId = this.route.snapshot.queryParamMap.get('shabad');
@@ -611,6 +613,16 @@ export class Search {
   presentationGurmukhiFontSize: number = 5;
 
   getPresentationHtml(verse: Verse): string {
+    // Use the current theme's background color for the popup
+    let bgColor = "#121212";
+    let textColor = "#fff";
+    if (this.theme === "navy") {
+      bgColor = "#1a2238";
+      textColor = "#eaf6fb";
+    } else if (this.theme === "blueorange") {
+      bgColor = "#003F66";
+      textColor = "#eaf6fb";
+    } 
     return `
     <html>
     <head>
@@ -623,8 +635,8 @@ export class Search {
           font-style: normal;
         }
         body {
-          background: #121212;
-          color: #fff;
+          background: ${bgColor};
+          color: ${textColor};
           font-family: 'Segoe UI', sans-serif;
           margin: 0;
           padding: 0;
@@ -638,7 +650,7 @@ export class Search {
           font-family: 'Gurakhar', sans-serif;
           font-size: ${this.presentationGurmukhiFontSize}rem;
           margin-bottom: 2rem;
-          color: #fff;
+          color: ${textColor};
           text-align: center;
         }
         .translation-english {
@@ -652,7 +664,7 @@ export class Search {
           font-size: ${this.punjabiFontSize + 2}rem;
           margin-bottom: 1rem;
           text-align: center;
-           color: #8ecae6;
+          color: #8ecae6;
         }
         .translation-english.transliteration {
           color: #b0b0b0;
@@ -662,7 +674,6 @@ export class Search {
         .v{
           color: #f97b4d;
         }
-
         .y {
           color: #1f991f;
         }
