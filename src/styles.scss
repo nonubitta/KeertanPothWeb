@@ -1428,7 +1428,10 @@ $theme-navy-sidepanel: #222b45;
   color: #fff;
 }
 
-.theme-navy .result-title,
+.theme-navy .result-title{
+  color: $primary-text-white
+}
+
 .theme-navy .panel-title,
 .theme-navy .details-title {
   color: $theme-navy-accent;
