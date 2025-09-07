@@ -1438,7 +1438,7 @@ $theme-navy-sidepanel: #222b45;
 }
 
 .theme-navy .btn-primary {
-  background: linear-gradient(45deg, $theme-navy-accent, $english-translation-orange);
+  background: $theme-navy-accent;
   color: #fff;
 }
 
@@ -1576,7 +1576,7 @@ $theme-blueorange-border: #003F66;
 }
 
 .theme-blueorange .btn-primary {
-  background: linear-gradient(45deg, $theme-blueorange-accent, $theme-blueorange-highlight);
+  background: $theme-blueorange-accent;
   color: #fff;
 }
 
