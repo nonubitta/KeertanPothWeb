@@ -1,0 +1,49 @@
+<div style="background: #1a2238; min-height: 100vh; width: 100vw; padding: 2rem 2.5rem 2rem 2rem; box-sizing: border-box;">
+  <h2>Upload JSON File</h2>
+  <input type="file" accept=".json,application/json" (change)="onFileSelected($event)" />
+  <br /><br />
+  <div style="margin-bottom: 1.2rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; max-width: 100vw;">
+    <div style="flex: 1 1 220px; min-width: 180px;">
+      <label for="sortSelect" style="font-weight: 500; margin-right: 0.7rem;">Sort by:</label>
+      <select id="sortSelect" [(ngModel)]="sortBy" (change)="sortPothis()" style="padding: 0.4rem 1rem; border-radius: 6px; max-width: 220px;">
+        <option value="select">Select</option>
+        <option value="nameAsc">Name Ascending</option>
+        <option value="nameDesc">Name Descending</option>
+        <option value="dateAsc">Date Ascending</option>
+        <option value="dateDesc">Date Descending</option>
+        <option value="custom">Custom</option>
+      </select>
+    </div>
+    <div style="flex: 0 0 auto;">
+      <button (click)="exportJson()" style="padding: 0.4rem 1.5rem; border-radius: 6px; background: #00a8e8; color: #fff; border: none; font-weight: 600; cursor: pointer; min-width: 120px; max-width: 100vw; white-space: nowrap;">
+        Export
+      </button>
+    </div>
+  </div>
+  <div *ngIf="jsonError" style="color: #ff6b6b; margin-top: 1rem;">{{ jsonError }}</div>
+  <div *ngIf="parsedJson" style="margin-top: 2rem; max-width: 100vw; overflow-x: auto;">
+    <table style="width:100%; min-width:600px; border-collapse:collapse; background: #232f3e; color: #fff; border-radius: 8px; overflow: hidden;">
+      <thead>
+        <tr style="background: #00a8e8;">
+          <th style="padding: 0.7rem 1rem; text-align:left;">PothiId</th>
+          <th style="padding: 0.7rem 1rem; text-align:left;">Name</th>
+          <th style="padding: 0.7rem 1rem; text-align:left;">ShabadCount</th>
+          <th style="padding: 0.7rem 1rem; text-align:left;">Created On</th>
+          <th style="padding: 0.7rem 1rem; text-align:left;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of parsedJson; let i = index">
+          <td style="padding: 0.6rem 1rem;">{{ item.pothi.PothiId }}</td>
+          <td style="padding: 0.6rem 1rem;">{{ item.pothi.Name }}</td>
+          <td style="padding: 0.6rem 1rem;">{{ item.pothi.ShabadCount }}</td>
+          <td style="padding: 0.6rem 1rem;">{{ item.pothi.CreatedOn | date }}</td>
+          <td style="padding: 0.6rem 1rem;">
+            <button (click)="movePothiUp(i)" [disabled]="i === 0" style="margin-right:0.3rem; background: #00a8e8; color: #fff; border: none; border-radius: 4px; padding: 0.3rem 0.7rem;">⬆️</button>
+            <button (click)="movePothiDown(i)" [disabled]="i === parsedJson.length - 1" style="background: #00a8e8; color: #fff; border: none; border-radius: 4px; padding: 0.3rem 0.7rem;">⬇️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
