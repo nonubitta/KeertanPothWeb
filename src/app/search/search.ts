@@ -7,7 +7,8 @@ import { visraamToVishraamArray, mapResultsToVerse, mapResultsToVerseSearchResul
 import { Queries } from '../Queries';
 import { Router, RouterModule } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-
+import { SpeechTestComponent } from '../speech-test.component/speech-test.component';
+import { SpeechHelper } from '../speech-helper';
 export enum ShabadSource {
   None = 'None',
   Random = 'Random',
@@ -18,7 +19,7 @@ export enum ShabadSource {
 }
 @Component({
   selector: 'app-search',
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, SpeechTestComponent, ],
   templateUrl: './search.html',
   styleUrl: './search.scss'
 })
@@ -68,7 +69,8 @@ export class Search {
   selectedWriterId: string = '';
   sources: any[] = [];
   selectedSourceId: string = '';
-
+  searchQuery: string = '';
+noResults: boolean = false;
   // Contact modal
   showContactModal: boolean = false;
 
@@ -229,12 +231,15 @@ export class Search {
     this.activeTab = null;
   }
 
-  openRandomShabad() {
-    const randomIndex =  Math.floor(Math.random() * (5540 - 40 + 1)) + 40;
-    // Create a new VerseSearchResult and assign ShabadID
-    const result: VerseSearchResult = {
-      ShabadID: randomIndex
-    };
+  openRandomShabad(shabadId?: number) {
+    if(!shabadId) {
+      const randomIndex =  Math.floor(Math.random() * (5540 - 40 + 1)) + 40;
+      shabadId = randomIndex;
+    }
+      // Create a new VerseSearchResult and assign ShabadID
+      const result: VerseSearchResult = {
+        ShabadID: shabadId
+      };
     this.onSelectItem(result, "RANDOM");
     this.closeSidePanel();
   }
@@ -435,10 +440,12 @@ export class Search {
   async onSearch() {
     if (!this.isDbReady || !this.searchText.trim() || this.searchText.trim().length < 2) {
       this.filteredItems = [];
+      this.noResults = false;
       return;
     }
     this.selectedShabad = null;
     this.showSearchPanel = true;
+    this.noResults = false;
 
     // Sanitize input if needed to prevent SQL injection — here simple usage
     let asciiSearch = '';
@@ -474,8 +481,11 @@ export class Search {
     try {
       const results = await this.dbService.query(query);
       this.filteredItems = mapResultsToVerseSearchResults(results);
+      this.noResults = this.filteredItems.length === 0;
     } catch (error) {
       console.error('Error querying the DB:', error);
+      this.filteredItems = [];
+      this.noResults = true;
     }
   }
 
@@ -483,6 +493,7 @@ export class Search {
     this.SetShabadSource(source);
     const query = Queries.getShabadById(item.ShabadID);
     const results = await this.dbService.query(query);
+    console.log("onSelectItem results:", results);
     if(!item.Gurmukhi){
       item = mapVerseToVerseSearchResults(results[0]);
     }
@@ -490,6 +501,7 @@ export class Search {
   }
 
   async setSelectedShabad(item: VerseSearchResult, results: any[], opts?: { updateUrl?: boolean }) {
+    console.log("setSelectedShabad results:", results);
     this.selectedShabad = mapResultsToVerse(results, this.showVishraam);
     if(item.ID)
       this.selectedVerseId = item.ID;
@@ -588,6 +600,45 @@ export class Search {
     this.selectedShabad = null;
     this.showSearchPanel = true;
   }
+
+  onTranscriptChange(text: string) {
+    if (!text || text.trim().length > 2) {
+      console.log("Transcript received:", text);
+      this.searchQuery = text;
+      var searchInitials = SpeechHelper.getInitialsFromGurmukhi(text); 
+      this.searchText = searchInitials;
+      this.searchOnRecord();
+    }
+  }
+
+  async searchOnRecord(){
+    var query: string;
+     let asciiSearch = '';
+    for (const c of this.searchText) {
+      const str = c.charCodeAt(0).toString().padStart(3, '0');
+      asciiSearch += str + ',';
+    }
+
+    //query = Queries.searchByFirstLetter(this.searchText, this.searchMode, '');
+    query = Queries.searchByFirstLetter(asciiSearch, this.searchMode, '');
+    console.log("Search Query:", query);
+
+    try {
+      const results = await this.dbService.query(query);
+      this.filteredItems = mapResultsToVerseSearchResults(results);
+      this.noResults = this.filteredItems.length === 0;
+      console.log("Search Results:", this.filteredItems);
+      if(this.filteredItems.length === 1){
+        this.openRandomShabad(this.filteredItems[0].ShabadID);
+      }
+    } catch (error) {
+      console.error('Error querying the DB:', error);
+      this.filteredItems = [];
+      this.noResults = true;
+    }
+  }
+
+
   //#endregion
 
   //#region Presentation mode

@@ -19,6 +19,7 @@
                         (focus)="showSearchPanel = true"
                         placeholder="Sbd Kojo" 
                         name="searchText">
+                        <app-speech-test (transcriptChange)="onTranscriptChange($event)"></app-speech-test>
                     <button type="button" class="keyboard-toggle-btn" (click)="toggleKeyboard()" title="Toggle Punjabi Keyboard">
                         <span style="font-size: 1.3rem; vertical-align: middle;">⌨️</span>
                     </button>
@@ -374,6 +375,7 @@
             </div>
           </div>
         </section>
+        <div *ngIf="noResults" style="text-align:center; color:#ff6b6b; font-size:1.2rem; margin-top:2rem;">No results found.</div>
         <!-- #endregion Search Results Section -->
 
     </div>
