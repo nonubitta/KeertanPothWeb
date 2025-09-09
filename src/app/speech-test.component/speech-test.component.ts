@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -15,6 +15,8 @@ export class SpeechTestComponent implements OnInit, OnDestroy {
   @Output() transcriptChange = new EventEmitter<string>();
   @Output() recordingEnded = new EventEmitter<string>();
   private recognition: any;
+
+  constructor(private ngZone: NgZone) {}
 
   ngOnInit(): void {
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -37,7 +39,11 @@ export class SpeechTestComponent implements OnInit, OnDestroy {
         }
         this.transcript += finalText;
         this.interimTranscript = interimText;
-        this.transcriptChange.emit(this.transcript);
+
+        // ✅ Ensure Angular picks up the change
+        this.ngZone.run(() => {
+          this.transcriptChange.emit(this.transcript);
+        });
       };
 
       this.recognition.onerror = (event: any) => {
