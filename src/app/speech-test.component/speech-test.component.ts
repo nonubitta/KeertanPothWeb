@@ -42,6 +42,7 @@ export class SpeechTestComponent implements OnInit, OnDestroy {
 
       this.recognition.onerror = (event: any) => {
         console.error('Speech recognition error:', event.error);
+        alert('Google speech service is not available right now. Please try again later.');
       };
 
       this.recognition.onend = () => {
