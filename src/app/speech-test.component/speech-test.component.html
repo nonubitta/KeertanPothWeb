@@ -1,0 +1,7 @@
+<button  class="record-btn" (click)="startListening()" [hidden]="isListening">
+    <img src="assets/images/mic.png" alt="Recording..." style="width: 24px; height: 24px;">
+</button>
+<button class="record-btn" (click)="stopListening()" [hidden]="!isListening">
+    <img src="assets/images/micred.png" alt="Recording..." style="width: 24px; height: 24px;">
+</button>
+<!-- <p style="color: gray;">{{ interimTranscript }}</p> -->
