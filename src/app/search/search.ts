@@ -188,6 +188,13 @@ noResults: boolean = false;
       this.showRoastMessage = false;
     }, 3000);
   }
+
+
+  onLogoClick() {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/']);
+    });
+  }
   //#endregion
 
   //#region Side Panels
@@ -627,7 +634,7 @@ noResults: boolean = false;
       this.noResults = this.filteredItems.length === 0;
       console.log("Search Results:", this.filteredItems);
       if(this.filteredItems.length === 1){
-        this.openRandomShabad(this.filteredItems[0].ShabadID);
+        this.onSelectItem(this.filteredItems[0], "SEARCH");
       }
     } catch (error) {
       console.error('Error querying the DB:', error);
