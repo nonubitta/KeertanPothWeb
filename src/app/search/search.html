@@ -1,11 +1,11 @@
 <!--#region Header-->
 <header class="header">
     <div class="container" style="position:relative;">
-        <nav class="nav">
-            <div class="nav-left">
-                <a class="logo">
-                    <img (click)="onLogoClick()" src="assets/images/favicon.png" alt="Keertan Pothi Logo" class="logo-img" />
-                    <span (click)="onLogoClick()" style="vertical-align: middle; cursor: pointer;">Keertan Pothi</span>
+        <nav class="nav mobile-nav">
+            <div class="nav-logo-title">
+                <a class="logo" (click)="onLogoClick()">
+                    <img src="assets/images/favicon.png" alt="Keertan Pothi Logo" class="logo-img" />
+                    <span style="vertical-align: middle;">Keertan Pothi</span>
                 </a>
             </div>
             <div class="header-search">
@@ -39,6 +39,35 @@
         </button>
     </div>
 </header>
+<style>
+@media (max-width: 600px) {
+  .mobile-nav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .nav-logo-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  .header-search {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .header-search-form {
+    width: 100%;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+  .logo {
+    justify-content: center;
+    width: 100%;
+  }
+}
+</style>
 <!--#endregion Header-->
 
 <!--#region Punjabi Keyboard -->
