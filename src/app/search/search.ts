@@ -493,7 +493,6 @@ noResults: boolean = false;
     this.SetShabadSource(source);
     const query = Queries.getShabadById(item.ShabadID);
     const results = await this.dbService.query(query);
-    console.log("onSelectItem results:", results);
     if(!item.Gurmukhi){
       item = mapVerseToVerseSearchResults(results[0]);
     }
@@ -501,7 +500,6 @@ noResults: boolean = false;
   }
 
   async setSelectedShabad(item: VerseSearchResult, results: any[], opts?: { updateUrl?: boolean }) {
-    console.log("setSelectedShabad results:", results);
     this.selectedShabad = mapResultsToVerse(results, this.showVishraam);
     if(item.ID)
       this.selectedVerseId = item.ID;
@@ -602,7 +600,7 @@ noResults: boolean = false;
   }
 
   onTranscriptChange(text: string) {
-    if (!text || text.trim().length > 2) {
+    if (text && text.trim().length > 2) {
       console.log("Transcript received:", text);
       this.searchQuery = text;
       var searchInitials = SpeechHelper.getInitialsFromGurmukhi(text); 
