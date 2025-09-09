@@ -24,23 +24,17 @@ export class SpeechTestComponent implements OnInit, OnDestroy {
       this.recognition = new SpeechRecognition();
       this.recognition.lang = 'pa-IN'; // Punjabi (India)
       this.recognition.continuous = true;
-      this.recognition.interimResults = true;
+      this.recognition.interimResults = false; // ❌ disable interim
 
       this.recognition.onresult = (event: any) => {
         let finalText = '';
-        let interimText = '';
         for (let i = event.resultIndex; i < event.results.length; i++) {
-          const transcript = event.results[i][0].transcript;
           if (event.results[i].isFinal) {
-            finalText += transcript + ' ';
-          } else {
-            interimText += transcript;
+            finalText += event.results[i][0].transcript + ' ';
           }
         }
         this.transcript += finalText;
-        this.interimTranscript = interimText;
 
-        // ✅ Ensure Angular picks up the change
         this.ngZone.run(() => {
           this.transcriptChange.emit(this.transcript);
         });
@@ -52,6 +46,8 @@ export class SpeechTestComponent implements OnInit, OnDestroy {
 
       this.recognition.onend = () => {
         this.isListening = false;
+        // ✅ emit transcript only when recording fully ends
+        this.recordingEnded.emit(this.transcript);
       };
     } else {
       alert('Your browser does not support Speech Recognition.');
@@ -61,7 +57,6 @@ export class SpeechTestComponent implements OnInit, OnDestroy {
   startListening(): void {
     if (this.recognition) {
       this.transcript = '';
-      this.interimTranscript = '';
       this.isListening = true;
       this.recognition.start();
     }
@@ -71,9 +66,9 @@ export class SpeechTestComponent implements OnInit, OnDestroy {
     if (this.recognition) {
       this.recognition.stop();
       this.isListening = false;
-      this.recordingEnded.emit(this.transcript);
     }
   }
+
 
   ngOnDestroy(): void {
     if (this.recognition) {
