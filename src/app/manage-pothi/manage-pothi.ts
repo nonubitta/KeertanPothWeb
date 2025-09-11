@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-manage-pothi',
   standalone: true,
-  imports: [CommonModule, JsonPipe, FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './manage-pothi.html',
   styleUrl: './manage-pothi.scss'
 })

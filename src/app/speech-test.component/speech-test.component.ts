@@ -4,7 +4,7 @@ import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-speech-test',
-  imports: [NgIf],
+  imports: [],
   templateUrl: './speech-test.component.html',
   styleUrl: './speech-test.component.scss'
 })
