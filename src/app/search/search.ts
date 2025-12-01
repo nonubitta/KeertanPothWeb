@@ -624,15 +624,12 @@ noResults: boolean = false;
       asciiSearch += str + ',';
     }
 
-    //query = Queries.searchByFirstLetter(this.searchText, this.searchMode, '');
     query = Queries.searchByFirstLetter(asciiSearch, this.searchMode, '');
-    console.log("Search Query:", query);
 
     try {
       const results = await this.dbService.query(query);
       this.filteredItems = mapResultsToVerseSearchResults(results);
       this.noResults = this.filteredItems.length === 0;
-      console.log("Search Results:", this.filteredItems);
       if(this.filteredItems.length === 1){
         this.onSelectItem(this.filteredItems[0], "SEARCH");
       }
