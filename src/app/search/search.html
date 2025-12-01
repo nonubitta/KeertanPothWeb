@@ -449,7 +449,8 @@
                 >
                     <div class="verse-content">
                         <div *ngIf="showGurmukhi" class="verse-text punjabi-font" [style.font-size.rem]="gurmukhiFontSize"
-                            [innerHTML]="verse.GurmukhiHtml">
+     [innerHTML]="verse.GurmukhiHtml"
+     (copy)="onCopyVerse($event, verse)">
                         </div>
                         <div *ngIf="showPunjabi && verse.Punjabi" class="translation-punjabi punjabi-font" [style.font-size.rem]="punjabiFontSize">
                             {{ verse.Punjabi }}

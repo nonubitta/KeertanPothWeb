@@ -855,4 +855,24 @@ noResults: boolean = false;
     // Reuse existing logic to open a specific shabad id (keeps routing consistent)
     this.openRandomShabad(targetId);
   }
+
+  onCopyVerse(e: ClipboardEvent, verse: Verse) {
+    const text = verse?.GurmukhiUni || '';
+    try {
+      if (e && e.clipboardData) {
+        e.clipboardData.setData('text/plain', text);
+        e.preventDefault();
+        this.showRoastMessageFn('Selected line copied');
+        return;
+      }
+      // Fallback for environments without clipboardData on event
+      navigator.clipboard.writeText(text).then(() => {
+        this.showRoastMessageFn('Selected line copied');
+      }).catch(() => {
+        this.showRoastMessageFn('Copy failed');
+      });
+    } catch {
+      this.showRoastMessageFn('Copy failed');
+    }
+  }
 }
