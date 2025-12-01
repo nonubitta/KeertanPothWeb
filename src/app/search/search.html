@@ -124,6 +124,9 @@
   <button (click)="openQuickSettings()" class="tab-btn-right share-btn" title="Quick Settings">
     <img height="24rem" src="assets/images/quicksetting.png" alt="Share" class="share-icon" />
   </button>
+  <button (click)="copyShabadToClipboard()" class="tab-btn-right share-btn" title="Copy Shabad">
+    <img height="24rem" src="assets/images/copy4.png" alt="Share" class="share-icon" />
+  </button>
 </div>
 
 <div class="side-panel" [class.open]="isSidePanelOpen">
@@ -449,8 +452,8 @@
                 >
                     <div class="verse-content">
                         <div *ngIf="showGurmukhi" class="verse-text punjabi-font" [style.font-size.rem]="gurmukhiFontSize"
-     [innerHTML]="verse.GurmukhiHtml"
-     (copy)="onCopyVerse($event, verse)">
+                        [innerHTML]="verse.GurmukhiHtml"
+                        (copy)="onCopyVerse($event, verse)">
                         </div>
                         <div *ngIf="showPunjabi && verse.Punjabi" class="translation-punjabi punjabi-font" [style.font-size.rem]="punjabiFontSize">
                             {{ verse.Punjabi }}

@@ -875,4 +875,37 @@ noResults: boolean = false;
       this.showRoastMessageFn('Copy failed');
     }
   }
+
+  copyShabadToClipboard() {
+    if (!this.selectedShabad || this.selectedShabad.length === 0) {
+      this.showRoastMessageFn('No shabad selected');
+      return;
+    }
+    const text = this.selectedShabad
+      .map(v => v.GurmukhiUni?.trim() ?? '')
+      .filter(x => x.length > 0)
+      .join('\n');
+    if (!text) {
+      this.showRoastMessageFn('Nothing to copy');
+      return;
+    }
+    // Try async clipboard API first
+    navigator.clipboard.writeText(text).then(() => {
+      this.showRoastMessageFn('Shabad copied');
+    }).catch(() => {
+      try {
+        const ta = document.createElement('textarea');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        this.showRoastMessageFn('Shabad copied');
+      } catch {
+        this.showRoastMessageFn('Copy failed');
+      }
+    });
+  }
 }
