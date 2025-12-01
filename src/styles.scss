@@ -1371,6 +1371,43 @@ $theme-gray-body-mid-color:#2d3748;
   outline: none;
 }
 
+.scroll-left-btn,
+.scroll-right-btn {
+  position: fixed;
+  bottom: 2.2rem;
+  z-index: 3000;
+  background: $theme-dark-sidepanel;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  opacity: 0.85;
+  transition: background 0.18s, color 0.18s, transform 0.12s;
+}
+
+.scroll-left-btn {
+  left: 2.2rem;
+}
+
+.scroll-right-btn {
+  right: 5.2rem;
+}
+
+.scroll-left-btn:hover,
+.scroll-right-btn:hover {
+  background: var(--defaultContrastColor);
+  color: #fff;
+  outline: none;
+  //transform: translateY(-2px);
+}
+
 //#endregion
 
 //#region Navy Theme 
@@ -1466,11 +1503,13 @@ $theme-navy-sidepanel: #222b45;
   border-bottom: 1px solid $theme-navy-border;
 }
 
-.theme-navy .scroll-to-top-btn{
-  background: $theme-navy-sidepanel; 
-}
-
-.theme-navy .scroll-to-top-btn:hover{
+.theme-navy .scroll-to-top-btn,
+.theme-navy .scroll-left-btn,
+.theme-navy .scroll-right-btn,
+.theme-navy .scroll-to-top-btn:hover,
+.theme-navy .scroll-left-btn:hover,
+.theme-navy .scroll-right-btn:hover
+{
   background: $theme-navy-sidepanel;
 }
 
@@ -1647,12 +1686,16 @@ $theme-blueorange-border: #003F66;
   color: #b0c4d6;
 }
 
-.theme-blueorange .scroll-to-top-btn{
+
+.theme-blueorange .scroll-to-top-btn,
+.theme-blueorange .scroll-left-btn,
+.theme-blueorange .scroll-right-btn,
+.theme-blueorange .scroll-to-top-btn:hover,
+.theme-blueorange .scroll-left-btn:hover,
+.theme-blueorange .scroll-right-btn:hover
+{
   background: $theme-blueorange-sidepanel; 
 }
 
-.theme-blueorange .scroll-to-top-btn:hover{
-  background: $theme-blueorange-sidepanel;
-}
 
 //#endregion

@@ -844,4 +844,15 @@ noResults: boolean = false;
   }
 
   //#endregion
+
+  moveShabad(moveBy: number) {
+    const currentId = this.selectedItem?.ShabadID;
+    if (!currentId || currentId <= 1) {
+      this.showRoastMessageFn('No previous shabad');
+      return;
+    }
+    const targetId = currentId + moveBy;
+    // Reuse existing logic to open a specific shabad id (keeps routing consistent)
+    this.openRandomShabad(targetId);
+  }
 }
