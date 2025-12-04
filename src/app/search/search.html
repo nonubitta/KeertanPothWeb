@@ -565,15 +565,18 @@
   </div>
 </div>
 
-<!-- Scroll to Top Button -->
-<button class="scroll-to-top-btn" (click)="scrollToTop()">
-  ↑
-</button>
-
-<!-- Left / Right navigation buttons (styled like scroll-to-top-btn) -->
-<button class="scroll-left-btn" (click)="moveShabad(-1)" title="Previous Shabad" aria-label="Previous Shabad">
-  ←
-</button>
-<button class="scroll-right-btn" (click)="moveShabad(1)" title="Next Shabad" aria-label="Next Shabad">
-  →
-</button>
+@if(selectedShabad){
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top-btn" (click)="scrollToTop()">
+    ↑
+  </button>
+  @if(shabadSource !== 'SundarGutka'){
+    <!-- Left / Right navigation buttons (styled like scroll-to-top-btn) -->
+    <button class="scroll-left-btn" (click)="moveShabad(-1)" title="Previous Shabad" aria-label="Previous Shabad">
+      ←
+    </button>
+    <button class="scroll-right-btn" (click)="moveShabad(1)" title="Next Shabad" aria-label="Next Shabad">
+      →
+    </button>
+  }
+}
