@@ -1,0 +1,90 @@
+.support-page {
+	color: var(--text);
+}
+
+.support-hero {
+	padding: 1.5rem 0 0.5rem 0;
+	h1 {
+		margin: 0;
+		font-size: 2rem;
+		color: #d98300; // site accent used in logo
+	}
+	p {
+		margin: 0.5rem 0 0 0;
+		opacity: 0.9;
+	}
+}
+
+.support-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1rem;
+	padding: 1rem 0 2rem 0;
+}
+
+@media (max-width: 900px) {
+	.support-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+.card {
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: 10px;
+	padding: 1rem;
+	box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+	h2 {
+		margin: 0 0 0.5rem 0;
+		font-size: 1.3rem;
+		color: var(--text);
+	}
+	p {
+		margin: 0 0 0.8rem 0;
+		opacity: 0.9;
+	}
+}
+
+.cta {
+	display: inline-block;
+	background: linear-gradient(45deg, #d98300, #b86b00);
+	color: #1b1b1b;
+	text-decoration: none;
+	border: none;
+	padding: 0.5rem 1rem;
+	border-radius: 8px;
+	font-weight: 600;
+	box-shadow: 0 4px 10px rgba(217, 131, 0, 0.35);
+}
+
+.hint {
+	background: rgba(255,255,255,0.06);
+	border: 1px dashed var(--border);
+	padding: 0.6rem;
+	border-radius: 8px;
+	font-size: 0.95rem;
+	opacity: 0.85;
+}
+
+.tips,
+.faq,
+.team-list {
+  margin: 0.7rem 0 0 0;
+  padding-left: 1.1rem;
+}
+
+.team-list {
+  list-style: none;
+  padding-left: 0;
+
+  li {
+    padding: 0.4rem 0;
+    opacity: 0.95;
+  }
+}
+
+.version {
+	margin-top: 0.8rem;
+	font-size: 0.95rem;
+	opacity: 0.85;
+}

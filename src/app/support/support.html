@@ -1,0 +1,65 @@
+<!-- Header (lightweight, reuses global theme styles) -->
+<header class="header">
+	<div class="container">
+		<nav class="nav" style="padding: 0.8rem 0;">
+			<a class="logo" routerLink="/">
+				<img src="assets/images/favicon.png" alt="Keertan Pothi Logo" class="logo-img" />
+				<span>Keertan Pothi</span>
+			</a>
+		</nav>
+	</div>
+  
+	<div class="toolbar-divider-hr" style="opacity:0.35;"></div>
+</header>
+
+<main class="support-page">
+	<section class="support-hero container">
+		<h1>Support</h1>
+		<p>We're here to help with the Keertan Pothi iOS app and website.</p>
+	</section>
+
+	<section class="support-grid container">
+		<!-- iOS App -->
+		<div class="card">
+			<h2>Get the iOS App</h2>
+			<p>Use the official Keertan Pothi app on iPhone and iPad.</p>
+			<ng-container *ngIf="appStoreUrl && appStoreUrl.length; else appStoreMissing">
+				<a class="cta" [href]="appStoreUrl" target="_blank" rel="noopener">Open in App Store</a>
+			</ng-container>
+			<ng-template #appStoreMissing>
+				<div class="hint">App Store link will be added here.</div>
+			</ng-template>
+		</div>
+
+		<!-- Contact -->
+		<div class="card">
+			<h2>Contact Support</h2>
+			<p>Questions, feedback or issues? Send us a message.</p>
+			<ng-container *ngIf="supportEmail && supportEmail.length; else emailMissing">
+				<a class="cta" [href]="mailtoLink">Email Support</a>
+			</ng-container>
+			<ng-template #emailMissing>
+				<div class="hint">keertanpothi@gmail.com</div>
+			</ng-template>
+			<ul class="tips">
+				<li>Include steps to reproduce and screenshots, if possible.</li>
+				<li>Mention whether the issue is on iOS app or website.</li>
+			</ul>
+		</div>
+
+		<!-- FAQs & Tips -->
+		<div class="card">
+			<h2>Development Team</h2>
+			<p>Keertan Pothi is built with dedication by:</p>
+			<ul class="team-list">
+				<li>AkalUstat Singh</li>
+				<li>Keerat Singh</li>
+				<li>Gurjas Singh</li>
+				<li>Gurmeet Singh Khalsa</li>
+				<li>Harpreet Kaur</li>
+			</ul>
+			<div class="version" *ngIf="webVersion">Web version: v{{ webVersion }} | App version: v21.0.0.24</div>
+		</div>
+
+	</section>
+</main>

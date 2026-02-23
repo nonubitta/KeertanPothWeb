@@ -1,0 +1,95 @@
+<!-- Header -->
+<header class="header">
+  <div class="container">
+    <nav class="nav" style="padding: 0.8rem 0;">
+      <a class="logo" routerLink="/">
+        <img src="assets/images/favicon.png" alt="Keertan Pothi Logo" class="logo-img" />
+        <span>Keertan Pothi</span>
+      </a>
+    </nav>
+  </div>
+  <div class="toolbar-divider-hr" style="opacity:0.35;"></div>
+</header>
+
+<main class="privacy-page">
+  <section class="container">
+    <h1>Privacy Policy</h1>
+    <p class="effective-date">Effective Date: {{ effectiveDate }}</p>
+
+    <div class="policy-content">
+      <section class="policy-section">
+        <h2>Overview</h2>
+        <p>
+          Thank you for using <strong>Keertan Pothi</strong>. Your privacy is important to us. 
+          This Privacy Policy explains how we handle information in connection with our iOS app and website.
+        </p>
+      </section>
+
+      <section class="policy-section">
+        <h2>No Data Collection</h2>
+        <p>
+          <strong>Keertan Pothi does not collect, store, or process any personal information from its users.</strong> 
+          We do not ask for or track any of the following:
+        </p>
+        <ul>
+          <li>Names, email addresses, or contact information</li>
+          <li>Location data or device identifiers</li>
+          <li>Usage analytics or behavioral data</li>
+          <li>Cookies or tracking technologies</li>
+        </ul>
+      </section>
+
+      <section class="policy-section">
+        <h2>No Data Sharing</h2>
+        <p>
+          Since we do not collect any user data, <strong>we do not share, sell, or disclose any information to third parties.</strong>
+        </p>
+      </section>
+
+      <section class="policy-section">
+        <h2>Local Storage</h2>
+        <p>
+          The app may store data locally on your device (such as preferences, bookmarks, or history) to enhance your experience. 
+          This data remains on your device and is never transmitted to our servers or any third party.
+        </p>
+      </section>
+
+      <section class="policy-section">
+        <h2>Third-Party Services</h2>
+        <p>
+          Keertan Pothi does not integrate with any third-party analytics, advertising, or tracking services. 
+          We do not use any SDKs or services that collect user data.
+        </p>
+      </section>
+
+      <section class="policy-section">
+        <h2>Children's Privacy</h2>
+        <p>
+          Our app is safe for users of all ages. Since we do not collect any personal information, 
+          we comply with all applicable children's privacy laws, including COPPA (Children's Online Privacy Protection Act).
+        </p>
+      </section>
+
+      <section class="policy-section">
+        <h2>Changes to This Policy</h2>
+        <p>
+          We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated effective date. 
+          We encourage you to review this policy periodically.
+        </p>
+      </section>
+
+      <section class="policy-section">
+        <h2>Contact Us</h2>
+        <p>
+          If you have any questions about this Privacy Policy, please contact us at:
+        </p>
+        <p class="contact-info" *ngIf="contactEmail">
+          <a [href]="'mailto:' + contactEmail">{{ contactEmail }}</a>
+        </p>
+        <p class="contact-info" *ngIf="!contactEmail">
+          Contact information will be available here.
+        </p>
+      </section>
+    </div>
+  </section>
+</main>

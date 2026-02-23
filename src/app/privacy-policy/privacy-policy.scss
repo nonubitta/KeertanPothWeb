@@ -1,0 +1,92 @@
+.privacy-page {
+  color: var(--text);
+  padding-bottom: 2rem;
+}
+
+.privacy-page h1 {
+  margin: 1.5rem 0 0.5rem 0;
+  font-size: 2rem;
+  color: #d98300;
+}
+
+.effective-date {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  margin: 0 0 1.5rem 0;
+}
+
+.policy-content {
+  max-width: 900px;
+}
+
+.policy-section {
+  margin-bottom: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+
+  h2 {
+    margin: 0 0 0.8rem 0;
+    font-size: 1.4rem;
+    color: var(--text);
+  }
+
+  p {
+    margin: 0 0 0.8rem 0;
+    line-height: 1.7;
+    opacity: 0.95;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  ul {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+    line-height: 1.7;
+
+    li {
+      margin-bottom: 0.4rem;
+      opacity: 0.95;
+    }
+  }
+
+  strong {
+    color: #d98300;
+    font-weight: 600;
+  }
+}
+
+.contact-info {
+  padding: 0.8rem;
+  background: rgba(255,255,255,0.05);
+  border-radius: 6px;
+  border: 1px solid var(--border);
+
+  a {
+    color: #d98300;
+    text-decoration: none;
+    font-weight: 600;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .privacy-page h1 {
+    font-size: 1.6rem;
+  }
+
+  .policy-section {
+    padding: 1rem;
+
+    h2 {
+      font-size: 1.2rem;
+    }
+  }
+}
