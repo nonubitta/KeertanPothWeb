@@ -1,0 +1,37 @@
+{
+  "BaniName": {
+    "Id": 31,
+    "PunjabiName": "lwvW",
+    "EnglishName": "Lava",
+    "IsVisible": 1,
+    "Bookmark": 0,
+    "SortOrder": 31
+  },
+  "Nitnem": [
+    { "id": 31, "sort": 1, "verseid": 32936 },
+    { "id": 31, "sort": 1, "verseid": 32937 },
+    { "id": 31, "sort": 1, "verseid": 32938 },
+    { "id": 31, "sort": 1, "verseid": 32939 },
+    { "id": 31, "sort": 1, "verseid": 32940 },
+    { "id": 31, "sort": 1, "verseid": 32941 },
+    { "id": 31, "sort": 1, "verseid": 32942 },
+    { "id": 31, "sort": 1, "verseid": 32943 },
+    { "id": 31, "sort": 1, "verseid": 32944 },
+    { "id": 31, "sort": 1, "verseid": 32945 },
+    { "id": 31, "sort": 1, "verseid": 32946 },
+    { "id": 31, "sort": 1, "verseid": 32947 },
+    { "id": 31, "sort": 1, "verseid": 32948 },
+    { "id": 31, "sort": 1, "verseid": 32949 },
+    { "id": 31, "sort": 1, "verseid": 32950 },
+    { "id": 31, "sort": 1, "verseid": 32951 },
+    { "id": 31, "sort": 1, "verseid": 32952 },
+    { "id": 31, "sort": 1, "verseid": 32953 },
+    { "id": 31, "sort": 1, "verseid": 32954 },
+    { "id": 31, "sort": 1, "verseid": 32955 },
+    { "id": 31, "sort": 1, "verseid": 32956 },
+    { "id": 31, "sort": 1, "verseid": 32957 },
+    { "id": 31, "sort": 1, "verseid": 32958 },
+    { "id": 31, "sort": 1, "verseid": 32959 },
+    { "id": 31, "sort": 1, "verseid": 32960 }
+  ]
+}

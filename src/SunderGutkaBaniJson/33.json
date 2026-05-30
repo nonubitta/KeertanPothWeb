@@ -1,0 +1,38 @@
+{
+  "BaniName": {
+    "Id": 33,
+    "PunjabiName": "GoVIAw",
+    "EnglishName": "Ghodiyan",
+    "IsVisible": 1,
+    "Bookmark": 0,
+    "SortOrder": 33
+  },
+  "Nitnem": [
+    { "id": 33, "sort": 1, "verseid": 25163 },
+    { "id": 33, "sort": 1, "verseid": 25164 },
+    { "id": 33, "sort": 1, "verseid": 25165 },
+    { "id": 33, "sort": 1, "verseid": 25166 },
+    { "id": 33, "sort": 1, "verseid": 25167 },
+    { "id": 33, "sort": 1, "verseid": 25168 },
+    { "id": 33, "sort": 1, "verseid": 25169 },
+    { "id": 33, "sort": 1, "verseid": 25170 },
+    { "id": 33, "sort": 1, "verseid": 25171 },
+    { "id": 33, "sort": 1, "verseid": 25172 },
+    { "id": 33, "sort": 1, "verseid": 25173 },
+    { "id": 33, "sort": 1, "verseid": 25174 },
+    { "id": 33, "sort": 1, "verseid": 25175 },
+    { "id": 33, "sort": 1, "verseid": 25176 },
+    { "id": 33, "sort": 1, "verseid": 25177 },
+    { "id": 33, "sort": 1, "verseid": 25178 },
+    { "id": 33, "sort": 1, "verseid": 25179 },
+    { "id": 33, "sort": 1, "verseid": 25180 },
+    { "id": 33, "sort": 1, "verseid": 25181 },
+    { "id": 33, "sort": 1, "verseid": 25182 },
+    { "id": 33, "sort": 1, "verseid": 25183 },
+    { "id": 33, "sort": 1, "verseid": 25184 },
+    { "id": 33, "sort": 1, "verseid": 25185 },
+    { "id": 33, "sort": 1, "verseid": 25186 },
+    { "id": 33, "sort": 1, "verseid": 25187 },
+    { "id": 33, "sort": 1, "verseid": 25188 }
+  ]
+}

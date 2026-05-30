@@ -1,0 +1,38 @@
+{
+  "BaniName": {
+    "Id": 35,
+    "PunjabiName": "ibrhVy",
+    "EnglishName": "Birhade",
+    "IsVisible": 1,
+    "Bookmark": 0,
+    "SortOrder": 35
+  },
+  "Nitnem": [
+    { "id": 35, "sort": 1, "verseid": 19697 },
+    { "id": 35, "sort": 1, "verseid": 19698 },
+    { "id": 35, "sort": 1, "verseid": 19699 },
+    { "id": 35, "sort": 1, "verseid": 19700 },
+    { "id": 35, "sort": 1, "verseid": 19701 },
+    { "id": 35, "sort": 1, "verseid": 19702 },
+    { "id": 35, "sort": 1, "verseid": 19703 },
+    { "id": 35, "sort": 1, "verseid": 19704 },
+    { "id": 35, "sort": 1, "verseid": 19705 },
+    { "id": 35, "sort": 1, "verseid": 19706 },
+    { "id": 35, "sort": 1, "verseid": 19707 },
+    { "id": 35, "sort": 1, "verseid": 19708 },
+    { "id": 35, "sort": 1, "verseid": 19709 },
+    { "id": 35, "sort": 1, "verseid": 19710 },
+    { "id": 35, "sort": 1, "verseid": 19711 },
+    { "id": 35, "sort": 1, "verseid": 19712 },
+    { "id": 35, "sort": 1, "verseid": 19713 },
+    { "id": 35, "sort": 1, "verseid": 19714 },
+    { "id": 35, "sort": 1, "verseid": 19715 },
+    { "id": 35, "sort": 1, "verseid": 19716 },
+    { "id": 35, "sort": 1, "verseid": 19717 },
+    { "id": 35, "sort": 1, "verseid": 19718 },
+    { "id": 35, "sort": 1, "verseid": 19719 },
+    { "id": 35, "sort": 1, "verseid": 19720 },
+    { "id": 35, "sort": 1, "verseid": 19721 },
+    { "id": 35, "sort": 1, "verseid": 19722 }
+  ]
+}

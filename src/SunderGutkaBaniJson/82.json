@@ -1,0 +1,132 @@
+{
+  "BaniName": {
+    "Id": 82,
+    "PunjabiName": "rwgu mwlI gauVw",
+    "EnglishName": "Raag Maalee Gauraa",
+    "IsVisible": 1,
+    "Bookmark": 0,
+    "SortOrder": 82
+  },
+  "Nitnem": [
+    {
+      "id": 82,
+      "sort": 1,
+      "verseid": 42140
+    },
+    {
+      "id": 82,
+      "sort": 2,
+      "verseid": 42139
+    },
+    {
+      "id": 82,
+      "sort": 3,
+      "verseid": 42140
+    },
+    {
+      "id": 82,
+      "sort": 4,
+      "verseid": 42141
+    },
+    {
+      "id": 82,
+      "sort": 5,
+      "verseid": 42142
+    },
+    {
+      "id": 82,
+      "sort": 6,
+      "verseid": 42143
+    },
+    {
+      "id": 82,
+      "sort": 7,
+      "verseid": 42144
+    },
+    {
+      "id": 82,
+      "sort": 8,
+      "verseid": 42145
+    },
+    {
+      "id": 82,
+      "sort": 9,
+      "verseid": 42146
+    },
+    {
+      "id": 82,
+      "sort": 10,
+      "verseid": 42147
+    },
+    {
+      "id": 82,
+      "sort": 11,
+      "verseid": 42148
+    },
+    {
+      "id": 82,
+      "sort": 12,
+      "verseid": 42149
+    },
+    {
+      "id": 82,
+      "sort": 13,
+      "verseid": 42150
+    },
+    {
+      "id": 82,
+      "sort": 14,
+      "verseid": 42151
+    },
+    {
+      "id": 82,
+      "sort": 15,
+      "verseid": 42152
+    },
+    {
+      "id": 82,
+      "sort": 16,
+      "verseid": 42153
+    },
+    {
+      "id": 82,
+      "sort": 17,
+      "verseid": 42154
+    },
+    {
+      "id": 82,
+      "sort": 18,
+      "verseid": 42155
+    },
+    {
+      "id": 82,
+      "sort": 19,
+      "verseid": 42156
+    },
+    {
+      "id": 82,
+      "sort": 20,
+      "verseid": 42157
+    },
+    {
+      "id": 82,
+      "sort": 21,
+      "verseid": 42158
+    },
+    {
+      "id": 82,
+      "sort": 22,
+      "verseid": 42159
+    },
+    {
+      "id": 82,
+      "sort": 23,
+      "verseid": 42160
+    },
+    {
+      "id": 82,
+      "sort": 24,
+      "verseid": 42161
+    }
+  ]
+}

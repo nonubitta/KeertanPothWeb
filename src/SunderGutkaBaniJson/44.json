@@ -1,0 +1,287 @@
+{
+  "BaniName": {
+    "Id": 44,
+    "PunjabiName": "svXy sRI muKbwk´ mhlw 5 - 1",
+    "EnglishName": "Savayiye Sri Mukhbak Mehla 5 - 1",
+    "IsVisible": 1,
+    "Bookmark": 0,
+    "SortOrder": 44
+  },
+  "Nitnem": [
+    {
+      "id": 44,
+      "sort": 1,
+      "verseid": 58833
+    },
+    {
+      "id": 44,
+      "sort": 1,
+      "verseid": 58834
+    },
+    {
+      "id": 44,
+      "sort": 1,
+      "verseid": 58835
+    },
+    {
+      "id": 44,
+      "sort": 1,
+      "verseid": 58836
+    },
+    {
+      "id": 44,
+      "sort": 1,
+      "verseid": 58837
+    },
+    {
+      "id": 44,
+      "sort": 1,
+      "verseid": 58838
+    },
+    {
+      "id": 44,
+      "sort": 1,
+      "verseid": 58839
+    },
+    {
+      "id": 44,
+      "sort": 1,
+      "verseid": 58840
+    },
+    {
+      "id": 44,
+      "sort": 1,
+      "verseid": 58841
+    },
+    {
+      "id": 44,
+      "sort": 1,
+      "verseid": 58842
+    },
+    {
+      "id": 44,
+      "sort": 2,
+      "verseid": 58843
+    },
+    {
+      "id": 44,
+      "sort": 2,
+      "verseid": 58844
+    },
+    {
+      "id": 44,
+      "sort": 2,
+      "verseid": 58845
+    },
+    {
+      "id": 44,
+      "sort": 2,
+      "verseid": 58846
+    },
+    {
+      "id": 44,
+      "sort": 2,
+      "verseid": 58847
+    },
+    {
+      "id": 44,
+      "sort": 3,
+      "verseid": 58848
+    },
+    {
+      "id": 44,
+      "sort": 3,
+      "verseid": 58849
+    },
+    {
+      "id": 44,
+      "sort": 3,
+      "verseid": 58850
+    },
+    {
+      "id": 44,
+      "sort": 3,
+      "verseid": 58851
+    },
+    {
+      "id": 44,
+      "sort": 3,
+      "verseid": 58852
+    },
+    {
+      "id": 44,
+      "sort": 4,
+      "verseid": 58853
+    },
+    {
+      "id": 44,
+      "sort": 4,
+      "verseid": 58854
+    },
+    {
+      "id": 44,
+      "sort": 4,
+      "verseid": 58855
+    },
+    {
+      "id": 44,
+      "sort": 4,
+      "verseid": 58856
+    },
+    {
+      "id": 44,
+      "sort": 4,
+      "verseid": 58857
+    },
+    {
+      "id": 44,
+      "sort": 5,
+      "verseid": 58858
+    },
+    {
+      "id": 44,
+      "sort": 5,
+      "verseid": 58859
+    },
+    {
+      "id": 44,
+      "sort": 5,
+      "verseid": 58860
+    },
+    {
+      "id": 44,
+      "sort": 5,
+      "verseid": 58861
+    },
+    {
+      "id": 44,
+      "sort": 5,
+      "verseid": 58862
+    },
+    {
+      "id": 44,
+      "sort": 5,
+      "verseid": 58863
+    },
+    {
+      "id": 44,
+      "sort": 6,
+      "verseid": 58864
+    },
+    {
+      "id": 44,
+      "sort": 6,
+      "verseid": 58865
+    },
+    {
+      "id": 44,
+      "sort": 6,
+      "verseid": 58866
+    },
+    {
+      "id": 44,
+      "sort": 6,
+      "verseid": 58867
+    },
+    {
+      "id": 44,
+      "sort": 6,
+      "verseid": 58868
+    },
+    {
+      "id": 44,
+      "sort": 6,
+      "verseid": 58869
+    },
+    {
+      "id": 44,
+      "sort": 7,
+      "verseid": 58870
+    },
+    {
+      "id": 44,
+      "sort": 7,
+      "verseid": 58871
+    },
+    {
+      "id": 44,
+      "sort": 7,
+      "verseid": 58872
+    },
+    {
+      "id": 44,
+      "sort": 7,
+      "verseid": 58873
+    },
+    {
+      "id": 44,
+      "sort": 7,
+      "verseid": 58874
+    },
+    {
+      "id": 44,
+      "sort": 7,
+      "verseid": 58875
+    },
+    {
+      "id": 44,
+      "sort": 8,
+      "verseid": 58876
+    },
+    {
+      "id": 44,
+      "sort": 8,
+      "verseid": 58877
+    },
+    {
+      "id": 44,
+      "sort": 8,
+      "verseid": 58878
+    },
+    {
+      "id": 44,
+      "sort": 8,
+      "verseid": 58879
+    },
+    {
+      "id": 44,
+      "sort": 8,
+      "verseid": 58880
+    },
+    {
+      "id": 44,
+      "sort": 8,
+      "verseid": 58881
+    },
+    {
+      "id": 44,
+      "sort": 9,
+      "verseid": 58882
+    },
+    {
+      "id": 44,
+      "sort": 9,
+      "verseid": 58883
+    },
+    {
+      "id": 44,
+      "sort": 9,
+      "verseid": 58884
+    },
+    {
+      "id": 44,
+      "sort": 9,
+      "verseid": 58885
+    },
+    {
+      "id": 44,
+      "sort": 9,
+      "verseid": 58886
+    },
+    {
+      "id": 44,
+      "sort": 9,
+      "verseid": 58887
+    }
+  ]
+}

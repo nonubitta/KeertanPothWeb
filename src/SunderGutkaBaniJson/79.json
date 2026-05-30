@@ -1,0 +1,132 @@
+{
+  "BaniName": {
+    "Id": 79,
+    "PunjabiName": "rwgu tofI (bwxI BgqW kI)",
+    "EnglishName": "Raag Todee (baanee Bhagataa Kee)",
+    "IsVisible": 1,
+    "Bookmark": 0,
+    "SortOrder": 79
+  },
+  "Nitnem": [
+    {
+      "id": 79,
+      "sort": 1,
+      "verseid": 30793
+    },
+    {
+      "id": 79,
+      "sort": 2,
+      "verseid": 30792
+    },
+    {
+      "id": 79,
+      "sort": 3,
+      "verseid": 30793
+    },
+    {
+      "id": 79,
+      "sort": 4,
+      "verseid": 30794
+    },
+    {
+      "id": 79,
+      "sort": 5,
+      "verseid": 30795
+    },
+    {
+      "id": 79,
+      "sort": 6,
+      "verseid": 30796
+    },
+    {
+      "id": 79,
+      "sort": 7,
+      "verseid": 30797
+    },
+    {
+      "id": 79,
+      "sort": 8,
+      "verseid": 30798
+    },
+    {
+      "id": 79,
+      "sort": 9,
+      "verseid": 30799
+    },
+    {
+      "id": 79,
+      "sort": 10,
+      "verseid": 30800
+    },
+    {
+      "id": 79,
+      "sort": 11,
+      "verseid": 30801
+    },
+    {
+      "id": 79,
+      "sort": 12,
+      "verseid": 30802
+    },
+    {
+      "id": 79,
+      "sort": 13,
+      "verseid": 30803
+    },
+    {
+      "id": 79,
+      "sort": 14,
+      "verseid": 30804
+    },
+    {
+      "id": 79,
+      "sort": 15,
+      "verseid": 30805
+    },
+    {
+      "id": 79,
+      "sort": 16,
+      "verseid": 30806
+    },
+    {
+      "id": 79,
+      "sort": 17,
+      "verseid": 30807
+    },
+    {
+      "id": 79,
+      "sort": 18,
+      "verseid": 30808
+    },
+    {
+      "id": 79,
+      "sort": 19,
+      "verseid": 30809
+    },
+    {
+      "id": 79,
+      "sort": 20,
+      "verseid": 30810
+    },
+    {
+      "id": 79,
+      "sort": 21,
+      "verseid": 30811
+    },
+    {
+      "id": 79,
+      "sort": 22,
+      "verseid": 30812
+    },
+    {
+      "id": 79,
+      "sort": 23,
+      "verseid": 30813
+    },
+    {
+      "id": 79,
+      "sort": 24,
+      "verseid": 30814
+    }
+  ]
+}

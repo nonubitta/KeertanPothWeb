@@ -1,0 +1,35 @@
+{
+  "BaniName": {
+    "Id": 34,
+    "PunjabiName": "krhly",
+    "EnglishName": "Karhale",
+    "IsVisible": 1,
+    "Bookmark": 0,
+    "SortOrder": 34
+  },
+  "Nitnem": [
+    { "id": 34, "sort": 1, "verseid": 10141 },
+    { "id": 34, "sort": 1, "verseid": 10142 },
+    { "id": 34, "sort": 1, "verseid": 10143 },
+    { "id": 34, "sort": 1, "verseid": 10144 },
+    { "id": 34, "sort": 1, "verseid": 10145 },
+    { "id": 34, "sort": 1, "verseid": 10146 },
+    { "id": 34, "sort": 1, "verseid": 10147 },
+    { "id": 34, "sort": 1, "verseid": 10148 },
+    { "id": 34, "sort": 1, "verseid": 10149 },
+    { "id": 34, "sort": 1, "verseid": 10150 },
+    { "id": 34, "sort": 1, "verseid": 10151 },
+    { "id": 34, "sort": 1, "verseid": 10152 },
+    { "id": 34, "sort": 1, "verseid": 10153 },
+    { "id": 34, "sort": 1, "verseid": 10154 },
+    { "id": 34, "sort": 1, "verseid": 10155 },
+    { "id": 34, "sort": 1, "verseid": 10156 },
+    { "id": 34, "sort": 1, "verseid": 10157 },
+    { "id": 34, "sort": 1, "verseid": 10158 },
+    { "id": 34, "sort": 1, "verseid": 10159 },
+    { "id": 34, "sort": 1, "verseid": 10160 },
+    { "id": 34, "sort": 1, "verseid": 10161 },
+    { "id": 34, "sort": 1, "verseid": 10162 },
+    { "id": 34, "sort": 1, "verseid": 10163 }
+  ]
+}

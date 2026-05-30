@@ -1,0 +1,382 @@
+{
+  "BaniName": {
+    "Id": 78,
+    "PunjabiName": "rwgu isrIrwgu (kbIr jIau kw)",
+    "EnglishName": "Raag Sireeraag (kabeer Jeeau Kaa)",
+    "IsVisible": 1,
+    "Bookmark": 0,
+    "SortOrder": 78
+  },
+  "Nitnem": [
+    {
+      "id": 78,
+      "sort": 1,
+      "verseid": 3667
+    },
+    {
+      "id": 78,
+      "sort": 2,
+      "verseid": 3668
+    },
+    {
+      "id": 78,
+      "sort": 3,
+      "verseid": 3669
+    },
+    {
+      "id": 78,
+      "sort": 4,
+      "verseid": 3670
+    },
+    {
+      "id": 78,
+      "sort": 5,
+      "verseid": 3671
+    },
+    {
+      "id": 78,
+      "sort": 6,
+      "verseid": 3672
+    },
+    {
+      "id": 78,
+      "sort": 7,
+      "verseid": 3673
+    },
+    {
+      "id": 78,
+      "sort": 8,
+      "verseid": 3674
+    },
+    {
+      "id": 78,
+      "sort": 9,
+      "verseid": 3675
+    },
+    {
+      "id": 78,
+      "sort": 10,
+      "verseid": 3676
+    },
+    {
+      "id": 78,
+      "sort": 11,
+      "verseid": 3677
+    },
+    {
+      "id": 78,
+      "sort": 12,
+      "verseid": 3678
+    },
+    {
+      "id": 78,
+      "sort": 13,
+      "verseid": 3679
+    },
+    {
+      "id": 78,
+      "sort": 14,
+      "verseid": 3680
+    },
+    {
+      "id": 78,
+      "sort": 15,
+      "verseid": 3681
+    },
+    {
+      "id": 78,
+      "sort": 16,
+      "verseid": 3682
+    },
+    {
+      "id": 78,
+      "sort": 17,
+      "verseid": 3683
+    },
+    {
+      "id": 78,
+      "sort": 18,
+      "verseid": 3684
+    },
+    {
+      "id": 78,
+      "sort": 19,
+      "verseid": 3685
+    },
+    {
+      "id": 78,
+      "sort": 20,
+      "verseid": 3686
+    },
+    {
+      "id": 78,
+      "sort": 21,
+      "verseid": 3687
+    },
+    {
+      "id": 78,
+      "sort": 22,
+      "verseid": 3688
+    },
+    {
+      "id": 78,
+      "sort": 23,
+      "verseid": 3689
+    },
+    {
+      "id": 78,
+      "sort": 24,
+      "verseid": 3690
+    },
+    {
+      "id": 78,
+      "sort": 25,
+      "verseid": 3691
+    },
+    {
+      "id": 78,
+      "sort": 26,
+      "verseid": 3692
+    },
+    {
+      "id": 78,
+      "sort": 27,
+      "verseid": 3693
+    },
+    {
+      "id": 78,
+      "sort": 28,
+      "verseid": 3694
+    },
+    {
+      "id": 78,
+      "sort": 29,
+      "verseid": 3695
+    },
+    {
+      "id": 78,
+      "sort": 30,
+      "verseid": 3696
+    },
+    {
+      "id": 78,
+      "sort": 31,
+      "verseid": 3697
+    },
+    {
+      "id": 78,
+      "sort": 32,
+      "verseid": 3698
+    },
+    {
+      "id": 78,
+      "sort": 33,
+      "verseid": 3699
+    },
+    {
+      "id": 78,
+      "sort": 34,
+      "verseid": 3700
+    },
+    {
+      "id": 78,
+      "sort": 35,
+      "verseid": 3701
+    },
+    {
+      "id": 78,
+      "sort": 36,
+      "verseid": 3702
+    },
+    {
+      "id": 78,
+      "sort": 37,
+      "verseid": 3703
+    },
+    {
+      "id": 78,
+      "sort": 38,
+      "verseid": 3704
+    },
+    {
+      "id": 78,
+      "sort": 39,
+      "verseid": 3705
+    },
+    {
+      "id": 78,
+      "sort": 40,
+      "verseid": 3708
+    },
+    {
+      "id": 78,
+      "sort": 41,
+      "verseid": 3706
+    },
+    {
+      "id": 78,
+      "sort": 42,
+      "verseid": 3707
+    },
+    {
+      "id": 78,
+      "sort": 43,
+      "verseid": 3708
+    },
+    {
+      "id": 78,
+      "sort": 44,
+      "verseid": 3709
+    },
+    {
+      "id": 78,
+      "sort": 45,
+      "verseid": 3710
+    },
+    {
+      "id": 78,
+      "sort": 46,
+      "verseid": 3711
+    },
+    {
+      "id": 78,
+      "sort": 47,
+      "verseid": 3712
+    },
+    {
+      "id": 78,
+      "sort": 48,
+      "verseid": 3713
+    },
+    {
+      "id": 78,
+      "sort": 49,
+      "verseid": 3714
+    },
+    {
+      "id": 78,
+      "sort": 50,
+      "verseid": 3715
+    },
+    {
+      "id": 78,
+      "sort": 51,
+      "verseid": 3716
+    },
+    {
+      "id": 78,
+      "sort": 52,
+      "verseid": 3717
+    },
+    {
+      "id": 78,
+      "sort": 53,
+      "verseid": 3718
+    },
+    {
+      "id": 78,
+      "sort": 54,
+      "verseid": 3719
+    },
+    {
+      "id": 78,
+      "sort": 55,
+      "verseid": 3720
+    },
+    {
+      "id": 78,
+      "sort": 56,
+      "verseid": 3721
+    },
+    {
+      "id": 78,
+      "sort": 57,
+      "verseid": 3722
+    },
+    {
+      "id": 78,
+      "sort": 58,
+      "verseid": 3723
+    },
+    {
+      "id": 78,
+      "sort": 59,
+      "verseid": 3724
+    },
+    {
+      "id": 78,
+      "sort": 60,
+      "verseid": 3725
+    },
+    {
+      "id": 78,
+      "sort": 61,
+      "verseid": 3726
+    },
+    {
+      "id": 78,
+      "sort": 62,
+      "verseid": 3727
+    },
+    {
+      "id": 78,
+      "sort": 63,
+      "verseid": 3728
+    },
+    {
+      "id": 78,
+      "sort": 64,
+      "verseid": 3729
+    },
+    {
+      "id": 78,
+      "sort": 65,
+      "verseid": 3730
+    },
+    {
+      "id": 78,
+      "sort": 66,
+      "verseid": 3731
+    },
+    {
+      "id": 78,
+      "sort": 67,
+      "verseid": 3732
+    },
+    {
+      "id": 78,
+      "sort": 68,
+      "verseid": 3733
+    },
+    {
+      "id": 78,
+      "sort": 69,
+      "verseid": 3734
+    },
+    {
+      "id": 78,
+      "sort": 70,
+      "verseid": 3735
+    },
+    {
+      "id": 78,
+      "sort": 71,
+      "verseid": 3736
+    },
+    {
+      "id": 78,
+      "sort": 72,
+      "verseid": 3737
+    },
+    {
+      "id": 78,
+      "sort": 73,
+      "verseid": 3738
+    },
+    {
+      "id": 78,
+      "sort": 74,
+      "verseid": 3739
+    }
+  ]
+}
