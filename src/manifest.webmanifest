@@ -1,0 +1,17 @@
+{
+  "name": "Keertan Pothi",
+  "short_name": "Keertan Pothi",
+  "description": "Search Gurbani and Sikh Scriptures",
+  "theme_color": "#121212",
+  "background_color": "#121212",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "assets/images/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
