@@ -9,6 +9,7 @@ import { Router, RouterModule } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { SpeechTestComponent } from '../speech-test.component/speech-test.component';
 import { SpeechHelper } from '../speech-helper';
+import { SeoService } from '../services/seo.service';
 export enum ShabadSource {
   None = 'None',
   Random = 'Random',
@@ -108,12 +109,18 @@ noResults: boolean = false;
 
   //#region constructor, onInit
   constructor(private dbService: DbService, private router: Router, 
-    private route: ActivatedRoute
+    private route: ActivatedRoute, private seo: SeoService
   ) {}
 
   async ngOnInit() {
     
-      // Load theme from localStorage
+    this.seo.update(
+    'Search Gurbani | Keertan Pothi',
+    'Search Gurbani from Sri Guru Granth Sahib Ji, Dasam Granth Sahib Ji, Bhai Gurdas Ji and many other Sikh scriptures.',
+    'https://keertanpothi.org/'
+);  
+    
+    // Load theme from localStorage
     const savedTheme = localStorage.getItem('kpoth-theme');
     if (savedTheme) {
       this.setTheme(savedTheme);
