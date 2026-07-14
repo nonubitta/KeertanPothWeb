@@ -14,16 +14,19 @@ export class SeoService {
   update(
     title: string,
     description: string,
-    url: string = 'https://keertanpothi.org/'
+    url: string,
+    image: string = 'https://keertanpothi.org/assets/images/social-preview.png'
   ) {
 
     this.title.setTitle(title);
 
+    // Standard SEO
     this.meta.updateTag({
       name: 'description',
       content: description
     });
 
+    // Open Graph
     this.meta.updateTag({
       property: 'og:title',
       content: title
@@ -40,6 +43,12 @@ export class SeoService {
     });
 
     this.meta.updateTag({
+      property: 'og:image',
+      content: image
+    });
+
+    // Twitter
+    this.meta.updateTag({
       name: 'twitter:title',
       content: title
     });
@@ -50,8 +59,22 @@ export class SeoService {
     });
 
     this.meta.updateTag({
-      rel: 'canonical',
-      href: url
+      name: 'twitter:image',
+      content: image
     });
+
+    // Canonical
+    let canonical = document.querySelector(
+      'link[rel="canonical"]'
+    ) as HTMLLinkElement | null;
+
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      document.head.appendChild(canonical);
+    }
+
+    canonical.href = url;
   }
+
 }
