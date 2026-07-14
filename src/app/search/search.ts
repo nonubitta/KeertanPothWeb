@@ -119,6 +119,30 @@ noResults: boolean = false;
     'Search Gurbani from Sri Guru Granth Sahib Ji, Dasam Granth Sahib Ji, Bhai Gurdas Ji and many other Sikh scriptures.',
     'https://keertanpothi.org/'
 );  
+
+this.seo.setStructuredData({
+
+  "@context": "https://schema.org",
+
+  "@type": "WebSite",
+
+  "name": "Keertan Pothi",
+
+  "url": "https://keertanpothi.org",
+
+  "description": "Search Gurbani from Sikh scriptures.",
+
+  "potentialAction": {
+
+    "@type": "SearchAction",
+
+    "target": "https://keertanpothi.org/?search={search_term_string}",
+
+    "query-input": "required name=search_term_string"
+
+  }
+
+});
     
     // Load theme from localStorage
     const savedTheme = localStorage.getItem('kpoth-theme');
