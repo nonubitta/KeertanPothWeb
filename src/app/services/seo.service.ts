@@ -15,7 +15,7 @@ export class SeoService {
     title: string,
     description: string,
     url: string,
-    image: string = 'https://keertanpothi.org/assets/images/social-preview.png'
+    image: string = 'https://keertanpothi.org/assets/images/favicon.png'
   ) {
 
     this.title.setTitle(title);
@@ -75,6 +75,25 @@ export class SeoService {
     }
 
     canonical.href = url;
+  }
+
+  setStructuredData(data: object) {
+
+    const existing = document.getElementById('structured-data');
+
+    if (existing) {
+      existing.remove();
+    }
+
+    const script = document.createElement('script');
+
+    script.type = 'application/ld+json';
+
+    script.id = 'structured-data';
+
+    script.text = JSON.stringify(data);
+
+    document.head.appendChild(script);
   }
 
 }
