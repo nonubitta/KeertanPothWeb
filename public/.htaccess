@@ -1,0 +1,15 @@
+Options -MultiViews
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Keep existing SQL protection
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^script_v[0-9]+\.sql$ - [R=404,L,NC]
+
+    # Angular routes
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ /index.html [L]
+</IfModule>
