@@ -24,7 +24,10 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/assets"
+              "src/assets",
+              { "glob": "robots.txt", "input": "src", "output": "" },
+              { "glob": "sitemap.xml", "input": "src", "output": "" },
+              { "glob": "manifest.webmanifest", "input": "src", "output": "" }
             ],
             "styles": [
               "src/styles.scss"
@@ -79,7 +82,10 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/assets"
+              "src/assets",
+              { "glob": "robots.txt", "input": "src", "output": "" },
+              { "glob": "sitemap.xml", "input": "src", "output": "" },
+              { "glob": "manifest.webmanifest", "input": "src", "output": "" }
             ],
             "styles": [
               "src/styles.scss"
@@ -88,5 +94,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
