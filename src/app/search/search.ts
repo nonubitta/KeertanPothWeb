@@ -356,6 +356,31 @@ this.seo.setStructuredData({
     }
   }
 
+  exportFavorites() {
+    if (this.favorites.length === 0) {
+      this.showRoastMessageFn('No favorites to export');
+      return;
+    }
+    const dataStr = JSON.stringify(this.favorites, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `keertan-pothi-favorites-${new Date().toISOString().split('T')[0]}.json`;
+    link.click();
+    URL.revokeObjectURL(url);
+    this.showRoastMessageFn('Favorites exported successfully');
+  }
+
+  removeFromFavorites(shabadId: number | undefined) {
+    if (shabadId === undefined) return;
+    if (confirm('Remove this Shabad from favorites?')) {
+      this.favorites = this.favorites.filter(f => f.ShabadID !== shabadId);
+      localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(this.favorites));
+      this.showRoastMessageFn('Shabad removed from favorites');
+    }
+  }
+
   //#region Pothi management
   openAddPothiModal() {
     this.newPothiName = '';
