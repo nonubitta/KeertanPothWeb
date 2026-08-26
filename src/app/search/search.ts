@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DbService } from '../db.service';  // Your existing service handling sql.js
@@ -520,6 +520,9 @@ this.seo.setStructuredData({
       const results = await this.dbService.query(query);
       this.filteredItems = mapResultsToVerseSearchResults(results);
       this.noResults = this.filteredItems.length === 0;
+      if(this.filteredItems.length === 1){
+        this.onSelectItem(this.filteredItems[0], "SEARCH");
+      }
     } catch (error) {
       console.error('Error querying the DB:', error);
       this.filteredItems = [];
@@ -938,5 +941,23 @@ this.seo.setStructuredData({
         this.showRoastMessageFn('Copy failed');
       }
     });
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  handleKeyboardShortcut(event: KeyboardEvent) {
+    // Ctrl + Shift + F to add to favorites
+    if (event.ctrlKey && event.shiftKey && event.key === 'F') {
+      event.preventDefault();
+      this.addToFavorites();
+    }
+    // Ctrl + Shift + D to focus search bar
+    if (event.ctrlKey && event.shiftKey && event.key === 'D') {
+      event.preventDefault();
+      const searchInput = document.getElementById('searchText') as HTMLInputElement;
+      if (searchInput) {
+        searchInput.focus();
+        searchInput.select();
+      }
+    }
   }
 }
