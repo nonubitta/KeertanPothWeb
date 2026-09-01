@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DragDropModule, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { RouterModule } from '@angular/router';
 import { VerseSearchResult } from '../verse.model';
 
 /**
@@ -12,7 +13,7 @@ import { VerseSearchResult } from '../verse.model';
 @Component({
   selector: 'app-edit-favorites',
   // Import Angular common directives and CDK drag‑drop module for this standalone component.
-  imports: [CommonModule, DragDropModule],
+  imports: [CommonModule, DragDropModule, RouterModule],
   templateUrl: './edit-favorites.html',
   styleUrl: './edit-favorites.scss',
   standalone: true
