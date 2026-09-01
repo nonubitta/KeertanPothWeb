@@ -317,14 +317,39 @@
       <!-- favorites Section -->
       <div *ngSwitchCase="'favorites'">
         <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-          <div style="display: flex; gap: 0.5rem;">
+          <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
             <button class="btn-clear-history" (click)="exportFavorites()"
               style="background: none; border: none; color: #4fc3f7; font-size: 1rem; cursor: pointer; padding: 0.5rem 1rem;">
-              Export Favorites
+              Export
             </button>
+            <ng-container *ngIf="!showImportFileInput">
+              <button class="btn-clear-history" type="button" (click)="showImportFileInput = true"
+                style="background: none; border: none; color: #81c784; font-size: 1rem; cursor: pointer; padding: 0.5rem 1rem;">
+                Import
+              </button>
+            </ng-container>
+            <ng-container *ngIf="showImportFileInput">
+              <label style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                <input type="file" accept=".json" (change)="importFavorites($event)" 
+                  style="display: none;" #fileInput />
+                <button class="btn-clear-history" type="button" (click)="fileInput.click()"
+                  style="background: none; border: none; color: #81c784; font-size: 1rem; cursor: pointer; padding: 0.5rem 1rem;">
+                  Browse JSON
+                </button>
+                <button class="btn-clear-history" type="button" (click)="showImportFileInput = false"
+                  style="background: none; border: none; color: #e57373; font-size: 1rem; cursor: pointer; padding: 0.5rem 1rem;">
+                  Cancel
+                </button>
+              </label>
+            </ng-container>
             <button class="btn-clear-history" (click)="confirmClearFavorites()"
               style="background: none; border: none; color: #e57373; font-size: 1rem; cursor: pointer; padding: 0.5rem 1rem;">
-              Clear Favorites
+              Delete All
+            </button>
+            <button class="btn-clear-history" (click)="openEditFavorites()"
+              style="background: none; border: none; color: #ffb74d; font-size: 1rem; cursor: pointer; padding: 0.5rem 1rem;"
+              title="Edit favorites (drag to reorder)">
+              ✎
             </button>
           </div>
         </div>

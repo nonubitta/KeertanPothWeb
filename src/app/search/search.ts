@@ -84,6 +84,9 @@ noResults: boolean = false;
   // Favorites
   favorites: VerseSearchResult[] = [];
 
+  // Import favorites UI state
+  showImportFileInput: boolean = false;
+
   // Theme
   theme: string = 'navy'; // set blue/navy as default
 
@@ -250,6 +253,11 @@ this.seo.setStructuredData({
     }
   }
 
+  openEditFavorites() {
+    this.router.navigate(['/favorites']);
+    this.closeSidePanel();
+  }
+
   openSidePanel(tab: 'random' | 'links' | 'settings' | 'history' | 'pothi' | 'favorites') {
     const prevTab = this.activeTab;
     this.activeTab = tab;
@@ -370,6 +378,62 @@ this.seo.setStructuredData({
     link.click();
     URL.revokeObjectURL(url);
     this.showRoastMessageFn('Favorites exported successfully');
+  }
+
+  importFavorites(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (!input.files || input.files.length === 0) return;
+
+    const file = input.files[0];
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      try {
+        const content = e.target?.result as string;
+        const importedFavorites = JSON.parse(content);
+
+        if (!Array.isArray(importedFavorites)) {
+          this.showRoastMessageFn('Invalid file format: expected an array of favorites');
+          return;
+        }
+
+        let addedCount = 0;
+        const validFavorites: VerseSearchResult[] = [];
+        
+        for (const fav of importedFavorites) {
+          // Validate the favorite has required fields
+          if (fav && fav.ShabadID && fav.Gurmukhi) {
+            // Avoid duplicates by ShabadID
+            if (!this.favorites.some(f => f.ShabadID === fav.ShabadID)) {
+              validFavorites.push(fav);
+              addedCount++;
+            }
+          }
+        }
+
+        // Prepend the valid favorites in their original order (first in JSON = first in list)
+        this.favorites = [...validFavorites, ...this.favorites];
+
+        localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(this.favorites));
+        this.showRoastMessageFn(`${addedCount} favorite(s) imported successfully`);
+      } catch (error) {
+        console.error('Error importing favorites:', error);
+        this.showRoastMessageFn('Failed to import favorites: invalid JSON file');
+      } finally {
+        // Reset the input so the same file can be selected again
+        input.value = '';
+        // Hide the file input UI
+        this.showImportFileInput = false;
+      }
+    };
+
+    reader.onerror = () => {
+      this.showRoastMessageFn('Failed to read file');
+      input.value = '';
+      this.showImportFileInput = false;
+    };
+
+    reader.readAsText(file);
   }
 
   removeFromFavorites(shabadId: number | undefined) {
