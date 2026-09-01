@@ -45,4 +45,30 @@ export class EditFavorites implements OnInit {
     // Persist the reordered list.
     localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(this.favorites));
   }
+
+  /** Removes a favorite at the given index and persists the change. */
+  removeFavorite(index: number): void {
+    if (index >= 0 && index < this.favorites.length) {
+      this.favorites.splice(index, 1);
+      localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(this.favorites));
+    }
+  }
+
+  /** Moves the favorite at the given index to the top of the list. */
+  moveToTop(index: number): void {
+    if (index > 0 && index < this.favorites.length) {
+      const [item] = this.favorites.splice(index, 1);
+      this.favorites.unshift(item);
+      localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(this.favorites));
+    }
+  }
+
+  /** Moves the favorite at the given index to the bottom of the list. */
+  moveToBottom(index: number): void {
+    if (index >= 0 && index < this.favorites.length - 1) {
+      const [item] = this.favorites.splice(index, 1);
+      this.favorites.push(item);
+      localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(this.favorites));
+    }
+  }
 }

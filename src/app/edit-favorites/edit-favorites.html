@@ -13,8 +13,16 @@
 			class="favorite-item"
 		>
 			<span class="drag-handle" cdkDragHandle>☰</span>
+			<!-- Serial number for each favorite -->
+			<span class="favorite-index">{{ i + 1 }}.&nbsp;</span>
 			<span class="favorite-text">
 				{{ fav.Gurmukhi || fav.Punjabi || 'Unnamed favorite' }}
+			</span>
+			<!-- Action buttons for each favorite -->
+			<span class="favorite-actions">
+				<button type="button" (click)="removeFavorite(i)" title="Remove favorite">✖</button>
+				<button type="button" (click)="moveToTop(i)" title="Move to top">⬆️</button>
+				<button type="button" (click)="moveToBottom(i)" title="Move to bottom">⬇️</button>
 			</span>
 		</div>
 	</div>
