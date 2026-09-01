@@ -217,11 +217,11 @@ header {
 //#endregion 
 
 //#region Side Panels
-.side-panel {
+ .side-panel {
   position: fixed;
   top: 0;
   left: -100%; /* Completely hidden */
-  width: 300px;
+  width: 500px; /* increased width for larger favorites side bar */
   height: 100vh;
   background: $theme-dark-sidepanel;
   border-right: 1px solid rgba(64, 224, 208, 0.2);
@@ -231,7 +231,7 @@ header {
   overflow-y: auto;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
   padding: 1rem 1rem;
-}
+ }
 
 .side-panel-header {
   padding: 1rem;
