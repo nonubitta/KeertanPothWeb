@@ -1,0 +1,40 @@
+/* Styles for the Edit Favorites component – aligned with global dark theme */
+.edit-favorites-container {
+	padding: 1rem;
+	/* Use the global background variable for consistency */
+	background-color: var(--background);
+	color: var(--text);
+}
+
+.favorites-list {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	max-width: 600px;
+	padding-left: 0;
+	list-style: none;
+}
+
+.favorite-item {
+	display: flex;
+	align-items: center;
+	padding: 0.5rem 0.75rem;
+	background: var(--surface);
+	border-radius: 4px;
+	cursor: move;
+	border: 1px solid var(--border);
+}
+
+.drag-handle {
+	margin-right: 0.75rem;
+	font-size: 1.2rem;
+	cursor: grab;
+	color: var(--accent);
+}
+
+.favorite-text {
+	flex: 1;
+	color: var(--text);
+    font-size: large;
+	font-family: 'Gurakhar', sans-serif;
+}

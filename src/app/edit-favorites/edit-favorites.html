@@ -1,1 +1,20 @@
-<p>edit-favorites works!</p>
+<div class="edit-favorites-container">
+	<h2>Edit Favorites</h2>
+	<p *ngIf="favorites.length === 0">No favorites saved.</p>
+	<div
+		cdkDropList
+		class="favorites-list"
+		(cdkDropListDropped)="onDrop($event)"
+	>
+		<div
+			*ngFor="let fav of favorites; let i = index"
+			cdkDrag
+			class="favorite-item"
+		>
+			<span class="drag-handle" cdkDragHandle>☰</span>
+			<span class="favorite-text">
+				{{ fav.Gurmukhi || fav.Punjabi || 'Unnamed favorite' }}
+			</span>
+		</div>
+	</div>
+</div>
