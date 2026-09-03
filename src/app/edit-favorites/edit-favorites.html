@@ -118,10 +118,10 @@
 				{{ searchError }}
 			</div>
 			
-			<div *ngIf="searchResults && searchResults.length > 0 && !isSearching" class="search-results">
+			<div *ngIf="searchResults && searchResults.length > 0 && !isSearching && (!selectedShabad || selectedShabad.length === 0)" class="search-results">
 				<h4>Search Results ({{ searchResults.length }})</h4>
 				<div class="results-list">
-					<div *ngFor="let result of searchResults" class="result-item" >
+					<div *ngFor="let result of searchResults" class="result-item" (click)="selectShabadFromSearch(result)">
 						<div class="result-text" [innerHTML]="result.GurmukhiUni || result.Gurmukhi"></div>
 						<div class="result-meta">
 							<span *ngIf="result.ShabadID">Shabad ID: {{ result.ShabadID }}</span>
@@ -131,6 +131,52 @@
 						</div>
 					</div>
 				</div>
+			</div>
+
+			<!-- Display full shabad in dialog -->
+			<div *ngIf="selectedShabad && selectedShabad.length > 0" class="shabad-display">
+				<div class="shabad-header">
+					<h4>Shabad Preview</h4>
+					<button type="button" class="close-btn" (click)="clearShabad()" title="Back to search results">✖</button>
+				</div>
+				<div class="shabad-meta">
+					<span class="shabad-id" *ngIf="selectedShabad[0].ShabadID">Shabad ID: {{ selectedShabad[0].ShabadID }}</span>
+					<span class="verse-count">{{ selectedShabad.length }} verse(s)</span>
+					<span class="page-no" *ngIf="selectedShabad[0].PageNo">Page: {{ selectedShabad[0].PageNo }}</span>
+					<span class="raag" *ngIf="selectedShabad[0].RaagEnglish">Raag: {{ selectedShabad[0].RaagEnglish }}</span>
+					<span class="writer" *ngIf="selectedShabad[0].WriterEnglish">Writer: {{ selectedShabad[0].WriterEnglish }}</span>
+				</div>
+				<div class="shabad-verses">
+					<div *ngFor="let verse of selectedShabad; let i = index" 
+				     class="verse-item" 
+				     [class.selected]="i === selectedVerseIndex"
+				     (click)="selectVerseFromDialog(verse, i)"
+				     title="Click to select this verse for favorites">
+					<div class="verse-number">{{ i + 1 }}.</div>
+					<div class="shabad-text" [innerHTML]="verse.GurmukhiHtml || verse.Gurmukhi"></div>
+					<div class="verse-selected-badge" *ngIf="i === selectedVerseIndex">✓ Selected for favorites</div>
+				</div>
+			</div>
+			<div class="shabad-insert-index">
+				<label for="insert-index-input">Insert at position (0 = first, empty = append to end):</label>
+				<input 
+					id="insert-index-input" 
+					type="number" 
+					[(ngModel)]="insertIndex" 
+					min="0" 
+					[max]="favorites.length"
+					placeholder="e.g., 0 for first, {{ favorites.length }} for end"
+					style="width: 80px; padding: 0.5rem; margin-left: 0.5rem;"
+				/>
+			</div>
+			<div class="shabad-actions">
+				<button type="button" (click)="addDisplayedShabadToFavorites()" class="add-to-favorites-btn" [disabled]="selectedShabad.length === 0">
+					Add to Favorites {{ selectedVerseIndex >= 0 ? '(Verse ' + (selectedVerseIndex + 1) + ')' : '(Verse 1)' }}
+				</button>
+				<button type="button" (click)="clearShabad()" class="back-to-search-btn">
+					Back to Search
+				</button>
+			</div>
 			</div>
 			
 			<div *ngIf="searchResults && searchResults.length === 0 && !isSearching && shabadSearchQuery.trim()" class="no-results">

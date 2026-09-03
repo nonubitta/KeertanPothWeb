@@ -444,3 +444,197 @@
 		width: 100%;
 	}
 }
+
+/* Shabad Display in Dialog */
+.shabad-display {
+	animation: fadeIn 0.2s ease;
+}
+
+.shabad-display .shabad-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 1.5rem;
+	border-bottom: 1px solid var(--border);
+	background: var(--background);
+	border-radius: 12px 12px 0 0;
+	margin: -1.5rem -1.5rem 1rem -1.5rem;
+}
+
+.shabad-display .shabad-header h4 {
+	margin: 0;
+	color: var(--text);
+}
+
+.shabad-display .close-btn {
+	background: none;
+	border: none;
+	color: var(--text-secondary);
+	font-size: 1.2rem;
+	cursor: pointer;
+	padding: 0.25rem 0.5rem;
+	border-radius: 4px;
+}
+
+.shabad-display .close-btn:hover {
+	background: var(--border);
+	color: var(--text);
+}
+
+.shabad-display .shabad-meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	margin-bottom: 1rem;
+	padding-bottom: 1rem;
+	border-bottom: 1px solid var(--border);
+	font-size: 0.85rem;
+	color: var(--text-secondary);
+}
+
+.shabad-display .shabad-meta span {
+	background: var(--background);
+	padding: 0.25rem 0.5rem;
+	border-radius: 4px;
+}
+
+.shabad-display .shabad-verses {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	max-height: 400px;
+	overflow-y: auto;
+	padding-right: 0.5rem;
+}
+
+.shabad-display .verse-item {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	padding: 0.75rem;
+	background: var(--background);
+	border: 1px solid var(--border);
+	border-radius: 6px;
+}
+
+.shabad-display .verse-number {
+	font-size: 0.85rem;
+	color: var(--text-secondary);
+	font-weight: bold;
+}
+
+.shabad-display .shabad-text {
+	font-family: 'Gurakhar', sans-serif;
+	font-size: 1.1rem;
+	line-height: 1.8;
+	color: var(--text);
+	margin-bottom: 0;
+	white-space: pre-wrap;
+}
+
+.shabad-display .shabad-actions {
+	display: flex;
+	gap: 0.75rem;
+	margin-top: 1.5rem;
+	padding-top: 1rem;
+	border-top: 1px solid var(--border);
+	justify-content: flex-end;
+}
+
+.shabad-display .add-to-favorites-btn {
+	padding: 0.75rem 1.5rem;
+	background: var(--accent);
+	color: var(--background);
+	border: none;
+	border-radius: 6px;
+	font-size: 1rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.shabad-display .add-to-favorites-btn:hover {
+	background: var(--accent-hover);
+	transform: translateY(-1px);
+}
+
+.shabad-display .back-to-search-btn {
+	padding: 0.75rem 1.5rem;
+	background: var(--background);
+	color: var(--text);
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	font-size: 1rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.shabad-display .back-to-search-btn:hover {
+	background: var(--surface);
+	border-color: var(--accent);
+}
+
+/* Selected verse styles in dialog */
+.shabad-display .verse-item {
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.shabad-display .verse-item:hover {
+	background: var(--surface);
+	border-color: var(--accent);
+}
+
+.shabad-display .verse-item.selected {
+	border-color: var(--accent);
+	background: rgba(var(--accent-rgb), 0.1);
+	box-shadow: 0 0 0 2px var(--accent);
+}
+
+.shabad-display .verse-selected-badge {
+	font-size: 0.75rem;
+	color: var(--accent);
+	background: rgba(var(--accent-rgb), 0.1);
+	padding: 0.25rem 0.5rem;
+	border-radius: 4px;
+	align-self: flex-start;
+	animation: fadeIn 0.2s ease;
+}
+
+.shabad-display .add-to-favorites-btn:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+/* Insert index input styles */
+.shabad-display .shabad-insert-index {
+	display: flex;
+	align-items: center;
+	margin-top: 1rem;
+	padding-top: 1rem;
+	border-top: 1px solid var(--border);
+}
+
+.shabad-display .shabad-insert-index label {
+	font-size: 0.85rem;
+	color: var(--text-secondary);
+	margin-right: 0.5rem;
+	white-space: nowrap;
+}
+
+.shabad-display .shabad-insert-index input {
+	padding: 0.5rem;
+	background: var(--background);
+	border: 1px solid var(--border);
+	border-radius: 4px;
+	color: var(--text);
+	font-size: 0.9rem;
+	width: 80px;
+}
+
+.shabad-display .shabad-insert-index input:focus {
+	outline: none;
+	border-color: var(--accent);
+	box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.2);
+}

@@ -67,6 +67,9 @@ export class EditFavorites implements OnInit {
   /** Error message for search. */
   searchError: string = '';
 
+  /** Insert index for adding new shabad to favorites (0-based, empty = append to end). */
+  insertIndex: number | null = null;
+
 
   constructor(private dbService: DbService, private router: Router, 
     private route: ActivatedRoute
@@ -280,7 +283,7 @@ debugger;
   }
 // (click)="selectShabadFromSearch(result)"
 
-  /** Selects a shabad from search results and adds it to favorites. */
+  /** Selects a shabad from search results and displays it in the right panel. */
   async selectShabadFromSearch(result: VerseSearchResult): Promise<void> {
     if (!result.ShabadID) {
       this.searchError = 'Invalid shabad selected.';
@@ -298,41 +301,71 @@ debugger;
       const results = this.dbService.query(query);
       
       if (results && results.length > 0) {
-        const shabadVerses = mapResultsToVerse(results, true);
+        // Map all verses of the shabad (with vishraam)
+        this.selectedShabad = mapResultsToVerse(results, true);
         
-        // Create a new favorite entry with the first verse of the shabad
-        const firstVerse = shabadVerses[0];
-        const newFavorite: VerseSearchResult = {
-          ID: firstVerse.ID,
-          VerseID: firstVerse.ID,
-          ShabadID: firstVerse.ShabadID,
-          Gurmukhi: firstVerse.Gurmukhi,
-          GurmukhiUni: firstVerse.GurmukhiUni,
-          Punjabi: firstVerse.Punjabi,
-          WriterID: firstVerse.WriterID,
-          WriterEnglish: firstVerse.WriterEnglish,
-          RaagID: firstVerse.RaagID,
-          RaagEnglish: firstVerse.RaagEnglish,
-          PageNo: firstVerse.PageNo,
-          SourceID: firstVerse.SourceID,
-          SourceEnglish: firstVerse.SourceEnglish
-        };
+        // Track which favorite was clicked (for verse selection)
+        this.selectedFavoriteIndex = -1; // Not editing an existing favorite
+        this.selectedVerseIndex = -1;
         
-        // Add to favorites
-        this.favorites.push(newFavorite);
-        localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(this.favorites));
-        
-        // Close dialog
-        this.closeAddShabadDialog();
+        // Hide search results to show the shabad
+        this.searchResults = [];
+        this.shabadSearchQuery = '';
       } else {
         this.searchError = 'Failed to load shabad details.';
       }
     } catch (error) {
-      console.error('Error adding shabad:', error);
-      this.searchError = 'Failed to add shabad. Please try again.';
+      console.error('Error loading shabad:', error);
+      this.searchError = 'Failed to load shabad. Please try again.';
     } finally {
       this.isSearching = false;
     }
+  }
+
+  /** Selects a verse from the displayed shabad in the dialog. */
+  selectVerseFromDialog(verse: Verse, verseIndex: number): void {
+    this.selectedVerseIndex = verseIndex;
+  }
+
+  /** Adds the selected verse from the displayed shabad to favorites. */
+  addDisplayedShabadToFavorites(): void {
+    if (!this.selectedShabad || this.selectedShabad.length === 0) {
+      return;
+    }
+
+    // Use selected verse if available, otherwise default to first verse
+    const verseIndex = this.selectedVerseIndex >= 0 ? this.selectedVerseIndex : 0;
+    const selectedVerse = this.selectedShabad[verseIndex];
+    
+    const newFavorite: VerseSearchResult = {
+      ID: selectedVerse.ID,
+      VerseID: selectedVerse.ID,
+      ShabadID: selectedVerse.ShabadID,
+      Gurmukhi: selectedVerse.Gurmukhi,
+      GurmukhiUni: selectedVerse.GurmukhiUni,
+      Punjabi: selectedVerse.Punjabi,
+      WriterID: selectedVerse.WriterID,
+      WriterEnglish: selectedVerse.WriterEnglish,
+      RaagID: selectedVerse.RaagID,
+      RaagEnglish: selectedVerse.RaagEnglish,
+      PageNo: selectedVerse.PageNo,
+      SourceID: selectedVerse.SourceID,
+      SourceEnglish: selectedVerse.SourceEnglish
+    };
+
+    // Insert at specified index or append to end
+    const insertIdx = this.insertIndex !== null && this.insertIndex >= 0 
+      ? Math.min(this.insertIndex, this.favorites.length) 
+      : this.favorites.length;
+    
+    this.favorites.splice(insertIdx, 0, newFavorite);
+    localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(this.favorites));
+    
+    // Reset insert index
+    this.insertIndex = null;
+    
+    // Close dialog
+    this.closeAddShabadDialog();
   }
 
   /** Clears the selected shabad from the right panel. */
