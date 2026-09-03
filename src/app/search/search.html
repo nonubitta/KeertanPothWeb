@@ -10,7 +10,7 @@
             </div>
             <div class="header-search">
                 <form class="header-search-form" (submit)="handleSearch($event)">
-                    <div class="search-input-wrapper" style="position: relative; flex: 1;">
+                    <div class="search-input-wrapper" style="position: relative; flex: 1; display: flex; align-items: center;">
                         <input id="searchText"
                             autocomplete="off"
                             type="text" 
@@ -20,7 +20,7 @@
                             (focus)="showSearchPanel = true"
                             placeholder="Sbd Kojo" 
                             name="searchText"
-                            style="padding-right: 2.5rem;">
+                            style="padding-right: 2.5rem; flex: 1;">
                         <button 
                             type="button" 
                             class="search-clear-btn" 
@@ -34,6 +34,10 @@
                         </button>
                     </div>
                     <app-speech-test (transcriptChange)="onTranscriptChange($event)"></app-speech-test>
+                    <!-- Add to Favorites button (star) moved here next to mic -->
+                    <button type="button" class="keyboard-toggle-btn" (click)="addToFavorites()" title="Add to Favorites" style="margin-left: 0.5rem;">
+                        <img height="24rem" src="assets/images/favorite.png" alt="Add to Favorites" style="vertical-align: middle;" />
+                    </button>
                     <button type="button" class="keyboard-toggle-btn" (click)="toggleKeyboard()" title="Toggle Punjabi Keyboard">
                         <span style="font-size: 1.3rem; vertical-align: middle;">⌨️</span>
                     </button>
@@ -129,9 +133,6 @@
 </div>
 <!-- Star Button Right Bar -->
 <div class="right-tabs" *ngIf="!showSearchPanel">
-   <button (click)="addToFavorites()" class="tab-btn-right star-btn" title="Add to Favorite"><!-- for pothi call addToPothi()-->
-    <img height="24rem" src="assets/images/favorite.png" alt="Favorite" class="favorite-icon" />
-  </button>
   <button (click)="shareShabad()" class="tab-btn-right share-btn" title="Share">
     <img height="24rem" src="assets/images/share.png" alt="Share" class="share-icon" />
   </button>

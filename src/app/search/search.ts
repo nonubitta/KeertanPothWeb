@@ -380,14 +380,14 @@ this.seo.setStructuredData({
     this.showRoastMessageFn('Favorites exported successfully');
   }
 
-  importFavorites(event: Event) {
+  async importFavorites(event: Event) {
     const input = event.target as HTMLInputElement;
     if (!input.files || input.files.length === 0) return;
 
     const file = input.files[0];
     const reader = new FileReader();
 
-    reader.onload = (e) => {
+    reader.onload = async (e) => {
       try {
         const content = e.target?.result as string;
         const importedFavorites = JSON.parse(content);
@@ -401,11 +401,61 @@ this.seo.setStructuredData({
         const validFavorites: VerseSearchResult[] = [];
         
         for (const fav of importedFavorites) {
-          // Validate the favorite has required fields
-          if (fav && fav.ShabadID && fav.Gurmukhi) {
+          // Handle both PascalCase (ShabadID, VerseID) and camelCase (shabadId, verseId) field names
+          const shabadId = fav.ShabadID ?? fav.shabadId;
+          const verseId = fav.VerseID ?? fav.verseId;
+          
+          // Check if it's the full format (has Gurmukhi) or minimal format (has ShabadID/VerseID)
+          if (fav && shabadId) {
             // Avoid duplicates by ShabadID
-            if (!this.favorites.some(f => f.ShabadID === fav.ShabadID)) {
-              validFavorites.push(fav);
+            if (this.favorites.some(f => f.ShabadID === shabadId)) {
+              continue;
+            }
+
+            let verseData: VerseSearchResult | null = null;
+
+            if (fav.Gurmukhi) {
+              // Full format - use as-is
+              verseData = fav as VerseSearchResult;
+            } else if (verseId || shabadId) {
+              // Minimal format - fetch from database
+              try {
+                // If VerseID is provided, we can fetch specific verse
+                // Otherwise fetch the first verse of the Shabad
+                // Note: the sggsvw view uses 'ID' for verse ID, not 'VerseID'
+                let query: string;
+                if (verseId) {
+                  query = `SELECT * FROM sggsvw WHERE ID = ${verseId} LIMIT 1`;
+                } else {
+                  query = `SELECT * FROM sggsvw WHERE ShabadId = ${shabadId} LIMIT 1`;
+                }
+                
+                const results = await this.dbService.query(query);
+                if (results && results.length > 0) {
+                  const row = results[0];
+                  verseData = {
+                    ID: row.ID,
+                    VerseID: row.VerseID || row.ID,
+                    ShabadID: row.ShabadID,
+                    Gurmukhi: row.Gurmukhi,
+                    GurmukhiUni: row.GurmukhiUni,
+                    WriterID: row.WriterID,
+                    Punjabi: row.Punjabi,
+                    RaagID: row.RaagID,
+                    PageNo: row.PageNo,
+                    SourceID: row.SourceID,
+                    WriterEnglish: row.WriterEnglish,
+                    RaagEnglish: row.RaagEnglish,
+                    SourceEnglish: row.SourceEnglish
+                  };
+                }
+              } catch (dbError) {
+                console.error('Error fetching verse from DB:', dbError);
+              }
+            }
+
+            if (verseData) {
+              validFavorites.push(verseData);
               addedCount++;
             }
           }

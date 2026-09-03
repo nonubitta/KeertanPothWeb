@@ -11,29 +11,71 @@
 	<div *ngIf="showChhakkaError" class="error-message" style="color: #e57373; margin: 0.5rem 0; font-size: 0.9rem;">
 		Please enter a Chhakka value before exporting.
 	</div>
-	<p *ngIf="favorites.length === 0">No favorites saved.</p>
-	<div
-		cdkDropList
-		class="favorites-list"
-		(cdkDropListDropped)="onDrop($event)"
-	>
-		<div
-			*ngFor="let fav of favorites; let i = index"
-			cdkDrag
-			class="favorite-item"
-		>
-			<span class="drag-handle" cdkDragHandle>☰</span>
-			<!-- Serial number for each favorite -->
-			<span class="favorite-index">{{ i + 1 }}.&nbsp;</span>
-			<span class="favorite-text">
-				{{ fav.Gurmukhi || fav.Punjabi || 'Unnamed favorite' }}
-			</span>
-			<!-- Action buttons for each favorite -->
-			<span class="favorite-actions">
-				<button type="button" (click)="removeFavorite(i)" title="Remove favorite">✖</button>
-				<button type="button" (click)="moveToTop(i)" title="Move to top">⬆️</button>
-				<button type="button" (click)="moveToBottom(i)" title="Move to bottom">⬇️</button>
-			</span>
+
+	<div class="split-layout">
+		<!-- Left Panel: Favorites List (50%) -->
+		<div class="left-panel">
+			<p *ngIf="favorites.length === 0">No favorites saved.</p>
+			<div
+				cdkDropList
+				class="favorites-list"
+				(cdkDropListDropped)="onDrop($event)"
+			>
+				<div
+					*ngFor="let fav of favorites; let i = index"
+					cdkDrag
+					class="favorite-item"
+				>
+					<span class="drag-handle" cdkDragHandle>☰</span>
+					<!-- Serial number for each favorite -->
+					<span class="favorite-index">{{ i + 1 }}.&nbsp;</span>
+					<span class="favorite-text">
+						{{ fav.Gurmukhi || fav.Punjabi || 'Unnamed favorite' }}
+					</span>
+					<!-- Action buttons for each favorite -->
+					<span class="favorite-actions">
+						<button type="button" (click)="removeFavorite(i)" title="Remove favorite">✖</button>
+						<button type="button" (click)="moveToTop(i)" title="Move to top">⬆️</button>
+						<button type="button" (click)="moveToBottom(i)" title="Move to bottom">⬇️</button>
+						<button type="button" (click)="openShabad(fav)" title="Open Shabad" class="open-shabad-btn">📖</button>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- Right Panel: Shabad Content (50%) -->
+		<div class="right-panel">
+			<div class="shabad-header">
+				<h3>Shabad Content</h3>
+				<button type="button" (click)="clearShabad()" class="close-btn" title="Close">✖</button>
+			</div>
+			
+			<div *ngIf="isLoadingShabad" class="shabad-loading">
+				Loading shabad...
+			</div>
+			
+			<div *ngIf="shabadError" class="shabad-error">
+				{{ shabadError }}
+			</div>
+			
+			<div *ngIf="selectedShabad && selectedShabad.length > 0 && !isLoadingShabad" class="shabad-content">
+				<div class="shabad-meta">
+					<span class="shabad-id">Shabad ID: {{ selectedShabad[0].ShabadID }}</span>
+					<span class="verse-count">{{ selectedShabad.length }} verse(s)</span>
+					<span class="page-no" *ngIf="selectedShabad[0].PageNo">Page: {{ selectedShabad[0].PageNo }}</span>
+					<span class="raag" *ngIf="selectedShabad[0].RaagEnglish">Raag: {{ selectedShabad[0].RaagEnglish }}</span>
+					<span class="writer" *ngIf="selectedShabad[0].WriterEnglish">Writer: {{ selectedShabad[0].WriterEnglish }}</span>
+				</div>
+				<div class="shabad-verses">
+					<div *ngFor="let verse of selectedShabad; let i = index" class="verse-item">
+						<div class="shabad-text" [innerHTML]="(i + 1) + '. '+ (verse.GurmukhiHtml || verse.Gurmukhi)"></div>
+					</div>
+				</div>
+			</div>
+			
+			<div *ngIf="(!selectedShabad || selectedShabad.length === 0) && !isLoadingShabad && !shabadError" class="shabad-placeholder">
+				<p>Select a shabad from the list to view its content here.</p>
+			</div>
 		</div>
 	</div>
 </div>

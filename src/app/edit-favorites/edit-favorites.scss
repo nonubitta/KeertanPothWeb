@@ -6,11 +6,122 @@
 	color: var(--text);
 }
 
+/* Split layout: 50/50 */
+.split-layout {
+	display: flex;
+	gap: 1rem;
+	height: calc(100vh - 200px);
+	min-height: 500px;
+}
+
+.left-panel {
+	flex: 1;
+	min-width: 0;
+	overflow-y: auto;
+}
+
+.right-panel {
+	flex: 1;
+	min-width: 0;
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.shabad-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem;
+	border-bottom: 1px solid var(--border);
+	background: var(--background);
+}
+
+.shabad-header h3 {
+	margin: 0;
+	color: var(--text);
+}
+
+.close-btn {
+	background: none;
+	border: none;
+	color: var(--text-secondary);
+	font-size: 1.2rem;
+	cursor: pointer;
+	padding: 0.25rem 0.5rem;
+	border-radius: 4px;
+}
+
+.close-btn:hover {
+	background: var(--border);
+	color: var(--text);
+}
+
+.shabad-loading,
+.shabad-error,
+.shabad-placeholder {
+	padding: 2rem;
+	text-align: center;
+	color: var(--text-secondary);
+}
+
+.shabad-error {
+	color: #e57373;
+}
+
+.shabad-content {
+	flex: 1;
+	overflow-y: auto;
+	padding: 1rem;
+}
+
+.shabad-meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	margin-bottom: 1rem;
+	padding-bottom: 1rem;
+	border-bottom: 1px solid var(--border);
+	font-size: 0.85rem;
+	color: var(--text-secondary);
+}
+
+.shabad-meta span {
+	background: var(--background);
+	padding: 0.25rem 0.5rem;
+	border-radius: 4px;
+}
+
+.shabad-text {
+	font-family: 'Gurakhar', sans-serif;
+	font-size: 1.2rem;
+	line-height: 2;
+	color: var(--text);
+	margin-bottom: 1.5rem;
+	white-space: pre-wrap;
+}
+
+.shabad-translation h4,
+.shabad-transliteration h4 {
+	margin: 1rem 0 0.5rem;
+	color: var(--accent);
+	font-size: 1rem;
+}
+
+.shabad-translation div,
+.shabad-transliteration div {
+	color: var(--text-secondary);
+	line-height: 1.8;
+	white-space: pre-wrap;
+}
+
 .favorites-list {
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
-	max-width: 600px;
 	padding-left: 0;
 	list-style: none;
 }
@@ -37,4 +148,48 @@
 	color: var(--text);
     font-size: large;
 	font-family: 'Gurakhar', sans-serif;
+}
+
+.favorite-actions {
+	display: flex;
+	gap: 0.25rem;
+}
+
+.favorite-actions button {
+	background: none;
+	border: none;
+	color: var(--text-secondary);
+	cursor: pointer;
+	padding: 0.25rem 0.5rem;
+	border-radius: 4px;
+	font-size: 0.9rem;
+	transition: all 0.2s ease;
+}
+
+.favorite-actions button:hover {
+	background: var(--border);
+	color: var(--text);
+}
+
+.open-shabad-btn {
+	color: var(--accent) !important;
+}
+
+.open-shabad-btn:hover {
+	background: var(--accent) !important;
+	color: var(--background) !important;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 768px) {
+	.split-layout {
+		flex-direction: column;
+		height: auto;
+		min-height: auto;
+	}
+	
+	.left-panel,
+	.right-panel {
+		min-height: 300px;
+	}
 }

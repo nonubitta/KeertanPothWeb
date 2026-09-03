@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DragDropModule, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { VerseSearchResult } from '../verse.model';
+import { VerseSearchResult, Verse } from '../verse.model';
+import { DbService } from '../db.service';
+import { Queries } from '../Queries';
+import { mapResultsToVerse } from '../utils';
 
 /**
  * Component for editing the list of favorite verses.
@@ -31,6 +34,17 @@ export class EditFavorites implements OnInit {
 
   /** Flag to show Chhakka validation error. */
   showChhakkaError: boolean = false;
+
+  /** Currently selected shabad verses for display on the right panel. */
+  selectedShabad: Verse[] = [];
+
+  /** Loading state for shabad fetch. */
+  isLoadingShabad: boolean = false;
+
+  /** Error message for shabad fetch. */
+  shabadError: string = '';
+
+  private dbService = inject(DbService);
 
   ngOnInit(): void {
     const stored = localStorage.getItem(this.FAVORITES_KEY);
@@ -109,5 +123,45 @@ export class EditFavorites implements OnInit {
       this.favorites.push(item);
       localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(this.favorites));
     }
+  }
+
+  /** Opens the shabad for the given favorite in the right panel. */
+  async openShabad(fav: VerseSearchResult): Promise<void> {
+    if (!fav.ShabadID) {
+      this.shabadError = 'No ShabadID available for this favorite.';
+      this.selectedShabad = [];
+      return;
+    }
+
+    this.isLoadingShabad = true;
+    this.shabadError = '';
+    this.selectedShabad = [];
+
+    try {
+      // Ensure database is initialized
+      await this.dbService.initDb();
+      
+      const query = Queries.getShabadById(fav.ShabadID);
+      const results = this.dbService.query(query);
+      
+      if (results && results.length > 0) {
+        debugger;
+        // Map all verses of the shabad
+        this.selectedShabad = mapResultsToVerse(results, true);
+      } else {
+        this.shabadError = 'Shabad not found.';
+      }
+    } catch (error) {
+      console.error('Error fetching shabad:', error);
+      this.shabadError = 'Failed to load shabad. Please try again.';
+    } finally {
+      this.isLoadingShabad = false;
+    }
+  }
+
+  /** Clears the selected shabad from the right panel. */
+  clearShabad(): void {
+    this.selectedShabad = [];
+    this.shabadError = '';
   }
 }
