@@ -10,16 +10,30 @@
             </div>
             <div class="header-search">
                 <form class="header-search-form" (submit)="handleSearch($event)">
-                    <input id="searchText"
-                        autocomplete="off"
-                        type="text" 
-                        class="header-search-input" 
-                        [(ngModel)]="searchText"
-                        (input)="onSearch()"
-                        (focus)="showSearchPanel = true"
-                        placeholder="Sbd Kojo" 
-                        name="searchText">
-                        <app-speech-test (transcriptChange)="onTranscriptChange($event)"></app-speech-test>
+                    <div class="search-input-wrapper" style="position: relative; flex: 1;">
+                        <input id="searchText"
+                            autocomplete="off"
+                            type="text" 
+                            class="header-search-input" 
+                            [(ngModel)]="searchText"
+                            (input)="onSearch()"
+                            (focus)="showSearchPanel = true"
+                            placeholder="Sbd Kojo" 
+                            name="searchText"
+                            style="padding-right: 2.5rem;">
+                        <button 
+                            type="button" 
+                            class="search-clear-btn" 
+                            (click)="clearSearch()"
+                            *ngIf="searchText"
+                            title="Clear search"
+                            style="position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: #888; font-size: 1.2rem; cursor: pointer; padding: 0; line-height: 1; display: flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; transition: background-color 0.2s, color 0.2s;"
+                            onmouseover="this.style.backgroundColor='#eee'; this.style.color='#333'"
+                            onmouseout="this.style.backgroundColor='transparent'; this.style.color='#888'">
+                            ×
+                        </button>
+                    </div>
+                    <app-speech-test (transcriptChange)="onTranscriptChange($event)"></app-speech-test>
                     <button type="button" class="keyboard-toggle-btn" (click)="toggleKeyboard()" title="Toggle Punjabi Keyboard">
                         <span style="font-size: 1.3rem; vertical-align: middle;">⌨️</span>
                     </button>

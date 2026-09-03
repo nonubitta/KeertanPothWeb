@@ -619,6 +619,17 @@ this.seo.setStructuredData({
     }
   }
 
+  clearSearch() {
+    this.searchText = '';
+    this.filteredItems = [];
+    this.noResults = false;
+    // Focus the input after clearing
+    const input = document.getElementById('searchText') as HTMLInputElement;
+    if (input) {
+      input.focus();
+    }
+  }
+
   async onSelectItem(item: VerseSearchResult, source: string = "NONE") {
     this.SetShabadSource(source);
     const query = Queries.getShabadById(item.ShabadID);

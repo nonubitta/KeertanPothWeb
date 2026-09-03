@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DragDropModule, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { VerseSearchResult } from '../verse.model';
 
 /**
@@ -13,7 +14,7 @@ import { VerseSearchResult } from '../verse.model';
 @Component({
   selector: 'app-edit-favorites',
   // Import Angular common directives and CDK drag‑drop module for this standalone component.
-  imports: [CommonModule, DragDropModule, RouterModule],
+  imports: [CommonModule, DragDropModule, RouterModule, FormsModule],
   templateUrl: './edit-favorites.html',
   styleUrl: './edit-favorites.scss',
   standalone: true
@@ -24,6 +25,12 @@ export class EditFavorites implements OnInit {
 
   /** Array of favorite verses displayed in the UI. */
   favorites: VerseSearchResult[] = [];
+
+  /** User-provided Chhakka value for export. */
+  chhakka: string = '';
+
+  /** Flag to show Chhakka validation error. */
+  showChhakkaError: boolean = false;
 
   ngOnInit(): void {
     const stored = localStorage.getItem(this.FAVORITES_KEY);
@@ -44,6 +51,38 @@ export class EditFavorites implements OnInit {
     moveItemInArray(this.favorites, event.previousIndex, event.currentIndex);
     // Persist the reordered list.
     localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(this.favorites));
+  }
+
+  /** Export all favorites to a text file with INSERT statements. */
+  exportFavorites(): void {
+    if (!this.favorites || this.favorites.length === 0) {
+      return;
+    }
+    
+    // Validate Chhakka is not empty
+    if (!this.chhakka || this.chhakka.trim() === '') {
+      this.showChhakkaError = true;
+      return;
+    }
+    
+    // Clear error if validation passes
+    this.showChhakkaError = false;
+
+    const lines = this.favorites.map((fav, idx) => {
+      const verseId = fav.VerseID ?? 0;
+      const shabadId = fav.ShabadID ?? 0;
+      const sortOrder = (idx + 1) * 10;
+      const escapedChhakka = this.chhakka.replace(/'/g, "''");
+      return `INSERT INTO AsaDiVaarShabads (VerseID, ShabadID, Source, Chhakka, SortOrder) VALUES (${verseId}, ${shabadId}, 'B', '${escapedChhakka}', ${sortOrder});`;
+    }).join('\n');
+
+    const blob = new Blob([lines], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'favorites_export.txt';
+    a.click();
+    URL.revokeObjectURL(url);
   }
 
   /** Removes a favorite at the given index and persists the change. */

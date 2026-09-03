@@ -1,6 +1,16 @@
 <div class="edit-favorites-container">
 	<a routerLink="/" class="back-link" style="margin-bottom: 1rem; display: inline-block; color: var(--accent); text-decoration: underline;">← Back to Search</a>
 	<h2>Edit Favorites</h2>
+	<!-- Export section: user inputs Chhakka and can export all favorites -->
+	<div class="export-section" style="margin: 1rem 0;">
+		<label for="chhakka-input">Chhakka:</label>
+		<input id="chhakka-input" type="text" [(ngModel)]="chhakka" placeholder="Enter Chhakka" style="margin-left: 0.5rem;" />
+		<button type="button" (click)="exportFavorites()" style="margin-left: 0.5rem;" [disabled]="favorites.length === 0">Export Favorites</button>
+	</div>
+	<!-- Error message for empty Chhakka -->
+	<div *ngIf="showChhakkaError" class="error-message" style="color: #e57373; margin: 0.5rem 0; font-size: 0.9rem;">
+		Please enter a Chhakka value before exporting.
+	</div>
 	<p *ngIf="favorites.length === 0">No favorites saved.</p>
 	<div
 		cdkDropList
