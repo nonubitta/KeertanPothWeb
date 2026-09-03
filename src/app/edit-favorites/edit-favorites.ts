@@ -44,6 +44,12 @@ export class EditFavorites implements OnInit {
   /** Error message for shabad fetch. */
   shabadError: string = '';
 
+  /** Index of the favorite that was clicked to open the shabad. */
+  selectedFavoriteIndex: number = -1;
+
+  /** Currently selected verse index in the right panel (for highlighting). */
+  selectedVerseIndex: number = -1;
+
   private dbService = inject(DbService);
 
   ngOnInit(): void {
@@ -94,7 +100,7 @@ export class EditFavorites implements OnInit {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'favorites_export.txt';
+    a.download = `${this.chhakka}.txt`;
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -126,12 +132,16 @@ export class EditFavorites implements OnInit {
   }
 
   /** Opens the shabad for the given favorite in the right panel. */
-  async openShabad(fav: VerseSearchResult): Promise<void> {
+  async openShabad(fav: VerseSearchResult, index: number): Promise<void> {
     if (!fav.ShabadID) {
       this.shabadError = 'No ShabadID available for this favorite.';
       this.selectedShabad = [];
       return;
     }
+
+    // Track which favorite was clicked
+    this.selectedFavoriteIndex = index;
+    this.selectedVerseIndex = -1;
 
     this.isLoadingShabad = true;
     this.shabadError = '';
@@ -145,7 +155,6 @@ export class EditFavorites implements OnInit {
       const results = this.dbService.query(query);
       
       if (results && results.length > 0) {
-        debugger;
         // Map all verses of the shabad
         this.selectedShabad = mapResultsToVerse(results, true);
       } else {
@@ -159,9 +168,39 @@ export class EditFavorites implements OnInit {
     }
   }
 
+  /** Handles verse selection in the right panel - updates the favorite's VerseID and content. */
+  selectVerse(verse: Verse, verseIndex: number): void {
+    if (this.selectedFavoriteIndex < 0 || this.selectedFavoriteIndex >= this.favorites.length) {
+      return;
+    }
+
+    // Update the favorite with the selected verse's data (only fields that exist in VerseSearchResult)
+    const favorite = this.favorites[this.selectedFavoriteIndex];
+    favorite.VerseID = verse.ID;
+    favorite.ID = verse.ID;
+    favorite.Gurmukhi = verse.Gurmukhi;
+    favorite.GurmukhiUni = verse.GurmukhiUni;
+    favorite.Punjabi = verse.Punjabi;
+    favorite.WriterID = verse.WriterID;
+    favorite.WriterEnglish = verse.WriterEnglish;
+    favorite.RaagID = verse.RaagID;
+    favorite.RaagEnglish = verse.RaagEnglish;
+    favorite.PageNo = verse.PageNo;
+    favorite.SourceID = verse.SourceID;
+    favorite.SourceEnglish = verse.SourceEnglish;
+    
+    // Persist the change
+    localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(this.favorites));
+    
+    // Highlight the selected verse
+    this.selectedVerseIndex = verseIndex;
+  }
+
   /** Clears the selected shabad from the right panel. */
   clearShabad(): void {
     this.selectedShabad = [];
     this.shabadError = '';
+    this.selectedFavoriteIndex = -1;
+    this.selectedVerseIndex = -1;
   }
 }

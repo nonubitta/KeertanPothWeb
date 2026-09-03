@@ -32,12 +32,13 @@
 					<span class="favorite-text">
 						{{ fav.Gurmukhi || fav.Punjabi || 'Unnamed favorite' }}
 					</span>
+					<span class="favorite-verse-id" *ngIf="fav.VerseID">Verse ID: {{ fav.VerseID }}</span>
 					<!-- Action buttons for each favorite -->
 					<span class="favorite-actions">
 						<button type="button" (click)="removeFavorite(i)" title="Remove favorite">✖</button>
 						<button type="button" (click)="moveToTop(i)" title="Move to top">⬆️</button>
 						<button type="button" (click)="moveToBottom(i)" title="Move to bottom">⬇️</button>
-						<button type="button" (click)="openShabad(fav)" title="Open Shabad" class="open-shabad-btn">📖</button>
+						<button type="button" (click)="openShabad(fav, i)" title="Open Shabad" class="open-shabad-btn">📖</button>
 					</span>
 				</div>
 			</div>
@@ -67,8 +68,14 @@
 					<span class="writer" *ngIf="selectedShabad[0].WriterEnglish">Writer: {{ selectedShabad[0].WriterEnglish }}</span>
 				</div>
 				<div class="shabad-verses">
-					<div *ngFor="let verse of selectedShabad; let i = index" class="verse-item">
-						<div class="shabad-text" [innerHTML]="(i + 1) + '. '+ (verse.GurmukhiHtml || verse.Gurmukhi)"></div>
+					<div *ngFor="let verse of selectedShabad; let i = index" 
+					     class="verse-item" 
+					     [class.selected]="i === selectedVerseIndex"
+					     (click)="selectVerse(verse, i)"
+					     title="Click to select this verse">
+						<div class="verse-number">{{ i + 1 }}.</div>
+						<div class="shabad-text" [innerHTML]="verse.GurmukhiHtml || verse.Gurmukhi"></div>
+						<div class="verse-id-badge" *ngIf="i === selectedVerseIndex">✓ Selected (Verse ID: {{ verse.ID }})</div>
 					</div>
 				</div>
 			</div>
