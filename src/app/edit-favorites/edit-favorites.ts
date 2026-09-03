@@ -1,12 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DragDropModule, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { VerseSearchResult, Verse } from '../verse.model';
 import { DbService } from '../db.service';
 import { Queries } from '../Queries';
 import { mapResultsToVerse } from '../utils';
+import { SeoService } from '../services/seo.service';
 
 /**
  * Component for editing the list of favorite verses.
@@ -23,6 +24,7 @@ import { mapResultsToVerse } from '../utils';
   standalone: true
 })
 export class EditFavorites implements OnInit {
+
   /** Local storage key used throughout the app for favorites. */
   private readonly FAVORITES_KEY = 'kpoth-favorites';
 
@@ -50,7 +52,25 @@ export class EditFavorites implements OnInit {
   /** Currently selected verse index in the right panel (for highlighting). */
   selectedVerseIndex: number = -1;
 
-  private dbService = inject(DbService);
+  /** Flag to show the Add New Shabad dialog. */
+  showAddShabadDialog: boolean = false;
+
+  /** Search query for finding shabads. */
+  shabadSearchQuery: string = '';
+
+  /** Search results from the database. */
+  searchResults: VerseSearchResult[] = [];
+
+  /** Loading state for search. */
+  isSearching: boolean = false;
+
+  /** Error message for search. */
+  searchError: string = '';
+
+
+  constructor(private dbService: DbService, private router: Router, 
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     const stored = localStorage.getItem(this.FAVORITES_KEY);
@@ -194,6 +214,125 @@ export class EditFavorites implements OnInit {
     
     // Highlight the selected verse
     this.selectedVerseIndex = verseIndex;
+  }
+
+  addNewShabad(): void {
+    this.showAddShabadDialog = true;
+    this.shabadSearchQuery = '';
+    this.searchResults = [];
+    this.searchError = '';
+  }
+
+  /** Closes the Add New Shabad dialog. */
+  closeAddShabadDialog(): void {
+    this.showAddShabadDialog = false;
+    this.shabadSearchQuery = '';
+    this.searchResults = [];
+    this.searchError = '';
+  }
+
+  /** Searches for shabads based on the search query. */
+  async searchShabads(): Promise<void> {
+    await this.dbService.initDb();
+debugger;
+    const srchString = this.shabadSearchQuery.trim();
+    if (!srchString) {
+      return;
+    }
+
+    const searchMode: string = 'mainletters';
+    let query: string = Queries.searchByFirstLetter(srchString, searchMode, '');
+    
+    console.log('Search query:', query);
+    this.isSearching = true;
+    this.searchError = '';
+    this.searchResults = [];
+
+    try {
+
+      const results = this.dbService.query(query);
+      
+      if (results && results.length > 0) {
+        // Map results to VerseSearchResult, grouping by ShabadID to avoid duplicates
+        const shabadMap = new Map<number, VerseSearchResult>();
+        
+        for (const row of results) {
+          const shabadId = row.ShabadID;
+          if (shabadId && !shabadMap.has(shabadId)) {
+            const verseResult = mapResultsToVerse([row], false)[0];
+            if (verseResult) {
+              shabadMap.set(shabadId, verseResult);
+            }
+          }
+        }
+        
+        this.searchResults = Array.from(shabadMap.values());
+      } else {
+        this.searchResults = [];
+      }
+    } catch (error) {
+      console.error('Error searching shabads:', error);
+      this.searchError = 'Failed to search. Please try again.';
+      this.searchResults = [];
+    } finally {
+      this.isSearching = false;
+    }
+  }
+// (click)="selectShabadFromSearch(result)"
+
+  /** Selects a shabad from search results and adds it to favorites. */
+  async selectShabadFromSearch(result: VerseSearchResult): Promise<void> {
+    if (!result.ShabadID) {
+      this.searchError = 'Invalid shabad selected.';
+      return;
+    }
+
+    this.isSearching = true;
+    this.searchError = '';
+
+    try {
+      await this.dbService.initDb();
+      
+      // Get the full shabad verses
+      const query = Queries.getShabadById(result.ShabadID);
+      const results = this.dbService.query(query);
+      
+      if (results && results.length > 0) {
+        const shabadVerses = mapResultsToVerse(results, true);
+        
+        // Create a new favorite entry with the first verse of the shabad
+        const firstVerse = shabadVerses[0];
+        const newFavorite: VerseSearchResult = {
+          ID: firstVerse.ID,
+          VerseID: firstVerse.ID,
+          ShabadID: firstVerse.ShabadID,
+          Gurmukhi: firstVerse.Gurmukhi,
+          GurmukhiUni: firstVerse.GurmukhiUni,
+          Punjabi: firstVerse.Punjabi,
+          WriterID: firstVerse.WriterID,
+          WriterEnglish: firstVerse.WriterEnglish,
+          RaagID: firstVerse.RaagID,
+          RaagEnglish: firstVerse.RaagEnglish,
+          PageNo: firstVerse.PageNo,
+          SourceID: firstVerse.SourceID,
+          SourceEnglish: firstVerse.SourceEnglish
+        };
+        
+        // Add to favorites
+        this.favorites.push(newFavorite);
+        localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(this.favorites));
+        
+        // Close dialog
+        this.closeAddShabadDialog();
+      } else {
+        this.searchError = 'Failed to load shabad details.';
+      }
+    } catch (error) {
+      console.error('Error adding shabad:', error);
+      this.searchError = 'Failed to add shabad. Please try again.';
+    } finally {
+      this.isSearching = false;
+    }
   }
 
   /** Clears the selected shabad from the right panel. */
