@@ -173,6 +173,9 @@
 				<button type="button" (click)="addDisplayedShabadToFavorites()" class="add-to-favorites-btn" [disabled]="selectedShabad.length === 0">
 					Add to Favorites {{ selectedVerseIndex >= 0 ? '(Verse ' + (selectedVerseIndex + 1) + ')' : '(Verse 1)' }}
 				</button>
+				<button type="button" (click)="addAndClose()" class="add-and-close-btn" [disabled]="selectedShabad.length === 0">
+					Add and Close
+				</button>
 				<button type="button" (click)="clearShabad()" class="back-to-search-btn">
 					Back to Search
 				</button>

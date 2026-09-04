@@ -327,8 +327,18 @@ debugger;
     this.selectedVerseIndex = verseIndex;
   }
 
-  /** Adds the selected verse from the displayed shabad to favorites. */
+  /** Adds the selected verse from the displayed shabad to favorites and resets dialog (keeps dialog open). */
   addDisplayedShabadToFavorites(): void {
+    this.addToFavoritesInternal(false);
+  }
+
+  /** Adds the selected verse from the displayed shabad to favorites and closes the dialog. */
+  addAndClose(): void {
+    this.addToFavoritesInternal(true);
+  }
+
+  /** Internal method to add to favorites with option to close dialog. */
+  private addToFavoritesInternal(closeDialog: boolean): void {
     if (!this.selectedShabad || this.selectedShabad.length === 0) {
       return;
     }
@@ -364,8 +374,23 @@ debugger;
     // Reset insert index
     this.insertIndex = null;
     
-    // Close dialog
-    this.closeAddShabadDialog();
+    // Reset dialog state but keep dialog open
+    this.resetDialogState();
+    
+    if (closeDialog) {
+      this.closeAddShabadDialog();
+    }
+  }
+
+  /** Resets the dialog state to initial search view (keeps dialog open). */
+  private resetDialogState(): void {
+    this.selectedShabad = [];
+    this.searchResults = [];
+    this.searchError = '';
+    this.selectedVerseIndex = -1;
+    //this.searchedVerseId = null;
+    //this.shouldScrollToVerse = false;
+    // Keep shabadSearchQuery so user can search again
   }
 
   /** Clears the selected shabad from the right panel. */
