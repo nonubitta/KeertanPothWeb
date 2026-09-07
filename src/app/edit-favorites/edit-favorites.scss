@@ -6,7 +6,7 @@
 	color: var(--text);
 }
 
-/* Split layout: 50/50 */
+/* Split layout: 60/40 */
 .split-layout {
 	display: flex;
 	gap: 1rem;
@@ -15,7 +15,7 @@
 }
 
 .left-panel {
-	flex: 1;
+	flex: 1.5;
 	min-width: 0;
 	overflow-y: auto;
 }

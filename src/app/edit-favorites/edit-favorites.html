@@ -14,7 +14,7 @@
 	</div>
 
 	<div class="split-layout">
-		<!-- Left Panel: Favorites List (50%) -->
+		<!-- Left Panel: Favorites List (60%) -->
 		<div class="left-panel">
 			<p *ngIf="favorites.length === 0">No favorites saved.</p>
 			<div
@@ -45,7 +45,7 @@
 			</div>
 		</div>
 
-		<!-- Right Panel: Shabad Content (50%) -->
+		<!-- Right Panel: Shabad Content (40%) -->
 		<div class="right-panel">
 			<div class="shabad-header">
 				<h3>Shabad Content</h3>
@@ -124,10 +124,10 @@
 					<div *ngFor="let result of searchResults" class="result-item" (click)="selectShabadFromSearch(result)">
 						<div class="result-text" [innerHTML]="result.GurmukhiUni || result.Gurmukhi"></div>
 						<div class="result-meta">
+							<span *ngIf="result.VerseID">Verse ID: {{ result.VerseID }}</span>
 							<span *ngIf="result.ShabadID">Shabad ID: {{ result.ShabadID }}</span>
 							<span *ngIf="result.PageNo">Page: {{ result.PageNo }}</span>
 							<span *ngIf="result.RaagEnglish">Raag: {{ result.RaagEnglish }}</span>
-							<span *ngIf="result.WriterEnglish">Writer: {{ result.WriterEnglish }}</span>
 						</div>
 					</div>
 				</div>
@@ -154,6 +154,7 @@
 				     title="Click to select this verse for favorites">
 					<div class="verse-number">{{ i + 1 }}.</div>
 					<div class="shabad-text" [innerHTML]="verse.GurmukhiHtml || verse.Gurmukhi"></div>
+					<div class="verse-id" *ngIf="verse.ID">Verse ID: {{ verse.ID }}</div>
 					<div class="verse-selected-badge" *ngIf="i === selectedVerseIndex">✓ Selected for favorites</div>
 				</div>
 			</div>

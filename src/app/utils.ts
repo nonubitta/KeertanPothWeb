@@ -37,6 +37,7 @@ export function mapResultsToVerse(results: any[], showVishraam: boolean = false)
     }
     return {
       ID: row.ID,
+      VerseID: row.VerseID,
       ShabadID: row.ShabadID,
       English: row.English,
       Gurmukhi: row.Gurmukhi,
