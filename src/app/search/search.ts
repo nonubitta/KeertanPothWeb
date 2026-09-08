@@ -354,7 +354,7 @@ this.seo.setStructuredData({
     if (this.selectedItem && this.selectedItem.Gurmukhi) {
       // Avoid duplicates by ShabadID
       if (!this.favorites.some(f => f.VerseID === this.selectedItem!.VerseID)) {
-        this.favorites.unshift(this.selectedItem);
+        this.favorites.push(this.selectedItem);
         localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(this.favorites));
         this.showRoastMessageFn('Shabad added to favorites');
       }
