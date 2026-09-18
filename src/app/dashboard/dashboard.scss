@@ -232,3 +232,9 @@
     min-height: 420px;
   }
 }
+
+/* Hide side hover menus (left-tabs and right-tabs) */
+.left-tabs,
+.right-tabs {
+  display: none !important;
+}
