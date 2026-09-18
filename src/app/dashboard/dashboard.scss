@@ -1,67 +1,234 @@
+/* ============================================================
+   Dashboard layout
+   ============================================================ */
+
 .dashboard-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1.8fr;
-  grid-template-rows: 2fr 1fr;
-  gap: 1.5rem;
-  min-height: 80vh;
-  padding: 2rem;
-  height: 90vh;
+  grid-template-columns: minmax(320px, 1.05fr) minmax(0, 1.95fr);
+  grid-template-rows: minmax(280px, 1fr) minmax(180px, 0.55fr);
+  gap: 1rem;
+  height: calc(100vh - 80px);
+  min-height: 600px;
+  padding: 1rem;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-.dashboard-search-results {
-  grid-column: 1 / 2;
-  grid-row: 1 / 2;
-  background: #232f3e;
-  border-radius: 10px;
-  padding: 1.2rem;
-  color: #fff;
-  overflow-y: auto;
-  max-height: 45vh;
-
-  input[type="text"] {
-    font-family: 'Gurakhar', 'PunjabiFont1', 'Gurblipi', 'Prabhki', sans-serif;
-    // ...existing code or add more styles as needed...
-  }
-}
-
-.dashboard-history {
-  grid-column: 1 / 2;
-  grid-row: 2 / 3;
-  background: #2e2e2e;
-  border-radius: 10px;
-  padding: 1.2rem;
-  color: #fff;
-  overflow-y: auto;
-  max-height: 30vh;
-}
-
+.dashboard-search-results,
+.dashboard-secondary,
 .dashboard-selected-shabad {
-  grid-column: 2 / 3;
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
+  border-radius: 10px;
+  color: var(--text, #fff);
+}
+
+/* Top-left: search and results */
+.dashboard-search-results {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #232f3e;
+  padding: 1rem;
+}
+
+.dashboard-panel-header {
+  flex: 0 0 auto;
+  padding: 0 0 0.75rem 0;
+}
+
+.dashboard-panel-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.dashboard-search-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.25rem;
+}
+
+.dashboard-search-results .results-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  align-items: stretch;
+}
+
+.dashboard-search-results .results-sort {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.dashboard-search-results .results-sort select {
+  margin-left: 0 !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  flex: 1 1 150px;
+}
+
+.dashboard-search-results .results-meta {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dashboard-search-results .results-section {
+  margin-top: 0.75rem;
+}
+
+.dashboard-search-results .results-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.dashboard-search-results .result-card {
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.dashboard-no-results {
+  text-align: center;
+  color: #ff6b6b;
+  font-size: 1.1rem;
+  margin-top: 1.5rem;
+}
+
+/* Bottom-left: third dashboard section */
+.dashboard-secondary {
+  grid-column: 1;
+  grid-row: 2;
+  background: #2e2e2e;
+  padding: 1rem;
+  overflow: auto;
+}
+
+/* Right: selected Shabad */
+.dashboard-selected-shabad {
+  grid-column: 2;
   grid-row: 1 / 3;
   background: #232f3e;
-  border-radius: 10px;
-  padding: 1.2rem;
-  color: #fff;
-  min-height: 300px;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.dashboard-selected-content {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-selected-shabad .details-header {
+  flex: 0 0 auto;
+}
+
+.dashboard-selected-shabad .content-section {
+  flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
-  max-height: 86vh;
+  overflow-x: hidden;
+}
+
+.dashboard-selected-shabad .verses-container {
+  min-height: 100%;
+}
+
+.dashboard-empty-selection {
+  height: 100%;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 0.65;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.dashboard-empty-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-empty-text {
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .dashboard-grid {
+    grid-template-columns: minmax(280px, 0.95fr) minmax(0, 1.65fr);
+  }
+
+  .dashboard-search-results .results-sort {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dashboard-search-results .results-sort select {
+    width: 100%;
+    flex: none;
+  }
 }
 
 @media (max-width: 900px) {
   .dashboard-grid {
     grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    gap: 1rem;
-    padding: 1rem;
+    grid-template-rows: minmax(320px, auto) minmax(180px, auto) minmax(450px, auto);
     height: auto;
+    min-height: 0;
+    overflow: visible;
+    padding: 0.75rem;
   }
-  .dashboard-search-results,
-  .dashboard-history,
+
+  .dashboard-search-results {
+    grid-column: 1;
+    grid-row: 1;
+    min-height: 320px;
+  }
+
+  .dashboard-secondary {
+    grid-column: 1;
+    grid-row: 2;
+    min-height: 180px;
+  }
+
   .dashboard-selected-shabad {
-    grid-column: 1 / 2;
-    grid-row: auto;
-    min-height: unset;
-    max-height: unset;
-    overflow-y: visible;
+    grid-column: 1;
+    grid-row: 3;
+    min-height: 450px;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-grid {
+    gap: 0.75rem;
+    padding: 0.5rem;
+  }
+
+  .dashboard-search-results,
+  .dashboard-secondary,
+  .dashboard-selected-shabad {
+    border-radius: 8px;
+    padding: 0.75rem;
+  }
+
+  .dashboard-search-results {
+    min-height: 300px;
+  }
+
+  .dashboard-selected-shabad {
+    min-height: 420px;
   }
 }
