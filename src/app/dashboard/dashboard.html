@@ -591,13 +591,13 @@
                     style="font-family: 'Gurakhar', sans-serif; margin-bottom: 0rem; text-align: left;">
                 {{ item.Gurmukhi }}
               </span>
-              <div style="font-size: 0.95rem; margin-top: 0; margin-bottom: 0.2rem; text-align: left;">
+              <!-- <div style="font-size: 0.95rem; margin-top: 0; margin-bottom: 0.2rem; text-align: left;">
                 <span style="color: #7ecbff;">By </span>
                 <span style="color: #d2691e; font-weight: 500;">{{ item.WriterEnglish }}</span>
                 <span style="color: #7ecbff;"> in </span>
                 <span style="color: #bfa600; font-weight: 500;">{{ item.RaagEnglish }}</span>
                 <span style="color: #7ecbff;"> on Ang {{ item.PageNo }}</span>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -690,60 +690,6 @@
 </div>
 <!--#endregion Dashboard-->
 
-<!--#region Contact Modal -->
-<div class="modal-overlay" *ngIf="showContactModal" (click)="closeContactModal()">
-  <div class="modal-dialog" (click)="$event.stopPropagation()">
-    <div class="modal-header">
-      <span>Contact</span>
-      <button class="modal-close-btn" (click)="closeContactModal()">×</button>
-    </div>
-    <div class="modal-body">
-      <p>
-        You can contact us at <a style="color: white;" href="mailto:keertanpothi@gmail.com">keertanpothi@gmail.com</a>
-      </p>
-      <!-- Add more contact info here if needed -->
-    </div>
-  </div>
-</div>
-<!--#endregion Contact Modal -->
-
-<!--#region Add New Pothi Modal -->
-<div class="modal-overlay" *ngIf="showAddPothiModal" (click)="closeAddPothiModal()">
-  <div class="modal-dialog" (click)="$event.stopPropagation()">
-    <div class="modal-header">
-      <span>Add New Pothi</span>
-      <button class="modal-close-btn" (click)="closeAddPothiModal()">×</button>
-    </div>
-    <div class="modal-body">
-      <label for="newPothiName">Pothi Name:</label>
-      <input id="newPothiName" type="text" [(ngModel)]="newPothiName" style="width: 100%; margin: 0.5rem 0;" />
-      <button class="btn-primary" (click)="addPothi()">Add</button>
-    </div>
-  </div>
-</div>
-<!--#endregion Add New Pothi Modal -->
-
-<!--#region Add to Pothi Modal -->
-<div class="modal-overlay" *ngIf="showAddToPothiModal" (click)="closeAddToPothiModal()">
-  <div class="modal-dialog" (click)="$event.stopPropagation()">
-    <div class="modal-header">
-      <span>Add Shabad to Pothi</span>
-      <button class="modal-close-btn" (click)="closeAddToPothiModal()">×</button>
-    </div>
-    <div class="modal-body">
-      <label for="pothiSelect">Select Existing Pothi:</label>
-      <select id="pothiSelect" [(ngModel)]="selectedPothiIndex" style="width: 100%; margin-bottom: 1rem;">
-        <option [ngValue]="null">-- Select --</option>
-        <option *ngFor="let pothi of pothis; let i = index" [ngValue]="i">{{ pothi.name }}</option>
-      </select>
-      <div style="margin: 1rem 0; text-align: center;">OR</div>
-      <label for="newPothiNameForFav">Create New Pothi:</label>
-      <input id="newPothiNameForFav" type="text" [(ngModel)]="newPothiNameForFav" style="width: 100%; margin-bottom: 1rem;" />
-      <button class="btn-primary" (click)="saveShabadToPothi()">Save</button>
-    </div>
-  </div>
-</div>
-<!--#endregion Add to Pothi Modal -->
 
 <!--#region Roast Message -->
 <div *ngIf="showRoastMessage" class="success-msg"
@@ -777,19 +723,3 @@
     </div>
   </div>
 </div>
-
-@if(selectedShabad){
-  <!-- Scroll to Top Button -->
-  <button class="scroll-to-top-btn" (click)="scrollToTop()">
-    ↑
-  </button>
-  @if(shabadSource !== 'SundarGutka'){
-    <!-- Left / Right navigation buttons (styled like scroll-to-top-btn) -->
-    <button class="scroll-left-btn" (click)="moveShabad(-1)" title="Previous Shabad" aria-label="Previous Shabad">
-      ←
-    </button>
-    <button class="scroll-right-btn" (click)="moveShabad(1)" title="Next Shabad" aria-label="Next Shabad">
-      →
-    </button>
-  }
-}
