@@ -2,13 +2,22 @@
    Dashboard layout
    ============================================================ */
 
+/* Make the component fill the viewport and use flex layout */
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
 .dashboard-grid {
   display: grid;
   grid-template-columns: minmax(320px, 1.05fr) minmax(0, 1.95fr);
   grid-template-rows: minmax(280px, 1fr) minmax(180px, 0.55fr);
   gap: 1rem;
-  height: calc(100vh - 80px);
-  min-height: 600px;
+  flex: 1;
+  min-height: 0; /* Allow grid to shrink below min-content */
   padding: 1rem;
   box-sizing: border-box;
   overflow: hidden;
