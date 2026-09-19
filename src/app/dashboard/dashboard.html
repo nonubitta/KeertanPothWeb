@@ -84,13 +84,13 @@
         <!-- Settings Section -->
       <div *ngSwitchCase="'settings'" style="padding-top: 0.3rem;">
          <!-- View Mode Toggle -->
-            <label style="margin-left: 1.5rem;">
-              <input type="checkbox" [checked]="viewMode === 'presentation'" (change)="viewMode = 'presentation'">
+            <label>
+              <input type="checkbox" [(ngModel)]="showSangatView">
               Sangat View
             </label>
-            <label>
-              <input type="checkbox" [checked]="viewMode === 'single'" (change)="viewMode = 'single'">
-              Keertani View
+            <label style="margin-left: 1.5rem;">
+              <input type="checkbox" [(ngModel)]="showKeertaniView">
+              Kirtani View
             </label>
             <br />
             <hr class="toolbar-divider-hr" />
@@ -616,7 +616,7 @@
             *ngFor="let verse of selectedShabad; let i = index"
             [class.verse-selected]="verse.ID === selectedVerseId"
             [attr.id]="verse.ID === selectedVerseId ? 'selected-verse' : null"
-            (click)="viewMode === 'presentation' ? onPresentationVerseClick(verse) : null"
+            (click)="showSangatView ? onPresentationVerseClick(verse) : null"
             [class.verse-heading-center]="verse.WriterID == null"
             style="cursor: pointer;"
           >

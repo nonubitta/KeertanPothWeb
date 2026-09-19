@@ -711,13 +711,14 @@ this.seo.setStructuredData({
   //#endregion
 
   //#region Presentation mode
-  viewMode: 'single' | 'presentation' = 'presentation';
+  showSangatView: boolean = true;
+  showKeertaniView: boolean = true;
   popupWindow: Window | null = null;
   presentationVerse: Verse | null = null;
 
   // Call this from the template when a verse row is clicked in selectedShabad
   onPresentationVerseClick(verse: Verse) {
-    if (this.viewMode === 'presentation') {
+    if (this.showSangatView) {
       // Keep the dashboard preview and the presentation popup on the same verse.
       this.presentationVerse = verse;
       this.selectedVerseId = verse.ID ?? null;
