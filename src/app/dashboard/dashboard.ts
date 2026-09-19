@@ -706,12 +706,17 @@ this.seo.setStructuredData({
   //#endregion
 
   //#region Presentation mode
-  viewMode: 'single' | 'presentation' = 'single';
+  viewMode: 'single' | 'presentation' = 'presentation';
   popupWindow: Window | null = null;
+  presentationVerse: Verse | null = null;
 
   // Call this from the template when a verse row is clicked in selectedShabad
   onPresentationVerseClick(verse: Verse) {
     if (this.viewMode === 'presentation') {
+      // Keep the dashboard preview and the presentation popup on the same verse.
+      this.presentationVerse = verse;
+      this.selectedVerseId = verse.ID ?? null;
+
       const popupHtml = this.getPresentationHtml(verse);
       if (!this.popupWindow || this.popupWindow.closed) {
         this.popupWindow = window.open('', 'kpoth-presentation', 'width=800,height=600');
@@ -727,17 +732,20 @@ this.seo.setStructuredData({
   // Presentation view Gurmukhi font size
   presentationGurmukhiFontSize: number = 5;
 
+  getPresentationBackgroundColor(): string {
+    if (this.theme === 'navy') return '#1a2238';
+    if (this.theme === 'blueorange') return '#003F66';
+    return '#121212';
+  }
+
+  getPresentationTextColor(): string {
+    return '#eaf6fb';
+  }
+
   getPresentationHtml(verse: Verse): string {
     // Use the current theme's background color for the popup
-    let bgColor = "#121212";
-    let textColor = "#fff";
-    if (this.theme === "navy") {
-      bgColor = "#1a2238";
-      textColor = "#eaf6fb";
-    } else if (this.theme === "blueorange") {
-      bgColor = "#003F66";
-      textColor = "#eaf6fb";
-    } 
+    const bgColor = this.getPresentationBackgroundColor();
+    const textColor = this.getPresentationTextColor();
     return `
     <html>
     <head>
