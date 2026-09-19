@@ -738,19 +738,28 @@ this.seo.setStructuredData({
 
   // Call this from the template when a verse row is clicked in selectedShabad for Kirtani View
   onKirtaniVerseClick(verse: Verse) {
-    if (this.showKeertaniView) {
+    if (this.showKeertaniView && this.selectedShabad) {
       // Keep the dashboard preview and the kirtani popup on the same verse.
       this.presentationVerse = verse;
       this.selectedVerseId = verse.ID ?? null;
 
-      const popupHtml = this.getKirtaniHtml(verse);
-      if (!this.kirtaniPopupWindow || this.kirtaniPopupWindow.closed) {
-        this.kirtaniPopupWindow = window.open('', 'kpoth-kirtani', 'width=800,height=600');
-      }
-      if (this.kirtaniPopupWindow) {
-        this.kirtaniPopupWindow.document.open();
-        this.kirtaniPopupWindow.document.write(popupHtml);
-        this.kirtaniPopupWindow.document.close();
+      // Find the index of the clicked verse in selectedShabad
+      const verseIndex = this.selectedShabad.findIndex(v => v.ID === verse.ID);
+      if (verseIndex !== -1) {
+        // Get 3 previous and 3 next verses (total 7 verses including selected)
+        const startIndex = Math.max(0, verseIndex - 3);
+        const endIndex = Math.min(this.selectedShabad.length, verseIndex + 4);
+        const surroundingVerses = this.selectedShabad.slice(startIndex, endIndex);
+
+        const popupHtml = this.getKirtaniHtml(surroundingVerses, verseIndex - startIndex);
+        if (!this.kirtaniPopupWindow || this.kirtaniPopupWindow.closed) {
+          this.kirtaniPopupWindow = window.open('', 'kpoth-kirtani', 'width=800,height=600');
+        }
+        if (this.kirtaniPopupWindow) {
+          this.kirtaniPopupWindow.document.open();
+          this.kirtaniPopupWindow.document.write(popupHtml);
+          this.kirtaniPopupWindow.document.close();
+        }
       }
     }
   }
@@ -852,10 +861,24 @@ this.seo.setStructuredData({
   }
 
   // Kirtani View HTML generation
-  getKirtaniHtml(verse: Verse): string {
+  getKirtaniHtml(verses: Verse[], selectedIndex: number): string {
     // Use the current theme's background color for the popup
     const bgColor = this.getPresentationBackgroundColor();
     const textColor = this.getPresentationTextColor();
+    
+    // Generate HTML for each verse
+    const versesHtml = verses.map((verse, index) => {
+      const isSelected = index === selectedIndex;
+      const selectedClass = isSelected ? 'selected-verse' : '';
+      const verseNumber = verse.ID ? ` <span class="verse-number">(${verse.ID})</span>` : '';
+      
+      return `
+        <div class="kirtani-verse ${selectedClass}" data-verse-id="${verse.ID || ''}">
+          ${this.showGurmukhi ? `<div class="verse-text">${verse.GurmukhiHtml || ''}</div>` : ''}
+        </div>
+      `;
+    }).join('');
+
     return `
     <html>
     <head>
@@ -902,20 +925,34 @@ this.seo.setStructuredData({
           font-size: 1rem;
           color: #b0b0b0;
         }
+        .kirtani-verse {
+          margin-bottom: 2rem;
+          padding: 1rem;
+          border-radius: 8px;
+          width: 100%;
+          transition: background-color 0.2s;
+        }
+        .kirtani-verse.selected-verse {
+          background: ${textColor}15;
+          border: 2px solid #fadd7b;
+        }
         .verse-text {
           font-family: 'Gurakhar', sans-serif;
           font-size: ${this.presentationGurmukhiFontSize}rem;
-          margin-bottom: 2rem;
+          margin-bottom: 1rem;
           color: ${textColor};
           text-align: center;
-          line-height: 2;
-          width: 100%;
-          max-width: 800px;
+        }
+        .verse-number {
+          font-family: 'Segoe UI', sans-serif;
+          font-size: 0.7em;
+          color: #888;
+          margin-left: 0.5rem;
         }
         .translation-english {
           font-size: ${this.englishFontSize + 1}rem;
           color: #fadd7b;
-          margin-bottom: 1rem;
+          margin-bottom: 0.75rem;
           text-align: center;
           width: 100%;
           max-width: 800px;
@@ -923,7 +960,7 @@ this.seo.setStructuredData({
         .translation-punjabi {
           font-family: 'Gurakhar', sans-serif;
           font-size: ${this.punjabiFontSize + 1}rem;
-          margin-bottom: 1rem;
+          margin-bottom: 0.75rem;
           text-align: center;
           color: #8ecae6;
           width: 100%;
@@ -959,16 +996,7 @@ this.seo.setStructuredData({
       </style>
     </head>
     <body>
-      <div class="kirtani-header">
-        <div class="kirtani-title">Kirtani View</div>
-        ${verse.RaagEnglish ? `<div class="kirtani-raag">Raag: ${verse.RaagEnglish}</div>` : ''}
-        ${verse.WriterEnglish ? `<div class="kirtani-writer">Writer: ${verse.WriterEnglish}</div>` : ''}
-        ${verse.PageNo ? `<div class="kirtani-writer">Ang: ${verse.PageNo}</div>` : ''}
-      </div>
-      ${this.showGurmukhi ? `<div class="verse-text">${verse.GurmukhiHtml || ''}</div>` : ''}
-      ${this.showEnglish && verse.English ? `<div class="translation-english">${verse.English}</div>` : ''}
-      ${this.showPunjabi && verse.Punjabi ? `<div class="translation-punjabi">${verse.Punjabi}</div>` : ''}
-      ${this.showTransliteration && verse.Transliteration ? `<div class="translation-english transliteration">${verse.Transliteration}</div>` : ''}
+      ${versesHtml}
       <div class="kirtani-footer">
         Keertan Pothi - Kirtani View
       </div>
