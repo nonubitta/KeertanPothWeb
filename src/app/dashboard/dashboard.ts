@@ -714,6 +714,7 @@ this.seo.setStructuredData({
   showSangatView: boolean = true;
   showKeertaniView: boolean = true;
   popupWindow: Window | null = null;
+  kirtaniPopupWindow: Window | null = null;
   presentationVerse: Verse | null = null;
 
   // Call this from the template when a verse row is clicked in selectedShabad
@@ -732,6 +733,35 @@ this.seo.setStructuredData({
         this.popupWindow.document.write(popupHtml);
         this.popupWindow.document.close();
       }
+    }
+  }
+
+  // Call this from the template when a verse row is clicked in selectedShabad for Kirtani View
+  onKirtaniVerseClick(verse: Verse) {
+    if (this.showKeertaniView) {
+      // Keep the dashboard preview and the kirtani popup on the same verse.
+      this.presentationVerse = verse;
+      this.selectedVerseId = verse.ID ?? null;
+
+      const popupHtml = this.getKirtaniHtml(verse);
+      if (!this.kirtaniPopupWindow || this.kirtaniPopupWindow.closed) {
+        this.kirtaniPopupWindow = window.open('', 'kpoth-kirtani', 'width=800,height=600');
+      }
+      if (this.kirtaniPopupWindow) {
+        this.kirtaniPopupWindow.document.open();
+        this.kirtaniPopupWindow.document.write(popupHtml);
+        this.kirtaniPopupWindow.document.close();
+      }
+    }
+  }
+
+  // Handle verse click for both Sangat View and Kirtani View
+  onVerseClick(verse: Verse) {
+    if (this.showSangatView) {
+      this.onPresentationVerseClick(verse);
+    }
+    if (this.showKeertaniView) {
+      this.onKirtaniVerseClick(verse);
     }
   }
 
@@ -813,6 +843,135 @@ this.seo.setStructuredData({
       ${this.showEnglish && verse.English ? `<div class="translation-english">${verse.English}</div>` : ''}
       ${this.showPunjabi && verse.Punjabi ? `<div class="translation-punjabi">${verse.Punjabi}</div>` : ''}
       ${this.showTransliteration && verse.Transliteration ? `<div class="translation-english transliteration">${verse.Transliteration}</div>` : ''}
+      <script>
+        // No escaping needed, innerHTML is used directly in document.write
+      </script>
+    </body>
+    </html>
+  `;
+  }
+
+  // Kirtani View HTML generation
+  getKirtaniHtml(verse: Verse): string {
+    // Use the current theme's background color for the popup
+    const bgColor = this.getPresentationBackgroundColor();
+    const textColor = this.getPresentationTextColor();
+    return `
+    <html>
+    <head>
+      <title>Keertan Pothi - Kirtani View</title>
+      <style>
+        @font-face {
+          font-family: 'Gurakhar';
+          src: url('${window.location.origin}/assets/Fonts/GURAKHAR.TTF') format('truetype');
+          font-weight: 300;
+          font-style: normal;
+        }
+        body {
+          background: ${bgColor};
+          color: ${textColor};
+          font-family: 'Segoe UI', sans-serif;
+          margin: 0;
+          padding: 2rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          min-height: 100vh;
+        }
+        .kirtani-header {
+          text-align: center;
+          margin-bottom: 2rem;
+          padding-bottom: 1rem;
+          border-bottom: 2px solid ${textColor}40;
+          width: 100%;
+          max-width: 800px;
+        }
+        .kirtani-title {
+          font-family: 'Gurakhar', sans-serif;
+          font-size: 2rem;
+          color: #fadd7b;
+          margin-bottom: 0.5rem;
+        }
+        .kirtani-raag {
+          font-size: 1.2rem;
+          color: #8ecae6;
+          margin-bottom: 0.25rem;
+        }
+        .kirtani-writer {
+          font-size: 1rem;
+          color: #b0b0b0;
+        }
+        .verse-text {
+          font-family: 'Gurakhar', sans-serif;
+          font-size: ${this.presentationGurmukhiFontSize}rem;
+          margin-bottom: 2rem;
+          color: ${textColor};
+          text-align: center;
+          line-height: 2;
+          width: 100%;
+          max-width: 800px;
+        }
+        .translation-english {
+          font-size: ${this.englishFontSize + 1}rem;
+          color: #fadd7b;
+          margin-bottom: 1rem;
+          text-align: center;
+          width: 100%;
+          max-width: 800px;
+        }
+        .translation-punjabi {
+          font-family: 'Gurakhar', sans-serif;
+          font-size: ${this.punjabiFontSize + 1}rem;
+          margin-bottom: 1rem;
+          text-align: center;
+          color: #8ecae6;
+          width: 100%;
+          max-width: 800px;
+        }
+        .translation-english.transliteration {
+          color: #b0b0b0;
+          font-size: ${this.transliterationFontSize + 1}rem;
+          text-align: center;
+          width: 100%;
+          max-width: 800px;
+        }
+        .vishraam-mark {
+          color: #f97b4d;
+          font-weight: bold;
+        }
+        .kirtani-footer {
+          margin-top: 3rem;
+          padding-top: 1rem;
+          border-top: 1px solid ${textColor}30;
+          text-align: center;
+          color: #888;
+          font-size: 0.9rem;
+          width: 100%;
+          max-width: 800px;
+        }
+        .v{
+          color: #f97b4d;
+        }
+        .y {
+          color: #1f991f;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="kirtani-header">
+        <div class="kirtani-title">Kirtani View</div>
+        ${verse.RaagEnglish ? `<div class="kirtani-raag">Raag: ${verse.RaagEnglish}</div>` : ''}
+        ${verse.WriterEnglish ? `<div class="kirtani-writer">Writer: ${verse.WriterEnglish}</div>` : ''}
+        ${verse.PageNo ? `<div class="kirtani-writer">Ang: ${verse.PageNo}</div>` : ''}
+      </div>
+      ${this.showGurmukhi ? `<div class="verse-text">${verse.GurmukhiHtml || ''}</div>` : ''}
+      ${this.showEnglish && verse.English ? `<div class="translation-english">${verse.English}</div>` : ''}
+      ${this.showPunjabi && verse.Punjabi ? `<div class="translation-punjabi">${verse.Punjabi}</div>` : ''}
+      ${this.showTransliteration && verse.Transliteration ? `<div class="translation-english transliteration">${verse.Transliteration}</div>` : ''}
+      <div class="kirtani-footer">
+        Keertan Pothi - Kirtani View
+      </div>
       <script>
         // No escaping needed, innerHTML is used directly in document.write
       </script>
