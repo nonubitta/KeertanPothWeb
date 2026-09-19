@@ -92,6 +92,11 @@ noResults: boolean = false;
 
   // Pin header
   pinHeader: boolean = true;
+
+  // Collapsible settings panels state
+  showSangatViewSettings: boolean = true;
+  showKirtaniViewSettings: boolean = true;
+  showUserSettings: boolean = true;
   //#endregion
 
   //#region Punjabi keyboard layout

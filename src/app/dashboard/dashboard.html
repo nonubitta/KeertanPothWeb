@@ -83,108 +83,139 @@
       
         <!-- Settings Section -->
       <div *ngSwitchCase="'settings'" style="padding-top: 0.3rem;">
-           <!-- Single/Presentation View Setting -->
-        <label style="margin-left: 1.5rem;">
-          <input type="checkbox" [checked]="viewMode === 'presentation'" (change)="viewMode = 'presentation'">
-          Sangat View
-        </label>
-        <label>
-          <input type="checkbox" [checked]="viewMode === 'single'" (change)="viewMode = 'single'">
-          Keertani View
-        </label>
-        <br />
-        <hr class="toolbar-divider-hr" />
+         <!-- View Mode Toggle -->
+            <label style="margin-left: 1.5rem;">
+              <input type="checkbox" [checked]="viewMode === 'presentation'" (change)="viewMode = 'presentation'">
+              Sangat View
+            </label>
+            <label>
+              <input type="checkbox" [checked]="viewMode === 'single'" (change)="viewMode = 'single'">
+              Keertani View
+            </label>
+            <br />
+            <hr class="toolbar-divider-hr" />
+        <!-- Sangat View Settings Panel -->
+        <div class="settings-panel">
+          <button class="settings-panel-header" (click)="showSangatViewSettings = !showSangatViewSettings" type="button">
+            <span class="panel-title">Sangat View Settings</span>
+            <span class="panel-toggle" [class.expanded]="showSangatViewSettings">▼</span>
+          </button>
+          <div class="settings-panel-content" [class.collapsed]="!showSangatViewSettings">
+            <!-- Presentation View Gurmukhi Font Size -->
+            <label for="presentationGurmukhiFontSize">Presentation View Gurmukhi Font Size:</label><br />
+            <input id="presentationGurmukhiFontSize" type="range" min="1" max="8" step="0.1"
+              [(ngModel)]="presentationGurmukhiFontSize" style="vertical-align: middle; width: 120px;" />
+            <span>{{ presentationGurmukhiFontSize * 10 }}</span>
+            <br />
+            <hr class="toolbar-divider-hr" />
 
-        <!-- New settings -->
-        <label>
-          <input type="checkbox" [(ngModel)]="showVishraam" (click)="onToggleVishraam()" />
-          Show Vishraam
-        </label>
-        <!-- <label style="margin-left: 1.5rem;">
-          <input type="checkbox" [(ngModel)]="showLadivaar" />
-          Ladivaar
-        </label> -->
-        <br />
-        <hr class="toolbar-divider-hr"/>
+          </div>
+        </div>
+
+        <!-- Kirtani View Settings Panel -->
+        <div class="settings-panel">
+          <button class="settings-panel-header" (click)="showKirtaniViewSettings = !showKirtaniViewSettings" type="button">
+            <span class="panel-title">Kirtani View Settings</span>
+            <span class="panel-toggle" [class.expanded]="showKirtaniViewSettings">▼</span>
+          </button>
+          <div class="settings-panel-content" [class.collapsed]="!showKirtaniViewSettings">
+           
+
+          </div>
+        </div>
+
+        <!-- User Settings Panel -->
+        <div class="settings-panel">
+          <button class="settings-panel-header" (click)="showUserSettings = !showUserSettings" type="button">
+            <span class="panel-title">User Settings</span>
+            <span class="panel-toggle" [class.expanded]="showUserSettings">▼</span>
+          </button>
+          <div class="settings-panel-content" [class.collapsed]="!showUserSettings">
         
-        <!-- Gurmukhi settings -->
-        <label>
-          <input type="checkbox" [(ngModel)]="showGurmukhi" />
-          Show Gurmukhi
-        </label>
-        <br />
-        <label for="gurmukhiFontSize">Gurmukhi Font Size:</label><br />
-        <input id="gurmukhiFontSize" type="range" min="1.5" max="5" step="0.1"
-          [(ngModel)]="gurmukhiFontSize" style="vertical-align: middle; width: 120px;" />
-        <span>{{ gurmukhiFontSize * 10 }}</span>
-        <br />
-        <hr class="toolbar-divider-hr" />
+            <!-- Theme Switcher -->
+            <span class="results-sort">Theme:
+              <select id="themeSelect" [ngModel]="theme" (ngModelChange)="onThemeChange($event)" style="margin-left: 0.5rem;">
+                <option value="default">Dark</option>
+                <!-- <option value="gray">Gray</option> -->
+                <option value="navy">Navy Blue</option>
+                <option value="blueorange">Teal Orange</option>
+              </select>
+            </span>
+            <hr class="toolbar-divider-hr" />
 
-        <!-- Punjabi settings -->
-        <label>
-          <input type="checkbox" [(ngModel)]="showPunjabi" />
-          Show Punjabi
-        </label>
-        <br />
-        <label for="punjabiFontSize">Punjabi Font Size:</label><br />
-        <input id="punjabiFontSize" type="range" min="1" max="3" step="0.05"
-          [(ngModel)]="punjabiFontSize" style="vertical-align: middle; width: 120px;" />
-        <span>{{ punjabiFontSize * 10 }}</span>
-        <br />
-        <hr class="toolbar-divider-hr" />
+            <!-- Gurmukhi Font Size -->
+            <label for="gurmukhiFontSize">Gurmukhi Font Size:</label><br />
+            <input id="gurmukhiFontSize" type="range" min="1.5" max="5" step="0.1"
+              [(ngModel)]="gurmukhiFontSize" style="vertical-align: middle; width: 120px;" />
+            <span>{{ gurmukhiFontSize * 10 }}</span>
+            <br />
+            <hr class="toolbar-divider-hr" />
 
-        <!-- English settings -->
-        <label>
-          <input type="checkbox" [(ngModel)]="showEnglish" />
-          Show English
-        </label>
-        <br />
-        <label for="englishFontSize">English Font Size:</label><br />
-        <input id="englishFontSize" type="range" min="1" max="3" step="0.05"
-          [(ngModel)]="englishFontSize" style="vertical-align: middle; width: 120px;" />
-        <span>{{ englishFontSize * 10 }}</span>
-        <br />
-        <hr class="toolbar-divider-hr" />
-        
-        <!-- Transliteration settings -->
-        <label>
-          <input type="checkbox" [(ngModel)]="showTransliteration" />
-          Show Transliteration
-        </label>
-        <br />
-        <label for="transliterationFontSize">Transliteration Font Size:</label>
-        <br />
-        <input id="transliterationFontSize" type="range" min="1" max="3" step="0.05"
-          [(ngModel)]="transliterationFontSize" style="vertical-align: middle; width: 120px;" />
-        <span>{{ transliterationFontSize * 10 }}</span>
-        <br />
-        <hr class="toolbar-divider-hr" />
+            <!-- Punjabi Font Size -->
+            <label for="punjabiFontSize">Punjabi Font Size:</label><br />
+            <input id="punjabiFontSize" type="range" min="1" max="3" step="0.05"
+              [(ngModel)]="punjabiFontSize" style="vertical-align: middle; width: 120px;" />
+            <span>{{ punjabiFontSize * 10 }}</span>
+            <br />
+            <hr class="toolbar-divider-hr" />
 
-        <!-- Presentation View Gurmukhi Font Size -->
-        <label for="presentationGurmukhiFontSize">Presentation View Gurmukhi Font Size:</label><br />
-        <input id="presentationGurmukhiFontSize" type="range" min="1" max="8" step="0.1"
-          [(ngModel)]="presentationGurmukhiFontSize" style="vertical-align: middle; width: 120px;" />
-        <span>{{ presentationGurmukhiFontSize * 10 }}</span>
-        <br />
-        <hr class="toolbar-divider-hr" />
+            <!-- English Font Size -->
+            <label for="englishFontSize">English Font Size:</label><br />
+            <input id="englishFontSize" type="range" min="1" max="3" step="0.05"
+              [(ngModel)]="englishFontSize" style="vertical-align: middle; width: 120px;" />
+            <span>{{ englishFontSize * 10 }}</span>
+            <br />
+            <hr class="toolbar-divider-hr" />
 
-           <!-- Theme Switcher -->
-        <span class="results-sort">Theme:
-          <select id="themeSelect" [ngModel]="theme" (ngModelChange)="onThemeChange($event)" style="margin-left: 0.5rem;">
-            <option value="default">Dark</option>
-            <!-- <option value="gray">Gray</option> -->
-            <option value="navy">Navy Blue</option>
-            <option value="blueorange">Teal Orange</option>
-          </select>
-        </span>
-        <hr class="toolbar-divider-hr" />
-        <!-- Pin Header Setting -->
-        <!-- <label>
-          <input type="checkbox" [(ngModel)]="pinHeader" (change)="onPinHeaderChange()" />
-          Pin header
-        </label>
-        <br />
-        <hr class="toolbar-divider-hr" /> -->
+            <!-- Transliteration Font Size -->
+            <label for="transliterationFontSize">Transliteration Font Size:</label>
+            <br />
+            <input id="transliterationFontSize" type="range" min="1" max="3" step="0.05"
+              [(ngModel)]="transliterationFontSize" style="vertical-align: middle; width: 120px;" />
+            <span>{{ transliterationFontSize * 10 }}</span>
+            <br />
+            <hr class="toolbar-divider-hr" />
+            <!-- Show Vishraam -->
+            <label>
+              <input type="checkbox" [(ngModel)]="showVishraam" (click)="onToggleVishraam()" />
+              Show Vishraam
+            </label>
+            <br />
+            <hr class="toolbar-divider-hr"/>
+
+            <!-- Show Gurmukhi -->
+            <label>
+              <input type="checkbox" [(ngModel)]="showGurmukhi" />
+              Show Gurmukhi
+            </label>
+            <br />
+            <hr class="toolbar-divider-hr" />
+
+            <!-- Show Punjabi -->
+            <label>
+              <input type="checkbox" [(ngModel)]="showPunjabi" />
+              Show Punjabi
+            </label>
+            <br />
+            <hr class="toolbar-divider-hr" />
+
+            <!-- Show English -->
+            <label>
+              <input type="checkbox" [(ngModel)]="showEnglish" />
+              Show English
+            </label>
+            <br />
+            <hr class="toolbar-divider-hr" />
+
+            <!-- Show Transliteration -->
+            <label>
+              <input type="checkbox" [(ngModel)]="showTransliteration" />
+              Show Transliteration
+            </label>
+            <br />
+            <hr class="toolbar-divider-hr" />
+          </div>
+        </div>
       </div>
 
       <!-- History Section -->
@@ -523,25 +554,25 @@
       <div *ngIf="presentationVerse" class="presentation-preview-content">
         <div *ngIf="showGurmukhi"
              class="presentation-preview-gurmukhi"
-             [style.font-size.rem]="2"
+             [style.font-size.rem]="1.2"
              [innerHTML]="presentationVerse.GurmukhiHtml || ''">
         </div>
 
         <div *ngIf="showEnglish && presentationVerse.English"
              class="presentation-preview-english"
-             [style.font-size.rem]="1">
+             [style.font-size.rem]="0.7">
           {{ presentationVerse.English }}
         </div>
 
         <div *ngIf="showPunjabi && presentationVerse.Punjabi"
              class="presentation-preview-punjabi"
-             [style.font-size.rem]="1">
+             [style.font-size.rem]="0.7">
           {{ presentationVerse.Punjabi }}
         </div>
 
         <div *ngIf="showTransliteration && presentationVerse.Transliteration"
              class="presentation-preview-transliteration"
-             [style.font-size.rem]="1">
+             [style.font-size.rem]="0.7">
           {{ presentationVerse.Transliteration }}
         </div>
       </div>
