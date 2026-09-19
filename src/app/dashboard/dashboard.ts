@@ -7,7 +7,7 @@ import { visraamToVishraamArray, mapResultsToVerse, mapResultsToVerseSearchResul
 import { Queries } from '../Queries';
 import { Router, RouterModule } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { SpeechTestComponent } from '../speech-test.component/speech-test.component';
+// import { SpeechTestComponent } from '../speech-test.component/speech-test.component';
 import { SpeechHelper } from '../speech-helper';
 import { SeoService } from '../services/seo.service';
 export enum ShabadSource {
@@ -20,7 +20,7 @@ export enum ShabadSource {
 }
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, FormsModule, RouterModule, SpeechTestComponent, ],
+  imports: [CommonModule, FormsModule, RouterModule, ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
   providers: [DbService]
