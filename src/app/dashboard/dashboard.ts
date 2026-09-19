@@ -927,7 +927,7 @@ this.seo.setStructuredData({
         }
         .kirtani-verse {
           margin-bottom: 2rem;
-          padding: 1rem;
+          padding: 0.5rem;
           border-radius: 8px;
           width: 100%;
           transition: background-color 0.2s;
@@ -935,19 +935,15 @@ this.seo.setStructuredData({
         .kirtani-verse.selected-verse {
           background: ${textColor}15;
           border: 2px solid #fadd7b;
+          font-size: ${this.presentationGurmukhiFontSize * 0.8}rem !important;
         }
         .verse-text {
           font-family: 'Gurakhar', sans-serif;
-          font-size: ${this.presentationGurmukhiFontSize}rem;
+          font-size: ${this.presentationGurmukhiFontSize * 0.8}rem;
           margin-bottom: 1rem;
           color: ${textColor};
           text-align: center;
-        }
-        .verse-number {
-          font-family: 'Segoe UI', sans-serif;
-          font-size: 0.7em;
-          color: #888;
-          margin-left: 0.5rem;
+          line-height: 1.3;
         }
         .translation-english {
           font-size: ${this.englishFontSize + 1}rem;
