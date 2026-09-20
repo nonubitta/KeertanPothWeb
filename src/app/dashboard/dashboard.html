@@ -384,7 +384,7 @@
 
 .dashboard-search-results .result-card {
   min-height: 0 !important;
-  padding: 4px 7px !important;
+  padding: 6px 7px !important; /* Increased vertical padding to prevent character truncation */
   margin: 0 !important;
   border-radius: 4px !important;
   box-sizing: border-box !important;
@@ -400,8 +400,8 @@
   display: block !important;
   padding: 0 !important;
   margin: 0 !important;
-  font-size: 1.05rem !important;
-  line-height: 1.15 !important;
+  font-size: 1.2rem !important;
+  line-height: 1.5 !important; /* Increased line-height for Gurmukhi font to prevent character truncation */
 }
 
 .dashboard-search-results .result-card .result-content > div {
@@ -539,6 +539,8 @@
   </section>
 
   <!-- BOTTOM LEFT: PRESENTATION PREVIEW -->
+   <fieldset class="presentation-preview-fieldset">
+    <legend>Presentation Preview</legend>
   <section class="dashboard-secondary">
     <div class="presentation-preview"
          [style.background-color]="getPresentationBackgroundColor()"
@@ -554,7 +556,7 @@
       <div *ngIf="presentationVerse" class="presentation-preview-content">
         <div *ngIf="showGurmukhi"
              class="presentation-preview-gurmukhi"
-             [style.font-size.rem]="1.2"
+             [style.font-size.rem]="1.4"
              [innerHTML]="presentationVerse.GurmukhiHtml || ''">
         </div>
 
@@ -578,6 +580,7 @@
       </div>
     </div>
   </section>
+   </fieldset>
 
   <!-- RIGHT: SELECTED SHABAD -->
   <section id="details" class="dashboard-selected-shabad">
