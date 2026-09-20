@@ -1,67 +1,327 @@
-<!-- Header (lightweight, reuses global theme styles) -->
-<header class="header">
-	<div class="container">
-		<nav class="nav" style="padding: 0.8rem 0;">
-			<a class="logo" routerLink="/">
-				<img src="assets/images/favicon.png" alt="Keertan Pothi Logo" class="logo-img" />
-				<span>Keertan Pothi</span>
-			</a>
-		</nav>
-	</div>
-  
-	<div class="toolbar-divider-hr" style="opacity:0.35;"></div>
+<header class="support-header">
+  <div class="container support-header-inner">
+    <a class="support-logo" routerLink="/">
+      <img
+        src="assets/images/favicon.png"
+        alt="Keertan Pothi"
+        class="support-logo-img"
+      />
+      <span>Keertan Pothi</span>
+    </a>
+
+    <a routerLink="/" class="back-home">
+      <span>←</span>
+      Back to Search
+    </a>
+  </div>
 </header>
 
+
 <main class="support-page">
-	<section class="support-hero container">
-		<h1>Support</h1>
-		<p>We're here to help with the Keertan Pothi iOS app and website.</p>
-	</section>
 
-	<section class="support-grid container">
-		<!-- iOS App -->
-		<div class="card">
-			<h2>Get the iOS App</h2>
-			<p>Use the official Keertan Pothi app on iPhone and iPad.</p>
-			<ng-container *ngIf="appStoreUrl && appStoreUrl.length; else appStoreMissing">
-				<a class="cta" [href]="appStoreUrl" target="_blank" rel="noopener">Open in App Store</a>
-			</ng-container>
-			<ng-template #appStoreMissing>
-				<div class="hint">
-					<a style="color: white;" href="https://apps.apple.com/be/app/keertan-pothi/id1538493887" target="_blank" rel="noopener">App store link</a>
-				</div>
-			</ng-template>
-		</div>
+  <!-- HERO -->
+  <section class="support-hero container">
 
-		<!-- Contact -->
-		<div class="card">
-			<h2>Contact Support</h2>
-			<p>Questions, feedback or issues? Send us a message.</p>
-			<ng-container *ngIf="supportEmail && supportEmail.length; else emailMissing">
-				<a class="cta" [href]="mailtoLink">Email Support</a>
-			</ng-container>
-			<ng-template #emailMissing>
-				<div class="hint">keertanpothi@gmail.com</div>
-			</ng-template>
-			<ul class="tips">
-				<li>Include steps to reproduce and screenshots, if possible.</li>
-				<li>Mention whether the issue is on iOS app or website.</li>
-			</ul>
-		</div>
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Keertan Pothi Support
+    </div>
 
-		<!-- FAQs & Tips -->
-		<div class="card">
-			<h2>Development Team</h2>
-			<p>Keertan Pothi is built with dedication by:</p>
-			<ul class="team-list">
-				<li>AkalUstat Singh</li>
-				<li>Keerat Singh</li>
-				<li>Gurjas Singh</li>
-				<li>Gurmeet Singh Khalsa</li>
-				<li>Harpreet Kaur</li>
-			</ul>
-			<div class="version" *ngIf="webVersion">Web version: v{{ webVersion }} | App version: v21.0.0.24</div>
-		</div>
+    <h1>
+      How can we <span>help?</span>
+    </h1>
 
-	</section>
+    <p>
+      Get the Keertan Pothi app, contact us with questions,
+      or find information about the project.
+    </p>
+
+  </section>
+
+
+  <!-- APP DOWNLOADS -->
+  <section class="support-section container">
+
+    <div class="section-heading">
+      <div>
+        <span class="section-eyebrow">MOBILE APPS</span>
+        <h2>Take Keertan Pothi with you</h2>
+      </div>
+
+      <p>
+        Gurbani wherever you go, on your preferred device.
+      </p>
+    </div>
+
+
+    <div class="app-grid">
+
+      <!-- iOS -->
+      <div class="app-card ios-card">
+
+        <div class="app-card-top">
+
+          <div class="app-icon ios-icon">
+            <span></span>
+          </div>
+
+          <div>
+            <span class="app-platform">iPHONE & iPAD</span>
+            <h3>Keertan Pothi for iOS</h3>
+          </div>
+
+        </div>
+
+        <p>
+          Explore Gurbani, search Shabads and keep Keertan Pothi
+          with you on iPhone and iPad.
+        </p>
+
+        <ng-container
+          *ngIf="appStoreUrl && appStoreUrl.length; else appStoreFallback">
+
+          <a
+            class="store-button"
+            [href]="appStoreUrl"
+            target="_blank"
+            rel="noopener">
+
+            <span class="store-button-icon"></span>
+
+            <span>
+              <small>Download on the</small>
+              <strong>App Store</strong>
+            </span>
+
+            <span class="store-arrow">↗</span>
+          </a>
+
+        </ng-container>
+
+        <ng-template #appStoreFallback>
+
+          <a
+            class="store-button"
+            href="https://apps.apple.com/be/app/keertan-pothi/id1538493887"
+            target="_blank"
+            rel="noopener">
+
+            <span class="store-button-icon"></span>
+
+            <span>
+              <small>Download on the</small>
+              <strong>App Store</strong>
+            </span>
+
+            <span class="store-arrow">↗</span>
+          </a>
+
+        </ng-template>
+
+      </div>
+
+
+      <!-- ANDROID -->
+      <div class="app-card android-card">
+
+        <div class="app-card-top">
+
+          <div class="app-icon android-icon">
+            <span>▶</span>
+          </div>
+
+          <div>
+            <span class="app-platform">ANDROID</span>
+            <h3>Keertan Pothi for Android</h3>
+          </div>
+
+        </div>
+
+        <p>
+          Access Gurbani and your favorite Shabads from your
+          Android phone or tablet.
+        </p>
+
+        <a
+          class="store-button"
+          href="https://play.google.com/store/apps/details?id=keertan_Pothi.keertan_Pothi&hl=en_US"
+          target="_blank"
+          rel="noopener">
+
+          <span class="store-button-icon play-icon">▶</span>
+
+          <span>
+            <small>GET IT ON</small>
+            <strong>Google Play</strong>
+          </span>
+
+          <span class="store-arrow">↗</span>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- SUPPORT -->
+  <section class="support-section container">
+
+    <div class="section-heading compact-heading">
+      <div>
+        <span class="section-eyebrow">NEED HELP?</span>
+        <h2>We're here for you</h2>
+      </div>
+    </div>
+
+
+    <div class="support-grid">
+
+      <!-- CONTACT -->
+      <div class="info-card contact-card">
+
+        <div class="card-icon">
+          ✉
+        </div>
+
+        <div class="card-content">
+
+          <h3>Contact Support</h3>
+
+          <p>
+            Found an issue or have a suggestion?
+            We'd love to hear from you.
+          </p>
+
+          <ng-container
+            *ngIf="supportEmail && supportEmail.length; else emailFallback">
+
+            <a
+              class="primary-link"
+              [href]="mailtoLink">
+              Email Support
+              <span>→</span>
+            </a>
+
+          </ng-container>
+
+          <ng-template #emailFallback>
+
+            <a
+              class="primary-link"
+              href="mailto:keertanpothi@gmail.com?subject=Keertan%20Pothi%20Support">
+              Email Support
+              <span>→</span>
+            </a>
+
+            <div class="email-address">
+              keertanpothi@gmail.com
+            </div>
+
+          </ng-template>
+
+          <ul class="support-tips">
+            <li>Include steps to reproduce the issue.</li>
+            <li>Screenshots are helpful when reporting problems.</li>
+            <li>Mention whether you're using iOS, Android or the website.</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <!-- WEBSITE -->
+      <div class="info-card website-card">
+
+        <div class="card-icon">
+          🌐
+        </div>
+
+        <div class="card-content">
+
+          <h3>Keertan Pothi Web</h3>
+
+          <p>
+            Search Gurbani directly from your browser.
+            No installation required.
+          </p>
+
+          <a
+            class="secondary-link"
+            routerLink="/">
+            Open Website
+            <span>→</span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- DEVELOPMENT TEAM -->
+  <section class="team-section">
+
+    <div class="container">
+
+      <div class="team-header">
+        <span class="section-eyebrow">THE PEOPLE BEHIND IT</span>
+
+        <h2>
+          Built with dedication
+        </h2>
+
+        <p>
+          Keertan Pothi is built and maintained with dedication
+          to making Gurbani accessible and easy to explore.
+        </p>
+      </div>
+
+
+      <div class="team-list">
+
+        <div class="team-member">
+          <span class="team-number">01</span>
+          <span>AkalUstat Singh</span>
+        </div>
+
+        <div class="team-member">
+          <span class="team-number">02</span>
+          <span>Keerat Singh</span>
+        </div>
+
+        <div class="team-member">
+          <span class="team-number">03</span>
+          <span>Gurjas Singh</span>
+        </div>
+
+        <div class="team-member">
+          <span class="team-number">04</span>
+          <span>Gurmeet Singh Khalsa</span>
+        </div>
+
+        <div class="team-member">
+          <span class="team-number">05</span>
+          <span>Harpreet Kaur</span>
+        </div>
+
+      </div>
+
+
+      <div class="version-info" *ngIf="webVersion">
+        <span>Web v{{ webVersion }}</span>
+        <span class="version-separator">•</span>
+        <span>App v21.0.0.24</span>
+      </div>
+
+    </div>
+
+  </section>
+
 </main>

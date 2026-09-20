@@ -1,43 +1,91 @@
 <!--#region Header-->
 <header class="header">
-    <div class="container" style="position:relative;">
-        <nav class="nav mobile-nav">
-            <div class="nav-logo-title">
-                <a class="logo" (click)="onLogoClick()">
-                    <img src="assets/images/favicon.png" alt="Keertan Pothi Logo" class="logo-img" />
-                    <span style="vertical-align: middle;">Keertan Pothi</span>
-                </a>
-            </div>
-            <div class="header-search">
-                <form class="header-search-form" (submit)="handleSearch($event)">
-                    <input id="searchText"
-                        autocomplete="off"
-                        type="text" 
-                        class="header-search-input" 
-                        [(ngModel)]="searchText"
-                        (input)="onSearch()"
-                        (focus)="showSearchPanel = true"
-                        placeholder="Sbd Kojo" 
-                        name="searchText">
-                        <app-speech-test (transcriptChange)="onTranscriptChange($event)"></app-speech-test>
-                    <button type="button" class="keyboard-toggle-btn" (click)="toggleKeyboard()" title="Toggle Punjabi Keyboard">
-                        <span style="font-size: 1.3rem; vertical-align: middle;">⌨️</span>
-                    </button>
-                    <button type="submit" class="header-search-btn">Search</button>
-                </form>
-            </div>
-        </nav>
-        <button class="header-pin-btn"
-            (click)="pinHeader = !pinHeader; onPinHeaderChange()"
-            [title]="pinHeader ? 'Unpin header' : 'Pin header'"
-            style="position: fixed; right: 2.2rem; top: 1.1rem; margin-left:0; background:none; border:none; cursor:pointer; outline:none; display:flex; align-items:center; font-size:1.7rem; z-index:1101;">
-            <img src="assets/images/pin.png"
-              [style.transform]="pinHeader ? 'rotate(-45deg)' : 'rotate(0deg)'"
-              alt="Pin Search Bar"
-              style="height: 1.2rem; width: 1.2rem; transition: transform 0.18s, opacity 0.18s;"
-            />
-        </button>
-    </div>
+  <div class="container header-container">
+
+    <nav class="nav mobile-nav">
+
+      <!-- Logo -->
+      <div class="nav-logo-title">
+        <a class="logo" (click)="onLogoClick()">
+          <img
+            src="assets/images/favicon.png"
+            alt="Keertan Pothi Logo"
+            class="logo-img"
+          />
+          <span>Keertan Pothi</span>
+        </a>
+      </div>
+
+      <!-- Main navigation -->
+      <div class="header-links">
+        <a
+          routerLink="/dashboard"
+          routerLinkActive="active"
+          class="header-link">
+          Dashboard
+        </a>
+
+        <a
+          routerLink="/support"
+          routerLinkActive="active"
+          class="header-link">
+          Support
+        </a>
+      </div>
+
+      <!-- Search -->
+      <div class="header-search">
+        <form
+          class="header-search-form"
+          (submit)="handleSearch($event)">
+
+          <input
+            id="searchText"
+            autocomplete="off"
+            type="text"
+            class="header-search-input"
+            [(ngModel)]="searchText"
+            (input)="onSearch()"
+            (focus)="showSearchPanel = true"
+            placeholder="Sbd Kojo"
+            name="searchText">
+
+          <app-speech-test
+            (transcriptChange)="onTranscriptChange($event)">
+          </app-speech-test>
+
+          <button
+            type="button"
+            class="keyboard-toggle-btn"
+            (click)="toggleKeyboard()"
+            title="Toggle Punjabi Keyboard">
+            <span>⌨️</span>
+          </button>
+
+          <button
+            type="submit"
+            class="header-search-btn">
+            Search
+          </button>
+
+        </form>
+      </div>
+
+    </nav>
+
+    <!-- Pin -->
+    <button
+      class="header-pin-btn"
+      (click)="pinHeader = !pinHeader; onPinHeaderChange()"
+      [title]="pinHeader ? 'Unpin header' : 'Pin header'">
+
+      <img
+        src="assets/images/pin.png"
+        [style.transform]="pinHeader ? 'rotate(-45deg)' : 'rotate(0deg)'"
+        alt="Pin Search Bar">
+    </button>
+
+  </div>
 </header>
 <style>
 @media (max-width: 600px) {
