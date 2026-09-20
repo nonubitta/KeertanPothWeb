@@ -38,6 +38,104 @@
 
   </section>
 
+  
+  <!-- SUPPORT -->
+  <section class="support-section container">
+
+    <div class="section-heading compact-heading">
+      <div>
+        <span class="section-eyebrow">NEED HELP?</span>
+        <h2>We're here for you</h2>
+      </div>
+    </div>
+
+
+    <div class="support-grid">
+
+      <!-- CONTACT -->
+      <div class="info-card contact-card">
+
+        <div class="card-icon">
+          ✉
+        </div>
+
+        <div class="card-content">
+
+          <h3>Contact Support</h3>
+
+          <p>
+            Found an issue or have a suggestion?
+            We'd love to hear from you.
+          </p>
+
+          <ng-container
+            *ngIf="supportEmail && supportEmail.length; else emailFallback">
+
+            <a
+              class="primary-link"
+              [href]="mailtoLink">
+              Email Support
+              <span>→</span>
+            </a>
+
+          </ng-container>
+
+          <ng-template #emailFallback>
+
+            <a
+              class="primary-link"
+              href="mailto:keertanpothi@gmail.com?subject=Keertan%20Pothi%20Support">
+              Email Support
+              <span>→</span>
+            </a>
+
+            <div class="email-address">
+              keertanpothi@gmail.com
+            </div>
+
+          </ng-template>
+
+          <ul class="support-tips">
+            <li>Include steps to reproduce the issue.</li>
+            <li>Screenshots are helpful when reporting problems.</li>
+            <li>Mention whether you're using iOS, Android or the website.</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <!-- WEBSITE -->
+      <div class="info-card website-card">
+
+        <div class="card-icon">
+          🌐
+        </div>
+
+        <div class="card-content">
+
+          <h3>Keertan Pothi Web</h3>
+
+          <p>
+            Search Gurbani directly from your browser.
+            No installation required.
+          </p>
+
+          <a
+            class="secondary-link"
+            routerLink="/">
+            Open Website
+            <span>→</span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
 
   <!-- APP DOWNLOADS -->
   <section class="support-section container">
@@ -165,106 +263,6 @@
 
   </section>
 
-
-  <!-- SUPPORT -->
-  <section class="support-section container">
-
-    <div class="section-heading compact-heading">
-      <div>
-        <span class="section-eyebrow">NEED HELP?</span>
-        <h2>We're here for you</h2>
-      </div>
-    </div>
-
-
-    <div class="support-grid">
-
-      <!-- CONTACT -->
-      <div class="info-card contact-card">
-
-        <div class="card-icon">
-          ✉
-        </div>
-
-        <div class="card-content">
-
-          <h3>Contact Support</h3>
-
-          <p>
-            Found an issue or have a suggestion?
-            We'd love to hear from you.
-          </p>
-
-          <ng-container
-            *ngIf="supportEmail && supportEmail.length; else emailFallback">
-
-            <a
-              class="primary-link"
-              [href]="mailtoLink">
-              Email Support
-              <span>→</span>
-            </a>
-
-          </ng-container>
-
-          <ng-template #emailFallback>
-
-            <a
-              class="primary-link"
-              href="mailto:keertanpothi@gmail.com?subject=Keertan%20Pothi%20Support">
-              Email Support
-              <span>→</span>
-            </a>
-
-            <div class="email-address">
-              keertanpothi@gmail.com
-            </div>
-
-          </ng-template>
-
-          <ul class="support-tips">
-            <li>Include steps to reproduce the issue.</li>
-            <li>Screenshots are helpful when reporting problems.</li>
-            <li>Mention whether you're using iOS, Android or the website.</li>
-          </ul>
-
-        </div>
-
-      </div>
-
-
-      <!-- WEBSITE -->
-      <div class="info-card website-card">
-
-        <div class="card-icon">
-          🌐
-        </div>
-
-        <div class="card-content">
-
-          <h3>Keertan Pothi Web</h3>
-
-          <p>
-            Search Gurbani directly from your browser.
-            No installation required.
-          </p>
-
-          <a
-            class="secondary-link"
-            routerLink="/">
-            Open Website
-            <span>→</span>
-          </a>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
   <!-- DEVELOPMENT TEAM -->
   <section class="team-section">
 
@@ -285,32 +283,25 @@
 
 
       <div class="team-list">
-
         <div class="team-member">
           <span class="team-number">01</span>
-          <span>AkalUstat Singh</span>
+          <span>AkalUstat Singh (Sacramento, CA)</span>
         </div>
 
         <div class="team-member">
           <span class="team-number">02</span>
-          <span>Keerat Singh</span>
+          <span>Keerat Singh (Sacramento, CA)</span>
         </div>
 
         <div class="team-member">
           <span class="team-number">03</span>
-          <span>Gurjas Singh</span>
+          <span>Gurjas Singh (Pompton Lakes, NJ)</span>
         </div>
 
         <div class="team-member">
           <span class="team-number">04</span>
-          <span>Gurmeet Singh Khalsa</span>
+          <span>Gurmeet Singh Khalsa (Sacramento, CA)</span>
         </div>
-
-        <div class="team-member">
-          <span class="team-number">05</span>
-          <span>Harpreet Kaur</span>
-        </div>
-
       </div>
 
 

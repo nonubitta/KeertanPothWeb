@@ -22,6 +22,9 @@ export class Support implements OnInit {
 
   webVersion: number | null = null;
 
+  // Theme
+  theme: string = 'navy';
+
   get mailtoLink(): string {
     if (!this.supportEmail) {
       return '';
@@ -37,6 +40,14 @@ export class Support implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    // Load theme from localStorage
+    const savedTheme = localStorage.getItem('kpoth-theme');
+    if (savedTheme) {
+      this.setTheme(savedTheme);
+    } else {
+      this.setTheme('navy'); // set blue/navy as default if not set
+    }
+
     try {
       const res = await fetch('assets/api/version.json');
 
@@ -47,5 +58,14 @@ export class Support implements OnInit {
     } catch {
       // Ignore version fetch errors.
     }
+  }
+
+  // Theme management
+  setTheme(theme: string) {
+    const oldTheme = this.theme;
+    this.theme = theme;
+    const root = document.documentElement;
+    root.classList.remove(`theme-${oldTheme}`);
+    root.classList.add(`theme-${theme}`);
   }
 }
