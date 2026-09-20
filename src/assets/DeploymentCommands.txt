@@ -1,0 +1,14 @@
+Android:
+	new command: .\scripts\release.ps1
+
+	all these are not required if above is available
+	flutter clean
+	flutter pub get
+	flutter build appbundle
+
+iPhone:
+
+
+Angular:
+	run: npm run start
+	build: npx ng build
