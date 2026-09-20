@@ -736,33 +736,6 @@ this.seo.setStructuredData({
     }
   }
 
-  // Call this from the template when a verse row is clicked in selectedShabad for Kirtani View
-  onKirtaniVerseClick(verse: Verse) {
-    if (this.showKeertaniView && this.selectedShabad) {
-      // Keep the dashboard preview and the kirtani popup on the same verse.
-      this.presentationVerse = verse;
-      this.selectedVerseId = verse.ID ?? null;
-
-      // Find the index of the clicked verse in selectedShabad
-      const verseIndex = this.selectedShabad.findIndex(v => v.ID === verse.ID);
-      if (verseIndex !== -1) {
-        // Get 3 previous and 3 next verses (total 7 verses including selected)
-        const startIndex = Math.max(0, verseIndex - 3);
-        const endIndex = Math.min(this.selectedShabad.length, verseIndex + 4);
-        const surroundingVerses = this.selectedShabad.slice(startIndex, endIndex);
-
-        const popupHtml = this.getKirtaniHtml(surroundingVerses, verseIndex - startIndex);
-        if (!this.kirtaniPopupWindow || this.kirtaniPopupWindow.closed) {
-          this.kirtaniPopupWindow = window.open('', 'kpoth-kirtani', 'width=800,height=600');
-        }
-        if (this.kirtaniPopupWindow) {
-          this.kirtaniPopupWindow.document.open();
-          this.kirtaniPopupWindow.document.write(popupHtml);
-          this.kirtaniPopupWindow.document.close();
-        }
-      }
-    }
-  }
 
   // Handle verse click for both Sangat View and Kirtani View
   onVerseClick(verse: Verse) {
@@ -858,6 +831,44 @@ this.seo.setStructuredData({
     </body>
     </html>
   `;
+  }
+
+  getVishraamClass(vishraamArray: any[], wi: number): string | null {
+    const v = vishraamArray?.find(x => x.p === wi);
+    if (!v) return null;
+    return (v.t && v.t.toLowerCase() === 'v') ? 'main-vishram' : 'secondary-vishram';
+  }
+
+  //#endregion
+
+//#region Kirtani View
+ 
+  // Call this from the template when a verse row is clicked in selectedShabad for Kirtani View
+  onKirtaniVerseClick(verse: Verse) {
+    if (this.showKeertaniView && this.selectedShabad) {
+      // Keep the dashboard preview and the kirtani popup on the same verse.
+      this.presentationVerse = verse;
+      this.selectedVerseId = verse.ID ?? null;
+
+      // Find the index of the clicked verse in selectedShabad
+      const verseIndex = this.selectedShabad.findIndex(v => v.ID === verse.ID);
+      if (verseIndex !== -1) {
+        // Get 3 previous and 3 next verses (total 7 verses including selected)
+        const startIndex = Math.max(0, verseIndex - 3);
+        const endIndex = Math.min(this.selectedShabad.length, verseIndex + 4);
+        const surroundingVerses = this.selectedShabad.slice(startIndex, endIndex);
+
+        const popupHtml = this.getKirtaniHtml(surroundingVerses, verseIndex - startIndex);
+        if (!this.kirtaniPopupWindow || this.kirtaniPopupWindow.closed) {
+          this.kirtaniPopupWindow = window.open('', 'kpoth-kirtani', 'width=800,height=600');
+        }
+        if (this.kirtaniPopupWindow) {
+          this.kirtaniPopupWindow.document.open();
+          this.kirtaniPopupWindow.document.write(popupHtml);
+          this.kirtaniPopupWindow.document.close();
+        }
+      }
+    }
   }
 
   // Kirtani View HTML generation
@@ -1003,14 +1014,7 @@ this.seo.setStructuredData({
     </html>
   `;
   }
-
-  getVishraamClass(vishraamArray: any[], wi: number): string | null {
-    const v = vishraamArray?.find(x => x.p === wi);
-    if (!v) return null;
-    return (v.t && v.t.toLowerCase() === 'v') ? 'main-vishram' : 'secondary-vishram';
-  }
-
-  //#endregion
+//#endregion
 
   //#region Theme management
   setTheme(theme: string) {
@@ -1104,6 +1108,7 @@ this.seo.setStructuredData({
 
   //#endregion
 
+  //#region Shabad Navigation and Copy
   moveShabad(moveBy: number) {
     const currentId = this.selectedItem?.ShabadID;
     if (!currentId || currentId <= 1) {
@@ -1185,4 +1190,6 @@ this.seo.setStructuredData({
       }
     }
   }
+
+  //#endregion
 }
