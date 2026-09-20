@@ -1053,7 +1053,13 @@ this.seo.setStructuredData({
         Keertan Pothi - Kirtani View
       </div>
       <script>
-        // No escaping needed, innerHTML is used directly in document.write
+        // Scroll the selected verse to the center of the viewport
+        window.addEventListener('load', function() {
+          const selectedVerse = document.querySelector('.selected-verse');
+          if (selectedVerse) {
+            selectedVerse.scrollIntoView({ behavior: 'auto', block: 'center', inline: 'nearest' });
+          }
+        });
       </script>
     </body>
     </html>
