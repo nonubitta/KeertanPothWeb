@@ -748,8 +748,26 @@ this.seo.setStructuredData({
   }
 
   // Presentation view Gurmukhi font size
-  presentationGurmukhiFontSize: number = 5;
-  kirtaniViewGurmukhiFontSize: number = 5;
+  private _presentationGurmukhiFontSize: number = 5;
+  private _kirtaniViewGurmukhiFontSize: number = 5;
+
+  get presentationGurmukhiFontSize(): number {
+    return this._presentationGurmukhiFontSize;
+  }
+
+  set presentationGurmukhiFontSize(value: number) {
+    this._presentationGurmukhiFontSize = value;
+    this.updatePresentationPopup();
+  }
+
+  get kirtaniViewGurmukhiFontSize(): number {
+    return this._kirtaniViewGurmukhiFontSize;
+  }
+
+  set kirtaniViewGurmukhiFontSize(value: number) {
+    this._kirtaniViewGurmukhiFontSize = value;
+    this.updateKirtaniPopup();
+  }
 
   getPresentationBackgroundColor(): string {
     if (this.theme === 'navy') return '#1a2238';
@@ -832,6 +850,32 @@ this.seo.setStructuredData({
     </body>
     </html>
   `;
+  }
+
+  // Update the presentation popup with current font size
+  private updatePresentationPopup(): void {
+    if (this.popupWindow && !this.popupWindow.closed && this.presentationVerse) {
+      const popupHtml = this.getPresentationHtml(this.presentationVerse);
+      this.popupWindow.document.open();
+      this.popupWindow.document.write(popupHtml);
+      this.popupWindow.document.close();
+    }
+  }
+
+  // Update the kirtani popup with current font size
+  private updateKirtaniPopup(): void {
+    if (this.kirtaniPopupWindow && !this.kirtaniPopupWindow.closed && this.selectedShabad && this.presentationVerse) {
+      const verseIndex = this.selectedShabad.findIndex(v => v.ID === this.presentationVerse?.ID);
+      if (verseIndex !== -1) {
+        const startIndex = Math.max(0, verseIndex - 3);
+        const endIndex = Math.min(this.selectedShabad.length, verseIndex + 4);
+        const surroundingVerses = this.selectedShabad.slice(startIndex, endIndex);
+        const popupHtml = this.getKirtaniHtml(surroundingVerses, verseIndex - startIndex);
+        this.kirtaniPopupWindow.document.open();
+        this.kirtaniPopupWindow.document.write(popupHtml);
+        this.kirtaniPopupWindow.document.close();
+      }
+    }
   }
 
   getVishraamClass(vishraamArray: any[], wi: number): string | null {
