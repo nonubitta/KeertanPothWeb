@@ -991,11 +991,13 @@ this.seo.setStructuredData({
         .kirtani-verse.selected-verse {
           background: ${textColor}15;
           border: 2px solid #fadd7b;
-          font-size: ${this.kirtaniViewGurmukhiFontSize * 0.8}rem !important;
+        }
+        .kirtani-verse.selected-verse .verse-text {
+          font-size: ${this.kirtaniViewGurmukhiFontSize * 1.0}rem !important;
         }
         .verse-text {
           font-family: 'Gurakhar', sans-serif;
-          font-size: ${this.kirtaniViewGurmukhiFontSize * 0.6}rem;
+          font-size: ${this.kirtaniViewGurmukhiFontSize * 0.8}rem;
           margin-bottom: 1rem;
           color: ${textColor};
           text-align: center;
