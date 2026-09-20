@@ -673,3 +673,370 @@
     border-bottom: none;
   }
 }
+
+
+/* =========================================
+   THEME SUPPORT
+   ========================================= */
+
+// Navy Theme (default)
+.theme-navy {
+  .support-page {
+    background: #1a2238;
+    color: #edf3fb;
+  }
+
+  .support-header {
+    background: rgba(20, 33, 61, 0.92);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .support-logo {
+    color: #edf3fb;
+  }
+
+  .back-home {
+    color: #aebbd0;
+  }
+
+  .back-home:hover {
+    color: #4db8ff;
+  }
+
+  .hero-badge {
+    border-color: rgba(77, 184, 255, 0.22);
+    background: rgba(77, 184, 255, 0.07);
+    color: #75c8ff;
+  }
+
+  .hero-badge-dot {
+    background: #4db8ff;
+    box-shadow: 0 0 8px rgba(77, 184, 255, 0.7);
+  }
+
+  .support-hero h1 span {
+    color: #4db8ff;
+  }
+
+  .support-hero p {
+    color: #aab8cb;
+  }
+
+  .section-heading h2 {
+    color: #edf3fb;
+  }
+
+  .section-heading p {
+    color: #8494aa;
+  }
+
+  .section-eyebrow {
+    color: #d9a52c;
+  }
+
+  .app-card {
+    border-color: rgba(255, 255, 255, 0.09);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018));
+  }
+
+  .app-card::after {
+    background: rgba(77, 184, 255, 0.07);
+  }
+
+  .app-card:hover {
+    border-color: rgba(77, 184, 255, 0.25);
+  }
+
+  .ios-icon {
+    background: linear-gradient(145deg, #394454, #171e29);
+  }
+
+  .android-icon {
+    background: linear-gradient(145deg, #38a96c, #1f7549);
+  }
+
+  .app-platform {
+    color: #7f91a9;
+  }
+
+  .app-card h3 {
+    color: #edf3fb;
+  }
+
+  .app-card > p {
+    color: #9aa9bd;
+  }
+
+  .store-button {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: #111b2d;
+    color: #f1f5fa;
+  }
+
+  .store-button:hover {
+    background: #18253a;
+    border-color: rgba(77, 184, 255, 0.4);
+  }
+
+  .store-button small {
+    color: #8494aa;
+  }
+
+  .store-arrow {
+    color: #6e8199;
+  }
+
+  .support-grid {
+    // no specific background
+  }
+
+  .info-card {
+    border-color: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  .card-icon {
+    background: rgba(77, 184, 255, 0.09);
+    color: #55bbff;
+  }
+
+  .info-card h3 {
+    color: #edf3fb;
+  }
+
+  .info-card p {
+    color: #94a4b9;
+  }
+
+  .primary-link,
+  .secondary-link {
+    color: #4db8ff;
+  }
+
+  .primary-link:hover,
+  .secondary-link:hover {
+    color: #82d0ff;
+  }
+
+  .email-address {
+    color: #71839a;
+  }
+
+  .support-tips {
+    border-top-color: rgba(255, 255, 255, 0.07);
+    color: #8191a7;
+  }
+
+  .team-section {
+    border-top-color: rgba(255, 255, 255, 0.06);
+    background: radial-gradient(circle at 50% 0%, rgba(77, 184, 255, 0.055), transparent 45%);
+  }
+
+  .team-header h2 {
+    color: #edf3fb;
+  }
+
+  .team-header p {
+    color: #8999ae;
+  }
+
+  .team-list {
+    border-color: rgba(255, 255, 255, 0.07);
+  }
+
+  .team-member {
+    border-right-color: rgba(255, 255, 255, 0.07);
+    color: #c5d0df;
+  }
+
+  .team-number {
+    color: #53657c;
+  }
+
+  .version-info {
+    color: #65758a;
+  }
+
+  .version-separator {
+    color: #34445a;
+  }
+}
+
+// Blue Orange Theme
+.theme-blueorange {
+  .support-page {
+    background: #003F66;
+    color: #f0f5fa;
+  }
+
+  .support-header {
+    background: rgba(0, 45, 75, 0.92);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .support-logo {
+    color: #f0f5fa;
+  }
+
+  .back-home {
+    color: #a8c8e8;
+  }
+
+  .back-home:hover {
+    color: #ff9f43;
+  }
+
+  .hero-badge {
+    border-color: rgba(255, 159, 67, 0.22);
+    background: rgba(255, 159, 67, 0.07);
+    color: #ffb366;
+  }
+
+  .hero-badge-dot {
+    background: #ff9f43;
+    box-shadow: 0 0 8px rgba(255, 159, 67, 0.7);
+  }
+
+  .support-hero h1 span {
+    color: #ff9f43;
+  }
+
+  .support-hero p {
+    color: #c8d8e8;
+  }
+
+  .section-heading h2 {
+    color: #f0f5fa;
+  }
+
+  .section-heading p {
+    color: #98b8d8;
+  }
+
+  .section-eyebrow {
+    color: #ffcc66;
+  }
+
+  .app-card {
+    border-color: rgba(255, 255, 255, 0.09);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018));
+  }
+
+  .app-card::after {
+    background: rgba(255, 159, 67, 0.07);
+  }
+
+  .app-card:hover {
+    border-color: rgba(255, 159, 67, 0.25);
+  }
+
+  .ios-icon {
+    background: linear-gradient(145deg, #2a3a4a, #1a2a3a);
+  }
+
+  .android-icon {
+    background: linear-gradient(145deg, #4a7a3a, #2a5a2a);
+  }
+
+  .app-platform {
+    color: #88a8c8;
+  }
+
+  .app-card h3 {
+    color: #f0f5fa;
+  }
+
+  .app-card > p {
+    color: #a8c8e8;
+  }
+
+  .store-button {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: #0a2a4a;
+    color: #f0f5fa;
+  }
+
+  .store-button:hover {
+    background: #1a3a5a;
+    border-color: rgba(255, 159, 67, 0.4);
+  }
+
+  .store-button small {
+    color: #88a8c8;
+  }
+
+  .store-arrow {
+    color: #7898b8;
+  }
+
+  .info-card {
+    border-color: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  .card-icon {
+    background: rgba(255, 159, 67, 0.09);
+    color: #ffb366;
+  }
+
+  .info-card h3 {
+    color: #f0f5fa;
+  }
+
+  .info-card p {
+    color: #a8c8e8;
+  }
+
+  .primary-link,
+  .secondary-link {
+    color: #ff9f43;
+  }
+
+  .primary-link:hover,
+  .secondary-link:hover {
+    color: #ffcc66;
+  }
+
+  .email-address {
+    color: #88a8c8;
+  }
+
+  .support-tips {
+    border-top-color: rgba(255, 255, 255, 0.07);
+    color: #98b8d8;
+  }
+
+  .team-section {
+    border-top-color: rgba(255, 255, 255, 0.06);
+    background: radial-gradient(circle at 50% 0%, rgba(255, 159, 67, 0.055), transparent 45%);
+  }
+
+  .team-header h2 {
+    color: #f0f5fa;
+  }
+
+  .team-header p {
+    color: #98b8d8;
+  }
+
+  .team-list {
+    border-color: rgba(255, 255, 255, 0.07);
+  }
+
+  .team-member {
+    border-right-color: rgba(255, 255, 255, 0.07);
+    color: #c8d8e8;
+  }
+
+  .team-number {
+    color: #6888a8;
+  }
+
+  .version-info {
+    color: #88a8c8;
+  }
+
+  .version-separator {
+    color: #4a6a8a;
+  }
+}

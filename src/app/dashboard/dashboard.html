@@ -61,6 +61,10 @@
 <!--#region Side Panel -->
 <!-- Left Tabs Bar -->
 <div class="left-tabs">
+  <a routerLink="/" class="tab-btn logo-tab" title="Go to Search" style="height: 35px; width: 24px; display: flex; align-items: 
+  center; justify-content: center;  border-radius: 0 8px 8px 0; border: none; padding: 0.5rem; cursor: pointer; transition: background 0.2s;">
+    <img src="assets/images/favicon.png" alt="Keertan Pothi" style="height: 24px; width: 24px; object-fit: contain;" />
+  </a>
   <button class="tab-btn" tooltip="History" [class.active]="activeTab === 'history'" (click)="openSidePanel('history')">
     <img height="24rem" src="assets/images/history.png" alt="History" class="tab-icon" />
     <span class="tab-text">History</span></button>
