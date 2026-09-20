@@ -101,14 +101,10 @@
             <span class="panel-toggle" [class.expanded]="showSangatViewSettings">▼</span>
           </button>
           <div class="settings-panel-content" [class.collapsed]="!showSangatViewSettings">
-            <!-- Presentation View Gurmukhi Font Size -->
-            <label for="presentationGurmukhiFontSize">Presentation View Gurmukhi Font Size:</label><br />
-            <input id="presentationGurmukhiFontSize" type="range" min="1" max="8" step="0.1"
-              [(ngModel)]="presentationGurmukhiFontSize" style="vertical-align: middle; width: 120px;" />
+          <span><label for="presentationGurmukhiFontSize">Gurmukhi Font Size:</label></span>&nbsp;
+            <span><input id="presentationGurmukhiFontSize" type="range" min="1" max="8" step="0.1"
+              [(ngModel)]="presentationGurmukhiFontSize" style="vertical-align: middle; width: 120px;" /></span>&nbsp;
             <span>{{ presentationGurmukhiFontSize * 10 }}</span>
-            <br />
-            <hr class="toolbar-divider-hr" />
-
           </div>
         </div>
 
@@ -119,7 +115,10 @@
             <span class="panel-toggle" [class.expanded]="showKirtaniViewSettings">▼</span>
           </button>
           <div class="settings-panel-content" [class.collapsed]="!showKirtaniViewSettings">
-           
+            <span><label for="kirtaniViewGurmukhiFontSize">Gurmukhi Font Size:</label></span>&nbsp;
+            <span><input id="kirtaniViewGurmukhiFontSize" type="range" min="1" max="8" step="0.1"
+              [(ngModel)]="kirtaniViewGurmukhiFontSize" style="vertical-align: middle; width: 120px;" /></span>&nbsp;
+            <span>{{ kirtaniViewGurmukhiFontSize * 10 }}</span>
 
           </div>
         </div>
@@ -247,201 +246,6 @@
 <div class="overlay" [class.active]="isSidePanelOpen" (click)="closeSidePanel()"></div>
 <!--#endregion Side Panel-->
 
-
-<style>
-/* ===== Compact Search Dashboard ===== */
-.dashboard-search-results {
-  padding: 6px !important;
-  min-height: 0;
-  overflow: hidden;
-  display: flex !important;
-  flex-direction: column !important;
-}
-
-.dashboard-search-results .nav.mobile-nav {
-  min-height: 0 !important;
-  height: auto !important;
-  padding: 0 !important;
-  margin: 0 0 5px 0 !important;
-  gap: 4px !important;
-  display: block !important;
-  flex: 0 0 auto !important;
-}
-
-.dashboard-search-results .header-search-form {
-  /* height: 34px !important; */
-  min-height: 34px !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  gap: 4px !important;
-  display: flex !important;
-  align-items: stretch !important;
-}
-
-.dashboard-search-results .header-search-input {
-  height: 34px !important;
-  min-height: 34px !important;
-  padding: 4px 9px !important;
-  margin: 0 !important;
-  font-size: 1rem !important;
-  line-height: 1.1 !important;
-  box-sizing: border-box !important;
-}
-
-.dashboard-search-results .keyboard-toggle-btn,
-.dashboard-search-results .header-search-btn {
-  height: 34px !important;
-  min-height: 34px !important;
-  padding: 2px 9px !important;
-  margin: 0 !important;
-  font-size: 0.82rem !important;
-  line-height: 1 !important;
-  box-sizing: border-box !important;
-}
-
-.dashboard-search-results .keyboard-toggle-btn span {
-  font-size: 1rem !important;
-}
-
-.dashboard-search-content {
-  padding: 0 !important;
-  margin: 0 !important;
-  min-height: 0;
-  display: flex !important;
-  flex-direction: column !important;
-  flex: 1 1 auto !important;
-  overflow: hidden !important;
-}
-
-.dashboard-search-results .results-header {
-  display: flex !important;
-  align-items: center !important;
-  gap: 5px !important;
-  padding: 0 !important;
-  margin: 0 0 5px 0 !important;
-  min-height: 30px !important;
-  flex: 0 0 auto !important;
-}
-
-.dashboard-search-results .results-sort {
-  display: flex !important;
-  align-items: center !important;
-  gap: 4px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  width: 100% !important;
-}
-
-.dashboard-search-results .results-header select {
-  height: 28px !important;
-  min-height: 28px !important;
-  width: auto !important;
-  min-width: 0 !important;
-  max-width: none !important;
-  padding: 2px 7px !important;
-  margin: 0 !important;
-  font-size: 0.78rem !important;
-  line-height: 1 !important;
-  box-sizing: border-box !important;
-}
-
-.dashboard-search-results .results-header select[name="searchMode"] {
-  width: 145px !important;
-}
-
-.dashboard-search-results .results-header select[name="writerId"] {
-  width: 125px !important;
-}
-
-.dashboard-search-results .results-header select[name="sourceId"] {
-  width: 120px !important;
-}
-
-.dashboard-search-results .results-meta {
-  margin: 0 0 0 auto !important;
-  padding: 0 !important;
-  white-space: nowrap !important;
-  font-size: 0.72rem !important;
-}
-
-.dashboard-search-results .results-section {
-  margin: 0 !important;
-  padding: 0 !important;
-  min-height: 0 !important;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  max-height: none !important;
-  flex: 1 1 auto !important;
-}
-
-.dashboard-search-results .results-grid {
-  display: grid !important;
-  grid-template-columns: 1fr !important;
-  gap: 3px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.dashboard-search-results .result-card {
-  min-height: 0 !important;
-  padding: 6px 7px !important; /* Increased vertical padding to prevent character truncation */
-  margin: 0 !important;
-  border-radius: 4px !important;
-  box-sizing: border-box !important;
-}
-
-.dashboard-search-results .result-content {
-  padding: 0 !important;
-  margin: 0 !important;
-  gap: 0 !important;
-}
-
-.dashboard-search-results .result-title {
-  display: block !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  font-size: 1.2rem !important;
-  line-height: 1.5 !important; /* Increased line-height for Gurmukhi font to prevent character truncation */
-}
-
-.dashboard-search-results .result-card .result-content > div {
-  padding: 0 !important;
-  margin: 1px 0 0 !important;
-  font-size: 0.70rem !important;
-  line-height: 1.15 !important;
-}
-
-.dashboard-search-results .dashboard-no-results {
-  margin: 5px 0 0 !important;
-  padding: 0 !important;
-  font-size: 0.85rem !important;
-}
-
-@media (max-width: 700px) {
-  .dashboard-search-results .results-header {
-    flex-wrap: wrap;
-  }
-
-  .dashboard-search-results .results-sort {
-    flex-wrap: wrap;
-  }
-
-  .dashboard-search-results .results-header select[name="searchMode"] {
-    width: 140px !important;
-  }
-
-  .dashboard-search-results .results-header select[name="writerId"],
-  .dashboard-search-results .results-header select[name="sourceId"] {
-    width: 115px !important;
-  }
-
-  .dashboard-search-results .results-meta {
-    width: 100%;
-    margin-left: 0 !important;
-  }
-}
-</style>
-
 <!--#region Dashboard -->
 <div class="dashboard-grid">
 
@@ -540,7 +344,7 @@
 
   <!-- BOTTOM LEFT: PRESENTATION PREVIEW -->
    <fieldset class="presentation-preview-fieldset">
-    <legend>Presentation Preview</legend>
+    <legend>Sangat View</legend>
   <section class="dashboard-secondary">
     <div class="presentation-preview"
          [style.background-color]="getPresentationBackgroundColor()"

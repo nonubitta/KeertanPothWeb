@@ -749,6 +749,7 @@ this.seo.setStructuredData({
 
   // Presentation view Gurmukhi font size
   presentationGurmukhiFontSize: number = 5;
+  kirtaniViewGurmukhiFontSize: number = 5;
 
   getPresentationBackgroundColor(): string {
     if (this.theme === 'navy') return '#1a2238';
@@ -795,21 +796,21 @@ this.seo.setStructuredData({
           text-align: center;
         }
         .translation-english {
-          font-size: ${this.englishFontSize + 2}rem;
+          font-size: ${this.presentationGurmukhiFontSize * 0.5}rem;
           color: #fadd7b;
           margin-bottom: 1rem;
           text-align: center;
         }
         .translation-punjabi {
           font-family: 'Gurakhar', sans-serif;
-          font-size: ${this.punjabiFontSize + 2}rem;
+          font-size: ${this.presentationGurmukhiFontSize * 0.5}rem;
           margin-bottom: 1rem;
           text-align: center;
           color: #8ecae6;
         }
         .translation-english.transliteration {
           color: #b0b0b0;
-          font-size: ${this.transliterationFontSize + 2}rem;
+          font-size: ${this.presentationGurmukhiFontSize * 0.5}rem;
           text-align: center;
         }
         .v{
@@ -946,11 +947,11 @@ this.seo.setStructuredData({
         .kirtani-verse.selected-verse {
           background: ${textColor}15;
           border: 2px solid #fadd7b;
-          font-size: ${this.presentationGurmukhiFontSize * 0.8}rem !important;
+          font-size: ${this.kirtaniViewGurmukhiFontSize * 0.8}rem !important;
         }
         .verse-text {
           font-family: 'Gurakhar', sans-serif;
-          font-size: ${this.presentationGurmukhiFontSize * 0.8}rem;
+          font-size: ${this.kirtaniViewGurmukhiFontSize * 0.6}rem;
           margin-bottom: 1rem;
           color: ${textColor};
           text-align: center;
