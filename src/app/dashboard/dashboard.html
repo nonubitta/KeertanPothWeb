@@ -467,6 +467,25 @@
 <!--#endregion Dashboard-->
 
 
+<!--#region Popup Block Warning -->
+<div *ngIf="showPopupBlockedWarning"
+     class="popup-blocked-warning"
+     role="alert"
+     aria-live="assertive">
+  <div class="popup-blocked-warning-content">
+    <span class="popup-blocked-warning-icon">⚠️</span>
+    <div class="popup-blocked-warning-text">
+      <strong>Popup blocked</strong>
+      <span>{{ popupBlockedMessage }}</span>
+    </div>
+    <button type="button"
+            class="popup-blocked-warning-close"
+            (click)="closePopupBlockedWarning()"
+            aria-label="Close">×</button>
+  </div>
+</div>
+<!--#endregion Popup Block Warning -->
+
 <!--#region Roast Message -->
 <div *ngIf="showRoastMessage" class="success-msg"
      style="position:fixed;top:2rem;left:50%;transform:translateX(-50%);z-index:3000;background:#1f991f;color:#fff;padding:0.7rem 2rem;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.18);font-size:1.1rem;">

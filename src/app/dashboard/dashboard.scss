@@ -631,3 +631,55 @@
     margin-left: 0 !important;
   }
 }
+
+/* Popup blocked warning */
+.popup-blocked-warning {
+  position: fixed;
+  top: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5000;
+  max-width: min(620px, calc(100vw - 2rem));
+  box-sizing: border-box;
+}
+
+.popup-blocked-warning-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid #e0a800;
+  border-radius: 8px;
+  background: #fff8db;
+  color: #5f4b00;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+}
+
+.popup-blocked-warning-icon {
+  font-size: 1.2rem;
+  flex: 0 0 auto;
+}
+
+.popup-blocked-warning-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+.popup-blocked-warning-text strong {
+  font-size: 0.98rem;
+}
+
+.popup-blocked-warning-close {
+  margin-left: auto;
+  flex: 0 0 auto;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.1rem 0.25rem;
+}

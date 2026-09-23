@@ -20,7 +20,7 @@ export enum ShabadSource {
 }
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, FormsModule, RouterModule, ],
+  imports: [CommonModule, FormsModule, RouterModule,],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
   providers: [DbService]
@@ -36,7 +36,7 @@ export class Dashboard {
   filteredItems: VerseSearchResult[] = [];
   selectedShabad: Verse[] | null = null;
   private isDbReady = false;
-  detailsInfo:Verse | null = null;
+  detailsInfo: Verse | null = null;
   showMainKeyboard: boolean = true
   selectedVerseId: number | null = null;
   selectedItem: VerseSearchResult | null = null;
@@ -48,7 +48,7 @@ export class Dashboard {
 
   // Punjabi Keyboard state
   showKeyboard: boolean = false;
-    // Gurmukhi font size
+  // Gurmukhi font size
   gurmukhiFontSize: number = 2;
   punjabiFontSize: number = 1.0;
   englishFontSize: number = 1.0;
@@ -74,7 +74,7 @@ export class Dashboard {
   sources: any[] = [];
   selectedSourceId: string = '';
   searchQuery: string = '';
-noResults: boolean = false;
+  noResults: boolean = false;
   // Contact modal
   showContactModal: boolean = false;
 
@@ -105,53 +105,53 @@ noResults: boolean = false;
     ['k', 'K', 'g', 'G', '|', 'p', 'P', 'b', 'B', 'm'],
     ['c', 'C', 'j', 'J', '\\', 'X', 'r', 'l', 'v', 'V'],
     ['t', 'T', 'f', 'F', 'x', 'E', '⎵', '←', '123']
-    
+
   ];
-   keyboardLayout2 = [
+  keyboardLayout2 = [
     ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
     ['y', 'Y', 'i', 'I', 'w', 'W', 'u', 'U', 'o', 'O'],
-    ['R', 'N', 'M', 'S', '^', 'Z', 'z', '&', '⎵', '←','123']
+    ['R', 'N', 'M', 'S', '^', 'Z', 'z', '&', '⎵', '←', '123']
   ];
   keyboardLayout = this.keyboardLayout1;
   //#endregion
 
   //#region constructor, onInit
-  constructor(private dbService: DbService, private router: Router, 
+  constructor(private dbService: DbService, private router: Router,
     private route: ActivatedRoute, private seo: SeoService
-  ) {}
+  ) { }
 
   async ngOnInit() {
-    
+
     this.seo.update(
-    'Search Gurbani | Keertan Pothi',
-    'Search Gurbani from Sri Guru Granth Sahib Ji, Dasam Granth Sahib Ji, Bhai Gurdas Ji and many other Sikh scriptures.',
-    'https://keertanpothi.org/'
-);  
+      'Search Gurbani | Keertan Pothi',
+      'Search Gurbani from Sri Guru Granth Sahib Ji, Dasam Granth Sahib Ji, Bhai Gurdas Ji and many other Sikh scriptures.',
+      'https://keertanpothi.org/'
+    );
 
-this.seo.setStructuredData({
+    this.seo.setStructuredData({
 
-  "@context": "https://schema.org",
+      "@context": "https://schema.org",
 
-  "@type": "WebSite",
+      "@type": "WebSite",
 
-  "name": "Keertan Pothi",
+      "name": "Keertan Pothi",
 
-  "url": "https://keertanpothi.org",
+      "url": "https://keertanpothi.org",
 
-  "description": "Search Gurbani from Sikh scriptures.",
+      "description": "Search Gurbani from Sikh scriptures.",
 
-  "potentialAction": {
+      "potentialAction": {
 
-    "@type": "SearchAction",
+        "@type": "SearchAction",
 
-    "target": "https://keertanpothi.org/?search={search_term_string}",
+        "target": "https://keertanpothi.org/?search={search_term_string}",
 
-    "query-input": "required name=search_term_string"
+        "query-input": "required name=search_term_string"
 
-  }
+      }
 
-});
-    
+    });
+
     // Load theme from localStorage
     const savedTheme = localStorage.getItem('kpoth-theme');
     if (savedTheme) {
@@ -159,11 +159,11 @@ this.seo.setStructuredData({
     } else {
       this.setTheme('navy'); // set blue/navy as default if not set
     }
-    
+
     const shabadId = this.route.snapshot.queryParamMap.get('shabad');
     await this.dbService.initDb();
     this.isDbReady = true;
-    
+
     try {
       const writersResult = await this.dbService.query(Queries.getWriters());
       this.writers = writersResult;
@@ -174,7 +174,7 @@ this.seo.setStructuredData({
       this.writers = [];
       this.sources = [];
     }
-   
+
     // Load history from localStorage
     const stored = localStorage.getItem(this.HISTORY_KEY);
     if (stored) {
@@ -237,7 +237,7 @@ this.seo.setStructuredData({
   //#endregion
 
   //#region Side Panels
-  
+
   toggleSidePanel() {
     this.isSidePanelOpen = !this.isSidePanelOpen;
   }
@@ -251,7 +251,7 @@ this.seo.setStructuredData({
   }
 
   confirmClearFavorites() {
-   if (confirm('Are you sure you want to clear your favorites? This action cannot be undone.')) {
+    if (confirm('Are you sure you want to clear your favorites? This action cannot be undone.')) {
       this.favorites = [];
       localStorage.removeItem(this.FAVORITES_KEY);
       this.showRoastMessageFn('Favorites have been cleared');
@@ -261,7 +261,7 @@ this.seo.setStructuredData({
   openSidePanel(tab: 'random' | 'links' | 'settings' | 'history' | 'pothi' | 'favorites') {
     const prevTab = this.activeTab;
     this.activeTab = tab;
-    if(!prevTab)
+    if (!prevTab)
       this.isSidePanelOpen = !this.isSidePanelOpen;
 
     if (prevTab && this.activeTab === prevTab && this.isSidePanelOpen) {
@@ -278,14 +278,14 @@ this.seo.setStructuredData({
   }
 
   openRandomShabad(shabadId?: number) {
-    if(!shabadId) {
-      const randomIndex =  Math.floor(Math.random() * (5540 - 40 + 1)) + 40;
+    if (!shabadId) {
+      const randomIndex = Math.floor(Math.random() * (5540 - 40 + 1)) + 40;
       shabadId = randomIndex;
     }
-      // Create a new VerseSearchResult and assign ShabadID
-      const result: VerseSearchResult = {
-        ShabadID: shabadId
-      };
+    // Create a new VerseSearchResult and assign ShabadID
+    const result: VerseSearchResult = {
+      ShabadID: shabadId
+    };
     this.onSelectItem(result, "RANDOM");
     this.closeSidePanel();
   }
@@ -310,16 +310,16 @@ this.seo.setStructuredData({
   }
 
   openSundarGutka() {
-  
+
   }
 
   openQuickSettings() {
-    if(this.showEnglish || this.showPunjabi || this.showTransliteration) {
-    this.showEnglish = false;
-    this.showPunjabi = false;
-    this.showTransliteration = false;
+    if (this.showEnglish || this.showPunjabi || this.showTransliteration) {
+      this.showEnglish = false;
+      this.showPunjabi = false;
+      this.showTransliteration = false;
     }
-    else{
+    else {
       this.showEnglish = true;
       this.showPunjabi = true;
     }
@@ -333,7 +333,7 @@ this.seo.setStructuredData({
         title: 'Keertan Pothi',
         text: 'Check out this Shabad on Keertan Pothi',
         url: url
-      }).catch(() => {});
+      }).catch(() => { });
     } else {
       // Fallback: copy URL to clipboard
       try {
@@ -435,7 +435,7 @@ this.seo.setStructuredData({
     }
   }
 
-    addToPothi() {
+  addToPothi() {
     this.selectedPothiIndex = null;
     this.newPothiNameForFav = '';
     this.showAddToPothiModal = true;
@@ -483,16 +483,16 @@ this.seo.setStructuredData({
       return;
     } else if (key === '⎵') {
       this.searchText += ' '; // Add space
-    }else if (key === '⌕') {
+    } else if (key === '⌕') {
       return; // Add space
-    }else if (key === '123') {
-      if(this.showMainKeyboard) 
+    } else if (key === '123') {
+      if (this.showMainKeyboard)
         this.keyboardLayout = this.keyboardLayout2;
-      else 
+      else
         this.keyboardLayout = this.keyboardLayout1; // Switch back to Punjabi layout
-      this.showMainKeyboard = !this.showMainKeyboard; 
+      this.showMainKeyboard = !this.showMainKeyboard;
 
-    }else {
+    } else {
       // Add character
       this.searchText += key;
     }
@@ -535,17 +535,17 @@ this.seo.setStructuredData({
     }
 
     let query: string;
-    switch(this.searchMode) {
+    switch (this.searchMode) {
       case 'mainletters':
       case 'exact':
-         query = Queries.searchByFirstLetter(this.searchText, this.searchMode, extraFilters);
+        query = Queries.searchByFirstLetter(this.searchText, this.searchMode, extraFilters);
         break;
       case 'anywhere':
       case 'start':
-         query = Queries.searchByFirstLetter(asciiSearch, this.searchMode, extraFilters);
+        query = Queries.searchByFirstLetter(asciiSearch, this.searchMode, extraFilters);
         break;
       default:
-         query = Queries.searchByFirstLetter(asciiSearch, this.searchMode, extraFilters);
+        query = Queries.searchByFirstLetter(asciiSearch, this.searchMode, extraFilters);
         break;
     }
 
@@ -553,7 +553,7 @@ this.seo.setStructuredData({
       const results = await this.dbService.query(query);
       this.filteredItems = mapResultsToVerseSearchResults(results);
       this.noResults = this.filteredItems.length === 0;
-      if(this.filteredItems.length === 1){
+      if (this.filteredItems.length === 1) {
         this.onSelectItem(this.filteredItems[0], "SEARCH");
       }
     } catch (error) {
@@ -567,7 +567,7 @@ this.seo.setStructuredData({
     this.SetShabadSource(source);
     const query = Queries.getShabadById(item.ShabadID);
     const results = await this.dbService.query(query);
-    if(!item.Gurmukhi){
+    if (!item.Gurmukhi) {
       item = mapVerseToVerseSearchResults(results[0]);
     }
     this.setSelectedShabad(item, results);
@@ -575,25 +575,25 @@ this.seo.setStructuredData({
 
   async setSelectedShabad(item: VerseSearchResult, results: any[], opts?: { updateUrl?: boolean }) {
     this.selectedShabad = mapResultsToVerse(results, this.showVishraam);
-    if(item.ID)
+    if (item.ID)
       this.selectedVerseId = item.ID;
     //else{
     //  this.selectedVerseId = this.selectedShabad[0].ID; 
     //}
     this.detailsInfo = { ...this.selectedShabad[0] };
-  
+
     if (!this.detailsInfo.WriterID) {
       const verse = this.selectedShabad.find(v => v.WriterID != null);
       if (verse) {
         this.detailsInfo.WriterID = verse.WriterID;
         this.detailsInfo.WriterEnglish = verse.WriterEnglish;
-        if(!item.ID){
+        if (!item.ID) {
           item = mapVerseToVerseSearchResults(verse);
         }
       }
     }
     this.selectedItem = item;
-    if(item.Gurmukhi && this.shabadSource !== ShabadSource.SundarGutka){
+    if (item.Gurmukhi && this.shabadSource !== ShabadSource.SundarGutka) {
       // Store in history (avoid duplicates by ShabadID)
       if (!this.history.some(h => h.ShabadID === item.ShabadID)) {
         this.history.unshift(item);
@@ -602,18 +602,18 @@ this.seo.setStructuredData({
         localStorage.setItem(this.HISTORY_KEY, JSON.stringify(this.history));
       }
     }
-    
+
     this.showSearchPanel = false;
-    
+
     if (item.ShabadID) {
-      if(!opts || opts.updateUrl === true){
+      if (!opts || opts.updateUrl === true) {
         this.router.navigate([], {
           queryParams: { shabad: item.ShabadID },
           queryParamsHandling: 'merge',
           replaceUrl: true
         });
       }
-      else{
+      else {
         // Remove shabad param from URL
         this.router.navigate([], {
           queryParams: { shabad: null },
@@ -624,11 +624,11 @@ this.seo.setStructuredData({
     }
 
     setTimeout(() => {
-    const el = document.getElementById('selected-verse');
-    if (el) {
-      const offset = 60; // pixels from the top
-      const top = el.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top, behavior: 'smooth' });
+      const el = document.getElementById('selected-verse');
+      if (el) {
+        const offset = 60; // pixels from the top
+        const top = el.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
       } else {
         console.warn('selected-verse not found in DOM');
       }
@@ -636,7 +636,7 @@ this.seo.setStructuredData({
   }
 
   SetShabadSource(source: string) {
-    switch(source){
+    switch (source) {
       case 'SEARCH':
         this.shabadSource = ShabadSource.Search;
         break;
@@ -658,7 +658,7 @@ this.seo.setStructuredData({
   }
 
   onToggleVishraam() {
-    if(!this.showVishraam) {
+    if (!this.showVishraam) {
       this.selectedShabad = visraamToVishraamArray(this.selectedShabad);
     }
     else {
@@ -677,15 +677,15 @@ this.seo.setStructuredData({
     if (text && text.trim().length > 2) {
       console.log("Transcript received:", text);
       this.searchQuery = text;
-      var searchInitials = SpeechHelper.getInitialsFromGurmukhi(text); 
+      var searchInitials = SpeechHelper.getInitialsFromGurmukhi(text);
       this.searchText = searchInitials;
       this.searchOnRecord();
     }
   }
 
-  async searchOnRecord(){
+  async searchOnRecord() {
     var query: string;
-     let asciiSearch = '';
+    let asciiSearch = '';
     for (const c of this.searchText) {
       const str = c.charCodeAt(0).toString().padStart(3, '0');
       asciiSearch += str + ',';
@@ -697,7 +697,7 @@ this.seo.setStructuredData({
       const results = await this.dbService.query(query);
       this.filteredItems = mapResultsToVerseSearchResults(results);
       this.noResults = this.filteredItems.length === 0;
-      if(this.filteredItems.length === 1){
+      if (this.filteredItems.length === 1) {
         this.onSelectItem(this.filteredItems[0], "SEARCH");
       }
     } catch (error) {
@@ -717,6 +717,19 @@ this.seo.setStructuredData({
   kirtaniPopupWindow: Window | null = null;
   presentationVerse: Verse | null = null;
 
+  // Popup-block warning
+  showPopupBlockedWarning: boolean = false;
+  popupBlockedMessage: string = '';
+
+  private showPopupBlocked(message: string): void {
+    this.popupBlockedMessage = message;
+    this.showPopupBlockedWarning = true;
+  }
+
+  closePopupBlockedWarning(): void {
+    this.showPopupBlockedWarning = false;
+  }
+
   // Call this from the template when a verse row is clicked in selectedShabad
   onPresentationVerseClick(verse: Verse) {
     if (this.showSangatView) {
@@ -727,6 +740,13 @@ this.seo.setStructuredData({
       const popupHtml = this.getPresentationHtml(verse);
       if (!this.popupWindow || this.popupWindow.closed) {
         this.popupWindow = window.open('', 'kpoth-presentation', 'width=800,height=600');
+
+        if (!this.popupWindow) {
+          this.showPopupBlocked(
+            'Sangat View could not open because your browser blocked the popup. Please allow popups for Keertan Pothi and try again.'
+          );
+          return;
+        }
       }
       if (this.popupWindow) {
         this.popupWindow.document.open();
@@ -886,8 +906,8 @@ this.seo.setStructuredData({
 
   //#endregion
 
-//#region Kirtani View
- 
+  //#region Kirtani View
+
   // Call this from the template when a verse row is clicked in selectedShabad for Kirtani View
   onKirtaniVerseClick(verse: Verse) {
     if (this.showKeertaniView && this.selectedShabad) {
@@ -905,7 +925,14 @@ this.seo.setStructuredData({
 
         const popupHtml = this.getKirtaniHtml(surroundingVerses, verseIndex - startIndex);
         if (!this.kirtaniPopupWindow || this.kirtaniPopupWindow.closed) {
-          this.kirtaniPopupWindow = window.open('', 'kpoth-kirtani', 'width=800,height=600');
+          this.kirtaniPopupWindow = window.open('', 'kpoth-kirtani', 'width=800,height=600,left=150,top=150');
+
+          if (!this.kirtaniPopupWindow) {
+            this.showPopupBlocked(
+              'Kirtani View could not open because your browser blocked the popup. Please allow popups for Keertan Pothi and try again.'
+            );
+            return;
+          }
         }
         if (this.kirtaniPopupWindow) {
           this.kirtaniPopupWindow.document.open();
@@ -921,13 +948,13 @@ this.seo.setStructuredData({
     // Use the current theme's background color for the popup
     const bgColor = this.getPresentationBackgroundColor();
     const textColor = this.getPresentationTextColor();
-    
+
     // Generate HTML for each verse
     const versesHtml = verses.map((verse, index) => {
       const isSelected = index === selectedIndex;
       const selectedClass = isSelected ? 'selected-verse' : '';
       const verseNumber = verse.ID ? ` <span class="verse-number">(${verse.ID})</span>` : '';
-      
+
       return `
         <div class="kirtani-verse ${selectedClass}" data-verse-id="${verse.ID || ''}">
           ${this.showGurmukhi ? `<div class="verse-text">${verse.GurmukhiHtml || ''}</div>` : ''}
@@ -1067,7 +1094,7 @@ this.seo.setStructuredData({
     </html>
   `;
   }
-//#endregion
+  //#endregion
 
   //#region Theme management
   setTheme(theme: string) {
