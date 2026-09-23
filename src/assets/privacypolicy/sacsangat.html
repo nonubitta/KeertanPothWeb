@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Sac Sangat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold:       #c8922a;
+      --gold-light: #e8b84b;
+      --gold-pale:  #f5e6c0;
+      --deep:       #1a1008;
+      --mid:        #2e1f0a;
+      --text:       #3a2a10;
+      --muted:      #7a6040;
+      --cream:      #fdf6e3;
+      --divider:    rgba(200, 146, 42, 0.3);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--text);
+      font-family: 'Lora', Georgia, serif;
+      font-size: 16px;
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    /* ── Noise texture overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Header ── */
+    header {
+      position: relative;
+      background: linear-gradient(160deg, var(--deep) 0%, var(--mid) 100%);
+      padding: 3.5rem 2rem 3rem;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(200,146,42,0.18) 0%, transparent 70%);
+    }
+
+    .ik-onkar {
+      font-size: 3.2rem;
+      color: var(--gold-light);
+      letter-spacing: 0.04em;
+      display: block;
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeDown 0.9s ease forwards 0.1s;
+    }
+
+    .app-name {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeDown 0.9s ease forwards 0.25s;
+    }
+
+    .app-sub {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      color: var(--gold-pale);
+      font-size: 1rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.06em;
+      opacity: 0;
+      animation: fadeDown 0.9s ease forwards 0.4s;
+    }
+
+    .gold-line {
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+      margin: 1.4rem auto 0;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards 0.55s;
+    }
+
+    /* ── Layout ── */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    /* ── Intro card ── */
+    .intro-card {
+      background: linear-gradient(135deg, rgba(200,146,42,0.12), rgba(200,146,42,0.04));
+      border: 1px solid var(--divider);
+      border-radius: 4px;
+      padding: 1.8rem 2rem;
+      margin-bottom: 2.8rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.6s;
+    }
+
+    .intro-card p { color: var(--muted); font-size: 0.95rem; }
+    .intro-card strong { color: var(--gold); }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 2.6rem;
+      padding-bottom: 2.6rem;
+      border-bottom: 1px solid var(--divider);
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards var(--delay, 0.7s);
+    }
+    .section:last-of-type { border-bottom: none; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+    }
+
+    h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--deep);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    p { margin-bottom: 0.9rem; color: var(--text); }
+    p:last-child { margin-bottom: 0; }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(200,146,42,0.1), rgba(232,184,75,0.05));
+      border-left: 3px solid var(--gold);
+      border-radius: 0 4px 4px 0;
+      padding: 1rem 1.2rem;
+      margin-top: 1rem;
+      font-weight: 500;
+      color: var(--mid);
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      border-top: 1px solid var(--divider);
+      font-style: italic;
+    }
+
+    footer .brand {
+      font-family: 'Cinzel', serif;
+      font-style: normal;
+      color: var(--gold);
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 480px) {
+      header { padding: 2.5rem 1.2rem 2.2rem; }
+      main { padding: 2rem 1.2rem 4rem; }
+      .intro-card { padding: 1.2rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <span class="ik-onkar">ੴ</span>
+    <div class="app-name">Sac Sangat</div>
+    <div class="app-sub">Privacy Policy</div>
+    <div class="gold-line"></div>
+  </header>
+
+  <main>
+
+    <div class="intro-card">
+      <p><strong>Effective Date:</strong> May 19, 2025 &nbsp;|&nbsp; <strong>Last Updated:</strong> May 19, 2025</p>
+      <p style="margin-top:0.6rem;">
+        This Privacy Policy applies to the <strong>Sac Sangat</strong> mobile application,
+        available on Android and iOS. Please read this policy to understand our practices.
+      </p>
+    </div>
+
+    <div class="section" style="--delay: 0.65s">
+      <div class="section-header">
+        <div class="section-icon">🛡️</div>
+        <h2>No Data Collection</h2>
+      </div>
+      <p>
+        <strong>Sac Sangat does not collect, store, transmit, or share any personal
+        information or usage data from its users — of any kind.</strong>
+      </p>
+      <p>
+        We do not collect your name, email address, phone number, location,
+        device identifiers, usage statistics, or any other information.
+      </p>
+      <div class="highlight-box">
+        Your privacy is fully preserved. Nothing leaves your device.
+      </div>
+    </div>
+
+    <div class="section" style="--delay: 0.75s">
+      <div class="section-header">
+        <div class="section-icon">📊</div>
+        <h2>Analytics & Tracking</h2>
+      </div>
+      <p>
+        We do not use any analytics tools, crash reporting services, advertising
+        SDKs, or third-party tracking libraries. There is no tracking of any kind
+        within the app.
+      </p>
+    </div>
+
+    <div class="section" style="--delay: 0.85s">
+      <div class="section-header">
+        <div class="section-icon">🌐</div>
+        <h2>Internet & Permissions</h2>
+      </div>
+      <p>
+        Sac Sangat operates entirely offline. The app does not make any network
+        requests and does not require an internet connection to function. Any
+        device permissions requested are used solely for local app functionality
+        (such as microphone access for speech features) and no data from these
+        permissions is transmitted externally.
+      </p>
+    </div>
+
+    <div class="section" style="--delay: 0.95s">
+      <div class="section-header">
+        <div class="section-icon">👶</div>
+        <h2>Children's Privacy</h2>
+      </div>
+      <p>
+        Because we collect no data whatsoever, our app is safe for users of all
+        ages, including children under 13. We fully comply with COPPA (Children's
+        Online Privacy Protection Act) and similar regulations.
+      </p>
+    </div>
+
+    <div class="section" style="--delay: 1.05s">
+      <div class="section-header">
+        <div class="section-icon">🔄</div>
+        <h2>Changes to This Policy</h2>
+      </div>
+      <p>
+        If this Privacy Policy is ever updated, the new version will be posted
+        within the app and on the relevant app store listing. The "Last Updated"
+        date at the top of this page will reflect any changes. Continued use of
+        the app after any changes constitutes your acceptance of the revised policy.
+      </p>
+    </div>
+
+    <div class="section" style="--delay: 1.15s">
+      <div class="section-header">
+        <div class="section-icon">✉️</div>
+        <h2>Contact Us</h2>
+      </div>
+      <p>
+        If you have any questions or concerns about this Privacy Policy or the
+        Sac Sangat app, please feel free to reach out:
+      </p>
+      <div class="highlight-box">
+        📧 &nbsp;Please update this with your contact email address.
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="brand">Sac Sangat</div>
+    <div style="margin-top:0.4rem;">
+      © 2025 Sac Sangat. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>
