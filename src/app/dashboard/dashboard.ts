@@ -712,7 +712,7 @@ export class Dashboard {
 
   //#region Presentation mode
   showSangatView: boolean = true;
-  showKeertaniView: boolean = true;
+  showKeertaniView: boolean = false;
   popupWindow: Window | null = null;
   kirtaniPopupWindow: Window | null = null;
   presentationVerse: Verse | null = null;
