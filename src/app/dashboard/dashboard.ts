@@ -314,8 +314,6 @@ export class Dashboard {
 
   async openAsaKiVaarKeertanMode() {
     await this.openNitnemBani(18, true);
-    this.showSangatView = false;
-    this.showKeertaniView = true;
 
     const savedVerseId = localStorage.getItem(this.ASA_KI_VAAR_KEERTAN_LAST_VERSE_KEY);
     if (savedVerseId === null) {
@@ -366,7 +364,7 @@ export class Dashboard {
     setTimeout(() => {
       const verseElement = document.getElementById('selected-verse');
       if (verseElement) {
-        verseElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        verseElement.scrollIntoView({ behavior: 'auto', block: 'center' });
       } else {
         console.warn(`Selected verse ${verseId} was not found in the DOM.`);
       }
@@ -701,16 +699,18 @@ export class Dashboard {
       }
     }
 
-    setTimeout(() => {
-      const el = document.getElementById('selected-verse');
-      if (el) {
-        const offset = 60; // pixels from the top
-        const top = el.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top, behavior: 'smooth' });
-      } else {
-        console.warn('selected-verse not found in DOM');
-      }
-    }, 50); // small delay to ensure details section is rendered
+    if (!opts?.asaKiVaarKeertanMode) {
+      setTimeout(() => {
+        const el = document.getElementById('selected-verse');
+        if (el) {
+          const offset = 60; // pixels from the top
+          const top = el.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        } else {
+          console.warn('selected-verse not found in DOM');
+        }
+      }, 50); // small delay to ensure details section is rendered
+    }
   }
 
   SetShabadSource(source: string) {
