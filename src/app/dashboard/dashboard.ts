@@ -67,6 +67,7 @@ export class Dashboard {
   private readonly HISTORY_KEY = 'kpoth-history';
   private readonly POTHIS_KEY = 'kpoth-pothis';
   private readonly FAVORITES_KEY = 'kpoth-favorites';
+  private readonly ASA_KI_VAAR_BANI_ID = 18;
   RoastMessage: string = '';
   showRoastMessage: boolean = false;
   writers: any[] = [];
@@ -299,7 +300,6 @@ export class Dashboard {
     this.setSelectedShabad(item, results, { updateUrl: false });
     this.closeSidePanel();
   }
-
   openContact() {
     this.showContactModal = true;
     this.closeSidePanel();

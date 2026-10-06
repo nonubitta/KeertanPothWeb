@@ -90,7 +90,14 @@
 
       <!-- Sundar Gutka Section -->
       <div *ngSwitchCase="'links'">
-        <ul *ngIf="nitnemBani.length > 0" class="history-list">
+        <ul class="history-list">
+          <li>
+            <a (click)="openNitnemBani(18)" class="history-link">
+              <span style="font-family: 'Gurakhar', sans-serif;">Awsw kI vwr - kIrqnu mof</span><br />
+              <span style="font-size: 1rem;">Asa Ki Vaar - Keertan Mode</span>
+            </a>
+            <hr class="toolbar-divider-hr" />
+          </li>
           <li *ngFor="let item of nitnemBani">
             <a (click)="openNitnemBani(item.Id)" class="history-link">
               <span style="font-family: 'Gurakhar', sans-serif;">{{ item.PunjabiName }}</span><br />
