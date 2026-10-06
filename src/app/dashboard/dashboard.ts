@@ -44,6 +44,7 @@ export class Dashboard {
   showSelectedBaniBookmark: boolean = false;
   showBaniBookmarkDialog: boolean = false;
   baniBookmarks: BaniBookmark[] = [];
+  private selectedBaniId: number | null = null;
   shabadSource: ShabadSource = ShabadSource.None;
   // Side panel state
   isSidePanelOpen: boolean = false;
@@ -70,7 +71,6 @@ export class Dashboard {
   private readonly HISTORY_KEY = 'kpoth-history';
   private readonly POTHIS_KEY = 'kpoth-pothis';
   private readonly FAVORITES_KEY = 'kpoth-favorites';
-  private readonly ASA_KI_VAAR_BANI_ID = 18;
   RoastMessage: string = '';
   showRoastMessage: boolean = false;
   writers: any[] = [];
@@ -303,14 +303,18 @@ export class Dashboard {
     const baniBookmark = this.nitnemBani.find(bani => bani.Id === baniId)?.Bookmark;
     this.setSelectedShabad(item, results, {
       updateUrl: false,
-      baniBookmarked: Boolean(baniBookmark)
+      baniBookmarked: Boolean(baniBookmark),
+      baniId
     });
     this.closeSidePanel();
   }
 
   async openBaniBookmarkDialog() {
+    if (this.selectedBaniId === null) {
+      throw new Error('Cannot load bookmarks without a selected Sundar Gutka Bani.');
+    }
     this.baniBookmarks = await this.dbService.query(
-      Queries.getBaniBookmarks(this.ASA_KI_VAAR_BANI_ID)
+      Queries.getBaniBookmarks(this.selectedBaniId)
     );
     this.showBaniBookmarkDialog = true;
   }
@@ -592,9 +596,11 @@ export class Dashboard {
     this.setSelectedShabad(item, results);
   }
 
-  async setSelectedShabad(item: VerseSearchResult, results: any[], opts?: { updateUrl?: boolean; baniBookmarked?: boolean }) {
+  async setSelectedShabad(item: VerseSearchResult, results: any[], opts?: { updateUrl?: boolean; baniBookmarked?: boolean; baniId?: number }) {
     this.showSelectedBaniBookmark =
       this.shabadSource === ShabadSource.SundarGutka && opts?.baniBookmarked === true;
+    this.selectedBaniId =
+      this.shabadSource === ShabadSource.SundarGutka ? opts?.baniId ?? null : null;
     this.selectedShabad = mapResultsToVerse(results, this.showVishraam);
     if (item.ID)
       this.selectedVerseId = item.ID;
