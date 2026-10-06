@@ -503,9 +503,12 @@
                       aria-label="Close">×</button>
             </div>
             <div class="modal-body bani-bookmark-list">
-              <div *ngFor="let bookmark of baniBookmarks" class="bani-bookmark-item punjabi-font">
+              <button *ngFor="let bookmark of baniBookmarks"
+                      type="button"
+                      class="bani-bookmark-item punjabi-font"
+                      (click)="selectBaniBookmarkVerse(bookmark)">
                 {{ bookmark.Gurmukhi }}
-              </div>
+              </button>
               <p *ngIf="baniBookmarks.length === 0">No bookmarks found.</p>
             </div>
           </div>

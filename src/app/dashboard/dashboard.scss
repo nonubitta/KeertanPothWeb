@@ -237,10 +237,19 @@
 }
 
 .bani-bookmark-item {
+  width: 100%;
   padding: 0.75rem 0.5rem;
   border: 1px solid #404040;
   border-radius: 6px;
+  background: transparent;
+  color: inherit;
   font-size: 1.5rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.bani-bookmark-item:hover {
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .dashboard-selected-shabad .content-section {

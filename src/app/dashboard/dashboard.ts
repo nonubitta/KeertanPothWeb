@@ -323,6 +323,25 @@ export class Dashboard {
     this.showBaniBookmarkDialog = false;
   }
 
+  selectBaniBookmarkVerse(bookmark: BaniBookmark) {
+    if (!this.selectedShabad?.some(verse => verse.ID === bookmark.VerseID)) {
+      console.warn(`Bookmark verse ${bookmark.VerseID} is not present in the selected Bani.`);
+      this.closeBaniBookmarkDialog();
+      return;
+    }
+
+    this.selectedVerseId = bookmark.VerseID;
+    this.closeBaniBookmarkDialog();
+    setTimeout(() => {
+      const verseElement = document.getElementById('selected-verse');
+      if (verseElement) {
+        verseElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        console.warn(`Selected bookmark verse ${bookmark.VerseID} was not found in the DOM.`);
+      }
+    }, 50);
+  }
+
   openContact() {
     this.showContactModal = true;
     this.closeSidePanel();
