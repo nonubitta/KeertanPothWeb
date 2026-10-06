@@ -45,6 +45,7 @@ export class Dashboard {
   showBaniBookmarkDialog: boolean = false;
   baniBookmarks: BaniBookmark[] = [];
   private selectedBaniId: number | null = null;
+  private isAsaKiVaarKeertanMode: boolean = false;
   shabadSource: ShabadSource = ShabadSource.None;
   // Side panel state
   isSidePanelOpen: boolean = false;
@@ -71,6 +72,7 @@ export class Dashboard {
   private readonly HISTORY_KEY = 'kpoth-history';
   private readonly POTHIS_KEY = 'kpoth-pothis';
   private readonly FAVORITES_KEY = 'kpoth-favorites';
+  private readonly ASA_KI_VAAR_KEERTAN_LAST_VERSE_KEY = 'kpoth-asa-ki-vaar-keertan-last-verse';
   RoastMessage: string = '';
   showRoastMessage: boolean = false;
   writers: any[] = [];
@@ -294,7 +296,7 @@ export class Dashboard {
     this.closeSidePanel();
   }
 
-  async openNitnemBani(baniId: number) {
+  async openNitnemBani(baniId: number, asaKiVaarKeertanMode: boolean = false) {
     const query = Queries.getNitnemBani(baniId);
     const results = await this.dbService.query(query);
     const item: VerseSearchResult = mapVerseToVerseSearchResults(results[0]);
@@ -304,9 +306,34 @@ export class Dashboard {
     this.setSelectedShabad(item, results, {
       updateUrl: false,
       baniBookmarked: Boolean(baniBookmark),
-      baniId
+      baniId,
+      asaKiVaarKeertanMode
     });
     this.closeSidePanel();
+  }
+
+  async openAsaKiVaarKeertanMode() {
+    await this.openNitnemBani(18, true);
+    this.showSangatView = false;
+    this.showKeertaniView = true;
+
+    const savedVerseId = localStorage.getItem(this.ASA_KI_VAAR_KEERTAN_LAST_VERSE_KEY);
+    if (savedVerseId === null) {
+      return;
+    }
+
+    const verseId = Number(savedVerseId);
+    if (!Number.isSafeInteger(verseId)) {
+      console.warn('Saved Asa Ki Vaar Keertan verse ID is invalid.');
+      return;
+    }
+
+    if (!this.selectedShabad?.some(verse => verse.ID === verseId)) {
+      console.warn(`Saved Asa Ki Vaar Keertan verse ${verseId} is not present in the loaded Bani.`);
+      return;
+    }
+
+    this.selectAndScrollToVerse(verseId);
   }
 
   async openBaniBookmarkDialog() {
@@ -330,14 +357,18 @@ export class Dashboard {
       return;
     }
 
-    this.selectedVerseId = bookmark.VerseID;
     this.closeBaniBookmarkDialog();
+    this.selectAndScrollToVerse(bookmark.VerseID);
+  }
+
+  private selectAndScrollToVerse(verseId: number) {
+    this.selectedVerseId = verseId;
     setTimeout(() => {
       const verseElement = document.getElementById('selected-verse');
       if (verseElement) {
         verseElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
-        console.warn(`Selected bookmark verse ${bookmark.VerseID} was not found in the DOM.`);
+        console.warn(`Selected verse ${verseId} was not found in the DOM.`);
       }
     }, 50);
   }
@@ -615,11 +646,12 @@ export class Dashboard {
     this.setSelectedShabad(item, results);
   }
 
-  async setSelectedShabad(item: VerseSearchResult, results: any[], opts?: { updateUrl?: boolean; baniBookmarked?: boolean; baniId?: number }) {
+  async setSelectedShabad(item: VerseSearchResult, results: any[], opts?: { updateUrl?: boolean; baniBookmarked?: boolean; baniId?: number; asaKiVaarKeertanMode?: boolean }) {
     this.showSelectedBaniBookmark =
       this.shabadSource === ShabadSource.SundarGutka && opts?.baniBookmarked === true;
     this.selectedBaniId =
       this.shabadSource === ShabadSource.SundarGutka ? opts?.baniId ?? null : null;
+    this.isAsaKiVaarKeertanMode = opts?.asaKiVaarKeertanMode === true;
     this.selectedShabad = mapResultsToVerse(results, this.showVishraam);
     if (item.ID)
       this.selectedVerseId = item.ID;
@@ -805,6 +837,9 @@ export class Dashboard {
 
   // Handle verse click for both Sangat View and Kirtani View
   onVerseClick(verse: Verse) {
+    if (this.isAsaKiVaarKeertanMode) {
+      localStorage.setItem(this.ASA_KI_VAAR_KEERTAN_LAST_VERSE_KEY, String(verse.ID));
+    }
     if (this.showSangatView) {
       this.onPresentationVerseClick(verse);
     }
