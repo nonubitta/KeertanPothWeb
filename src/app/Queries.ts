@@ -100,6 +100,12 @@ export class Queries {
                     Where n.id = ${id} order by n.sort, n.verseid `;
   }
 
+  static getBaniBookmarks(baniId: number): string {
+	return ` select v.Id VerseID, case when b.text is not null then b.text else v.gurmukhi end Gurmukhi
+                    from BaniBookmark b inner join verse v on b.verseid = v.id
+                    where b.baniid = ${baniId} order by b.sort `;
+  }
+
   static getAngByAngNo(angNo: number, source: string = "G"): string {
 	return ` select wr.writerenglish, rg.raagenglish, sc.sourceenglish, sh.shabadid, 
                     REPLACE(vr.gurmukhi,'<>','&lt;&gt;') gurmukhiHtml,  vr.* 

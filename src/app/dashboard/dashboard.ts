@@ -2,7 +2,7 @@ import { Component, inject, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DbService } from '../db.service';  // Your existing service handling sql.js
-import { NitnemBani, Verse, VerseSearchResult } from '../verse.model';
+import { BaniBookmark, NitnemBani, Verse, VerseSearchResult } from '../verse.model';
 import { visraamToVishraamArray, mapResultsToVerse, mapResultsToVerseSearchResults, mapVerseToVerseSearchResults } from '../utils';
 import { Queries } from '../Queries';
 import { Router, RouterModule } from '@angular/router';
@@ -42,6 +42,8 @@ export class Dashboard {
   selectedItem: VerseSearchResult | null = null;
   nitnemBani: NitnemBani[] = [];
   showSelectedBaniBookmark: boolean = false;
+  showBaniBookmarkDialog: boolean = false;
+  baniBookmarks: BaniBookmark[] = [];
   shabadSource: ShabadSource = ShabadSource.None;
   // Side panel state
   isSidePanelOpen: boolean = false;
@@ -305,6 +307,18 @@ export class Dashboard {
     });
     this.closeSidePanel();
   }
+
+  async openBaniBookmarkDialog() {
+    this.baniBookmarks = await this.dbService.query(
+      Queries.getBaniBookmarks(this.ASA_KI_VAAR_BANI_ID)
+    );
+    this.showBaniBookmarkDialog = true;
+  }
+
+  closeBaniBookmarkDialog() {
+    this.showBaniBookmarkDialog = false;
+  }
+
   openContact() {
     this.showContactModal = true;
     this.closeSidePanel();

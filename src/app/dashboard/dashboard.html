@@ -444,6 +444,7 @@
         <button *ngIf="showSelectedBaniBookmark"
                 type="button"
                 class="btn-primary dashboard-bookmark-button"
+                (click)="openBaniBookmarkDialog()"
                 title="Bookmarked Bani">
           Bookmarks
         </button>
@@ -485,6 +486,27 @@
                    [style.font-size.rem]="transliterationFontSize">
                 {{ verse.Transliteration }}
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-overlay" *ngIf="showBaniBookmarkDialog" (click)="closeBaniBookmarkDialog()">
+          <div class="modal-dialog bani-bookmark-dialog"
+               role="dialog"
+               aria-modal="true"
+               aria-labelledby="baniBookmarkDialogTitle"
+               (click)="$event.stopPropagation()">
+            <div class="modal-header">
+              <span id="baniBookmarkDialogTitle">Bookmarks</span>
+              <button type="button"
+                      class="modal-close-btn"
+                      (click)="closeBaniBookmarkDialog()"
+                      aria-label="Close">×</button>
+            </div>
+            <div class="modal-body bani-bookmark-list">
+              <div *ngFor="let bookmark of baniBookmarks" class="bani-bookmark-item punjabi-font">
+                {{ bookmark.Gurmukhi }}
+              </div>
+              <p *ngIf="baniBookmarks.length === 0">No bookmarks found.</p>
             </div>
           </div>
         </div>

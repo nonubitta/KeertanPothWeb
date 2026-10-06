@@ -54,3 +54,8 @@ export interface NitnemBani {
   ShabadList?: string; // Optional, used for single bani
   IsSingleBani?: boolean; // Optional, used for single bani
 }
+
+export interface BaniBookmark {
+  VerseID: number;
+  Gurmukhi: string;
+}
