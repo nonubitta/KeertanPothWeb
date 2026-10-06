@@ -207,6 +207,18 @@
 
 .dashboard-selected-shabad .details-header {
   flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.dashboard-selected-shabad .details-main {
+  min-width: 0;
+}
+
+.dashboard-bookmark-button {
+  flex: 0 0 auto;
 }
 
 .dashboard-selected-shabad .content-section {

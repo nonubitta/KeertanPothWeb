@@ -441,6 +441,12 @@
             <span class="meta-label">Lines {{ selectedShabad.length }}</span>
           </div>
         </div>
+        <button *ngIf="showSelectedBaniBookmark"
+                type="button"
+                class="btn-primary dashboard-bookmark-button"
+                title="Bookmarked Bani">
+          Bookmarks
+        </button>
       </section>
 
       <section class="content-section">

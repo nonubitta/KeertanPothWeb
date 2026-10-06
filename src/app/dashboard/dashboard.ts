@@ -41,6 +41,7 @@ export class Dashboard {
   selectedVerseId: number | null = null;
   selectedItem: VerseSearchResult | null = null;
   nitnemBani: NitnemBani[] = [];
+  showSelectedBaniBookmark: boolean = false;
   shabadSource: ShabadSource = ShabadSource.None;
   // Side panel state
   isSidePanelOpen: boolean = false;
@@ -297,7 +298,11 @@ export class Dashboard {
     const item: VerseSearchResult = mapVerseToVerseSearchResults(results[0]);
     // Remove the URL update for Nitnem Bani, or use a different param
     this.shabadSource = ShabadSource.SundarGutka;
-    this.setSelectedShabad(item, results, { updateUrl: false });
+    const baniBookmark = this.nitnemBani.find(bani => bani.Id === baniId)?.Bookmark;
+    this.setSelectedShabad(item, results, {
+      updateUrl: false,
+      baniBookmarked: Boolean(baniBookmark)
+    });
     this.closeSidePanel();
   }
   openContact() {
@@ -573,7 +578,9 @@ export class Dashboard {
     this.setSelectedShabad(item, results);
   }
 
-  async setSelectedShabad(item: VerseSearchResult, results: any[], opts?: { updateUrl?: boolean }) {
+  async setSelectedShabad(item: VerseSearchResult, results: any[], opts?: { updateUrl?: boolean; baniBookmarked?: boolean }) {
+    this.showSelectedBaniBookmark =
+      this.shabadSource === ShabadSource.SundarGutka && opts?.baniBookmarked === true;
     this.selectedShabad = mapResultsToVerse(results, this.showVishraam);
     if (item.ID)
       this.selectedVerseId = item.ID;
